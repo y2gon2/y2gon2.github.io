@@ -105,12 +105,32 @@
     
       
   {
+  "tag" : "general blogging",
+  "posts" : [
+      
+      "./starting-the-adventure.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "instance",
   "posts" : [
       
       "./create-instance.html",
       
       "./instance-with-elixir-copy.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "life",
+  "posts" : [
+      
+      "./starting-the-adventure.html"
       
     ]
   } ,
@@ -143,6 +163,16 @@
       "./create-instance.html",
       
       "./instance-with-elixir-copy.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "thoughts",
+  "posts" : [
+      
+      "./starting-the-adventure.html"
       
     ]
   } 

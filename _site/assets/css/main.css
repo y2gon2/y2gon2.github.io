@@ -16,7 +16,7 @@ html {
   --background:   #ffffff;
   --shadow:       rgba(32,30,30,.3);
   --github:       #333;
-  --font1: 'Lora', charter, Georgia, Cambria, 'Times New Roman', Times, serif;/* body text */
+  --font1: 'Noto Sans KR', 'Lora', charter, Georgia, Cambria, 'Times New Roman', Times, sans-serif; /* body text */
   --font2: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; /* headers and titles   */
   --font1-light:      400;
   --font1-regular:    400;
@@ -403,7 +403,7 @@ html, body {
 html {
     line-height: 1.75;
     letter-spacing: 0.002em;
-    font-size: 1.375rem;
+    font-size: 1rem;
 }
 body {
   font-family: var(--font1);

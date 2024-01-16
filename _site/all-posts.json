@@ -13,7 +13,9 @@
     
     "./preload.html",
     
-    "./authentication.html"
+    "./authentication.html",
+    
+    "./starting-the-adventure.html"
     
   ]
 }
