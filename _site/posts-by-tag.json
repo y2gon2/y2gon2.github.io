@@ -3,162 +3,146 @@
 [   
       
   {
-  "tag" : "artificial intelligence",
+  "tag" : "Authentication",
   "posts" : [
       
-      "./AI-and-intellectual-property.html",
-      
-      "./back-to-basics.html",
-      
-      "./deep-q-learning-tic-tac-toe.html"
+      "./authentication.html"
       
     ]
   } ,
     
       
   {
-  "tag" : "coding",
+  "tag" : "LiveView",
   "posts" : [
       
-      "./deep-q-learning-tic-tac-toe.html",
+      "./phoenix-slot.html",
       
-      "./neural-network-optimization-methods.html",
+      "./instance-with-elixir-copy.html",
       
-      "./ML-Library-from-scratch.html",
+      "./phoenix-presence.html",
       
-      "./conways-game-of-life.html",
+      "./complex-query.html",
       
-      "./single-neuron-perceptron.html"
+      "./preload.html",
+      
+      "./authentication.html"
       
     ]
   } ,
     
       
   {
-  "tag" : "copyright",
+  "tag" : "OOP",
   "posts" : [
       
-      "./AI-and-intellectual-property.html"
+      "./instance-with-elixir-copy.html"
       
     ]
   } ,
     
       
   {
-  "tag" : "creativity",
+  "tag" : "Phoenix",
   "posts" : [
       
-      "./AI-and-intellectual-property.html"
+      "./phoenix-slot.html",
+      
+      "./instance-with-elixir-copy.html",
+      
+      "./phoenix-presence.html",
+      
+      "./complex-query.html",
+      
+      "./preload.html",
+      
+      "./authentication.html"
       
     ]
   } ,
     
       
   {
-  "tag" : "deep Neural networks",
+  "tag" : "Phoenix Presence",
   "posts" : [
       
-      "./neural-network-optimization-methods.html"
+      "./phoenix-presence.html"
       
     ]
   } ,
     
       
   {
-  "tag" : "general blogging",
+  "tag" : "complex query",
   "posts" : [
       
-      "./starting-the-adventure.html"
+      "./complex-query.html"
       
     ]
   } ,
     
       
   {
-  "tag" : "life",
+  "tag" : "database",
   "posts" : [
       
-      "./starting-the-adventure.html"
+      "./complex-query.html"
       
     ]
   } ,
     
       
   {
-  "tag" : "machine learning",
+  "tag" : "elixir",
   "posts" : [
       
-      "./AI-and-intellectual-property.html",
+      "./create-instance.html",
       
-      "./back-to-basics.html",
-      
-      "./deep-q-learning-tic-tac-toe.html",
-      
-      "./neural-network-optimization-methods.html",
-      
-      "./ML-Library-from-scratch.html",
-      
-      "./single-neuron-perceptron.html"
+      "./instance-with-elixir-copy.html"
       
     ]
   } ,
     
       
   {
-  "tag" : "neural networks",
+  "tag" : "instance",
   "posts" : [
       
-      "./AI-and-intellectual-property.html",
+      "./create-instance.html",
       
-      "./back-to-basics.html",
-      
-      "./ML-Library-from-scratch.html",
-      
-      "./single-neuron-perceptron.html"
+      "./instance-with-elixir-copy.html"
       
     ]
   } ,
     
       
   {
-  "tag" : "optimization",
+  "tag" : "preload/1",
   "posts" : [
       
-      "./neural-network-optimization-methods.html"
+      "./preload.html"
       
     ]
   } ,
     
       
   {
-  "tag" : "python",
+  "tag" : "slop",
   "posts" : [
       
-      "./deep-q-learning-tic-tac-toe.html",
-      
-      "./ML-Library-from-scratch.html",
-      
-      "./conways-game-of-life.html"
+      "./phoenix-slot.html"
       
     ]
   } ,
     
       
   {
-  "tag" : "reinforcement learning",
+  "tag" : "struct",
   "posts" : [
       
-      "./deep-q-learning-tic-tac-toe.html"
+      "./create-instance.html",
       
-    ]
-  } ,
-    
-      
-  {
-  "tag" : "thoughts",
-  "posts" : [
-      
-      "./starting-the-adventure.html"
+      "./instance-with-elixir-copy.html"
       
     ]
   } 

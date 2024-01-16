@@ -240,7 +240,7 @@
 		<div class="post">
 			
 
-			<a class="post-list-title" href="./AI-and-intellectual-property.html">Who owns the copyright for an AI generated creative work?</a>
+			<a class="post-list-title" href="./phoenix-slot.html">slot attribute 사용</a>
 			
 
   <span class = "post-card-meta">
@@ -252,7 +252,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2021-04-20T00:00:00+09:00">April 20, 2021</time>
+        <time datetime="2024-01-01T10:32:20+09:00">January 1, 2024</time>
       </span>
     
     
@@ -264,7 +264,7 @@
     
     <span class="page_meta-readtime">
       
-        4 minute read
+        1 minute read
       
     </span>
   
@@ -272,14 +272,14 @@
   </span>
 
 			<div class="post-excerpt">
-				<p>Recently I was <a href="https://www.rollingstone.com/music/music-features/nirvana-kurt-cobain-ai-song-1146444/">reading an article</a> about a cool project that intends to have a neural network create songs of the late club of the 27 (artists that have tragically died at age 27 or near, and in the height of their respective careers), artists such as Amy Winehouse, Jimmy Hendrix, Curt Cobain and Jim Morrison.</p><iframe width="560" height="315" src="https://www.youtube.com/embed/tjzOzuKQhSM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe><p>The project was created by <a href="https://overthebridge.org">Over the Bridge</a>, an organization dedicated to increase awareness on mental health and substance abuse in the music industry, trying to denormalize and remove...<a class="read-more" href="./AI-and-intellectual-property.html"> read more</a>
+				<p>Phoenix LiveView 에서 동적인 component 를 삽입 하고자 하는 경우, 해당 component attribute 로 <code class="language-plaintext highlighter-rouge">slot</code> 을 정의하고 이를 사용해 주어야 한다.</p><p>사용 방법</p><div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">slot</span> <span class="p">:</span><span class="err">블록명</span><span class="p">,</span> <span class="ss">required:</span> <span class="no">true</span><span class="k">def</span> <span class="err">컴포넌트명</span><span class="p">(</span><span class="n">assigns</span><span class="p">)</span> <span class="k">do</span> <span class="sx">~H""</span><span class="s2">" &lt;동적으로 구현할 컴포넌트 태그&gt; &lt;&gt;..사용자 구현...&lt;&gt; &lt;%= render_slot(@블록명) %&gt; &lt;/동적으로 구현할 컴포넌트 태그&gt; """</span><span class="k">end</span></code></pre></div></div><p>관련 설명 (by ChatGPT)</p><ol> <li>Slot 정의:</li></ol><ul> <li>slot :블록명, required: true는 컴포넌트 내부에 동적으로 콘텐츠를 삽입할 수 있는 블록명이라는 이름의 슬롯을 정의합니다.</li> <li>required: true는 이 슬롯이 반드시 제공되어야 함을 의미합니다. 즉, 이 컴포넌트를 사용할 때는 블록명 슬롯에 대한 내용을...<a class="read-more" href="./phoenix-slot.html"> read more</a>
 			</div>
 		</div>
 	
 		<div class="post">
 			
 
-			<a class="post-list-title" href="./back-to-basics.html">So, what is a neural network?</a>
+			<a class="post-list-title" href="./create-instance.html">Elixir - intance 생성</a>
 			
 
   <span class = "post-card-meta">
@@ -291,7 +291,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2021-04-02T00:00:00+09:00">April 2, 2021</time>
+        <time datetime="2023-12-29T13:32:20+09:00">December 29, 2023</time>
       </span>
     
     
@@ -303,7 +303,7 @@
     
     <span class="page_meta-readtime">
       
-        9 minute read
+        less than 1 minute read
       
     </span>
   
@@ -311,14 +311,14 @@
   </span>
 
 			<div class="post-excerpt">
-				<p>The omnipresence of technology nowadays has made it commonplace to read news about AI, just a quick glance at today’s headlines, and I get:</p><ul> <li><a href="https://www.morningbrew.com/emerging-tech/stories/2021/03/29/one-biggest-advancements-ai-also-sparked-fierce-debate-heres?utm_source=morning_brew">This Powerful AI Technique Led to Clashes at Google and Fierce Debate in Tech.</a></li> <li><a href="https://fortune.com/2021/04/02/ai-forecasting-supply-chain-factories-caterpillar-agco/">How A.I.-powered companies dodged the worst damage from COVID</a></li> <li><a href="https://www.mobihealthnews.com/news/emea/ai-technology-detects-ticking-time-bomb-arteries">AI technology detects ‘ticking time bomb’ arteries</a></li> <li><a href="https://www.genengnews.com/insights/ai-in-drug-discovery-starts-to-live-up-to-the-hype/">AI in Drug Discovery Starts to Live Up to the Hype</a></li> <li><a href="https://www.c4isrnet.com/artificial-intelligence/2021/04/02/pentagon-seeks-commercial-solutions-to-get-its-data-ready-for-ai/">Pentagon seeks commercial solutions to get its data ready for AI</a></li></ul><p>Topics from business, manufacturing, supply chain, medicine and biotech and even defense are covered in those news headlines, definitively the...<a class="read-more" href="./back-to-basics.html"> read more</a>
+				<p>Elixir 문범에서 struct 에 대한 instace를 생성하는 방법은 아래와 같이 두가지가 존재한다. (ChatGPT 가 설명한 그 용도의 차이점에 대해서.. 아직 잘 모르겠다. 내눈에는 그냥 동일한 용도로 사용되는 것 처럼 보인다. ;;)</p><h3 id="__module__-사용"><code class="language-plaintext highlighter-rouge">__MODULE__</code> 사용</h3><ul> <li> <p>사용법: %<strong>MODULE</strong>{} 구문은 주로 모듈 내부에서 해당 모듈의 구조체 인스턴스를 생성할 때 사용됩니다. 이 경우, 모듈 내부에서 직접 %<strong>MODULE</strong>{field1: value1, field2: value2}와 같이 구조체 인스턴스를 생성할 수 있습니다.</p> </li> <li> <p>예시: 모듈 내부에서 def new() 함수를 정의하고, 이 함수 안에서 %<strong>MODULE</strong>{}를 사용하여 인스턴스를 생성할 수 있습니다.</p> </li></ul><h3 id="def-newfield---do-__struct__field-정의"><code class="language-plaintext highlighter-rouge">def new(field \\ []), do: __struct__(field)</code> 정의</h3><ul> <li> <p>사용법: 이 방법은 모듈 외부에서 인스턴스를 생성할...<a class="read-more" href="./create-instance.html"> read more</a>
 			</div>
 		</div>
 	
 		<div class="post">
 			
 
-			<a class="post-list-title" href="./starting-the-adventure.html">Starting the adventure</a>
+			<a class="post-list-title" href="./instance-with-elixir-copy.html">struct - instance 에 대해 (Elixir vs OOP languages)</a>
 			
 
   <span class = "post-card-meta">
@@ -330,7 +330,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2021-03-24T00:00:00+09:00">March 24, 2021</time>
+        <time datetime="2023-12-29T10:32:20+09:00">December 29, 2023</time>
       </span>
     
     
@@ -342,7 +342,7 @@
     
     <span class="page_meta-readtime">
       
-        10 minute read
+        1 minute read
       
     </span>
   
@@ -350,7 +350,7 @@
   </span>
 
 			<div class="post-excerpt">
-				<p>In the midst of a global pandemic caused by the SARS-COV2 coronavirus; I decided to start blogging. I wanted to blog since a long time, I have always enjoyed writing, but many unknowns and having “no time” for it prevented me from taking it up. Things like: “I don’t really know who my target audience is”, “what would my topic or topics be?”, “I don’t think I am a world-class expert in anything”, and many more kept stopping me from setting up my own blog. Now seemed like a good time as any so with those and tons of other...<a class="read-more" href="./starting-the-adventure.html"> read more</a>
+				<p>elixir 에서의 구조체는 상속, 다형성 등이 지원되지 않고 한번 정의되면 구조체 내부 field 값을 변경할 수 없는, 내부에 field 가 존재하는 사용자 정의 type 이며, 해당 구조체 type 에 실제 data 를 가지게 하고 이를 변수 매칭 시킨것이 elixir instance 이다.</p><h3 id="유사점">유사점</h3><ol> <li> <p>데이터 캡슐화: Elixir의 구조체와 Java나 Python의 인스턴스 모두 데이터를 캡슐화합니다. 즉, 여러 데이터를 하나의 구조로 묶어 관리할 수 있습니다.</p> </li> <li> <p>필드 정의: 두 언어에서는 자료구조에 필드(데이터 요소)를 정의할 수 있으며, 이러한 필드는 각각의 자료구조에 속한 정보를 나타냅니다.</p> </li> <li> <p>타입 안정성: Elixir의 구조체와 Java의 객체는 둘 다 특정 타입에 속하는 데이터를 담는데, 이는 데이터 타입에 대한...<a class="read-more" href="./instance-with-elixir-copy.html"> read more</a>
 			</div>
 		</div>
 	

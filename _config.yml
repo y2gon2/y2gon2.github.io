@@ -26,17 +26,17 @@ highlight_theme: syntax-base16.monokai.dark # select a dark theme for the code h
 # Author settings
 author: Yong gon Yun # add your name
 author-pic: Myself_Neon_grey.jpg
-about-author: None aa.
+about-author: N/A.
 
 # Contact links
 email: y2gon2@gmail.com # Add your Email address
 phone: # Add your Phone number
 website: https://y2gon2.github.io # Add your website
-linkedin: none # Add your Linkedin handle
-github: none # Add your Github handle
-twitter: '@none' # Add your Twitter handle
-bandcamp: none # Add your Bandcamp username
-stackoverflow: none # Add your stackoverflow account
+linkedin: N/A # Add your Linkedin handle
+github: https://github.com/y2gon2/y2gon2.github.io.git # Add your Github handle
+twitter: '@N/A' # Add your Twitter handle
+bandcamp: N/A # Add your Bandcamp username
+stackoverflow: N/A # Add your stackoverflow account
 
 # Newsletter
 mailchimp: "https://github.us1.list-manage.com/subscribe/post?u=8ece198b3eb260e6838461a60&amp;id=397d90b5f4"

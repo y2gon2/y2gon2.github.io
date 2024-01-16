@@ -1,0 +1,32 @@
+---
+layout: post
+read_time: true
+show_date: true
+title:  LiveView preload/1 에 대해
+date:   2023-12-20 13:32:20 +0900
+description: LiveView - preload/1
+img: "posts/general/post_general02.jpg"
+tags: [preload/1, Phoenix, LiveView]
+author: Yong gon Yun
+github:  y2gon2/pento1/document
+mathjax: yes
+---
+## Consider the preload/1 Callback (by ChatGPT)
+
+live_component/1이 처음 호출될 때, LiveView는 일반적으로 mount/1, update/2, 그리고 render/1 콜백을 순서대로 호출합니다. 하지만 이 콜백들만으로는 충분하지 않은 상황이 발생할 수 있습니다. 특히, 성능 문제, 예를 들어 N + 1 문제를 방지하기 위해 preload/1이라는 추가 콜백이 필요할 수 있습니다.
+
+N + 1 문제란? 이는 데이터베이스 쿼리와 관련된 성능 문제로, 한 번의 큰 쿼리 대신 작은 쿼리가 여러 번 발생하여 전체적인 성능이 저하되는 현상을 말합니다.
+preload/1 콜백은 mount/1이나 render/1 전에 호출됩니다. 이렇게 함으로써 필요한 데이터를 사전에 로드하고, 성능 저하를 방지할 수 있습니다.
+
+마운트/렌더 워크플로우의 경우, LiveView는 preload/1을 호출한 다음, mount/1, update/2, 그리고 마지막으로 render/1을 호출합니다.
+변경 관리 워크플로우에서는 mount/1은 생략되지만, preload/1, update/2, 그리고 render/1의 순서는 유지됩니다.
+
+## preload/1 콜백의 작동 방식과 N + 1 문제와의 관계
+
+Phoenix LiveView에서 preload/1 콜백은 컴포넌트의 라이프사이클에서 중요한 역할을 합니다. 이 콜백은 컴포넌트가 마운트되기 전에 필요한 데이터를 미리 로드하는데 사용됩니다. 예를 들어, 여러 컴포넌트에 필요한 데이터를 한 번의 배치로 미리 로드하여, 각각의 컴포넌트가 마운트될 때 필요한 데이터를 제공할 수 있습니다. 이 과정은 preload(list_of_assigns) -> mount(socket) -> update(assigns, socket) -> render(assigns)의 순서로 진행됩니다​​.
+
+preload/1 콜백의 주요 목적은 N + 1 문제를 해결하는 것입니다. 이 문제는 여러 데이터 레코드에 대한 의존성 있는 쿼리를 반복적으로 실행하여 발생하는 성능 저하 문제를 말합니다. preload/1를 사용함으로써 필요한 모든 데이터를 한 번에 로드할 수 있으며, 이는 데이터베이스에 대한 불필요한 접근을 줄이고 전체적인 성능을 향상시킵니다.
+
+Phoenix LiveView 문서에서는 preload/1과 관련된 구체적인 콜백 목록이나 사용 방법에 대해 자세히 설명하지 않지만, preload/1 콜백의 사용이 컴포넌트 라이프사이클에서 중요한 역할을 하고, 성능 최적화에 기여한다는 점은 분명합니다​​.
+
+이 정보를 바탕으로, preload/1 콜백이 데이터 처리를 mount/1 또는 update/2와 분리하여 실행함으로써 성능 최적화에 기여한다는 것을 이해할 수 있습니다. mount/1 이전에는 초기 로딩에 필요한 모든 데이터를 로드하고, update/2 이전에는 변경된 데이터에 대해서만 로드하는 방식으로 성능을 최적화합니다.

@@ -3,22 +3,9 @@
   
     
     <url>
-      <loc>http://localhost:4000/AI-and-intellectual-property.html</loc>
+      <loc>http://localhost:4000/phoenix-slot.html</loc>
       
-        <lastmod>2021-04-20T00:00:00+09:00</lastmod>
-      
-      
-        <changefreq>daily</changefreq>
-      
-      
-        <priority>0.5</priority></url>
-    
-  
-    
-    <url>
-      <loc>http://localhost:4000/back-to-basics.html</loc>
-      
-        <lastmod>2021-04-02T00:00:00+09:00</lastmod>
+        <lastmod>2024-01-01T10:32:20+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -29,22 +16,9 @@
   
     
     <url>
-      <loc>http://localhost:4000/starting-the-adventure.html</loc>
+      <loc>http://localhost:4000/create-instance.html</loc>
       
-        <lastmod>2021-03-24T00:00:00+09:00</lastmod>
-      
-      
-        <changefreq>daily</changefreq>
-      
-      
-        <priority>0.5</priority></url>
-    
-  
-    
-    <url>
-      <loc>http://localhost:4000/deep-q-learning-tic-tac-toe.html</loc>
-      
-        <lastmod>2021-03-19T06:14:20+09:00</lastmod>
+        <lastmod>2023-12-29T13:32:20+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -55,22 +29,9 @@
   
     
     <url>
-      <loc>http://localhost:4000/neural-network-optimization-methods.html</loc>
+      <loc>http://localhost:4000/instance-with-elixir-copy.html</loc>
       
-        <lastmod>2021-03-13T04:32:20+09:00</lastmod>
-      
-      
-        <changefreq>daily</changefreq>
-      
-      
-        <priority>0.5</priority></url>
-    
-  
-    
-    <url>
-      <loc>http://localhost:4000/ML-Library-from-scratch.html</loc>
-      
-        <lastmod>2021-03-01T03:32:20+09:00</lastmod>
+        <lastmod>2023-12-29T10:32:20+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -81,9 +42,9 @@
   
     
     <url>
-      <loc>http://localhost:4000/conways-game-of-life.html</loc>
+      <loc>http://localhost:4000/phoenix-presence.html</loc>
       
-        <lastmod>2021-02-11T04:32:20+09:00</lastmod>
+        <lastmod>2023-12-26T10:32:20+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -94,9 +55,35 @@
   
     
     <url>
-      <loc>http://localhost:4000/single-neuron-perceptron.html</loc>
+      <loc>http://localhost:4000/complex-query.html</loc>
       
-        <lastmod>2021-01-26T04:32:20+09:00</lastmod>
+        <lastmod>2023-12-24T13:32:20+09:00</lastmod>
+      
+      
+        <changefreq>daily</changefreq>
+      
+      
+        <priority>0.5</priority></url>
+    
+  
+    
+    <url>
+      <loc>http://localhost:4000/preload.html</loc>
+      
+        <lastmod>2023-12-20T13:32:20+09:00</lastmod>
+      
+      
+        <changefreq>daily</changefreq>
+      
+      
+        <priority>0.5</priority></url>
+    
+  
+    
+    <url>
+      <loc>http://localhost:4000/authentication.html</loc>
+      
+        <lastmod>2023-12-18T13:32:20+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -110,7 +97,7 @@
     <url>
       <loc>http://localhost:4000/404.html</loc>
       
-        <lastmod>2024-01-16T15:18:17+09:00</lastmod>
+        <lastmod>2024-01-16T17:08:36+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -125,7 +112,7 @@
     <url>
       <loc>http://localhost:4000/about.html</loc>
       
-        <lastmod>2024-01-16T15:18:17+09:00</lastmod>
+        <lastmod>2024-01-16T17:08:36+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -140,7 +127,7 @@
     <url>
       <loc>http://localhost:4000/all-posts.json</loc>
       
-        <lastmod>2024-01-16T15:18:17+09:00</lastmod>
+        <lastmod>2024-01-16T17:08:36+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -155,7 +142,7 @@
     <url>
       <loc>http://localhost:4000/archive.html</loc>
       
-        <lastmod>2024-01-16T15:18:17+09:00</lastmod>
+        <lastmod>2024-01-16T17:08:36+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -170,7 +157,7 @@
     <url>
       <loc>http://localhost:4000/</loc>
       
-        <lastmod>2024-01-16T15:18:17+09:00</lastmod>
+        <lastmod>2024-01-16T17:08:36+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -185,7 +172,7 @@
     <url>
       <loc>http://localhost:4000/ipfs-404.html</loc>
       
-        <lastmod>2024-01-16T15:18:17+09:00</lastmod>
+        <lastmod>2024-01-16T17:08:36+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -200,7 +187,7 @@
     <url>
       <loc>http://localhost:4000/posts-by-tag.json</loc>
       
-        <lastmod>2024-01-16T15:18:17+09:00</lastmod>
+        <lastmod>2024-01-16T17:08:36+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -215,7 +202,7 @@
     <url>
       <loc>http://localhost:4000/search.json</loc>
       
-        <lastmod>2024-01-16T15:18:17+09:00</lastmod>
+        <lastmod>2024-01-16T17:08:36+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -232,7 +219,7 @@
     <url>
       <loc>http://localhost:4000/tag.html</loc>
       
-        <lastmod>2024-01-16T15:18:17+09:00</lastmod>
+        <lastmod>2024-01-16T17:08:36+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -247,7 +234,7 @@
     <url>
       <loc>http://localhost:4000/tags.html</loc>
       
-        <lastmod>2024-01-16T15:18:17+09:00</lastmod>
+        <lastmod>2024-01-16T17:08:36+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -262,7 +249,7 @@
     <url>
       <loc>http://localhost:4000/feed.xml</loc>
       
-        <lastmod>2024-01-16T15:18:17+09:00</lastmod>
+        <lastmod>2024-01-16T17:08:36+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
@@ -277,7 +264,7 @@
     <url>
       <loc>http://localhost:4000/page2/</loc>
       
-        <lastmod>2024-01-16T15:18:17+09:00</lastmod>
+        <lastmod>2024-01-16T17:08:36+09:00</lastmod>
       
       
         <changefreq>daily</changefreq>
