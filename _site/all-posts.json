@@ -7,15 +7,17 @@
     
     "./instance-with-elixir-copy.html",
     
+    "./tail-recursion.html",
+    
     "./phoenix-presence.html",
     
     "./complex-query.html",
     
+    "./open-closed-principal.html",
+    
     "./preload.html",
     
-    "./authentication.html",
-    
-    "./starting-the-adventure.html"
+    "./authentication.html"
     
   ]
 }

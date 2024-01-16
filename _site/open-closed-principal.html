@@ -7,9 +7,9 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>LiveView preload/1 에 대해 - Gon's Tech Jurnal</title>
-	<link rel="canonical" href="http://localhost:4000/preload.html">
-	<meta name="description" content="LiveView - preload/1">
+	<title>Open-Closed Principle (OCP) - Gon's Tech Jurnal</title>
+	<link rel="canonical" href="http://localhost:4000/open-closed-principal.html">
+	<meta name="description" content="Open-Closed Principle (OCP)">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 <script type="application/ld+json">
@@ -19,13 +19,13 @@
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "http://localhost:4000"},
-  "headline": "LiveView preload/1 에 대해",
-  "abstract": "LiveView - preload/1",
-    "keywords": "preload/1, Phoenix, LiveView",
-    "wordcount": "279",
-    "image": ["http://localhost:4000/assets/imgposts/general/post_general02.jpg"],
-  "datePublished": "2023-12-20 13:32:20 +0900",
-  "dateModified": "2023-12-20 13:32:20 +0900",
+  "headline": "Open-Closed Principle (OCP)",
+  "abstract": "Open-Closed Principle (OCP)",
+    "keywords": "elixir, polymorphism, Open-Closed Principle, overloading, behaviour",
+    "wordcount": "471",
+    "image": ["http://localhost:4000/assets/imgposts/general/post_general08.jpg"],
+  "datePublished": "2023-12-21 10:32:20 +0900",
+  "dateModified": "2023-12-21 10:32:20 +0900",
   "author": {
     "@type": "Person",
     "name": "Yong gon Yun"},
@@ -40,30 +40,30 @@
 }
 </script>
 <!-- Open Graph data -->
-<meta property="og:url" content="http://localhost:4000/preload.html"/>
+<meta property="og:url" content="http://localhost:4000/open-closed-principal.html"/>
 <meta property="og:type" content="article"/>
-<meta property="og:title" content="LiveView preload/1 에 대해"/>
-<meta property="og:description" content="LiveView - preload/1"/>
-<meta property="og:image" content="http://localhost:4000/assets/imgposts/general/post_general02.jpg"/>
-<meta property="og:image:alt" content="LiveView preload/1 에 대해"/>
+<meta property="og:title" content="Open-Closed Principle (OCP)"/>
+<meta property="og:description" content="Open-Closed Principle (OCP)"/>
+<meta property="og:image" content="http://localhost:4000/assets/imgposts/general/post_general08.jpg"/>
+<meta property="og:image:alt" content="Open-Closed Principle (OCP)"/>
 <meta property="og:site_name" content="Gon's Tech Jurnal" />
-<meta property="article:published_time" content="2023-12-20 13:32:20 +0900" />
-<meta property="article:modified_time" content="2023-12-20 13:32:20 +0900" />
-<meta property="article:tag" content="preload/1, Phoenix, LiveView" />
+<meta property="article:published_time" content="2023-12-21 10:32:20 +0900" />
+<meta property="article:modified_time" content="2023-12-21 10:32:20 +0900" />
+<meta property="article:tag" content="elixir, polymorphism, Open-Closed Principle, overloading, behaviour" />
 <meta property="fb:admins" content="ar.maybach" />
 <!-- Schema.org markup for Google -->
-<meta itemprop="name" content="LiveView preload/1 에 대해">
-<meta itemprop="description" content="LiveView - preload/1">
-<meta itemprop="image" content="http://localhost:4000/assets/imgposts/general/post_general02.jpg">
+<meta itemprop="name" content="Open-Closed Principle (OCP)">
+<meta itemprop="description" content="Open-Closed Principle (OCP)">
+<meta itemprop="image" content="http://localhost:4000/assets/imgposts/general/post_general08.jpg">
 <!-- Twitter Card data -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@N/A">
-<meta name="twitter:title" content="LiveView preload/1 에 대해">
-<meta name="twitter:description" content="LiveView - preload/1">
+<meta name="twitter:title" content="Open-Closed Principle (OCP)">
+<meta name="twitter:description" content="Open-Closed Principle (OCP)">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="279"/>
-<meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general02.jpg">
+<meta data-rh="true" name="twitter:data1" content="471"/>
+<meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general08.jpg">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
 	<!-- iOS Safari -->
@@ -150,7 +150,7 @@
 
 <section class="hidden">
   <div class="post">
-      <a  class="post-list-title" href="./preload.html">LiveView preload/1 에 대해</a>
+      <a  class="post-list-title" href="./open-closed-principal.html">Open-Closed Principle (OCP)</a>
       
 
   <span class = "post-card-meta">
@@ -162,7 +162,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2023-12-20T13:32:20+09:00">December 20, 2023</time>
+        <time datetime="2023-12-21T10:32:20+09:00">December 21, 2023</time>
       </span>
     
     
@@ -174,7 +174,7 @@
     
     <span class="page_meta-readtime">
       
-        1 minute read
+        2 minute read
       
     </span>
   
@@ -182,7 +182,7 @@
   </span>
 
         <div class="post-excerpt">
-            <h2 id="consider-the-preload1-callback-by-chatgpt">Consider the preload/1 Callback (by ChatGPT)</h2><p>live_component/1이 처음 호출될 때, LiveView는 일반적으로 mount/1, update/2, 그리고 render/1 콜백을 순서대로 호출합니다. 하지만 이 콜백들만으로는 충분하지 않은 상황이 발생할 수 있습니다. 특히, 성능 문제, 예를 들어 N + 1 문제를 방지하기 위해 preload/1이라는 추가 콜백이 필요할 수 있습니다.</p><p>N + 1 문제란? 이는 데이터베이스 쿼리와 관련된 성능 문제로, 한 번의 큰 쿼리 대신 작은 쿼리가 여러 번 발생하여 전체적인 성능이 저하되는 현상을 말합니다.preload/1 콜백은 mount/1이나 render/1 전에 호출됩니다. 이렇게 함으로써 필요한 데이터를 사전에 로드하고, 성능 저하를 방지할 수 있습니다.</p><p>마운트/렌더 워크플로우의 경우, LiveView는 preload/1을 호출한 다음, mount/1, update/2, 그리고 마지막으로 render/1을 호출합니다.변경 관리 워크플로우에서는 mount/1은...<a class="read-more" href="./preload.html"> read more</a>
+            <p>Elixir에서 <strong>오픈-클로즈드 원칙(Open-Closed Principle, OCP)</strong>은 소프트웨어 엔지니어링의 SOLID 원칙 중 하나로, <strong>클래스, 모듈, 함수 등이 확장에는 열려 있으나, 수정에는 닫혀 있어야 한다</strong>는 개념. 이 원칙의 목적은 기존의 코드를 변경하지 않으면서도 시스템의 기능을 확장할 수 있게 하는 것이다.</p><p>Elixir는 함수형 언어이며, 모듈과 함수를 사용하여 이 원칙을 적용할 수 있다. Elixir에서 OCP를 적용하는 몇 가지 방법은 다음과 같다:</p><ol> <li><strong>다형성(Polymorphism)을 사용하는 방법</strong><br />Elixir에서는 프로토콜(Protocol)을 사용하여 다형성을 구현할 수 있다. 프로토콜은 서로 다른 데이터 타입에 대해 동일한 인터페이스를 제공하며, 새로운 타입을 추가할 때 기존 코드를 변경하지 않고도 기능을 확장할 수 있다.<br /><br />아래 예제와 같이 <code class="language-plaintext highlighter-rouge">great/1</code> 의 경우, 모두 동일한 parameter 갯수를 갖지만...<a class="read-more" href="./open-closed-principal.html"> read more</a>
         </div>
   </div>
 </section>
@@ -280,14 +280,14 @@
 </header> <!-- End Header -->
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="LiveView preload/1 에 대해">
-<meta itemprop="description" content="LiveView - preload/1">
-<meta itemprop="datePublished" content="2023-12-20T13:32:20+09:00">
+    <meta itemprop="headline" content="Open-Closed Principle (OCP)">
+<meta itemprop="description" content="Open-Closed Principle (OCP)">
+<meta itemprop="datePublished" content="2023-12-21T10:32:20+09:00">
 
     <div class="wrapper">
       <div class="page-content">
         <div class="header-page">
-          <h2 class="page-title">LiveView preload/1 에 대해</h2>
+          <h2 class="page-title">Open-Closed Principle (OCP)</h2>
           
 
   <span class = "post-page-meta">
@@ -299,7 +299,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2023-12-20T13:32:20+09:00">December 20, 2023</time>
+        <time datetime="2023-12-21T10:32:20+09:00">December 21, 2023</time>
       </span>
     
     
@@ -311,7 +311,7 @@
     
     <span class="page_meta-readtime">
       
-        1 minute read
+        2 minute read
       
     </span>
   
@@ -330,11 +330,15 @@
     
         <ul class="tags side">
             
-                <li><a href="./tag.html?tag=preload%2F1" class="tag side">preload/1</a></li>
+                <li><a href="./tag.html?tag=elixir" class="tag side">elixir</a></li>
             
-                <li><a href="./tag.html?tag=Phoenix" class="tag side">Phoenix</a></li>
+                <li><a href="./tag.html?tag=polymorphism" class="tag side">polymorphism</a></li>
             
-                <li><a href="./tag.html?tag=LiveView" class="tag side">LiveView</a></li>
+                <li><a href="./tag.html?tag=Open-Closed+Principle" class="tag side">Open-Closed Principle</a></li>
+            
+                <li><a href="./tag.html?tag=overloading" class="tag side">overloading</a></li>
+            
+                <li><a href="./tag.html?tag=behaviour" class="tag side">behaviour</a></li>
             
     
         </ul>
@@ -343,11 +347,11 @@
     <div class="share-hover side">
         <span class="share-button side"><svg fill="currentColor" width="25" height="25" class="side"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>
         <div class="share-icons side" id="sidebar-icons">
-            <a class="twitter" href="https://twitter.com/intent/tweet?text=LiveView preload/1 에 대해&url=http://localhost:4000/preload.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/preload.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/preload.html&title=LiveView preload/1 에 대해" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a>
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/preload.html&title=LiveView preload/1 에 대해&summary=LiveView - preload/1&source=http://localhost:4000/preload.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a class="email" href="mailto:?subject=LiveView preload/1 에 대해&body=LiveView - preload/1%0A%0ARead more here: http://localhost:4000/preload.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            <a class="twitter" href="https://twitter.com/intent/tweet?text=Open-Closed Principle (OCP)&url=http://localhost:4000/open-closed-principal.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/open-closed-principal.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/open-closed-principal.html&title=Open-Closed Principle (OCP)" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a>
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/open-closed-principal.html&title=Open-Closed Principle (OCP)&summary=Open-Closed Principle (OCP)&source=http://localhost:4000/open-closed-principal.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a class="email" href="mailto:?subject=Open-Closed Principle (OCP)&body=Open-Closed Principle (OCP)%0A%0ARead more here: http://localhost:4000/open-closed-principal.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
             <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="side" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>
         </div>
     </div>
@@ -360,29 +364,82 @@
 <div class="center-container">
   <div class="github-button">
     <span class="button-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" role="img" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2.2467A10.00042,10.00042,0,0,0,8.83752,21.73419c.5.08752.6875-.21247.6875-.475,0-.23749-.01251-1.025-.01251-1.86249C7,19.85919,6.35,18.78423,6.15,18.22173A3.636,3.636,0,0,0,5.125,16.8092c-.35-.1875-.85-.65-.01251-.66248A2.00117,2.00117,0,0,1,6.65,17.17169a2.13742,2.13742,0,0,0,2.91248.825A2.10376,2.10376,0,0,1,10.2,16.65923c-2.225-.25-4.55-1.11254-4.55-4.9375a3.89187,3.89187,0,0,1,1.025-2.6875,3.59373,3.59373,0,0,1,.1-2.65s.83747-.26251,2.75,1.025a9.42747,9.42747,0,0,1,5,0c1.91248-1.3,2.75-1.025,2.75-1.025a3.59323,3.59323,0,0,1,.1,2.65,3.869,3.869,0,0,1,1.025,2.6875c0,3.83747-2.33752,4.6875-4.5625,4.9375a2.36814,2.36814,0,0,1,.675,1.85c0,1.33752-.01251,2.41248-.01251,2.75,0,.26251.1875.575.6875.475A10.0053,10.0053,0,0,0,12,2.2467Z"/></svg></span>
-    <a class="button-text" href="https://github.com/y2gon2/pento1/document" target="_blank" aria-label="Open on GitHub">view on <b>GitHub</b></a>
+    <a class="button-text" href="https://github.com/y2gon2/exercism/tree/main/document" target="_blank" aria-label="Open on GitHub">view on <b>GitHub</b></a>
   </div>
 </div>
 
-        <h2 id="consider-the-preload1-callback-by-chatgpt">Consider the preload/1 Callback (by ChatGPT)</h2>
+        <p>Elixir에서 <strong>오픈-클로즈드 원칙(Open-Closed Principle, OCP)</strong>은 소프트웨어 엔지니어링의 SOLID 원칙 중 하나로, <strong>클래스, 모듈, 함수 등이 확장에는 열려 있으나, 수정에는 닫혀 있어야 한다</strong>는 개념. 이 원칙의 목적은 기존의 코드를 변경하지 않으면서도 시스템의 기능을 확장할 수 있게 하는 것이다.</p>
 
-<p>live_component/1이 처음 호출될 때, LiveView는 일반적으로 mount/1, update/2, 그리고 render/1 콜백을 순서대로 호출합니다. 하지만 이 콜백들만으로는 충분하지 않은 상황이 발생할 수 있습니다. 특히, 성능 문제, 예를 들어 N + 1 문제를 방지하기 위해 preload/1이라는 추가 콜백이 필요할 수 있습니다.</p>
+<p>Elixir는 함수형 언어이며, 모듈과 함수를 사용하여 이 원칙을 적용할 수 있다. Elixir에서 OCP를 적용하는 몇 가지 방법은 다음과 같다:</p>
 
-<p>N + 1 문제란? 이는 데이터베이스 쿼리와 관련된 성능 문제로, 한 번의 큰 쿼리 대신 작은 쿼리가 여러 번 발생하여 전체적인 성능이 저하되는 현상을 말합니다.
-preload/1 콜백은 mount/1이나 render/1 전에 호출됩니다. 이렇게 함으로써 필요한 데이터를 사전에 로드하고, 성능 저하를 방지할 수 있습니다.</p>
+<ol>
+  <li><strong>다형성(Polymorphism)을 사용하는 방법</strong><br />
+Elixir에서는 프로토콜(Protocol)을 사용하여 다형성을 구현할 수 있다. 프로토콜은 서로 다른 데이터 타입에 대해 동일한 인터페이스를 제공하며, 새로운 타입을 추가할 때 기존 코드를 변경하지 않고도 기능을 확장할 수 있다.<br /><br />
+아래 예제와 같이 <code class="language-plaintext highlighter-rouge">great/1</code> 의 경우, 모두 동일한 parameter 갯수를 갖지만 각각 type 이 다르므로 각각 함수 요청을 구분하여, 해당 함수가 실행되도록 한다.</li>
+</ol>
 
-<p>마운트/렌더 워크플로우의 경우, LiveView는 preload/1을 호출한 다음, mount/1, update/2, 그리고 마지막으로 render/1을 호출합니다.
-변경 관리 워크플로우에서는 mount/1은 생략되지만, preload/1, update/2, 그리고 render/1의 순서는 유지됩니다.</p>
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">defmodule</span> <span class="no">PolymorphismExample</span> <span class="k">do</span>
+    <span class="c1"># 인자가 맵이고 키 :name을 가진 경우</span>
+    <span class="k">def</span> <span class="n">greet</span><span class="p">(%{</span><span class="ss">name:</span> <span class="n">name</span><span class="p">}),</span> <span class="k">do</span><span class="p">:</span> <span class="s2">"Hello, </span><span class="si">#{</span><span class="n">name</span><span class="si">}</span><span class="s2">!"</span> 
 
-<h2 id="preload1-콜백의-작동-방식과-n--1-문제와의-관계">preload/1 콜백의 작동 방식과 N + 1 문제와의 관계</h2>
+    <span class="c1"># 인자가 문자열일 경우</span>
+    <span class="k">def</span> <span class="n">greet</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="ow">when</span> <span class="n">is_binary</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="k">do</span><span class="p">:</span> <span class="s2">"Hello, </span><span class="si">#{</span><span class="n">name</span><span class="si">}</span><span class="s2">!"</span> 
 
-<p>Phoenix LiveView에서 preload/1 콜백은 컴포넌트의 라이프사이클에서 중요한 역할을 합니다. 이 콜백은 컴포넌트가 마운트되기 전에 필요한 데이터를 미리 로드하는데 사용됩니다. 예를 들어, 여러 컴포넌트에 필요한 데이터를 한 번의 배치로 미리 로드하여, 각각의 컴포넌트가 마운트될 때 필요한 데이터를 제공할 수 있습니다. 이 과정은 preload(list_of_assigns) -&gt; mount(socket) -&gt; update(assigns, socket) -&gt; render(assigns)의 순서로 진행됩니다​​.</p>
+    <span class="c1"># 위의 경우에 모두 해당하지 않을 때</span>
+    <span class="k">def</span> <span class="n">greet</span><span class="p">(</span><span class="n">_</span><span class="p">),</span> <span class="k">do</span><span class="p">:</span> <span class="s2">"Hello, there!"</span> 
+  <span class="k">end</span>
+</code></pre></div></div>
 
-<p>preload/1 콜백의 주요 목적은 N + 1 문제를 해결하는 것입니다. 이 문제는 여러 데이터 레코드에 대한 의존성 있는 쿼리를 반복적으로 실행하여 발생하는 성능 저하 문제를 말합니다. preload/1를 사용함으로써 필요한 모든 데이터를 한 번에 로드할 수 있으며, 이는 데이터베이스에 대한 불필요한 접근을 줄이고 전체적인 성능을 향상시킵니다.</p>
+<ol>
+  <li><strong>함수 오버로딩</strong><br />
+함수 오버로딩을 통해 같은 이름의 함수에 대해 다양한 패턴을 정의할 수 있다. 이를 통해 새로운 경우를 처리하기 위해 기존 함수를 수정하는 대신 새로운 함수 정의를 추가할 수 있다.
+<br /><br />
+다음의 경우, parameter 갯수가 다름에 따라 각 함수는 구분되어진다.</li>
+</ol>
 
-<p>Phoenix LiveView 문서에서는 preload/1과 관련된 구체적인 콜백 목록이나 사용 방법에 대해 자세히 설명하지 않지만, preload/1 콜백의 사용이 컴포넌트 라이프사이클에서 중요한 역할을 하고, 성능 최적화에 기여한다는 점은 분명합니다​​.</p>
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">OverloadingExample</span> <span class="k">do</span>
+  <span class="k">def</span> <span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="k">do</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="c1"># 두 개의 인자를 받는 함수</span>
+  <span class="k">def</span> <span class="n">sum</span><span class="p">(</span><span class="n">list</span><span class="p">)</span> <span class="ow">when</span> <span class="n">is_list</span><span class="p">(</span><span class="n">list</span><span class="p">),</span> <span class="k">do</span><span class="p">:</span> <span class="no">Enum</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">list</span><span class="p">)</span> <span class="c1"># 리스트를 인자로 받는 함수</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<ol>
+  <li><strong>행위(Behaviour)를 정의하는 방법</strong><br />
+Elixir에서는 행위(behaviour)를 정의하여 모듈이 특정 콜백을 구현하도록 할 수 있다. <strong>(아직 이해가 부족하므로 추가 학습 필요)</strong> 이를 통해 동일한 인터페이스를 가진 다양한 구현을 제공할 수 있으며, 새로운 구현을 추가해도 기존 모듈을 수정할 필요가 없다.</li>
+</ol>
 
-<p>이 정보를 바탕으로, preload/1 콜백이 데이터 처리를 mount/1 또는 update/2와 분리하여 실행함으로써 성능 최적화에 기여한다는 것을 이해할 수 있습니다. mount/1 이전에는 초기 로딩에 필요한 모든 데이터를 로드하고, update/2 이전에는 변경된 데이터에 대해서만 로드하는 방식으로 성능을 최적화합니다.</p>
+<ul>
+  <li>Behaviour 에 대하여
+Elixir 는 함수형 언어이므로 JAVA, 나 Python 과 같은 객체에 대한 개념이 존재 하지 않으므로, 상속 또한 존재하지 않는다. 그러나 약간 유사하게 동일한 함수 signiture 를 정의하여, 이를 필요한 상황에 맞춰 callback 함수를 구현할 수 있는 기능이 있으며, 이것이 곧 behaviour 이다. (OOP 에서 부모 객체 ‘animal’ 에서 울음소리에 대한 함수를 구현하고, 자식 객체 ‘cat’, ‘dog’ 에서 각각 함수를 상속 받아 내용을 다르게 구현하는 것과 유사한 기능을 사용할 수 있음.)
+<br /><br />
+아래의 예제를 보면,
+    <div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">Worker</span> <span class="k">do</span>
+  <span class="nv">@callback</span> <span class="n">work</span><span class="p">(</span><span class="n">data</span> <span class="p">::</span> <span class="n">any</span><span class="p">)</span> <span class="p">::</span> <span class="no">String</span><span class="o">.</span><span class="n">t</span><span class="p">()</span>
+<span class="k">end</span>
+<span class="k">defmodule</span> <span class="no">FileWorker</span> <span class="k">do</span>
+  <span class="nv">@behaviour</span> <span class="no">Worker</span>
+  <span class="k">def</span> <span class="n">work</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="k">do</span>
+    <span class="s2">"Processing file: </span><span class="si">#{</span><span class="n">data</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+<span class="k">defmodule</span> <span class="no">DatabaseWorker</span> <span class="k">do</span>
+  <span class="nv">@behaviour</span> <span class="no">Worker</span>
+  <span class="k">def</span> <span class="n">work</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="k">do</span>
+    <span class="s2">"Processing database entry: </span><span class="si">#{</span><span class="n">data</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>    </div>
+    <p><code class="language-plaintext highlighter-rouge">Worker</code> module 에서  <code class="language-plaintext highlighter-rouge">work/1</code> callback 함수를 정의한다. 이 때, 함수명, parameter &amp; return type 에 대해서만 정의한다.<br /><br />
+그리고 함수의 내용은 다른 module 에서 해당 함수를 필요할 때,  <code class="language-plaintext highlighter-rouge">@behaviour Worker</code> 로  callback 을 정의 하고, 함수를 구현하여 사용하므로, 각 module 에서 필요한 logic 을 맞추어 사용할 수 있다. <br /> 
+<a href="https://elixirschool.com/ko/lessons/advanced/behaviours">공식 문서 behaviour 설명</a></p>
+  </li>
+</ul>
+
+<ol>
+  <li><strong>컨피규레이션을 통한 확장(추후학습 예정)</strong><br />
+시스템을 구성하는 요소들을 컨피규레이션을 통해 정의하고, 새로운 구성 요소를 추가하여 기능을 확장할 수 있다.<strong>(아직 이해가 부족하므로 추가 학습 필요)</strong> 이 방법은 기존 시스템의 코드를 변경하지 않고도 새로운 기능을 추가할 수 있게 한다.</li>
+</ol>
+
+<p>결론적으로 오픈-클로즈드 원칙을 적용하면, 시스템의 유지보수성과 확장성이 향상되며, 기존 코드의 안정성을 유지하면서 새로운 기능을 추가할 수 있습니다.</p>
 
         <aside class="sidebar inline" id="post-end">
     
@@ -393,11 +450,15 @@ preload/1 콜백은 mount/1이나 render/1 전에 호출됩니다. 이렇게 함
     
         <ul class="tags inline">
             
-                <li><a href="./tag.html?tag=preload%2F1" class="tag inline">preload/1</a></li>
+                <li><a href="./tag.html?tag=elixir" class="tag inline">elixir</a></li>
             
-                <li><a href="./tag.html?tag=Phoenix" class="tag inline">Phoenix</a></li>
+                <li><a href="./tag.html?tag=polymorphism" class="tag inline">polymorphism</a></li>
             
-                <li><a href="./tag.html?tag=LiveView" class="tag inline">LiveView</a></li>
+                <li><a href="./tag.html?tag=Open-Closed+Principle" class="tag inline">Open-Closed Principle</a></li>
+            
+                <li><a href="./tag.html?tag=overloading" class="tag inline">overloading</a></li>
+            
+                <li><a href="./tag.html?tag=behaviour" class="tag inline">behaviour</a></li>
             
     
         </ul>
@@ -406,11 +467,11 @@ preload/1 콜백은 mount/1이나 render/1 전에 호출됩니다. 이렇게 함
     <div class="share-hover inline">
         <span class="share-button inline"><svg fill="currentColor" width="25" height="25" class="inline"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>
         <div class="share-icons inline" id="post-end-icons">
-            <a class="twitter" href="https://twitter.com/intent/tweet?text=LiveView preload/1 에 대해&url=http://localhost:4000/preload.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/preload.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/preload.html&title=LiveView preload/1 에 대해" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a>
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/preload.html&title=LiveView preload/1 에 대해&summary=LiveView - preload/1&source=http://localhost:4000/preload.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a class="email" href="mailto:?subject=LiveView preload/1 에 대해&body=LiveView - preload/1%0A%0ARead more here: http://localhost:4000/preload.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            <a class="twitter" href="https://twitter.com/intent/tweet?text=Open-Closed Principle (OCP)&url=http://localhost:4000/open-closed-principal.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/open-closed-principal.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/open-closed-principal.html&title=Open-Closed Principle (OCP)" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a>
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/open-closed-principal.html&title=Open-Closed Principle (OCP)&summary=Open-Closed Principle (OCP)&source=http://localhost:4000/open-closed-principal.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a class="email" href="mailto:?subject=Open-Closed Principle (OCP)&body=Open-Closed Principle (OCP)%0A%0ARead more here: http://localhost:4000/open-closed-principal.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
             <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="inline" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>
         </div>
     </div>
@@ -807,14 +868,14 @@ preload/1 콜백은 mount/1이나 render/1 전에 호출됩니다. 이렇게 함
     }
 
     function copyToClipboard() {
-      navigator.clipboard.writeText('http://localhost:4000/preload.html').then(function() {
+      navigator.clipboard.writeText('http://localhost:4000/open-closed-principal.html').then(function() {
       alerts = document.getElementsByClassName('alert')
       for (i=0; i < alerts.length; i++){
         alerts[i].innerHTML='\u00ABlink copied\u00BB';
         setTimeout((function(i){ return function(){alerts[i].innerHTML='';}})(i), 1600 );
       };
       }, function() {
-        prompt("Unable to copy, please use this link:", "http://localhost:4000/preload.html");
+        prompt("Unable to copy, please use this link:", "http://localhost:4000/open-closed-principal.html");
       });
     }
 

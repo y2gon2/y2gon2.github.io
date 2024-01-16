@@ -43,6 +43,16 @@
     
       
   {
+  "tag" : "Open-Closed Principle",
+  "posts" : [
+      
+      "./open-closed-principal.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "Phoenix",
   "posts" : [
       
@@ -67,6 +77,16 @@
   "posts" : [
       
       "./phoenix-presence.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "behaviour",
+  "posts" : [
+      
+      "./open-closed-principal.html"
       
     ]
   } ,
@@ -98,17 +118,11 @@
       
       "./create-instance.html",
       
-      "./instance-with-elixir-copy.html"
+      "./instance-with-elixir-copy.html",
       
-    ]
-  } ,
-    
+      "./tail-recursion.html",
       
-  {
-  "tag" : "general blogging",
-  "posts" : [
-      
-      "./starting-the-adventure.html"
+      "./open-closed-principal.html"
       
     ]
   } ,
@@ -127,10 +141,20 @@
     
       
   {
-  "tag" : "life",
+  "tag" : "overloading",
   "posts" : [
       
-      "./starting-the-adventure.html"
+      "./open-closed-principal.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "polymorphism",
+  "posts" : [
+      
+      "./open-closed-principal.html"
       
     ]
   } ,
@@ -169,10 +193,10 @@
     
       
   {
-  "tag" : "thoughts",
+  "tag" : "tail recursion",
   "posts" : [
       
-      "./starting-the-adventure.html"
+      "./tail-recursion.html"
       
     ]
   } 
