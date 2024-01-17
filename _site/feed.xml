@@ -1,4 +1,69 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-01-17T15:57:33+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">slot attribute 사용</title><link href="http://localhost:4000/phoenix-slot.html" rel="alternate" type="text/html" title="slot attribute 사용" /><published>2024-01-01T10:32:20+09:00</published><updated>2024-01-01T10:32:20+09:00</updated><id>http://localhost:4000/phoenix-slot</id><content type="html" xml:base="http://localhost:4000/phoenix-slot.html"><![CDATA[<p>Phoenix LiveView 에서 동적인 component 를 삽입 하고자 하는 경우, 해당  component attribute 로 `slot` 을 정의하고 이를 사용해 주어야 한다. </p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-01-17T19:56:33+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">Lazy Collection 과 Stream library</title><link href="http://localhost:4000/lazy-collection.html" rel="alternate" type="text/html" title="Lazy Collection 과 Stream library" /><published>2024-01-07T10:32:20+09:00</published><updated>2024-01-07T10:32:20+09:00</updated><id>http://localhost:4000/lazy-collection</id><content type="html" xml:base="http://localhost:4000/lazy-collection.html"><![CDATA[<h3>Lazy Collection</h3>
+<p>Lazy Colleciton 은 Elixir와 같은 함수형 프로그래밍 언어에서 중요한 개념 중 하나로 데이터가 실제로 필요할 때까지 그 처리를 연기하는 방식으로 작동한다. 이 방식은 특히 대용량 데이터를 다룰 때 메모리 사용을 최소화하고 성능을 향상시킬 수 있다.</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stream</span> <span class="o">=</span> <span class="no">Stream</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">10000</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">(</span><span class="nv">&amp;1</span> <span class="o">*</span> <span class="nv">&amp;1</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>이 코드는 1부터 10,000까지의 숫자 각각에 대해 제곱을 하는 스트림을 생성한다. 그러나 실제 제곱 연산은 스트림을 열거하는 시점, 예를 들어 Enum.to_list(stream)을 호출할 때까지 수행되지 않는다.</p>
+
+<p><strong>특징</strong></p>
+<ul>
+<li>비동기 처리: lazy collection은 데이터의 전체 집합을 메모리에 한 번에 로드하지 않는다. 대신, 요소들은 필요할 때, 즉 실제로 열거(enumerate)하거나 접근할 때 처리된다.</li><br />
+<li>효율성: lazy collection은 메모리 사용을 최적화한다. 큰 데이터셋을 한 번에 처리하는 대신, 작은 조각으로 나누어 필요한 부분만 처리한다. 이는 특히 파일 읽기, 외부 API 호출, 대규모 계산과 같은 상황에서 유용하다.</li><br />
+<li>Function Chaining: lazy collection은 여러 함수를 연결(chaining)하여 복잡한 데이터 처리 파이프라인을 구축할 수 있다. 각 함수는 이전 함수의 출력을 입력으로 받아 처리한다.(아래 보충 설명 참조)</li><br />
+<li>Stream Module: Elixir에서 lazy collection을 구현하는 데 사용되는 주요 모듈은 Stream이다. Stream 모듈은 다양한 지연 처리 함수를 제공한다. 예를 들어, <code>Stream.map/2</code>은 컬렉션의 각 요소에 주어진 함수를 적용하지만, 실제 계산은 스트림을 열거할 때까지 연기된다.</li>
+</ul>
+
+<h3>즉시 연산 vs 지연 연산</h3>
+<p>아래 두 예제의 경우, 반환값은 동일하지만, 아래와 같이 다른 기능적 특징을 가진다.</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">Stream</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">10000</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">(</span><span class="nv">&amp;1</span> <span class="o">*</span> <span class="nv">&amp;1</span><span class="p">))</span>
+</code></pre></div></div>
+<ul>
+<li>지연 연산: Stream.map은 연산을 즉시 수행하지 않고, 각 요소에 대한 연산을 정의하는 스트림을 반환한다. 이 스트림은 실제로 열거되기 전까지는 어떤 연산도 수행하지 않는다.</li><br />
+<li>메모리 효율성: 큰 데이터셋을 처리할 때 Stream.map은 모든 요소를 한 번에 메모리에 로드하지 않는다. 대신, 스트림을 열거할 때 각 요소를 개별적으로 처리한다. 이는 대규모 데이터셋을 다룰 때 메모리 사용을 최소화한다.</li><br />
+<li>적용 예: 위 code 에서 <code>Enum.to_list(stream)</code> 또는 다른 Enum 함수를 사용하여 스트림을 열거할 때까지 실제 연산이 연기된다.</li>
+</ul>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">Enum</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">10000</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">(</span><span class="nv">&amp;1</span> <span class="o">*</span> <span class="nv">&amp;1</span><span class="p">))</span>
+</code></pre></div></div>
+<ul>
+<li>즉시 연산: Enum.map은 함수가 호출되는 즉시 모든 요소에 대해 연산을 수행한다. 연산 결과는 즉시 계산되고 반환된다.</li><br />
+<li>메모리 사용: 이 방식은 연산을 수행한 전체 결과를 메모리에 저장한다. 큰 데이터셋을 처리할 경우, 이는 상당한 양의 메모리를 사용할 수 있다.</li><br />
+<li>적용 예: 연산 결과가 즉시 필요하고 데이터셋이 메모리에 들어갈 수 있을 정도로 작을 때 유용.</li>
+</ul>
+
+<center>*****</center>
+<h3>Function Chaining 상태에서의 Lazy Collection</h3>
+<p>앞에서 관련 장점을 설명했으나, 다양한 함수를 연속적으로 사용하는 function chaining 에서 항상 해당 장점이 발휘되는 것은 아니다.</p>
+<p>예를 들면,</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">1</span><span class="o">..</span><span class="mi">10000</span>
+<span class="o">|&gt;</span> <span class="no">Enum</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="nv">&amp;1</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
+<span class="o">|&gt;</span> <span class="no">Stream</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="nv">&amp;1</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">))</span>
+<span class="o">|&gt;</span> <span class="no">Enum</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>의 처리 과정을 보면,</p>
+
+<ol>
+<li>chaining 과정에서 Stream 모듈의 함수 뒤에 Enum 모듈의 함수가 오면, 스트림에 대한 모든 연산이 Enum 함수 호출 시점에 즉시 수행된다. 이는 Enum 함수가 실제 데이터를 필요로 하기 때문이다.</li><br />
+<li>반대로, Enum 함수 다음에 Stream 함수가 오면, Enum 함수는 즉시 실행되고, 그 결과는 Stream 함수에 의해 다시 지연 처리된다.</li><br />
+<li>이 경우, Enum.map은 즉시 모든 요소에 대해 연산을 수행한다. 이어서 <code>Stream.filter</code>는 지연 처리 스트림을 생성하지만, 최종적으로 <code>Enum.to_list</code>에 의해 이 스트림이 즉시 열거되어 모든 데이터 처리가 완료된다.</li>
+</ol>
+
+<p>결론적으로, 예제에서 <code>Stream.filter(&amp;(&amp;1 &lt; 100))</code>는 결국 체인의 마지막에 있는 <code>Enum.to_list()</code> 함수 때문에 즉시 연산 처리된다.</p>
+<p>chaining된 함수들 중 하나라도 즉시 연산을 수행하는 Enum 모듈의 함수를 포함하고 있고, 이것이 체인의 마지막에 위치한다면, 체인의 모든 연산은 결국 즉시 수행된다. 이는 Enum 모듈의 함수가 실제 데이터를 필요로 하기 때문에, 지연된 연산들도 강제로 실행되어 결과를 산출한다.</p>
+<center>*****</center>]]></content><author><name>Yong gon Yun</name></author><category term="elixir" /><category term="lazy collection" /><category term="elixir stream" /><summary type="html"><![CDATA[Lazy Collection 과 Stream library]]></summary></entry><entry><title type="html">Elixir 의 Map, Struct 등은 왜 immutable data types 인가?</title><link href="http://localhost:4000/immutable-data-type.html" rel="alternate" type="text/html" title="Elixir 의 Map, Struct 등은 왜 immutable data types 인가?" /><published>2024-01-03T10:32:20+09:00</published><updated>2024-01-03T10:32:20+09:00</updated><id>http://localhost:4000/immutable-data-type</id><content type="html" xml:base="http://localhost:4000/immutable-data-type.html"><![CDATA[<p>Elixir 에서 Map 은 immutable type 이다. 따라서 <code>Map.delete/2</code>, <code>Map.put/3</code>, <code>Map.update/4</code> 등과 같은 함수는 실제로 기존 map data 를 수정하는 것이 아니라, 수정되된 값으로 새로운 map data 를 만들고 이것을 재할당 하는 것이다.</p>
+<p>Struct 의 경우도, 한번 생성된 instance 의 내부 field 값을 변경하고자 하는 경우, 이는 수정이 아닌, 새로운 data 생성 및 이를 재할당 하는 것이다. 그런데 list, map 과 같이 많은 데이터를 포함하고 있는 경우, 그중 하나의 값이 바뀔 때마다 매번 모든 부분에 대한 재할당을 진행한다면, 메모리 사용이나 성능상 단점이 매 커보인다.</p>
+<p>그렇다면, immutable data type 으로 처리할 때 어떤 이점이 있을 수 있으며, 예상되는 문제점은 어떻게 해결할까?</p>
+
+<ul>
+<li>구조적 공유(Structural Sharing): 변경 불가능한 데이터 구조에서는 종종 구조적 공유 작업이 필요하다. 즉, 새로운 맵을 생성할 때 전체 구조를 복사하는 대신, 변경되지 않은 부분은 기존 구조를 재사용하여 필요한 메모리 양과 복사 작업이 크게 줄인다. (결국 immutable data type 이라도 매번 모든 data 에 대한 memory 할당 및 쓰기 작업이 진행되지는 않는다.)</li><br />
+<li>예측 가능성과 안정성: 데이터의 불변성은 함수의 부작용을 줄여준다. 이는 프로그램의 동작을 예측하기 쉽게 만들고, 디버깅과 유지보수를 용이하게 한다. </li><br />
+<li>병렬 처리: 데이터가 변경 불가능하면 여러 스레드나 프로세스에서 동시에 데이터에 접근해도 안전하므로, 병렬 처리와 동시성 프로그래밍에서 큰 이점을 제공한다.</li><br />
+<li>최적화: 현대의 가비지 컬렉션(GC) 시스템은 변경 불가능한 데이터 구조를 효율적으로 처리할 수 있도록 설계되어 있다. 따라서 새로운 구조를 생성하는 오버헤드는 종종 생각보다 작다.</li>
+</ul>]]></content><author><name>Yong gon Yun</name></author><category term="elixir" /><category term="map" /><category term="struct" /><category term="immutable data type" /><summary type="html"><![CDATA[Elixir 의 immutable data types (Map, Struct)]]></summary></entry><entry><title type="html">slot attribute 사용</title><link href="http://localhost:4000/phoenix-slot.html" rel="alternate" type="text/html" title="slot attribute 사용" /><published>2024-01-01T10:32:20+09:00</published><updated>2024-01-01T10:32:20+09:00</updated><id>http://localhost:4000/phoenix-slot</id><content type="html" xml:base="http://localhost:4000/phoenix-slot.html"><![CDATA[<p>Phoenix LiveView 에서 동적인 component 를 삽입 하고자 하는 경우, 해당  component attribute 로 `slot` 을 정의하고 이를 사용해 주어야 한다. </p>
 
 <h3>사용 방법</h3>
 
@@ -270,48 +335,4 @@ preload/1 콜백은 mount/1이나 render/1 전에 호출됩니다. 이렇게 함
 <p>Phoenix LiveView에서 preload/1 콜백은 컴포넌트의 라이프사이클에서 중요한 역할을 합니다. 이 콜백은 컴포넌트가 마운트되기 전에 필요한 데이터를 미리 로드하는데 사용됩니다. 예를 들어, 여러 컴포넌트에 필요한 데이터를 한 번의 배치로 미리 로드하여, 각각의 컴포넌트가 마운트될 때 필요한 데이터를 제공할 수 있습니다. 이 과정은 preload(list_of_assigns) -&gt; mount(socket) -&gt; update(assigns, socket) -&gt; render(assigns)의 순서로 진행됩니다​​.</p>
 <p>preload/1 콜백의 주요 목적은 N + 1 문제를 해결하는 것입니다. 이 문제는 여러 데이터 레코드에 대한 의존성 있는 쿼리를 반복적으로 실행하여 발생하는 성능 저하 문제를 말합니다. preload/1를 사용함으로써 필요한 모든 데이터를 한 번에 로드할 수 있으며, 이는 데이터베이스에 대한 불필요한 접근을 줄이고 전체적인 성능을 향상시킵니다.</p>
 <p>Phoenix LiveView 문서에서는 preload/1과 관련된 구체적인 콜백 목록이나 사용 방법에 대해 자세히 설명하지 않지만, preload/1 콜백의 사용이 컴포넌트 라이프사이클에서 중요한 역할을 하고, 성능 최적화에 기여한다는 점은 분명합니다​​.</p>
-<p>이 정보를 바탕으로, preload/1 콜백이 데이터 처리를 mount/1 또는 update/2와 분리하여 실행함으로써 성능 최적화에 기여한다는 것을 이해할 수 있습니다. mount/1 이전에는 초기 로딩에 필요한 모든 데이터를 로드하고, update/2 이전에는 변경된 데이터에 대해서만 로드하는 방식으로 성능을 최적화합니다.</p>]]></content><author><name>Yong gon Yun</name></author><category term="preload/1" /><category term="phoenix" /><category term="liveview" /><summary type="html"><![CDATA[LiveView - preload/1]]></summary></entry><entry><title type="html">기본적인 LiveView Authentication 적용</title><link href="http://localhost:4000/authentication.html" rel="alternate" type="text/html" title="기본적인 LiveView Authentication 적용" /><published>2023-12-18T13:32:20+09:00</published><updated>2023-12-18T13:32:20+09:00</updated><id>http://localhost:4000/authentication</id><content type="html" xml:base="http://localhost:4000/authentication.html"><![CDATA[<ul><li>Authentication Generator 사용을 위한 phx.gen 추가</li></ul>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen
-</code></pre></div></div>
-<ul><li>이 중 auth 관련 generator 사용</li></ul>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen.auth Accounts User uers
-</code></pre></div></div>
-<ul><li>Authentication Generator 사용을 위한 phx.gen 추가</li></ul>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen
-</code></pre></div></div>
-<ul><li>이 중 auth 관련 generator 사용</li></ul>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen.auth Accounts User uers
-</code></pre></div></div>
-
-<p>
-1. Context ('Accounts') <br />
-  Context는 Phoenix에서 도메인 특정 로직을 캡슐화하는 모듈. 이는 데이터베이스와의 상호작용을 관리하고, 애플리케이션의 나머지 부분에 서비스 API를 제공한다.
-  "Accounts"는 이 예제에서 생성될 context의 이름으로 이 context는 인증과 관련된 모든 함수와 로직을 포함하게 된다.
-</p>
-
-<p>
-2. Schema ('User') <br />
-  Schema는 데이터베이스 테이블의 구조를 설명하는 Elixir 모듈. 이는 테이블의 각 열에 해당하는 필드와 그 타입을 정의한다.
-  "User"는 사용자 데이터를 나타내는 schema의 이름으로 이 schema는 사용자 데이터를 저장하고 쿼리하는 데 사용된다.
-</p>
-
-<p>
-3. Plural name of the schema ('users')<br />
-  이것은 데이터베이스 내에서 사용될 테이블의 이름. Phoenix는 일반적으로 schema 이름의 복수형을 테이블 이름으로 사용한다.
-  "users"는 "User" schema에 대응하는 데이터베이스 테이블의 이름.
-</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix deps.get
-</code></pre></div></div>
-<ul><li>Run Migration</li></ul>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix ecto.migrate
-</code></pre></div></div>
-
-<p>
-해당 설정 이후 기존 `live "/guess", WrongLive` 를 :require_authenticated_user plug 를 실행하는 scope 로 옮겨서 추가해준다.
-</p>
-
-<p>
-따라서 해당 경로 접속은 Authentication 이 필요하며, 해당 인증은 LiveView 에서 재공하는 login / signup page 를 사용하여 회원 등록을 손쉽게 적용할 수 있게 된다.
-</p>]]></content><author><name>Yong gon Yun</name></author><category term="authentication" /><category term="phoenix" /><category term="liveview" /><summary type="html"><![CDATA[LiveView 라이브러리가 제공하는 Authentication 을 적용]]></summary></entry></feed>
+<p>이 정보를 바탕으로, preload/1 콜백이 데이터 처리를 mount/1 또는 update/2와 분리하여 실행함으로써 성능 최적화에 기여한다는 것을 이해할 수 있습니다. mount/1 이전에는 초기 로딩에 필요한 모든 데이터를 로드하고, update/2 이전에는 변경된 데이터에 대해서만 로드하는 방식으로 성능을 최적화합니다.</p>]]></content><author><name>Yong gon Yun</name></author><category term="preload/1" /><category term="phoenix" /><category term="liveview" /><summary type="html"><![CDATA[LiveView - preload/1]]></summary></entry></feed>

@@ -46,6 +46,10 @@
   "tag" : "elixir",
   "posts" : [
       
+      "./lazy-collection.html",
+      
+      "./immutable-data-type.html",
+      
       "./create-instance.html",
       
       "./instance-with-elixir.html",
@@ -59,12 +63,42 @@
     
       
   {
+  "tag" : "elixir stream",
+  "posts" : [
+      
+      "./lazy-collection.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "immutable data type",
+  "posts" : [
+      
+      "./immutable-data-type.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "instance",
   "posts" : [
       
       "./create-instance.html",
       
       "./instance-with-elixir.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "lazy collection",
+  "posts" : [
+      
+      "./lazy-collection.html"
       
     ]
   } ,
@@ -85,6 +119,16 @@
       "./preload.html",
       
       "./authentication.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "map",
+  "posts" : [
+      
+      "./immutable-data-type.html"
       
     ]
   } ,
@@ -183,6 +227,8 @@
   {
   "tag" : "struct",
   "posts" : [
+      
+      "./immutable-data-type.html",
       
       "./create-instance.html",
       

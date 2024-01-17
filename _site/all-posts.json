@@ -1,6 +1,10 @@
 {
   "posts" : [
     
+    "./lazy-collection.html",
+    
+    "./immutable-data-type.html",
+    
     "./phoenix-slot.html",
     
     "./create-instance.html",
