@@ -283,7 +283,7 @@
   </span>
 
 			<div class="post-excerpt">
-				<p>Phoenix LiveView 에서 동적인 component 를 삽입 하고자 하는 경우, 해당 component attribute 로 <code class="language-plaintext highlighter-rouge">slot</code> 을 정의하고 이를 사용해 주어야 한다.</p><p>사용 방법</p><div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">slot</span> <span class="p">:</span><span class="err">블록명</span><span class="p">,</span> <span class="ss">required:</span> <span class="no">true</span><span class="k">def</span> <span class="err">컴포넌트명</span><span class="p">(</span><span class="n">assigns</span><span class="p">)</span> <span class="k">do</span> <span class="sx">~H""</span><span class="s2">" &lt;동적으로 구현할 컴포넌트 태그&gt; &lt;&gt;..사용자 구현...&lt;&gt; &lt;%= render_slot(@블록명) %&gt; &lt;/동적으로 구현할 컴포넌트 태그&gt; """</span><span class="k">end</span></code></pre></div></div><p>관련 설명 (by ChatGPT)</p><ol> <li>Slot 정의:</li></ol><ul> <li>slot :블록명, required: true는 컴포넌트 내부에 동적으로 콘텐츠를 삽입할 수 있는 블록명이라는 이름의 슬롯을 정의합니다.</li> <li>required: true는 이 슬롯이 반드시 제공되어야 함을 의미합니다. 즉, 이 컴포넌트를 사용할 때는 블록명 슬롯에 대한 내용을...<a class="read-more" href="./phoenix-slot.html"> read more</a>
+				<p>Phoenix LiveView 에서 동적인 component 를 삽입 하고자 하는 경우, 해당 component attribute 로 `slot` 을 정의하고 이를 사용해 주어야 한다. </p><h3>사용 방법</h3><div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">slot</span> <span class="p">:</span><span class="err">블록명</span><span class="p">,</span> <span class="ss">required:</span> <span class="no">true</span><span class="k">def</span> <span class="err">컴포넌트명</span><span class="p">(</span><span class="n">assigns</span><span class="p">)</span> <span class="k">do</span> <span class="sx">~H""</span><span class="s2">" &lt;동적으로 구현할 컴포넌트 태그&gt; &lt;&gt;..사용자 구현...&lt;&gt; &lt;%= render_slot(@블록명) %&gt; &lt;/동적으로 구현할 컴포넌트 태그&gt; """</span><span class="k">end</span></code></pre></div></div><h3> Slot 정의</h3><ul><li><code>slot :블록명</code> : 컴포넌트 내부에 동적으로 콘텐츠를 삽입할 수 있는 블록명이라는 이름의 슬롯을 정의.</li><li><code>required: true</code>: 이 슬롯이 반드시 제공되어야 함을 의미. 이 컴포넌트를 사용할 때는 블록명 슬롯에 대한 내용을 제공해야 한다.</li></ul><h3>컴포넌트 정의</h3><ul><li><code>def 컴포넌트명(assigns) do ... end</code> :...<a class="read-more" href="./phoenix-slot.html"> read more</a>
 			</div>
 		</div>
 	
@@ -322,14 +322,14 @@
   </span>
 
 			<div class="post-excerpt">
-				<p>Elixir 문범에서 struct 에 대한 instace를 생성하는 방법은 아래와 같이 두가지가 존재한다. (ChatGPT 가 설명한 그 용도의 차이점에 대해서.. 아직 잘 모르겠다. 내눈에는 그냥 동일한 용도로 사용되는 것 처럼 보인다. ;;)</p><h3 id="__module__-사용"><code class="language-plaintext highlighter-rouge">__MODULE__</code> 사용</h3><ul> <li> <p>사용법: %<strong>MODULE</strong>{} 구문은 주로 모듈 내부에서 해당 모듈의 구조체 인스턴스를 생성할 때 사용됩니다. 이 경우, 모듈 내부에서 직접 %<strong>MODULE</strong>{field1: value1, field2: value2}와 같이 구조체 인스턴스를 생성할 수 있습니다.</p> </li> <li> <p>예시: 모듈 내부에서 def new() 함수를 정의하고, 이 함수 안에서 %<strong>MODULE</strong>{}를 사용하여 인스턴스를 생성할 수 있습니다.</p> </li></ul><h3 id="def-newfield---do-__struct__field-정의"><code class="language-plaintext highlighter-rouge">def new(field \\ []), do: __struct__(field)</code> 정의</h3><ul> <li> <p>사용법: 이 방법은 모듈 외부에서 인스턴스를 생성할...<a class="read-more" href="./create-instance.html"> read more</a>
+				<p>Elixir 문범에서 struct 에 대한 instace를 생성하는 방법은 아래와 같이 두가지가 존재한다. (ChatGPT 가 설명한 그 용도의 차이점에 대해서.. 아직 잘 모르겠다. 내눈에는 그냥 동일한 용도로 사용되는 것 처럼 보인다. ;;)</p><h3><code>__MODULE__</code> 사용</h3><ul><li>사용법: <code>%__MODULE__{}</code> 구문은 주로 모듈 내부에서 해당 모듈의 구조체 인스턴스를 생성할 때 사용. 이 경우, 모듈 내부에서 직접 <code>%__MODULE__{field1: value1, field2: value2}</code>와 같이 구조체 인스턴스를 생성할 수 있다.</li><br /><li>예시: 모듈 내부에서 <code>def new()</code> 함수를 정의하고, 이 함수 안에서 <code>%__MODULE__{}</code>를 사용하여 인스턴스를 생성할 수 있다.</li></ul><h3><code>def new(field \\ []), do: __struct__(field)</code> 정의</h3><ul><li>사용법: 이 방법은 모듈 외부에서 인스턴스를 생성할 때 사용합니다. 여기서 new 함수는 외부에서 호출할 수 있는 공개 인터페이스를 제공하고, <code>__struct__</code>...<a class="read-more" href="./create-instance.html"> read more</a>
 			</div>
 		</div>
 	
 		<div class="post">
 			
 
-			<a class="post-list-title" href="./instance-with-elixir-copy.html">struct - instance 에 대해 (Elixir vs OOP languages)</a>
+			<a class="post-list-title" href="./instance-with-elixir.html">struct - instance 에 대해 (Elixir vs OOP languages)</a>
 			
 
   <span class = "post-card-meta">
@@ -361,7 +361,7 @@
   </span>
 
 			<div class="post-excerpt">
-				<p>elixir 에서의 구조체는 상속, 다형성 등이 지원되지 않고 한번 정의되면 구조체 내부 field 값을 변경할 수 없는, 내부에 field 가 존재하는 사용자 정의 type 이며, 해당 구조체 type 에 실제 data 를 가지게 하고 이를 변수 매칭 시킨것이 elixir instance 이다.</p><h3 id="유사점">유사점</h3><ol> <li> <p>데이터 캡슐화: Elixir의 구조체와 Java나 Python의 인스턴스 모두 데이터를 캡슐화합니다. 즉, 여러 데이터를 하나의 구조로 묶어 관리할 수 있습니다.</p> </li> <li> <p>필드 정의: 두 언어에서는 자료구조에 필드(데이터 요소)를 정의할 수 있으며, 이러한 필드는 각각의 자료구조에 속한 정보를 나타냅니다.</p> </li> <li> <p>타입 안정성: Elixir의 구조체와 Java의 객체는 둘 다 특정 타입에 속하는 데이터를 담는데, 이는 데이터 타입에 대한...<a class="read-more" href="./instance-with-elixir-copy.html"> read more</a>
+				<p>elixir 에서의 구조체는 상속, 다형성 등이 지원되지 않고 한번 정의되면 구조체 내부 field 값을 변경할 수 없는, 내부에 field 가 존재하는 사용자 정의 type 이며, 해당 구조체 type 에 실제 data 를 가지게 하고 이를 변수 매칭 시킨것이 elixir instance 이다. </p><h3>유사점</h3><ol><li>데이터 캡슐화: Elixir의 구조체와 Java나 Python의 인스턴스 모두 데이터를 캡슐화. 여러 데이터를 하나의 구조로 묶어 관리할 수 있다.</li><br /><li>필드 정의: 두 언어에서는 자료구조에 필드(데이터 요소)를 정의할 수 있으며, 이러한 필드는 각각의 자료구조에 속한 정보를 나타냄.</li><br /><li>타입 안정성: Elixir의 구조체와 Java의 객체는 둘 다 특정 타입에 속하는 데이터를 담는데, 이는 데이터 타입에 대한 안정성과 예측 가능성을 제공.</li></ol><h3>차이점</h3><ol><li>불변성(Immutability) vs 가변성(Mutability): Elixir의...<a class="read-more" href="./instance-with-elixir.html"> read more</a>
 			</div>
 		</div>
 	

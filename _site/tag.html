@@ -243,8 +243,8 @@
 
 
 	
-	<div id="Authentication" class="hidden tag-master">
-		<h1>Authentication</h1>
+	<div id="authentication" class="hidden tag-master">
+		<h1>authentication</h1>
 		<div class="archive">
 			<div class="post-list">
 		    
@@ -283,408 +283,7 @@
   </span>
 
 					<div class="post-excerpt">
-						<ul> <li>Authentication Generator 사용을 위한 phx.gen 추가 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen </code></pre></div> </div> <p>이 중 auth 관련 generator 사용</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen.auth Accounts User uers </code></pre></div> </div> </li> </ul> <ol> <li> <p>Context (‘Accounts’) <br /> Context는 Phoenix에서 도메인 특정 로직을 캡슐화하는 모듈. 이는 데이터베이스와의 상호작용을 관리하고, 애플리케이션의 나머지 부분에 서비스 API를 제공한다. “Accounts”는 이 예제에서 생성될 context의 이름으로 이 context는 인증과 관련된 모든 함수와 로직을 포함하게 된다.</p> </li> <li> <p>Schema (‘User’) <br /> Schema는 데이터베이스 테이블의 구조를 설명하는 Elixir 모듈. 이는 테이블의 각 열에 해당하는 필드와 그 타입을 정의한다. “User”는 사용자 데이터를 나타내는...<a class="read-more" href="./authentication.html"> read more</a>
-					</div>
-				</div>
-			
-			</div>
-		</div>
-	</div>
-
-	
-	<div id="LiveView" class="hidden tag-master">
-		<h1>LiveView</h1>
-		<div class="archive">
-			<div class="post-list">
-		    
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./phoenix-slot.html">slot attribute 사용</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2024-01-01T10:32:20+09:00">January 1, 2024</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        1 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<p>Phoenix LiveView 에서 동적인 component 를 삽입 하고자 하는 경우, 해당 component attribute 로 <code class="language-plaintext highlighter-rouge">slot</code> 을 정의하고 이를 사용해 주어야 한다.</p> <p>사용 방법</p> <div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">slot</span> <span class="p">:</span><span class="err">블록명</span><span class="p">,</span> <span class="ss">required:</span> <span class="no">true</span> <span class="k">def</span> <span class="err">컴포넌트명</span><span class="p">(</span><span class="n">assigns</span><span class="p">)</span> <span class="k">do</span> <span class="sx">~H""</span><span class="s2">" &lt;동적으로 구현할 컴포넌트 태그&gt; &lt;&gt;..사용자 구현...&lt;&gt; &lt;%= render_slot(@블록명) %&gt; &lt;/동적으로 구현할 컴포넌트 태그&gt; """</span> <span class="k">end</span> </code></pre></div></div> <p>관련 설명 (by ChatGPT)</p> <ol> <li>Slot 정의:</li> </ol> <ul> <li>slot :블록명, required: true는 컴포넌트 내부에 동적으로 콘텐츠를 삽입할 수 있는 블록명이라는 이름의 슬롯을 정의합니다.</li> <li>required: true는 이 슬롯이 반드시 제공되어야 함을 의미합니다....<a class="read-more" href="./phoenix-slot.html"> read more</a>
-					</div>
-				</div>
-			
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./instance-with-elixir-copy.html">struct - instance 에 대해 (Elixir vs OOP languages)</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2023-12-29T10:32:20+09:00">December 29, 2023</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        1 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<p>elixir 에서의 구조체는 상속, 다형성 등이 지원되지 않고 한번 정의되면 구조체 내부 field 값을 변경할 수 없는, 내부에 field 가 존재하는 사용자 정의 type 이며, 해당 구조체 type 에 실제 data 를 가지게 하고 이를 변수 매칭 시킨것이 elixir instance 이다.</p> <h3 id="유사점">유사점</h3> <ol> <li> <p>데이터 캡슐화: Elixir의 구조체와 Java나 Python의 인스턴스 모두 데이터를 캡슐화합니다. 즉, 여러 데이터를 하나의 구조로 묶어 관리할 수 있습니다.</p> </li> <li> <p>필드 정의: 두 언어에서는 자료구조에 필드(데이터 요소)를 정의할 수 있으며, 이러한 필드는 각각의 자료구조에 속한 정보를 나타냅니다.</p> </li> <li> <p>타입 안정성: Elixir의 구조체와 Java의 객체는 둘 다 특정 타입에 속하는 데이터를 담는데, 이는 데이터...<a class="read-more" href="./instance-with-elixir-copy.html"> read more</a>
-					</div>
-				</div>
-			
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./phoenix-presence.html">Phoenix Presence (by ChatGPT)</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2023-12-26T10:32:20+09:00">December 26, 2023</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        2 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<p>Phoenix Presence는 Elixir 언어를 사용하는 Phoenix 프레임워크의 한 부분으로, 실시간으로 사용자의 연결 상태를 추적하고 관리하는 기능을 제공합니다. 이 기능은 주로 채팅 애플리케이션, 게임, 라이브 이벤트 등에서 유용하게 사용됩니다.</p> <p>Phoenix Presence의 핵심은 분산 시스템에서도 사용자의 현재 상태를 효과적으로 관리할 수 있다는 점입니다. 이를 위해, Phoenix는 CRDT(Conflict-Free Replicated Data Type)라는 데이터 타입을 사용하여 네트워크의 다양한 노드 간에 사용자 상태 정보를 동기화합니다. 이를 통해 서버 간의 일관성을 유지하면서도, 네트워크 분할이나 다른 이슈들이 발생해도 사용자의 상태를 정확하게 추적할 수 있습니다.</p> <p>Phoenix Presence를 사용하면 어떤 사용자가 온라인인지, 어느 채널에 있는지 등의 정보를 실시간으로 확인할 수 있습니다. 또한, 이 기능은 Elixir의 가벼운 프로세스와 메시지 전달 시스템을...<a class="read-more" href="./phoenix-presence.html"> read more</a>
-					</div>
-				</div>
-			
-			</div>
-		</div>
-	</div>
-
-	
-	<div id="OOP" class="hidden tag-master">
-		<h1>OOP</h1>
-		<div class="archive">
-			<div class="post-list">
-		    
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./instance-with-elixir-copy.html">struct - instance 에 대해 (Elixir vs OOP languages)</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2023-12-29T10:32:20+09:00">December 29, 2023</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        1 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<p>elixir 에서의 구조체는 상속, 다형성 등이 지원되지 않고 한번 정의되면 구조체 내부 field 값을 변경할 수 없는, 내부에 field 가 존재하는 사용자 정의 type 이며, 해당 구조체 type 에 실제 data 를 가지게 하고 이를 변수 매칭 시킨것이 elixir instance 이다.</p> <h3 id="유사점">유사점</h3> <ol> <li> <p>데이터 캡슐화: Elixir의 구조체와 Java나 Python의 인스턴스 모두 데이터를 캡슐화합니다. 즉, 여러 데이터를 하나의 구조로 묶어 관리할 수 있습니다.</p> </li> <li> <p>필드 정의: 두 언어에서는 자료구조에 필드(데이터 요소)를 정의할 수 있으며, 이러한 필드는 각각의 자료구조에 속한 정보를 나타냅니다.</p> </li> <li> <p>타입 안정성: Elixir의 구조체와 Java의 객체는 둘 다 특정 타입에 속하는 데이터를 담는데, 이는 데이터...<a class="read-more" href="./instance-with-elixir-copy.html"> read more</a>
-					</div>
-				</div>
-			
-			</div>
-		</div>
-	</div>
-
-	
-	<div id="Open-Closed Principle" class="hidden tag-master">
-		<h1>Open-Closed Principle</h1>
-		<div class="archive">
-			<div class="post-list">
-		    
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./open-closed-principal.html">Open-Closed Principle (OCP)</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2023-12-21T10:32:20+09:00">December 21, 2023</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        2 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<p>Elixir에서 <strong>오픈-클로즈드 원칙(Open-Closed Principle, OCP)</strong>은 소프트웨어 엔지니어링의 SOLID 원칙 중 하나로, <strong>클래스, 모듈, 함수 등이 확장에는 열려 있으나, 수정에는 닫혀 있어야 한다</strong>는 개념. 이 원칙의 목적은 기존의 코드를 변경하지 않으면서도 시스템의 기능을 확장할 수 있게 하는 것이다.</p> <p>Elixir는 함수형 언어이며, 모듈과 함수를 사용하여 이 원칙을 적용할 수 있다. Elixir에서 OCP를 적용하는 몇 가지 방법은 다음과 같다:</p> <ol> <li><strong>다형성(Polymorphism)을 사용하는 방법</strong><br /> Elixir에서는 프로토콜(Protocol)을 사용하여 다형성을 구현할 수 있다. 프로토콜은 서로 다른 데이터 타입에 대해 동일한 인터페이스를 제공하며, 새로운 타입을 추가할 때 기존 코드를 변경하지 않고도 기능을 확장할 수 있다.<br /><br /> 아래 예제와 같이 <code class="language-plaintext highlighter-rouge">great/1</code> 의 경우, 모두...<a class="read-more" href="./open-closed-principal.html"> read more</a>
-					</div>
-				</div>
-			
-			</div>
-		</div>
-	</div>
-
-	
-	<div id="Phoenix" class="hidden tag-master">
-		<h1>Phoenix</h1>
-		<div class="archive">
-			<div class="post-list">
-		    
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./phoenix-slot.html">slot attribute 사용</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2024-01-01T10:32:20+09:00">January 1, 2024</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        1 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<p>Phoenix LiveView 에서 동적인 component 를 삽입 하고자 하는 경우, 해당 component attribute 로 <code class="language-plaintext highlighter-rouge">slot</code> 을 정의하고 이를 사용해 주어야 한다.</p> <p>사용 방법</p> <div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">slot</span> <span class="p">:</span><span class="err">블록명</span><span class="p">,</span> <span class="ss">required:</span> <span class="no">true</span> <span class="k">def</span> <span class="err">컴포넌트명</span><span class="p">(</span><span class="n">assigns</span><span class="p">)</span> <span class="k">do</span> <span class="sx">~H""</span><span class="s2">" &lt;동적으로 구현할 컴포넌트 태그&gt; &lt;&gt;..사용자 구현...&lt;&gt; &lt;%= render_slot(@블록명) %&gt; &lt;/동적으로 구현할 컴포넌트 태그&gt; """</span> <span class="k">end</span> </code></pre></div></div> <p>관련 설명 (by ChatGPT)</p> <ol> <li>Slot 정의:</li> </ol> <ul> <li>slot :블록명, required: true는 컴포넌트 내부에 동적으로 콘텐츠를 삽입할 수 있는 블록명이라는 이름의 슬롯을 정의합니다.</li> <li>required: true는 이 슬롯이 반드시 제공되어야 함을 의미합니다....<a class="read-more" href="./phoenix-slot.html"> read more</a>
-					</div>
-				</div>
-			
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./instance-with-elixir-copy.html">struct - instance 에 대해 (Elixir vs OOP languages)</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2023-12-29T10:32:20+09:00">December 29, 2023</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        1 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<p>elixir 에서의 구조체는 상속, 다형성 등이 지원되지 않고 한번 정의되면 구조체 내부 field 값을 변경할 수 없는, 내부에 field 가 존재하는 사용자 정의 type 이며, 해당 구조체 type 에 실제 data 를 가지게 하고 이를 변수 매칭 시킨것이 elixir instance 이다.</p> <h3 id="유사점">유사점</h3> <ol> <li> <p>데이터 캡슐화: Elixir의 구조체와 Java나 Python의 인스턴스 모두 데이터를 캡슐화합니다. 즉, 여러 데이터를 하나의 구조로 묶어 관리할 수 있습니다.</p> </li> <li> <p>필드 정의: 두 언어에서는 자료구조에 필드(데이터 요소)를 정의할 수 있으며, 이러한 필드는 각각의 자료구조에 속한 정보를 나타냅니다.</p> </li> <li> <p>타입 안정성: Elixir의 구조체와 Java의 객체는 둘 다 특정 타입에 속하는 데이터를 담는데, 이는 데이터...<a class="read-more" href="./instance-with-elixir-copy.html"> read more</a>
-					</div>
-				</div>
-			
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./phoenix-presence.html">Phoenix Presence (by ChatGPT)</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2023-12-26T10:32:20+09:00">December 26, 2023</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        2 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<p>Phoenix Presence는 Elixir 언어를 사용하는 Phoenix 프레임워크의 한 부분으로, 실시간으로 사용자의 연결 상태를 추적하고 관리하는 기능을 제공합니다. 이 기능은 주로 채팅 애플리케이션, 게임, 라이브 이벤트 등에서 유용하게 사용됩니다.</p> <p>Phoenix Presence의 핵심은 분산 시스템에서도 사용자의 현재 상태를 효과적으로 관리할 수 있다는 점입니다. 이를 위해, Phoenix는 CRDT(Conflict-Free Replicated Data Type)라는 데이터 타입을 사용하여 네트워크의 다양한 노드 간에 사용자 상태 정보를 동기화합니다. 이를 통해 서버 간의 일관성을 유지하면서도, 네트워크 분할이나 다른 이슈들이 발생해도 사용자의 상태를 정확하게 추적할 수 있습니다.</p> <p>Phoenix Presence를 사용하면 어떤 사용자가 온라인인지, 어느 채널에 있는지 등의 정보를 실시간으로 확인할 수 있습니다. 또한, 이 기능은 Elixir의 가벼운 프로세스와 메시지 전달 시스템을...<a class="read-more" href="./phoenix-presence.html"> read more</a>
-					</div>
-				</div>
-			
-			</div>
-		</div>
-	</div>
-
-	
-	<div id="Phoenix Presence" class="hidden tag-master">
-		<h1>Phoenix Presence</h1>
-		<div class="archive">
-			<div class="post-list">
-		    
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./phoenix-presence.html">Phoenix Presence (by ChatGPT)</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2023-12-26T10:32:20+09:00">December 26, 2023</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        2 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<p>Phoenix Presence는 Elixir 언어를 사용하는 Phoenix 프레임워크의 한 부분으로, 실시간으로 사용자의 연결 상태를 추적하고 관리하는 기능을 제공합니다. 이 기능은 주로 채팅 애플리케이션, 게임, 라이브 이벤트 등에서 유용하게 사용됩니다.</p> <p>Phoenix Presence의 핵심은 분산 시스템에서도 사용자의 현재 상태를 효과적으로 관리할 수 있다는 점입니다. 이를 위해, Phoenix는 CRDT(Conflict-Free Replicated Data Type)라는 데이터 타입을 사용하여 네트워크의 다양한 노드 간에 사용자 상태 정보를 동기화합니다. 이를 통해 서버 간의 일관성을 유지하면서도, 네트워크 분할이나 다른 이슈들이 발생해도 사용자의 상태를 정확하게 추적할 수 있습니다.</p> <p>Phoenix Presence를 사용하면 어떤 사용자가 온라인인지, 어느 채널에 있는지 등의 정보를 실시간으로 확인할 수 있습니다. 또한, 이 기능은 Elixir의 가벼운 프로세스와 메시지 전달 시스템을...<a class="read-more" href="./phoenix-presence.html"> read more</a>
+						<ul><li>Authentication Generator 사용을 위한 phx.gen 추가</li></ul> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen </code></pre></div></div> <ul><li>이 중 auth 관련 generator 사용</li></ul> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen.auth Accounts User uers </code></pre></div></div> <ul><li>Authentication Generator 사용을 위한 phx.gen 추가</li></ul> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen </code></pre></div></div> <ul><li>이 중 auth 관련 generator 사용</li></ul> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen.auth Accounts User uers </code></pre></div></div> <p> 1. Context ('Accounts') <br /> Context는 Phoenix에서 도메인 특정 로직을 캡슐화하는 모듈. 이는 데이터베이스와의 상호작용을 관리하고, 애플리케이션의 나머지 부분에 서비스 API를 제공한다. "Accounts"는 이 예제에서 생성될 context의 이름으로 이 context는 인증과 관련된 모든 함수와 로직을 포함하게 된다....<a class="read-more" href="./authentication.html"> read more</a>
 					</div>
 				</div>
 			
@@ -733,7 +332,7 @@
   </span>
 
 					<div class="post-excerpt">
-						<p>Elixir에서 <strong>오픈-클로즈드 원칙(Open-Closed Principle, OCP)</strong>은 소프트웨어 엔지니어링의 SOLID 원칙 중 하나로, <strong>클래스, 모듈, 함수 등이 확장에는 열려 있으나, 수정에는 닫혀 있어야 한다</strong>는 개념. 이 원칙의 목적은 기존의 코드를 변경하지 않으면서도 시스템의 기능을 확장할 수 있게 하는 것이다.</p> <p>Elixir는 함수형 언어이며, 모듈과 함수를 사용하여 이 원칙을 적용할 수 있다. Elixir에서 OCP를 적용하는 몇 가지 방법은 다음과 같다:</p> <ol> <li><strong>다형성(Polymorphism)을 사용하는 방법</strong><br /> Elixir에서는 프로토콜(Protocol)을 사용하여 다형성을 구현할 수 있다. 프로토콜은 서로 다른 데이터 타입에 대해 동일한 인터페이스를 제공하며, 새로운 타입을 추가할 때 기존 코드를 변경하지 않고도 기능을 확장할 수 있다.<br /><br /> 아래 예제와 같이 <code class="language-plaintext highlighter-rouge">great/1</code> 의 경우, 모두...<a class="read-more" href="./open-closed-principal.html"> read more</a>
+						<p>Elixir에서 <strong>오픈-클로즈드 원칙(Open-Closed Principle, OCP)</strong>은 소프트웨어 엔지니어링의 SOLID 원칙 중 하나로, <strong>클래스, 모듈, 함수 등이 확장에는 열려 있으나, 수정에는 닫혀 있어야 한다</strong>는 개념. 이 원칙의 목적은 기존의 코드를 변경하지 않으면서도 시스템의 기능을 확장할 수 있게 하는 것이다.</p> <p>Elixir는 함수형 언어이며, 모듈과 함수를 사용하여 이 원칙을 적용할 수 있다. Elixir에서 OCP를 적용하는 몇 가지 방법은 다음과 같다:</p> <p><strong>1. 다형성(Polymorphism)을 사용하는 방법</strong></p> <p>Elixir에서는 프로토콜(Protocol)을 사용하여 다형성을 구현할 수 있다. 프로토콜은 서로 다른 데이터 타입에 대해 동일한 인터페이스를 제공하며, 새로운 타입을 추가할 때 기존 코드를 변경하지 않고도 기능을 확장할 수 있다.</p> <p>아래 예제와 같이 `great/1` 의 경우, 모두 동일한 parameter 갯수를 갖지만 각각...<a class="read-more" href="./open-closed-principal.html"> read more</a>
 					</div>
 				</div>
 			
@@ -782,7 +381,7 @@
   </span>
 
 					<div class="post-excerpt">
-						<h3 id="복합-쿼리의-logic-실행은-client-측에서-진행되는가-아니면-database-server-측에서-진행되는가">복합 쿼리의 logic 실행은 client 측에서 진행되는가, 아니면 database server 측에서 진행되는가?</h3> <p>복합 쿼리를 데이터베이스에 실행할 때 발생하는 과정은 다음과 같습니다:</p> <ul> <li> <p>쿼리의 구성: 클라이언트 측(여기서는 Elixir/Ecto를 사용하는 서버)에서 Ecto 쿼리를 작성하고, 이는 SQL 쿼리로 변환됩니다. 이 변환 과정은 Ecto가 처리하며, 작성된 Ecto 쿼리를 데이터베이스가 이해할 수 있는 SQL 쿼리로 변환합니다.</p> </li> <li> <p>SQL 쿼리의 전송: 변환된 SQL 쿼리는 데이터베이스 서버로 전송됩니다. 이 때, 클라이언트 측에서는 복잡한 로직을 처리하지 않고, 데이터베이스에 대한 쿼리 요청만 전송합니다.</p> </li> <li> <p>데이터베이스의 처리: 데이터베이스 서버에서는 받은 SQL 쿼리를 실행합니다. 데이터베이스 관리 시스템(DBMS)은 쿼리를 분석하고 최적화하여 적절한 방식으로 데이터를 검색합니다.</p> </li> <li> <p>결과의...<a class="read-more" href="./complex-query.html"> read more</a>
+						<h3>복합 쿼리의 logic 실행은 client 측에서 진행되는가, 아니면 database server 측에서 진행되는가?</h3> <p>복합 쿼리를 데이터베이스에 실행할 때 발생하는 과정은 다음과 같다.</p> <ol> <li>쿼리의 구성: 클라이언트 측(여기서는 Elixir/Ecto를 사용하는 서버)에서 Ecto 쿼리를 작성하고, 이는 SQL 쿼리로 변환된다. 이 변환 과정은 Ecto가 처리하며, 작성된 Ecto 쿼리를 데이터베이스가 이해할 수 있는 SQL 쿼리로 변환한다.</li> <li>SQL 쿼리의 전송: 변환된 SQL 쿼리는 데이터베이스 서버로 전송. 이 때, 클라이언트 측에서는 복잡한 로직을 처리하지 않고, 데이터베이스에 대한 쿼리 요청만 전송한다.</li> <li>데이터베이스의 처리: 데이터베이스 서버에서는 받은 SQL 쿼리를 실행. 데이터베이스 관리 시스템(DBMS)은 쿼리를 분석하고 최적화하여 적절한 방식으로 데이터를 검색한다.</li> <li>결과의 반환: 데이터베이스는 쿼리 결과를 클라이언트 측으로 다시 보냄....<a class="read-more" href="./complex-query.html"> read more</a>
 					</div>
 				</div>
 			
@@ -831,7 +430,7 @@
   </span>
 
 					<div class="post-excerpt">
-						<h3 id="복합-쿼리의-logic-실행은-client-측에서-진행되는가-아니면-database-server-측에서-진행되는가">복합 쿼리의 logic 실행은 client 측에서 진행되는가, 아니면 database server 측에서 진행되는가?</h3> <p>복합 쿼리를 데이터베이스에 실행할 때 발생하는 과정은 다음과 같습니다:</p> <ul> <li> <p>쿼리의 구성: 클라이언트 측(여기서는 Elixir/Ecto를 사용하는 서버)에서 Ecto 쿼리를 작성하고, 이는 SQL 쿼리로 변환됩니다. 이 변환 과정은 Ecto가 처리하며, 작성된 Ecto 쿼리를 데이터베이스가 이해할 수 있는 SQL 쿼리로 변환합니다.</p> </li> <li> <p>SQL 쿼리의 전송: 변환된 SQL 쿼리는 데이터베이스 서버로 전송됩니다. 이 때, 클라이언트 측에서는 복잡한 로직을 처리하지 않고, 데이터베이스에 대한 쿼리 요청만 전송합니다.</p> </li> <li> <p>데이터베이스의 처리: 데이터베이스 서버에서는 받은 SQL 쿼리를 실행합니다. 데이터베이스 관리 시스템(DBMS)은 쿼리를 분석하고 최적화하여 적절한 방식으로 데이터를 검색합니다.</p> </li> <li> <p>결과의...<a class="read-more" href="./complex-query.html"> read more</a>
+						<h3>복합 쿼리의 logic 실행은 client 측에서 진행되는가, 아니면 database server 측에서 진행되는가?</h3> <p>복합 쿼리를 데이터베이스에 실행할 때 발생하는 과정은 다음과 같다.</p> <ol> <li>쿼리의 구성: 클라이언트 측(여기서는 Elixir/Ecto를 사용하는 서버)에서 Ecto 쿼리를 작성하고, 이는 SQL 쿼리로 변환된다. 이 변환 과정은 Ecto가 처리하며, 작성된 Ecto 쿼리를 데이터베이스가 이해할 수 있는 SQL 쿼리로 변환한다.</li> <li>SQL 쿼리의 전송: 변환된 SQL 쿼리는 데이터베이스 서버로 전송. 이 때, 클라이언트 측에서는 복잡한 로직을 처리하지 않고, 데이터베이스에 대한 쿼리 요청만 전송한다.</li> <li>데이터베이스의 처리: 데이터베이스 서버에서는 받은 SQL 쿼리를 실행. 데이터베이스 관리 시스템(DBMS)은 쿼리를 분석하고 최적화하여 적절한 방식으로 데이터를 검색한다.</li> <li>결과의 반환: 데이터베이스는 쿼리 결과를 클라이언트 측으로 다시 보냄....<a class="read-more" href="./complex-query.html"> read more</a>
 					</div>
 				</div>
 			
@@ -880,14 +479,14 @@
   </span>
 
 					<div class="post-excerpt">
-						<p>Elixir 문범에서 struct 에 대한 instace를 생성하는 방법은 아래와 같이 두가지가 존재한다. (ChatGPT 가 설명한 그 용도의 차이점에 대해서.. 아직 잘 모르겠다. 내눈에는 그냥 동일한 용도로 사용되는 것 처럼 보인다. ;;)</p> <h3 id="__module__-사용"><code class="language-plaintext highlighter-rouge">__MODULE__</code> 사용</h3> <ul> <li> <p>사용법: %<strong>MODULE</strong>{} 구문은 주로 모듈 내부에서 해당 모듈의 구조체 인스턴스를 생성할 때 사용됩니다. 이 경우, 모듈 내부에서 직접 %<strong>MODULE</strong>{field1: value1, field2: value2}와 같이 구조체 인스턴스를 생성할 수 있습니다.</p> </li> <li> <p>예시: 모듈 내부에서 def new() 함수를 정의하고, 이 함수 안에서 %<strong>MODULE</strong>{}를 사용하여 인스턴스를 생성할 수 있습니다.</p> </li> </ul> <h3 id="def-newfield---do-__struct__field-정의"><code class="language-plaintext highlighter-rouge">def new(field \\ []), do: __struct__(field)</code> 정의</h3> <ul> <li> <p>사용법: 이...<a class="read-more" href="./create-instance.html"> read more</a>
+						<p>Elixir 문범에서 struct 에 대한 instace를 생성하는 방법은 아래와 같이 두가지가 존재한다. (ChatGPT 가 설명한 그 용도의 차이점에 대해서.. 아직 잘 모르겠다. 내눈에는 그냥 동일한 용도로 사용되는 것 처럼 보인다. ;;)</p> <h3><code>__MODULE__</code> 사용</h3> <ul> <li>사용법: <code>%__MODULE__{}</code> 구문은 주로 모듈 내부에서 해당 모듈의 구조체 인스턴스를 생성할 때 사용. 이 경우, 모듈 내부에서 직접 <code>%__MODULE__{field1: value1, field2: value2}</code>와 같이 구조체 인스턴스를 생성할 수 있다.</li><br /> <li>예시: 모듈 내부에서 <code>def new()</code> 함수를 정의하고, 이 함수 안에서 <code>%__MODULE__{}</code>를 사용하여 인스턴스를 생성할 수 있다.</li> </ul> <h3><code>def new(field \\ []), do: __struct__(field)</code> 정의</h3> <ul> <li>사용법: 이 방법은 모듈 외부에서 인스턴스를 생성할 때 사용합니다. 여기서 new 함수는...<a class="read-more" href="./create-instance.html"> read more</a>
 					</div>
 				</div>
 			
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./instance-with-elixir-copy.html">struct - instance 에 대해 (Elixir vs OOP languages)</a>
+					<a class="post-list-title" href="./instance-with-elixir.html">struct - instance 에 대해 (Elixir vs OOP languages)</a>
 					
 
   <span class = "post-card-meta">
@@ -919,7 +518,7 @@
   </span>
 
 					<div class="post-excerpt">
-						<p>elixir 에서의 구조체는 상속, 다형성 등이 지원되지 않고 한번 정의되면 구조체 내부 field 값을 변경할 수 없는, 내부에 field 가 존재하는 사용자 정의 type 이며, 해당 구조체 type 에 실제 data 를 가지게 하고 이를 변수 매칭 시킨것이 elixir instance 이다.</p> <h3 id="유사점">유사점</h3> <ol> <li> <p>데이터 캡슐화: Elixir의 구조체와 Java나 Python의 인스턴스 모두 데이터를 캡슐화합니다. 즉, 여러 데이터를 하나의 구조로 묶어 관리할 수 있습니다.</p> </li> <li> <p>필드 정의: 두 언어에서는 자료구조에 필드(데이터 요소)를 정의할 수 있으며, 이러한 필드는 각각의 자료구조에 속한 정보를 나타냅니다.</p> </li> <li> <p>타입 안정성: Elixir의 구조체와 Java의 객체는 둘 다 특정 타입에 속하는 데이터를 담는데, 이는 데이터...<a class="read-more" href="./instance-with-elixir-copy.html"> read more</a>
+						<p>elixir 에서의 구조체는 상속, 다형성 등이 지원되지 않고 한번 정의되면 구조체 내부 field 값을 변경할 수 없는, 내부에 field 가 존재하는 사용자 정의 type 이며, 해당 구조체 type 에 실제 data 를 가지게 하고 이를 변수 매칭 시킨것이 elixir instance 이다. </p> <h3>유사점</h3> <ol> <li>데이터 캡슐화: Elixir의 구조체와 Java나 Python의 인스턴스 모두 데이터를 캡슐화. 여러 데이터를 하나의 구조로 묶어 관리할 수 있다.</li><br /> <li>필드 정의: 두 언어에서는 자료구조에 필드(데이터 요소)를 정의할 수 있으며, 이러한 필드는 각각의 자료구조에 속한 정보를 나타냄.</li><br /> <li>타입 안정성: Elixir의 구조체와 Java의 객체는 둘 다 특정 타입에 속하는 데이터를 담는데, 이는 데이터 타입에 대한 안정성과 예측...<a class="read-more" href="./instance-with-elixir.html"> read more</a>
 					</div>
 				</div>
 			
@@ -958,7 +557,7 @@
   </span>
 
 					<div class="post-excerpt">
-						<h3 id="일반-재귀-regular-recursion-예제">일반 재귀 (Regular Recursion) 예제</h3> <div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">RegularRecursion</span> <span class="k">do</span> <span class="k">def</span> <span class="n">sum</span><span class="p">([]),</span> <span class="k">do</span><span class="p">:</span> <span class="mi">0</span> <span class="k">def</span> <span class="n">sum</span><span class="p">([</span><span class="n">head</span> <span class="o">|</span> <span class="n">tail</span><span class="p">]),</span> <span class="k">do</span><span class="p">:</span> <span class="n">head</span> <span class="o">+</span> <span class="n">sum</span><span class="p">(</span><span class="n">tail</span><span class="p">)</span> <span class="k">end</span> </code></pre></div></div> <p>이 예제에서 sum/1 함수는 리스트의 첫 번째 요소를 취하고, 나머지 리스트에 대해 재귀적으로 sum/1을 호출한 다음, 결과에 첫 번째 요소를 더한다. 여기서 중요한 점은 재귀 호출 후에 추가 작업(더하기)이 수행된다는 것.</p> <h3 id="꼬리-재귀-tail-recursion-예제">꼬리 재귀 (Tail Recursion) 예제</h3> <div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">TailRecursion</span> <span class="k">do</span> <span...<a class="read-more" href="./tail-recursion.html"> read more</a>
+						<h3>일반 재귀 (Regular Recursion) 예제</h3> <div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">RegularRecursion</span> <span class="k">do</span> <span class="k">def</span> <span class="n">sum</span><span class="p">([]),</span> <span class="k">do</span><span class="p">:</span> <span class="mi">0</span> <span class="k">def</span> <span class="n">sum</span><span class="p">([</span><span class="n">head</span> <span class="o">|</span> <span class="n">tail</span><span class="p">]),</span> <span class="k">do</span><span class="p">:</span> <span class="n">head</span> <span class="o">+</span> <span class="n">sum</span><span class="p">(</span><span class="n">tail</span><span class="p">)</span> <span class="k">end</span> </code></pre></div></div> <p>이 예제에서 `sum/1` 함수는 리스트의 첫 번째 요소를 취하고, 나머지 리스트에 대해 재귀적으로 `sum/1`을 호출한 다음, 결과에 첫 번째 요소를 더한다. 여기서 중요한 점은 재귀 호출 후에 추가 작업(더하기)이 수행된다는 것.</p> <h3>꼬리 재귀 (Tail Recursion) 예제</h3> <p>다음 예제에서 `sum/2` 보조 함수는 누적된 합계를 유지하면서 재귀적으로 호출된다. 각 재귀 호출은...<a class="read-more" href="./tail-recursion.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1007,14 +606,14 @@
   </span>
 
 					<div class="post-excerpt">
-						<p>Elixir 문범에서 struct 에 대한 instace를 생성하는 방법은 아래와 같이 두가지가 존재한다. (ChatGPT 가 설명한 그 용도의 차이점에 대해서.. 아직 잘 모르겠다. 내눈에는 그냥 동일한 용도로 사용되는 것 처럼 보인다. ;;)</p> <h3 id="__module__-사용"><code class="language-plaintext highlighter-rouge">__MODULE__</code> 사용</h3> <ul> <li> <p>사용법: %<strong>MODULE</strong>{} 구문은 주로 모듈 내부에서 해당 모듈의 구조체 인스턴스를 생성할 때 사용됩니다. 이 경우, 모듈 내부에서 직접 %<strong>MODULE</strong>{field1: value1, field2: value2}와 같이 구조체 인스턴스를 생성할 수 있습니다.</p> </li> <li> <p>예시: 모듈 내부에서 def new() 함수를 정의하고, 이 함수 안에서 %<strong>MODULE</strong>{}를 사용하여 인스턴스를 생성할 수 있습니다.</p> </li> </ul> <h3 id="def-newfield---do-__struct__field-정의"><code class="language-plaintext highlighter-rouge">def new(field \\ []), do: __struct__(field)</code> 정의</h3> <ul> <li> <p>사용법: 이...<a class="read-more" href="./create-instance.html"> read more</a>
+						<p>Elixir 문범에서 struct 에 대한 instace를 생성하는 방법은 아래와 같이 두가지가 존재한다. (ChatGPT 가 설명한 그 용도의 차이점에 대해서.. 아직 잘 모르겠다. 내눈에는 그냥 동일한 용도로 사용되는 것 처럼 보인다. ;;)</p> <h3><code>__MODULE__</code> 사용</h3> <ul> <li>사용법: <code>%__MODULE__{}</code> 구문은 주로 모듈 내부에서 해당 모듈의 구조체 인스턴스를 생성할 때 사용. 이 경우, 모듈 내부에서 직접 <code>%__MODULE__{field1: value1, field2: value2}</code>와 같이 구조체 인스턴스를 생성할 수 있다.</li><br /> <li>예시: 모듈 내부에서 <code>def new()</code> 함수를 정의하고, 이 함수 안에서 <code>%__MODULE__{}</code>를 사용하여 인스턴스를 생성할 수 있다.</li> </ul> <h3><code>def new(field \\ []), do: __struct__(field)</code> 정의</h3> <ul> <li>사용법: 이 방법은 모듈 외부에서 인스턴스를 생성할 때 사용합니다. 여기서 new 함수는...<a class="read-more" href="./create-instance.html"> read more</a>
 					</div>
 				</div>
 			
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./instance-with-elixir-copy.html">struct - instance 에 대해 (Elixir vs OOP languages)</a>
+					<a class="post-list-title" href="./instance-with-elixir.html">struct - instance 에 대해 (Elixir vs OOP languages)</a>
 					
 
   <span class = "post-card-meta">
@@ -1046,7 +645,232 @@
   </span>
 
 					<div class="post-excerpt">
-						<p>elixir 에서의 구조체는 상속, 다형성 등이 지원되지 않고 한번 정의되면 구조체 내부 field 값을 변경할 수 없는, 내부에 field 가 존재하는 사용자 정의 type 이며, 해당 구조체 type 에 실제 data 를 가지게 하고 이를 변수 매칭 시킨것이 elixir instance 이다.</p> <h3 id="유사점">유사점</h3> <ol> <li> <p>데이터 캡슐화: Elixir의 구조체와 Java나 Python의 인스턴스 모두 데이터를 캡슐화합니다. 즉, 여러 데이터를 하나의 구조로 묶어 관리할 수 있습니다.</p> </li> <li> <p>필드 정의: 두 언어에서는 자료구조에 필드(데이터 요소)를 정의할 수 있으며, 이러한 필드는 각각의 자료구조에 속한 정보를 나타냅니다.</p> </li> <li> <p>타입 안정성: Elixir의 구조체와 Java의 객체는 둘 다 특정 타입에 속하는 데이터를 담는데, 이는 데이터...<a class="read-more" href="./instance-with-elixir-copy.html"> read more</a>
+						<p>elixir 에서의 구조체는 상속, 다형성 등이 지원되지 않고 한번 정의되면 구조체 내부 field 값을 변경할 수 없는, 내부에 field 가 존재하는 사용자 정의 type 이며, 해당 구조체 type 에 실제 data 를 가지게 하고 이를 변수 매칭 시킨것이 elixir instance 이다. </p> <h3>유사점</h3> <ol> <li>데이터 캡슐화: Elixir의 구조체와 Java나 Python의 인스턴스 모두 데이터를 캡슐화. 여러 데이터를 하나의 구조로 묶어 관리할 수 있다.</li><br /> <li>필드 정의: 두 언어에서는 자료구조에 필드(데이터 요소)를 정의할 수 있으며, 이러한 필드는 각각의 자료구조에 속한 정보를 나타냄.</li><br /> <li>타입 안정성: Elixir의 구조체와 Java의 객체는 둘 다 특정 타입에 속하는 데이터를 담는데, 이는 데이터 타입에 대한 안정성과 예측...<a class="read-more" href="./instance-with-elixir.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
+	<div id="liveview" class="hidden tag-master">
+		<h1>liveview</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./phoenix-slot.html">slot attribute 사용</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-01T10:32:20+09:00">January 1, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        1 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Phoenix LiveView 에서 동적인 component 를 삽입 하고자 하는 경우, 해당 component attribute 로 `slot` 을 정의하고 이를 사용해 주어야 한다. </p> <h3>사용 방법</h3> <div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">slot</span> <span class="p">:</span><span class="err">블록명</span><span class="p">,</span> <span class="ss">required:</span> <span class="no">true</span> <span class="k">def</span> <span class="err">컴포넌트명</span><span class="p">(</span><span class="n">assigns</span><span class="p">)</span> <span class="k">do</span> <span class="sx">~H""</span><span class="s2">" &lt;동적으로 구현할 컴포넌트 태그&gt; &lt;&gt;..사용자 구현...&lt;&gt; &lt;%= render_slot(@블록명) %&gt; &lt;/동적으로 구현할 컴포넌트 태그&gt; """</span> <span class="k">end</span> </code></pre></div></div> <h3> Slot 정의</h3> <ul> <li><code>slot :블록명</code> : 컴포넌트 내부에 동적으로 콘텐츠를 삽입할 수 있는 블록명이라는 이름의 슬롯을 정의.</li> <li><code>required: true</code>: 이 슬롯이 반드시 제공되어야 함을 의미. 이 컴포넌트를 사용할 때는 블록명 슬롯에 대한...<a class="read-more" href="./phoenix-slot.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./instance-with-elixir.html">struct - instance 에 대해 (Elixir vs OOP languages)</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2023-12-29T10:32:20+09:00">December 29, 2023</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        1 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>elixir 에서의 구조체는 상속, 다형성 등이 지원되지 않고 한번 정의되면 구조체 내부 field 값을 변경할 수 없는, 내부에 field 가 존재하는 사용자 정의 type 이며, 해당 구조체 type 에 실제 data 를 가지게 하고 이를 변수 매칭 시킨것이 elixir instance 이다. </p> <h3>유사점</h3> <ol> <li>데이터 캡슐화: Elixir의 구조체와 Java나 Python의 인스턴스 모두 데이터를 캡슐화. 여러 데이터를 하나의 구조로 묶어 관리할 수 있다.</li><br /> <li>필드 정의: 두 언어에서는 자료구조에 필드(데이터 요소)를 정의할 수 있으며, 이러한 필드는 각각의 자료구조에 속한 정보를 나타냄.</li><br /> <li>타입 안정성: Elixir의 구조체와 Java의 객체는 둘 다 특정 타입에 속하는 데이터를 담는데, 이는 데이터 타입에 대한 안정성과 예측...<a class="read-more" href="./instance-with-elixir.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./phoenix-presence.html">Phoenix Presence (by ChatGPT)</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2023-12-26T10:32:20+09:00">December 26, 2023</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        2 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Phoenix Presence는 Elixir 언어를 사용하는 Phoenix 프레임워크의 한 부분으로, 실시간으로 사용자의 연결 상태를 추적하고 관리하는 기능을 제공합니다. 이 기능은 주로 채팅 애플리케이션, 게임, 라이브 이벤트 등에서 유용하게 사용됩니다.</p> <p>Phoenix Presence의 핵심은 분산 시스템에서도 사용자의 현재 상태를 효과적으로 관리할 수 있다는 점입니다. 이를 위해, Phoenix는 CRDT(Conflict-Free Replicated Data Type)라는 데이터 타입을 사용하여 네트워크의 다양한 노드 간에 사용자 상태 정보를 동기화합니다. 이를 통해 서버 간의 일관성을 유지하면서도, 네트워크 분할이나 다른 이슈들이 발생해도 사용자의 상태를 정확하게 추적할 수 있습니다.</p> <p>Phoenix Presence를 사용하면 어떤 사용자가 온라인인지, 어느 채널에 있는지 등의 정보를 실시간으로 확인할 수 있습니다. 또한, 이 기능은 Elixir의 가벼운 프로세스와 메시지 전달 시스템을...<a class="read-more" href="./phoenix-presence.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
+	<div id="oop" class="hidden tag-master">
+		<h1>oop</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./instance-with-elixir.html">struct - instance 에 대해 (Elixir vs OOP languages)</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2023-12-29T10:32:20+09:00">December 29, 2023</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        1 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>elixir 에서의 구조체는 상속, 다형성 등이 지원되지 않고 한번 정의되면 구조체 내부 field 값을 변경할 수 없는, 내부에 field 가 존재하는 사용자 정의 type 이며, 해당 구조체 type 에 실제 data 를 가지게 하고 이를 변수 매칭 시킨것이 elixir instance 이다. </p> <h3>유사점</h3> <ol> <li>데이터 캡슐화: Elixir의 구조체와 Java나 Python의 인스턴스 모두 데이터를 캡슐화. 여러 데이터를 하나의 구조로 묶어 관리할 수 있다.</li><br /> <li>필드 정의: 두 언어에서는 자료구조에 필드(데이터 요소)를 정의할 수 있으며, 이러한 필드는 각각의 자료구조에 속한 정보를 나타냄.</li><br /> <li>타입 안정성: Elixir의 구조체와 Java의 객체는 둘 다 특정 타입에 속하는 데이터를 담는데, 이는 데이터 타입에 대한 안정성과 예측...<a class="read-more" href="./instance-with-elixir.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
+	<div id="open-closed principle" class="hidden tag-master">
+		<h1>open-closed principle</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./open-closed-principal.html">Open-Closed Principle (OCP)</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2023-12-21T10:32:20+09:00">December 21, 2023</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        2 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Elixir에서 <strong>오픈-클로즈드 원칙(Open-Closed Principle, OCP)</strong>은 소프트웨어 엔지니어링의 SOLID 원칙 중 하나로, <strong>클래스, 모듈, 함수 등이 확장에는 열려 있으나, 수정에는 닫혀 있어야 한다</strong>는 개념. 이 원칙의 목적은 기존의 코드를 변경하지 않으면서도 시스템의 기능을 확장할 수 있게 하는 것이다.</p> <p>Elixir는 함수형 언어이며, 모듈과 함수를 사용하여 이 원칙을 적용할 수 있다. Elixir에서 OCP를 적용하는 몇 가지 방법은 다음과 같다:</p> <p><strong>1. 다형성(Polymorphism)을 사용하는 방법</strong></p> <p>Elixir에서는 프로토콜(Protocol)을 사용하여 다형성을 구현할 수 있다. 프로토콜은 서로 다른 데이터 타입에 대해 동일한 인터페이스를 제공하며, 새로운 타입을 추가할 때 기존 코드를 변경하지 않고도 기능을 확장할 수 있다.</p> <p>아래 예제와 같이 `great/1` 의 경우, 모두 동일한 parameter 갯수를 갖지만 각각...<a class="read-more" href="./open-closed-principal.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1095,7 +919,183 @@
   </span>
 
 					<div class="post-excerpt">
-						<p>Elixir에서 <strong>오픈-클로즈드 원칙(Open-Closed Principle, OCP)</strong>은 소프트웨어 엔지니어링의 SOLID 원칙 중 하나로, <strong>클래스, 모듈, 함수 등이 확장에는 열려 있으나, 수정에는 닫혀 있어야 한다</strong>는 개념. 이 원칙의 목적은 기존의 코드를 변경하지 않으면서도 시스템의 기능을 확장할 수 있게 하는 것이다.</p> <p>Elixir는 함수형 언어이며, 모듈과 함수를 사용하여 이 원칙을 적용할 수 있다. Elixir에서 OCP를 적용하는 몇 가지 방법은 다음과 같다:</p> <ol> <li><strong>다형성(Polymorphism)을 사용하는 방법</strong><br /> Elixir에서는 프로토콜(Protocol)을 사용하여 다형성을 구현할 수 있다. 프로토콜은 서로 다른 데이터 타입에 대해 동일한 인터페이스를 제공하며, 새로운 타입을 추가할 때 기존 코드를 변경하지 않고도 기능을 확장할 수 있다.<br /><br /> 아래 예제와 같이 <code class="language-plaintext highlighter-rouge">great/1</code> 의 경우, 모두...<a class="read-more" href="./open-closed-principal.html"> read more</a>
+						<p>Elixir에서 <strong>오픈-클로즈드 원칙(Open-Closed Principle, OCP)</strong>은 소프트웨어 엔지니어링의 SOLID 원칙 중 하나로, <strong>클래스, 모듈, 함수 등이 확장에는 열려 있으나, 수정에는 닫혀 있어야 한다</strong>는 개념. 이 원칙의 목적은 기존의 코드를 변경하지 않으면서도 시스템의 기능을 확장할 수 있게 하는 것이다.</p> <p>Elixir는 함수형 언어이며, 모듈과 함수를 사용하여 이 원칙을 적용할 수 있다. Elixir에서 OCP를 적용하는 몇 가지 방법은 다음과 같다:</p> <p><strong>1. 다형성(Polymorphism)을 사용하는 방법</strong></p> <p>Elixir에서는 프로토콜(Protocol)을 사용하여 다형성을 구현할 수 있다. 프로토콜은 서로 다른 데이터 타입에 대해 동일한 인터페이스를 제공하며, 새로운 타입을 추가할 때 기존 코드를 변경하지 않고도 기능을 확장할 수 있다.</p> <p>아래 예제와 같이 `great/1` 의 경우, 모두 동일한 parameter 갯수를 갖지만 각각...<a class="read-more" href="./open-closed-principal.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
+	<div id="phoenix" class="hidden tag-master">
+		<h1>phoenix</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./phoenix-slot.html">slot attribute 사용</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-01T10:32:20+09:00">January 1, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        1 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Phoenix LiveView 에서 동적인 component 를 삽입 하고자 하는 경우, 해당 component attribute 로 `slot` 을 정의하고 이를 사용해 주어야 한다. </p> <h3>사용 방법</h3> <div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">slot</span> <span class="p">:</span><span class="err">블록명</span><span class="p">,</span> <span class="ss">required:</span> <span class="no">true</span> <span class="k">def</span> <span class="err">컴포넌트명</span><span class="p">(</span><span class="n">assigns</span><span class="p">)</span> <span class="k">do</span> <span class="sx">~H""</span><span class="s2">" &lt;동적으로 구현할 컴포넌트 태그&gt; &lt;&gt;..사용자 구현...&lt;&gt; &lt;%= render_slot(@블록명) %&gt; &lt;/동적으로 구현할 컴포넌트 태그&gt; """</span> <span class="k">end</span> </code></pre></div></div> <h3> Slot 정의</h3> <ul> <li><code>slot :블록명</code> : 컴포넌트 내부에 동적으로 콘텐츠를 삽입할 수 있는 블록명이라는 이름의 슬롯을 정의.</li> <li><code>required: true</code>: 이 슬롯이 반드시 제공되어야 함을 의미. 이 컴포넌트를 사용할 때는 블록명 슬롯에 대한...<a class="read-more" href="./phoenix-slot.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./instance-with-elixir.html">struct - instance 에 대해 (Elixir vs OOP languages)</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2023-12-29T10:32:20+09:00">December 29, 2023</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        1 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>elixir 에서의 구조체는 상속, 다형성 등이 지원되지 않고 한번 정의되면 구조체 내부 field 값을 변경할 수 없는, 내부에 field 가 존재하는 사용자 정의 type 이며, 해당 구조체 type 에 실제 data 를 가지게 하고 이를 변수 매칭 시킨것이 elixir instance 이다. </p> <h3>유사점</h3> <ol> <li>데이터 캡슐화: Elixir의 구조체와 Java나 Python의 인스턴스 모두 데이터를 캡슐화. 여러 데이터를 하나의 구조로 묶어 관리할 수 있다.</li><br /> <li>필드 정의: 두 언어에서는 자료구조에 필드(데이터 요소)를 정의할 수 있으며, 이러한 필드는 각각의 자료구조에 속한 정보를 나타냄.</li><br /> <li>타입 안정성: Elixir의 구조체와 Java의 객체는 둘 다 특정 타입에 속하는 데이터를 담는데, 이는 데이터 타입에 대한 안정성과 예측...<a class="read-more" href="./instance-with-elixir.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./phoenix-presence.html">Phoenix Presence (by ChatGPT)</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2023-12-26T10:32:20+09:00">December 26, 2023</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        2 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Phoenix Presence는 Elixir 언어를 사용하는 Phoenix 프레임워크의 한 부분으로, 실시간으로 사용자의 연결 상태를 추적하고 관리하는 기능을 제공합니다. 이 기능은 주로 채팅 애플리케이션, 게임, 라이브 이벤트 등에서 유용하게 사용됩니다.</p> <p>Phoenix Presence의 핵심은 분산 시스템에서도 사용자의 현재 상태를 효과적으로 관리할 수 있다는 점입니다. 이를 위해, Phoenix는 CRDT(Conflict-Free Replicated Data Type)라는 데이터 타입을 사용하여 네트워크의 다양한 노드 간에 사용자 상태 정보를 동기화합니다. 이를 통해 서버 간의 일관성을 유지하면서도, 네트워크 분할이나 다른 이슈들이 발생해도 사용자의 상태를 정확하게 추적할 수 있습니다.</p> <p>Phoenix Presence를 사용하면 어떤 사용자가 온라인인지, 어느 채널에 있는지 등의 정보를 실시간으로 확인할 수 있습니다. 또한, 이 기능은 Elixir의 가벼운 프로세스와 메시지 전달 시스템을...<a class="read-more" href="./phoenix-presence.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
+	<div id="phoenix presence" class="hidden tag-master">
+		<h1>phoenix presence</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./phoenix-presence.html">Phoenix Presence (by ChatGPT)</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2023-12-26T10:32:20+09:00">December 26, 2023</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        2 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Phoenix Presence는 Elixir 언어를 사용하는 Phoenix 프레임워크의 한 부분으로, 실시간으로 사용자의 연결 상태를 추적하고 관리하는 기능을 제공합니다. 이 기능은 주로 채팅 애플리케이션, 게임, 라이브 이벤트 등에서 유용하게 사용됩니다.</p> <p>Phoenix Presence의 핵심은 분산 시스템에서도 사용자의 현재 상태를 효과적으로 관리할 수 있다는 점입니다. 이를 위해, Phoenix는 CRDT(Conflict-Free Replicated Data Type)라는 데이터 타입을 사용하여 네트워크의 다양한 노드 간에 사용자 상태 정보를 동기화합니다. 이를 통해 서버 간의 일관성을 유지하면서도, 네트워크 분할이나 다른 이슈들이 발생해도 사용자의 상태를 정확하게 추적할 수 있습니다.</p> <p>Phoenix Presence를 사용하면 어떤 사용자가 온라인인지, 어느 채널에 있는지 등의 정보를 실시간으로 확인할 수 있습니다. 또한, 이 기능은 Elixir의 가벼운 프로세스와 메시지 전달 시스템을...<a class="read-more" href="./phoenix-presence.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1144,7 +1144,7 @@
   </span>
 
 					<div class="post-excerpt">
-						<p>Elixir에서 <strong>오픈-클로즈드 원칙(Open-Closed Principle, OCP)</strong>은 소프트웨어 엔지니어링의 SOLID 원칙 중 하나로, <strong>클래스, 모듈, 함수 등이 확장에는 열려 있으나, 수정에는 닫혀 있어야 한다</strong>는 개념. 이 원칙의 목적은 기존의 코드를 변경하지 않으면서도 시스템의 기능을 확장할 수 있게 하는 것이다.</p> <p>Elixir는 함수형 언어이며, 모듈과 함수를 사용하여 이 원칙을 적용할 수 있다. Elixir에서 OCP를 적용하는 몇 가지 방법은 다음과 같다:</p> <ol> <li><strong>다형성(Polymorphism)을 사용하는 방법</strong><br /> Elixir에서는 프로토콜(Protocol)을 사용하여 다형성을 구현할 수 있다. 프로토콜은 서로 다른 데이터 타입에 대해 동일한 인터페이스를 제공하며, 새로운 타입을 추가할 때 기존 코드를 변경하지 않고도 기능을 확장할 수 있다.<br /><br /> 아래 예제와 같이 <code class="language-plaintext highlighter-rouge">great/1</code> 의 경우, 모두...<a class="read-more" href="./open-closed-principal.html"> read more</a>
+						<p>Elixir에서 <strong>오픈-클로즈드 원칙(Open-Closed Principle, OCP)</strong>은 소프트웨어 엔지니어링의 SOLID 원칙 중 하나로, <strong>클래스, 모듈, 함수 등이 확장에는 열려 있으나, 수정에는 닫혀 있어야 한다</strong>는 개념. 이 원칙의 목적은 기존의 코드를 변경하지 않으면서도 시스템의 기능을 확장할 수 있게 하는 것이다.</p> <p>Elixir는 함수형 언어이며, 모듈과 함수를 사용하여 이 원칙을 적용할 수 있다. Elixir에서 OCP를 적용하는 몇 가지 방법은 다음과 같다:</p> <p><strong>1. 다형성(Polymorphism)을 사용하는 방법</strong></p> <p>Elixir에서는 프로토콜(Protocol)을 사용하여 다형성을 구현할 수 있다. 프로토콜은 서로 다른 데이터 타입에 대해 동일한 인터페이스를 제공하며, 새로운 타입을 추가할 때 기존 코드를 변경하지 않고도 기능을 확장할 수 있다.</p> <p>아래 예제와 같이 `great/1` 의 경우, 모두 동일한 parameter 갯수를 갖지만 각각...<a class="read-more" href="./open-closed-principal.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1193,7 +1193,7 @@
   </span>
 
 					<div class="post-excerpt">
-						<h2 id="consider-the-preload1-callback-by-chatgpt">Consider the preload/1 Callback (by ChatGPT)</h2> <p>live_component/1이 처음 호출될 때, LiveView는 일반적으로 mount/1, update/2, 그리고 render/1 콜백을 순서대로 호출합니다. 하지만 이 콜백들만으로는 충분하지 않은 상황이 발생할 수 있습니다. 특히, 성능 문제, 예를 들어 N + 1 문제를 방지하기 위해 preload/1이라는 추가 콜백이 필요할 수 있습니다.</p> <p>N + 1 문제란? 이는 데이터베이스 쿼리와 관련된 성능 문제로, 한 번의 큰 쿼리 대신 작은 쿼리가 여러 번 발생하여 전체적인 성능이 저하되는 현상을 말합니다. preload/1 콜백은 mount/1이나 render/1 전에 호출됩니다. 이렇게 함으로써 필요한 데이터를 사전에 로드하고, 성능 저하를 방지할 수 있습니다.</p> <p>마운트/렌더 워크플로우의 경우, LiveView는 preload/1을 호출한 다음, mount/1, update/2, 그리고 마지막으로 render/1을...<a class="read-more" href="./preload.html"> read more</a>
+						<h3>Consider the preload/1 Callback (by ChatGPT)</h3> <p>live_component/1이 처음 호출될 때, LiveView는 일반적으로 mount/1, update/2, 그리고 render/1 콜백을 순서대로 호출합니다. 하지만 이 콜백들만으로는 충분하지 않은 상황이 발생할 수 있습니다. 특히, 성능 문제, 예를 들어 N + 1 문제를 방지하기 위해 preload/1이라는 추가 콜백이 필요할 수 있습니다.</p> <p>N + 1 문제란? 이는 데이터베이스 쿼리와 관련된 성능 문제로, 한 번의 큰 쿼리 대신 작은 쿼리가 여러 번 발생하여 전체적인 성능이 저하되는 현상을 말합니다. preload/1 콜백은 mount/1이나 render/1 전에 호출됩니다. 이렇게 함으로써 필요한 데이터를 사전에 로드하고, 성능 저하를 방지할 수 있습니다.</p> <p>마운트/렌더 워크플로우의 경우, LiveView는 preload/1을 호출한 다음, mount/1, update/2, 그리고 마지막으로 render/1을 호출합니다....<a class="read-more" href="./preload.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1242,7 +1242,7 @@
   </span>
 
 					<div class="post-excerpt">
-						<p>Phoenix LiveView 에서 동적인 component 를 삽입 하고자 하는 경우, 해당 component attribute 로 <code class="language-plaintext highlighter-rouge">slot</code> 을 정의하고 이를 사용해 주어야 한다.</p> <p>사용 방법</p> <div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">slot</span> <span class="p">:</span><span class="err">블록명</span><span class="p">,</span> <span class="ss">required:</span> <span class="no">true</span> <span class="k">def</span> <span class="err">컴포넌트명</span><span class="p">(</span><span class="n">assigns</span><span class="p">)</span> <span class="k">do</span> <span class="sx">~H""</span><span class="s2">" &lt;동적으로 구현할 컴포넌트 태그&gt; &lt;&gt;..사용자 구현...&lt;&gt; &lt;%= render_slot(@블록명) %&gt; &lt;/동적으로 구현할 컴포넌트 태그&gt; """</span> <span class="k">end</span> </code></pre></div></div> <p>관련 설명 (by ChatGPT)</p> <ol> <li>Slot 정의:</li> </ol> <ul> <li>slot :블록명, required: true는 컴포넌트 내부에 동적으로 콘텐츠를 삽입할 수 있는 블록명이라는 이름의 슬롯을 정의합니다.</li> <li>required: true는 이 슬롯이 반드시 제공되어야 함을 의미합니다....<a class="read-more" href="./phoenix-slot.html"> read more</a>
+						<p>Phoenix LiveView 에서 동적인 component 를 삽입 하고자 하는 경우, 해당 component attribute 로 `slot` 을 정의하고 이를 사용해 주어야 한다. </p> <h3>사용 방법</h3> <div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">slot</span> <span class="p">:</span><span class="err">블록명</span><span class="p">,</span> <span class="ss">required:</span> <span class="no">true</span> <span class="k">def</span> <span class="err">컴포넌트명</span><span class="p">(</span><span class="n">assigns</span><span class="p">)</span> <span class="k">do</span> <span class="sx">~H""</span><span class="s2">" &lt;동적으로 구현할 컴포넌트 태그&gt; &lt;&gt;..사용자 구현...&lt;&gt; &lt;%= render_slot(@블록명) %&gt; &lt;/동적으로 구현할 컴포넌트 태그&gt; """</span> <span class="k">end</span> </code></pre></div></div> <h3> Slot 정의</h3> <ul> <li><code>slot :블록명</code> : 컴포넌트 내부에 동적으로 콘텐츠를 삽입할 수 있는 블록명이라는 이름의 슬롯을 정의.</li> <li><code>required: true</code>: 이 슬롯이 반드시 제공되어야 함을 의미. 이 컴포넌트를 사용할 때는 블록명 슬롯에 대한...<a class="read-more" href="./phoenix-slot.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1291,14 +1291,14 @@
   </span>
 
 					<div class="post-excerpt">
-						<p>Elixir 문범에서 struct 에 대한 instace를 생성하는 방법은 아래와 같이 두가지가 존재한다. (ChatGPT 가 설명한 그 용도의 차이점에 대해서.. 아직 잘 모르겠다. 내눈에는 그냥 동일한 용도로 사용되는 것 처럼 보인다. ;;)</p> <h3 id="__module__-사용"><code class="language-plaintext highlighter-rouge">__MODULE__</code> 사용</h3> <ul> <li> <p>사용법: %<strong>MODULE</strong>{} 구문은 주로 모듈 내부에서 해당 모듈의 구조체 인스턴스를 생성할 때 사용됩니다. 이 경우, 모듈 내부에서 직접 %<strong>MODULE</strong>{field1: value1, field2: value2}와 같이 구조체 인스턴스를 생성할 수 있습니다.</p> </li> <li> <p>예시: 모듈 내부에서 def new() 함수를 정의하고, 이 함수 안에서 %<strong>MODULE</strong>{}를 사용하여 인스턴스를 생성할 수 있습니다.</p> </li> </ul> <h3 id="def-newfield---do-__struct__field-정의"><code class="language-plaintext highlighter-rouge">def new(field \\ []), do: __struct__(field)</code> 정의</h3> <ul> <li> <p>사용법: 이...<a class="read-more" href="./create-instance.html"> read more</a>
+						<p>Elixir 문범에서 struct 에 대한 instace를 생성하는 방법은 아래와 같이 두가지가 존재한다. (ChatGPT 가 설명한 그 용도의 차이점에 대해서.. 아직 잘 모르겠다. 내눈에는 그냥 동일한 용도로 사용되는 것 처럼 보인다. ;;)</p> <h3><code>__MODULE__</code> 사용</h3> <ul> <li>사용법: <code>%__MODULE__{}</code> 구문은 주로 모듈 내부에서 해당 모듈의 구조체 인스턴스를 생성할 때 사용. 이 경우, 모듈 내부에서 직접 <code>%__MODULE__{field1: value1, field2: value2}</code>와 같이 구조체 인스턴스를 생성할 수 있다.</li><br /> <li>예시: 모듈 내부에서 <code>def new()</code> 함수를 정의하고, 이 함수 안에서 <code>%__MODULE__{}</code>를 사용하여 인스턴스를 생성할 수 있다.</li> </ul> <h3><code>def new(field \\ []), do: __struct__(field)</code> 정의</h3> <ul> <li>사용법: 이 방법은 모듈 외부에서 인스턴스를 생성할 때 사용합니다. 여기서 new 함수는...<a class="read-more" href="./create-instance.html"> read more</a>
 					</div>
 				</div>
 			
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./instance-with-elixir-copy.html">struct - instance 에 대해 (Elixir vs OOP languages)</a>
+					<a class="post-list-title" href="./instance-with-elixir.html">struct - instance 에 대해 (Elixir vs OOP languages)</a>
 					
 
   <span class = "post-card-meta">
@@ -1330,7 +1330,7 @@
   </span>
 
 					<div class="post-excerpt">
-						<p>elixir 에서의 구조체는 상속, 다형성 등이 지원되지 않고 한번 정의되면 구조체 내부 field 값을 변경할 수 없는, 내부에 field 가 존재하는 사용자 정의 type 이며, 해당 구조체 type 에 실제 data 를 가지게 하고 이를 변수 매칭 시킨것이 elixir instance 이다.</p> <h3 id="유사점">유사점</h3> <ol> <li> <p>데이터 캡슐화: Elixir의 구조체와 Java나 Python의 인스턴스 모두 데이터를 캡슐화합니다. 즉, 여러 데이터를 하나의 구조로 묶어 관리할 수 있습니다.</p> </li> <li> <p>필드 정의: 두 언어에서는 자료구조에 필드(데이터 요소)를 정의할 수 있으며, 이러한 필드는 각각의 자료구조에 속한 정보를 나타냅니다.</p> </li> <li> <p>타입 안정성: Elixir의 구조체와 Java의 객체는 둘 다 특정 타입에 속하는 데이터를 담는데, 이는 데이터...<a class="read-more" href="./instance-with-elixir-copy.html"> read more</a>
+						<p>elixir 에서의 구조체는 상속, 다형성 등이 지원되지 않고 한번 정의되면 구조체 내부 field 값을 변경할 수 없는, 내부에 field 가 존재하는 사용자 정의 type 이며, 해당 구조체 type 에 실제 data 를 가지게 하고 이를 변수 매칭 시킨것이 elixir instance 이다. </p> <h3>유사점</h3> <ol> <li>데이터 캡슐화: Elixir의 구조체와 Java나 Python의 인스턴스 모두 데이터를 캡슐화. 여러 데이터를 하나의 구조로 묶어 관리할 수 있다.</li><br /> <li>필드 정의: 두 언어에서는 자료구조에 필드(데이터 요소)를 정의할 수 있으며, 이러한 필드는 각각의 자료구조에 속한 정보를 나타냄.</li><br /> <li>타입 안정성: Elixir의 구조체와 Java의 객체는 둘 다 특정 타입에 속하는 데이터를 담는데, 이는 데이터 타입에 대한 안정성과 예측...<a class="read-more" href="./instance-with-elixir.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1379,7 +1379,7 @@
   </span>
 
 					<div class="post-excerpt">
-						<h3 id="일반-재귀-regular-recursion-예제">일반 재귀 (Regular Recursion) 예제</h3> <div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">RegularRecursion</span> <span class="k">do</span> <span class="k">def</span> <span class="n">sum</span><span class="p">([]),</span> <span class="k">do</span><span class="p">:</span> <span class="mi">0</span> <span class="k">def</span> <span class="n">sum</span><span class="p">([</span><span class="n">head</span> <span class="o">|</span> <span class="n">tail</span><span class="p">]),</span> <span class="k">do</span><span class="p">:</span> <span class="n">head</span> <span class="o">+</span> <span class="n">sum</span><span class="p">(</span><span class="n">tail</span><span class="p">)</span> <span class="k">end</span> </code></pre></div></div> <p>이 예제에서 sum/1 함수는 리스트의 첫 번째 요소를 취하고, 나머지 리스트에 대해 재귀적으로 sum/1을 호출한 다음, 결과에 첫 번째 요소를 더한다. 여기서 중요한 점은 재귀 호출 후에 추가 작업(더하기)이 수행된다는 것.</p> <h3 id="꼬리-재귀-tail-recursion-예제">꼬리 재귀 (Tail Recursion) 예제</h3> <div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">TailRecursion</span> <span class="k">do</span> <span...<a class="read-more" href="./tail-recursion.html"> read more</a>
+						<h3>일반 재귀 (Regular Recursion) 예제</h3> <div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">RegularRecursion</span> <span class="k">do</span> <span class="k">def</span> <span class="n">sum</span><span class="p">([]),</span> <span class="k">do</span><span class="p">:</span> <span class="mi">0</span> <span class="k">def</span> <span class="n">sum</span><span class="p">([</span><span class="n">head</span> <span class="o">|</span> <span class="n">tail</span><span class="p">]),</span> <span class="k">do</span><span class="p">:</span> <span class="n">head</span> <span class="o">+</span> <span class="n">sum</span><span class="p">(</span><span class="n">tail</span><span class="p">)</span> <span class="k">end</span> </code></pre></div></div> <p>이 예제에서 `sum/1` 함수는 리스트의 첫 번째 요소를 취하고, 나머지 리스트에 대해 재귀적으로 `sum/1`을 호출한 다음, 결과에 첫 번째 요소를 더한다. 여기서 중요한 점은 재귀 호출 후에 추가 작업(더하기)이 수행된다는 것.</p> <h3>꼬리 재귀 (Tail Recursion) 예제</h3> <p>다음 예제에서 `sum/2` 보조 함수는 누적된 합계를 유지하면서 재귀적으로 호출된다. 각 재귀 호출은...<a class="read-more" href="./tail-recursion.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1457,22 +1457,7 @@
         <ul class="tags">
             
                 
-                <li><a href="./tag.html?tag=Authentication" class="tag">Authentication <span>(1)</span></a></li>
-            
-                
-                <li><a href="./tag.html?tag=LiveView" class="tag">LiveView <span>(6)</span></a></li>
-            
-                
-                <li><a href="./tag.html?tag=OOP" class="tag">OOP <span>(1)</span></a></li>
-            
-                
-                <li><a href="./tag.html?tag=Open-Closed+Principle" class="tag">Open-Closed Principle <span>(1)</span></a></li>
-            
-                
-                <li><a href="./tag.html?tag=Phoenix" class="tag">Phoenix <span>(6)</span></a></li>
-            
-                
-                <li><a href="./tag.html?tag=Phoenix+Presence" class="tag">Phoenix Presence <span>(1)</span></a></li>
+                <li><a href="./tag.html?tag=authentication" class="tag">authentication <span>(1)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=behaviour" class="tag">behaviour <span>(1)</span></a></li>
@@ -1490,7 +1475,22 @@
                 <li><a href="./tag.html?tag=instance" class="tag">instance <span>(2)</span></a></li>
             
                 
+                <li><a href="./tag.html?tag=liveview" class="tag">liveview <span>(6)</span></a></li>
+            
+                
+                <li><a href="./tag.html?tag=oop" class="tag">oop <span>(1)</span></a></li>
+            
+                
+                <li><a href="./tag.html?tag=open-closed+principle" class="tag">open-closed principle <span>(1)</span></a></li>
+            
+                
                 <li><a href="./tag.html?tag=overloading" class="tag">overloading <span>(1)</span></a></li>
+            
+                
+                <li><a href="./tag.html?tag=phoenix" class="tag">phoenix <span>(6)</span></a></li>
+            
+                
+                <li><a href="./tag.html?tag=phoenix+presence" class="tag">phoenix presence <span>(1)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=polymorphism" class="tag">polymorphism <span>(1)</span></a></li>

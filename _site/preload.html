@@ -21,7 +21,7 @@
     "@id": "http://localhost:4000"},
   "headline": "LiveView preload/1 에 대해",
   "abstract": "LiveView - preload/1",
-    "keywords": "preload/1, Phoenix, LiveView",
+    "keywords": "preload/1, phoenix, liveview",
     "wordcount": "279",
     "image": ["http://localhost:4000/assets/imgposts/general/post_general02.jpg"],
   "datePublished": "2023-12-20 13:32:20 +0900",
@@ -49,7 +49,7 @@
 <meta property="og:site_name" content="Gon's Tech Jurnal" />
 <meta property="article:published_time" content="2023-12-20 13:32:20 +0900" />
 <meta property="article:modified_time" content="2023-12-20 13:32:20 +0900" />
-<meta property="article:tag" content="preload/1, Phoenix, LiveView" />
+<meta property="article:tag" content="preload/1, phoenix, liveview" />
 <meta property="fb:admins" content="ar.maybach" />
 <!-- Schema.org markup for Google -->
 <meta itemprop="name" content="LiveView preload/1 에 대해">
@@ -182,7 +182,7 @@
   </span>
 
         <div class="post-excerpt">
-            <h2 id="consider-the-preload1-callback-by-chatgpt">Consider the preload/1 Callback (by ChatGPT)</h2><p>live_component/1이 처음 호출될 때, LiveView는 일반적으로 mount/1, update/2, 그리고 render/1 콜백을 순서대로 호출합니다. 하지만 이 콜백들만으로는 충분하지 않은 상황이 발생할 수 있습니다. 특히, 성능 문제, 예를 들어 N + 1 문제를 방지하기 위해 preload/1이라는 추가 콜백이 필요할 수 있습니다.</p><p>N + 1 문제란? 이는 데이터베이스 쿼리와 관련된 성능 문제로, 한 번의 큰 쿼리 대신 작은 쿼리가 여러 번 발생하여 전체적인 성능이 저하되는 현상을 말합니다.preload/1 콜백은 mount/1이나 render/1 전에 호출됩니다. 이렇게 함으로써 필요한 데이터를 사전에 로드하고, 성능 저하를 방지할 수 있습니다.</p><p>마운트/렌더 워크플로우의 경우, LiveView는 preload/1을 호출한 다음, mount/1, update/2, 그리고 마지막으로 render/1을 호출합니다.변경 관리 워크플로우에서는 mount/1은...<a class="read-more" href="./preload.html"> read more</a>
+            <h3>Consider the preload/1 Callback (by ChatGPT)</h3><p>live_component/1이 처음 호출될 때, LiveView는 일반적으로 mount/1, update/2, 그리고 render/1 콜백을 순서대로 호출합니다. 하지만 이 콜백들만으로는 충분하지 않은 상황이 발생할 수 있습니다. 특히, 성능 문제, 예를 들어 N + 1 문제를 방지하기 위해 preload/1이라는 추가 콜백이 필요할 수 있습니다.</p><p>N + 1 문제란? 이는 데이터베이스 쿼리와 관련된 성능 문제로, 한 번의 큰 쿼리 대신 작은 쿼리가 여러 번 발생하여 전체적인 성능이 저하되는 현상을 말합니다.preload/1 콜백은 mount/1이나 render/1 전에 호출됩니다. 이렇게 함으로써 필요한 데이터를 사전에 로드하고, 성능 저하를 방지할 수 있습니다.</p><p>마운트/렌더 워크플로우의 경우, LiveView는 preload/1을 호출한 다음, mount/1, update/2, 그리고 마지막으로 render/1을 호출합니다.변경 관리 워크플로우에서는 mount/1은 생략되지만,...<a class="read-more" href="./preload.html"> read more</a>
         </div>
   </div>
 </section>
@@ -332,9 +332,9 @@
             
                 <li><a href="./tag.html?tag=preload%2F1" class="tag side">preload/1</a></li>
             
-                <li><a href="./tag.html?tag=Phoenix" class="tag side">Phoenix</a></li>
+                <li><a href="./tag.html?tag=phoenix" class="tag side">phoenix</a></li>
             
-                <li><a href="./tag.html?tag=LiveView" class="tag side">LiveView</a></li>
+                <li><a href="./tag.html?tag=liveview" class="tag side">liveview</a></li>
             
     
         </ul>
@@ -360,29 +360,23 @@
 <div class="center-container">
   <div class="github-button">
     <span class="button-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" role="img" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2.2467A10.00042,10.00042,0,0,0,8.83752,21.73419c.5.08752.6875-.21247.6875-.475,0-.23749-.01251-1.025-.01251-1.86249C7,19.85919,6.35,18.78423,6.15,18.22173A3.636,3.636,0,0,0,5.125,16.8092c-.35-.1875-.85-.65-.01251-.66248A2.00117,2.00117,0,0,1,6.65,17.17169a2.13742,2.13742,0,0,0,2.91248.825A2.10376,2.10376,0,0,1,10.2,16.65923c-2.225-.25-4.55-1.11254-4.55-4.9375a3.89187,3.89187,0,0,1,1.025-2.6875,3.59373,3.59373,0,0,1,.1-2.65s.83747-.26251,2.75,1.025a9.42747,9.42747,0,0,1,5,0c1.91248-1.3,2.75-1.025,2.75-1.025a3.59323,3.59323,0,0,1,.1,2.65,3.869,3.869,0,0,1,1.025,2.6875c0,3.83747-2.33752,4.6875-4.5625,4.9375a2.36814,2.36814,0,0,1,.675,1.85c0,1.33752-.01251,2.41248-.01251,2.75,0,.26251.1875.575.6875.475A10.0053,10.0053,0,0,0,12,2.2467Z"/></svg></span>
-    <a class="button-text" href="https://github.com/y2gon2/pento1/document" target="_blank" aria-label="Open on GitHub">view on <b>GitHub</b></a>
+    <a class="button-text" href="https://github.com/y2gon2/pento1/tree/main/document" target="_blank" aria-label="Open on GitHub">view on <b>GitHub</b></a>
   </div>
 </div>
 
-        <h2 id="consider-the-preload1-callback-by-chatgpt">Consider the preload/1 Callback (by ChatGPT)</h2>
-
+        <h3>Consider the preload/1 Callback (by ChatGPT)</h3>
 <p>live_component/1이 처음 호출될 때, LiveView는 일반적으로 mount/1, update/2, 그리고 render/1 콜백을 순서대로 호출합니다. 하지만 이 콜백들만으로는 충분하지 않은 상황이 발생할 수 있습니다. 특히, 성능 문제, 예를 들어 N + 1 문제를 방지하기 위해 preload/1이라는 추가 콜백이 필요할 수 있습니다.</p>
-
 <p>N + 1 문제란? 이는 데이터베이스 쿼리와 관련된 성능 문제로, 한 번의 큰 쿼리 대신 작은 쿼리가 여러 번 발생하여 전체적인 성능이 저하되는 현상을 말합니다.
 preload/1 콜백은 mount/1이나 render/1 전에 호출됩니다. 이렇게 함으로써 필요한 데이터를 사전에 로드하고, 성능 저하를 방지할 수 있습니다.</p>
-
 <p>마운트/렌더 워크플로우의 경우, LiveView는 preload/1을 호출한 다음, mount/1, update/2, 그리고 마지막으로 render/1을 호출합니다.
 변경 관리 워크플로우에서는 mount/1은 생략되지만, preload/1, update/2, 그리고 render/1의 순서는 유지됩니다.</p>
 
-<h2 id="preload1-콜백의-작동-방식과-n--1-문제와의-관계">preload/1 콜백의 작동 방식과 N + 1 문제와의 관계</h2>
-
+<h3>preload/1 콜백의 작동 방식과 N + 1 문제와의 관계</h3>
 <p>Phoenix LiveView에서 preload/1 콜백은 컴포넌트의 라이프사이클에서 중요한 역할을 합니다. 이 콜백은 컴포넌트가 마운트되기 전에 필요한 데이터를 미리 로드하는데 사용됩니다. 예를 들어, 여러 컴포넌트에 필요한 데이터를 한 번의 배치로 미리 로드하여, 각각의 컴포넌트가 마운트될 때 필요한 데이터를 제공할 수 있습니다. 이 과정은 preload(list_of_assigns) -&gt; mount(socket) -&gt; update(assigns, socket) -&gt; render(assigns)의 순서로 진행됩니다​​.</p>
-
 <p>preload/1 콜백의 주요 목적은 N + 1 문제를 해결하는 것입니다. 이 문제는 여러 데이터 레코드에 대한 의존성 있는 쿼리를 반복적으로 실행하여 발생하는 성능 저하 문제를 말합니다. preload/1를 사용함으로써 필요한 모든 데이터를 한 번에 로드할 수 있으며, 이는 데이터베이스에 대한 불필요한 접근을 줄이고 전체적인 성능을 향상시킵니다.</p>
-
 <p>Phoenix LiveView 문서에서는 preload/1과 관련된 구체적인 콜백 목록이나 사용 방법에 대해 자세히 설명하지 않지만, preload/1 콜백의 사용이 컴포넌트 라이프사이클에서 중요한 역할을 하고, 성능 최적화에 기여한다는 점은 분명합니다​​.</p>
-
 <p>이 정보를 바탕으로, preload/1 콜백이 데이터 처리를 mount/1 또는 update/2와 분리하여 실행함으로써 성능 최적화에 기여한다는 것을 이해할 수 있습니다. mount/1 이전에는 초기 로딩에 필요한 모든 데이터를 로드하고, update/2 이전에는 변경된 데이터에 대해서만 로드하는 방식으로 성능을 최적화합니다.</p>
+
 
         <aside class="sidebar inline" id="post-end">
     
@@ -395,9 +389,9 @@ preload/1 콜백은 mount/1이나 render/1 전에 호출됩니다. 이렇게 함
             
                 <li><a href="./tag.html?tag=preload%2F1" class="tag inline">preload/1</a></li>
             
-                <li><a href="./tag.html?tag=Phoenix" class="tag inline">Phoenix</a></li>
+                <li><a href="./tag.html?tag=phoenix" class="tag inline">phoenix</a></li>
             
-                <li><a href="./tag.html?tag=LiveView" class="tag inline">LiveView</a></li>
+                <li><a href="./tag.html?tag=liveview" class="tag inline">liveview</a></li>
             
     
         </ul>
@@ -434,7 +428,7 @@ preload/1 콜백은 mount/1이나 render/1 전에 호출됩니다. 이렇게 함
       <li class="linkedin"><a class="linkedin" href="https://in.linkedin.com/in/N/A" target="_blank"><i class="fa fa-linkedin"></i></a></li>
       
       
-      <li class="github"><a class="github" href="http://github.com/https://github.com/y2gon2/y2gon2.github.io.git" target="_blank"><i class="fa fa-github"></i></a></li>
+      <li class="github"><a class="github" href="http://github.com/y2gon2" target="_blank"><i class="fa fa-github"></i></a></li>
       
       
       <li class="email"><a class="email" href="mailto:y2gon2@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
@@ -525,7 +519,7 @@ preload/1 콜백은 mount/1이나 render/1 전에 호출됩니다. 이렇게 함
           
           
 
-          <a href="./instance-with-elixir-copy.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general05.jpg') center no-repeat; background-size: cover;">
+          <a href="./instance-with-elixir.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general05.jpg') center no-repeat; background-size: cover;">
             <div class="recent-item-title">
               <span>struct - instance 에 대해 (Elixir vs OOP languages)</span>
               
@@ -862,19 +856,6 @@ preload/1 콜백은 mount/1이나 render/1 전에 호출됩니다. 이렇게 함
 
 
 
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-      processEscapes: true
-    },
-    "CommonHTML": { linebreaks: { automatic: true } }
-    });
-  </script>
-  <script src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 
 <script src="./assets/js/main.js"></script>

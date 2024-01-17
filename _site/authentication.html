@@ -21,8 +21,8 @@
     "@id": "http://localhost:4000"},
   "headline": "기본적인 LiveView Authentication 적용",
   "abstract": "LiveView 라이브러리가 제공하는 Authentication 을 적용",
-    "keywords": "Authentication, Phoenix, LiveView",
-    "wordcount": "163",
+    "keywords": "authentication, phoenix, liveview",
+    "wordcount": "187",
     "image": ["http://localhost:4000/assets/imgposts/general/post_general01.jpg"],
   "datePublished": "2023-12-18 13:32:20 +0900",
   "dateModified": "2023-12-18 13:32:20 +0900",
@@ -49,7 +49,7 @@
 <meta property="og:site_name" content="Gon's Tech Jurnal" />
 <meta property="article:published_time" content="2023-12-18 13:32:20 +0900" />
 <meta property="article:modified_time" content="2023-12-18 13:32:20 +0900" />
-<meta property="article:tag" content="Authentication, Phoenix, LiveView" />
+<meta property="article:tag" content="authentication, phoenix, liveview" />
 <meta property="fb:admins" content="ar.maybach" />
 <!-- Schema.org markup for Google -->
 <meta itemprop="name" content="기본적인 LiveView Authentication 적용">
@@ -62,7 +62,7 @@
 <meta name="twitter:description" content="LiveView 라이브러리가 제공하는 Authentication 을 적용">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="163"/>
+<meta data-rh="true" name="twitter:data1" content="187"/>
 <meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general01.jpg">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
@@ -182,7 +182,7 @@
   </span>
 
         <div class="post-excerpt">
-            <ul> <li>Authentication Generator 사용을 위한 phx.gen 추가 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen</code></pre></div> </div> <p>이 중 auth 관련 generator 사용</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen.auth Accounts User uers</code></pre></div> </div> </li></ul><ol> <li> <p>Context (‘Accounts’) <br /> Context는 Phoenix에서 도메인 특정 로직을 캡슐화하는 모듈. 이는 데이터베이스와의 상호작용을 관리하고, 애플리케이션의 나머지 부분에 서비스 API를 제공한다. “Accounts”는 이 예제에서 생성될 context의 이름으로 이 context는 인증과 관련된 모든 함수와 로직을 포함하게 된다.</p> </li> <li> <p>Schema (‘User’) <br /> Schema는 데이터베이스 테이블의 구조를 설명하는 Elixir 모듈. 이는 테이블의 각 열에 해당하는 필드와 그 타입을 정의한다. “User”는 사용자 데이터를 나타내는 schema의 이름으로 이 schema는...<a class="read-more" href="./authentication.html"> read more</a>
+            <ul><li>Authentication Generator 사용을 위한 phx.gen 추가</li></ul><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen</code></pre></div></div><ul><li>이 중 auth 관련 generator 사용</li></ul><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen.auth Accounts User uers</code></pre></div></div><ul><li>Authentication Generator 사용을 위한 phx.gen 추가</li></ul><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen</code></pre></div></div><ul><li>이 중 auth 관련 generator 사용</li></ul><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen.auth Accounts User uers</code></pre></div></div><p>1. Context ('Accounts') <br /> Context는 Phoenix에서 도메인 특정 로직을 캡슐화하는 모듈. 이는 데이터베이스와의 상호작용을 관리하고, 애플리케이션의 나머지 부분에 서비스 API를 제공한다. "Accounts"는 이 예제에서 생성될 context의 이름으로 이 context는 인증과 관련된 모든 함수와 로직을 포함하게 된다.</p><p>2. Schema ('User') <br /> Schema는 데이터베이스 테이블의 구조를 설명하는 Elixir 모듈. 이는 테이블의...<a class="read-more" href="./authentication.html"> read more</a>
         </div>
   </div>
 </section>
@@ -330,11 +330,11 @@
     
         <ul class="tags side">
             
-                <li><a href="./tag.html?tag=Authentication" class="tag side">Authentication</a></li>
+                <li><a href="./tag.html?tag=authentication" class="tag side">authentication</a></li>
             
-                <li><a href="./tag.html?tag=Phoenix" class="tag side">Phoenix</a></li>
+                <li><a href="./tag.html?tag=phoenix" class="tag side">phoenix</a></li>
             
-                <li><a href="./tag.html?tag=LiveView" class="tag side">LiveView</a></li>
+                <li><a href="./tag.html?tag=liveview" class="tag side">liveview</a></li>
             
     
         </ul>
@@ -360,51 +360,56 @@
 <div class="center-container">
   <div class="github-button">
     <span class="button-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" role="img" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2.2467A10.00042,10.00042,0,0,0,8.83752,21.73419c.5.08752.6875-.21247.6875-.475,0-.23749-.01251-1.025-.01251-1.86249C7,19.85919,6.35,18.78423,6.15,18.22173A3.636,3.636,0,0,0,5.125,16.8092c-.35-.1875-.85-.65-.01251-.66248A2.00117,2.00117,0,0,1,6.65,17.17169a2.13742,2.13742,0,0,0,2.91248.825A2.10376,2.10376,0,0,1,10.2,16.65923c-2.225-.25-4.55-1.11254-4.55-4.9375a3.89187,3.89187,0,0,1,1.025-2.6875,3.59373,3.59373,0,0,1,.1-2.65s.83747-.26251,2.75,1.025a9.42747,9.42747,0,0,1,5,0c1.91248-1.3,2.75-1.025,2.75-1.025a3.59323,3.59323,0,0,1,.1,2.65,3.869,3.869,0,0,1,1.025,2.6875c0,3.83747-2.33752,4.6875-4.5625,4.9375a2.36814,2.36814,0,0,1,.675,1.85c0,1.33752-.01251,2.41248-.01251,2.75,0,.26251.1875.575.6875.475A10.0053,10.0053,0,0,0,12,2.2467Z"/></svg></span>
-    <a class="button-text" href="https://github.com/y2gon2/pento1" target="_blank" aria-label="Open on GitHub">view on <b>GitHub</b></a>
+    <a class="button-text" href="https://github.com/y2gon2/pento1/tree/main/document" target="_blank" aria-label="Open on GitHub">view on <b>GitHub</b></a>
   </div>
 </div>
 
-        <ul>
-  <li>Authentication Generator 사용을 위한 phx.gen 추가
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen
-</code></pre></div>    </div>
-    <p>이 중 auth 관련 generator 사용</p>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen.auth Accounts User uers
-</code></pre></div>    </div>
-  </li>
-</ul>
+        <ul><li>Authentication Generator 사용을 위한 phx.gen 추가</li></ul>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen
+</code></pre></div></div>
+<ul><li>이 중 auth 관련 generator 사용</li></ul>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen.auth Accounts User uers
+</code></pre></div></div>
+<ul><li>Authentication Generator 사용을 위한 phx.gen 추가</li></ul>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen
+</code></pre></div></div>
+<ul><li>이 중 auth 관련 generator 사용</li></ul>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen.auth Accounts User uers
+</code></pre></div></div>
 
-<ol>
-  <li>
-    <p>Context (‘Accounts’) <br />
+<p>
+1. Context ('Accounts') <br />
   Context는 Phoenix에서 도메인 특정 로직을 캡슐화하는 모듈. 이는 데이터베이스와의 상호작용을 관리하고, 애플리케이션의 나머지 부분에 서비스 API를 제공한다.
-  “Accounts”는 이 예제에서 생성될 context의 이름으로 이 context는 인증과 관련된 모든 함수와 로직을 포함하게 된다.</p>
-  </li>
-  <li>
-    <p>Schema (‘User’) <br />
+  "Accounts"는 이 예제에서 생성될 context의 이름으로 이 context는 인증과 관련된 모든 함수와 로직을 포함하게 된다.
+</p>
+
+<p>
+2. Schema ('User') <br />
   Schema는 데이터베이스 테이블의 구조를 설명하는 Elixir 모듈. 이는 테이블의 각 열에 해당하는 필드와 그 타입을 정의한다.
-  “User”는 사용자 데이터를 나타내는 schema의 이름으로 이 schema는 사용자 데이터를 저장하고 쿼리하는 데 사용된다.</p>
-  </li>
-  <li>
-    <p>Plural name of the schema (‘users’)<br />
+  "User"는 사용자 데이터를 나타내는 schema의 이름으로 이 schema는 사용자 데이터를 저장하고 쿼리하는 데 사용된다.
+</p>
+
+<p>
+3. Plural name of the schema ('users')<br />
   이것은 데이터베이스 내에서 사용될 테이블의 이름. Phoenix는 일반적으로 schema 이름의 복수형을 테이블 이름으로 사용한다.
-  “users”는 “User” schema에 대응하는 데이터베이스 테이블의 이름.</p>
-  </li>
-</ol>
+  "users"는 "User" schema에 대응하는 데이터베이스 테이블의 이름.
+</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix deps.get
 </code></pre></div></div>
-
-<ul>
-  <li>Run Migration</li>
-</ul>
+<ul><li>Run Migration</li></ul>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix ecto.migrate
 </code></pre></div></div>
 
-<p>해당 설정 이후 기존 <code class="language-plaintext highlighter-rouge">live "/guess", WrongLive</code> 를 :require_authenticated_user plug 를 실행하는 scope 로 옮겨서 추가해준다.</p>
+<p>
+해당 설정 이후 기존 `live "/guess", WrongLive` 를 :require_authenticated_user plug 를 실행하는 scope 로 옮겨서 추가해준다.
+</p>
 
-<p>따라서 해당 경로 접속은 Authentication 이 필요하며, 해당 인증은 LiveView 에서 재공하는 login / signup page 를 사용하여 회원 등록을 손쉽게 적용할 수 있게 된다.</p>
+<p>
+따라서 해당 경로 접속은 Authentication 이 필요하며, 해당 인증은 LiveView 에서 재공하는 login / signup page 를 사용하여 회원 등록을 손쉽게 적용할 수 있게 된다.
+</p>
+
 
         <aside class="sidebar inline" id="post-end">
     
@@ -415,11 +420,11 @@
     
         <ul class="tags inline">
             
-                <li><a href="./tag.html?tag=Authentication" class="tag inline">Authentication</a></li>
+                <li><a href="./tag.html?tag=authentication" class="tag inline">authentication</a></li>
             
-                <li><a href="./tag.html?tag=Phoenix" class="tag inline">Phoenix</a></li>
+                <li><a href="./tag.html?tag=phoenix" class="tag inline">phoenix</a></li>
             
-                <li><a href="./tag.html?tag=LiveView" class="tag inline">LiveView</a></li>
+                <li><a href="./tag.html?tag=liveview" class="tag inline">liveview</a></li>
             
     
         </ul>
@@ -456,7 +461,7 @@
       <li class="linkedin"><a class="linkedin" href="https://in.linkedin.com/in/N/A" target="_blank"><i class="fa fa-linkedin"></i></a></li>
       
       
-      <li class="github"><a class="github" href="http://github.com/https://github.com/y2gon2/y2gon2.github.io.git" target="_blank"><i class="fa fa-github"></i></a></li>
+      <li class="github"><a class="github" href="http://github.com/y2gon2" target="_blank"><i class="fa fa-github"></i></a></li>
       
       
       <li class="email"><a class="email" href="mailto:y2gon2@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
@@ -547,7 +552,7 @@
           
           
 
-          <a href="./instance-with-elixir-copy.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general05.jpg') center no-repeat; background-size: cover;">
+          <a href="./instance-with-elixir.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general05.jpg') center no-repeat; background-size: cover;">
             <div class="recent-item-title">
               <span>struct - instance 에 대해 (Elixir vs OOP languages)</span>
               
@@ -884,19 +889,6 @@
 
 
 
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-      processEscapes: true
-    },
-    "CommonHTML": { linebreaks: { automatic: true } }
-    });
-  </script>
-  <script src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 
 <script src="./assets/js/main.js"></script>

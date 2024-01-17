@@ -3,80 +3,10 @@
 [   
       
   {
-  "tag" : "Authentication",
+  "tag" : "authentication",
   "posts" : [
       
       "./authentication.html"
-      
-    ]
-  } ,
-    
-      
-  {
-  "tag" : "LiveView",
-  "posts" : [
-      
-      "./phoenix-slot.html",
-      
-      "./instance-with-elixir-copy.html",
-      
-      "./phoenix-presence.html",
-      
-      "./complex-query.html",
-      
-      "./preload.html",
-      
-      "./authentication.html"
-      
-    ]
-  } ,
-    
-      
-  {
-  "tag" : "OOP",
-  "posts" : [
-      
-      "./instance-with-elixir-copy.html"
-      
-    ]
-  } ,
-    
-      
-  {
-  "tag" : "Open-Closed Principle",
-  "posts" : [
-      
-      "./open-closed-principal.html"
-      
-    ]
-  } ,
-    
-      
-  {
-  "tag" : "Phoenix",
-  "posts" : [
-      
-      "./phoenix-slot.html",
-      
-      "./instance-with-elixir-copy.html",
-      
-      "./phoenix-presence.html",
-      
-      "./complex-query.html",
-      
-      "./preload.html",
-      
-      "./authentication.html"
-      
-    ]
-  } ,
-    
-      
-  {
-  "tag" : "Phoenix Presence",
-  "posts" : [
-      
-      "./phoenix-presence.html"
       
     ]
   } ,
@@ -118,7 +48,7 @@
       
       "./create-instance.html",
       
-      "./instance-with-elixir-copy.html",
+      "./instance-with-elixir.html",
       
       "./tail-recursion.html",
       
@@ -134,7 +64,47 @@
       
       "./create-instance.html",
       
-      "./instance-with-elixir-copy.html"
+      "./instance-with-elixir.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "liveview",
+  "posts" : [
+      
+      "./phoenix-slot.html",
+      
+      "./instance-with-elixir.html",
+      
+      "./phoenix-presence.html",
+      
+      "./complex-query.html",
+      
+      "./preload.html",
+      
+      "./authentication.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "oop",
+  "posts" : [
+      
+      "./instance-with-elixir.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "open-closed principle",
+  "posts" : [
+      
+      "./open-closed-principal.html"
       
     ]
   } ,
@@ -145,6 +115,36 @@
   "posts" : [
       
       "./open-closed-principal.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "phoenix",
+  "posts" : [
+      
+      "./phoenix-slot.html",
+      
+      "./instance-with-elixir.html",
+      
+      "./phoenix-presence.html",
+      
+      "./complex-query.html",
+      
+      "./preload.html",
+      
+      "./authentication.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "phoenix presence",
+  "posts" : [
+      
+      "./phoenix-presence.html"
       
     ]
   } ,
@@ -186,7 +186,7 @@
       
       "./create-instance.html",
       
-      "./instance-with-elixir-copy.html"
+      "./instance-with-elixir.html"
       
     ]
   } ,
