@@ -23,6 +23,16 @@
     
       
   {
+  "tag" : "changeset/2",
+  "posts" : [
+      
+      "./changeset.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "complex query",
   "posts" : [
       
@@ -37,6 +47,16 @@
   "posts" : [
       
       "./complex-query.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "ecto",
+  "posts" : [
+      
+      "./changeset.html"
       
     ]
   } ,

@@ -1,6 +1,8 @@
 {
   "posts" : [
     
+    "./changeset.html",
+    
     "./lazy-collection.html",
     
     "./immutable-data-type.html",

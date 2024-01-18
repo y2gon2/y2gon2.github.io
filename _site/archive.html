@@ -251,6 +251,45 @@
 		<div class="post">
 			
 
+			<a class="post-list-title" href="./changeset.html">changeset/2 in Ecto Library</a>
+			
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-15T10:32:20+09:00">January 15, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        1 minute read
+      
+    </span>
+  
+  
+  </span>
+
+			<div class="post-excerpt">
+				<p>Phoenix LiveView 에서 DB 처리 작업은 Ecto library 를 사용하여 작업이 진행된다. 이와 관련하여, Ecto 의 기능과 구성요소에 대해 알아보고, 여기에서 <code>changeset/2</code> 함수에 대해 좀더 알아 본다. </p><h3>Ecto 란?</h3><p>Phoenix LiveView 에서 사용하는 Ecto library 는 Elixir 언어를 위한 database wrapper 이다. 주로 Elixir web-framewor 인 Phoenix 와 함께 사용되며, 데이터베이스 상호작용을 효율적으로 만들어 준다.</p><p><strong>구성요소</strong></p><ol> <li> <p>Repo (Repository)</p> <ul> <li>데이터베이스와의 모든 상호작용(CRUD)을 처리</li> <li>데이터베이스에 query를 보내고 결과를 반환 받음</li> <li>여러 Repo 를 지원 할 수 있어, 다양한 데이터베이스와 동시에 작업 가능</li> </ul> </li> <li> <p>Schema</p> <ul> <li>데이터베이스 table 과 Elixir 구조체 간 mapping 을 정의</li> <li>각 field 는 Elixir data type...<a class="read-more" href="./changeset.html"> read more</a>
+			</div>
+		</div>
+	
+		<div class="post">
+			
+
 			<a class="post-list-title" href="./lazy-collection.html">Lazy Collection 과 Stream library</a>
 			
 
@@ -323,45 +362,6 @@
 
 			<div class="post-excerpt">
 				<p>Elixir 에서 Map 은 immutable type 이다. 따라서 <code>Map.delete/2</code>, <code>Map.put/3</code>, <code>Map.update/4</code> 등과 같은 함수는 실제로 기존 map data 를 수정하는 것이 아니라, 수정되된 값으로 새로운 map data 를 만들고 이것을 재할당 하는 것이다.</p><p>Struct 의 경우도, 한번 생성된 instance 의 내부 field 값을 변경하고자 하는 경우, 이는 수정이 아닌, 새로운 data 생성 및 이를 재할당 하는 것이다. 그런데 list, map 과 같이 많은 데이터를 포함하고 있는 경우, 그중 하나의 값이 바뀔 때마다 매번 모든 부분에 대한 재할당을 진행한다면, 메모리 사용이나 성능상 단점이 매 커보인다.</p><p>그렇다면, immutable data type 으로 처리할 때 어떤 이점이 있을 수 있으며, 예상되는 문제점은 어떻게 해결할까?</p><ul><li>구조적 공유(Structural Sharing):...<a class="read-more" href="./immutable-data-type.html"> read more</a>
-			</div>
-		</div>
-	
-		<div class="post">
-			
-
-			<a class="post-list-title" href="./phoenix-slot.html">slot attribute 사용</a>
-			
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2024-01-01T10:32:20+09:00">January 1, 2024</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        1 minute read
-      
-    </span>
-  
-  
-  </span>
-
-			<div class="post-excerpt">
-				<p>Phoenix LiveView 에서 동적인 component 를 삽입 하고자 하는 경우, 해당 component attribute 로 `slot` 을 정의하고 이를 사용해 주어야 한다. </p><h3>사용 방법</h3><div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">slot</span> <span class="p">:</span><span class="err">블록명</span><span class="p">,</span> <span class="ss">required:</span> <span class="no">true</span><span class="k">def</span> <span class="err">컴포넌트명</span><span class="p">(</span><span class="n">assigns</span><span class="p">)</span> <span class="k">do</span> <span class="sx">~H""</span><span class="s2">" &lt;동적으로 구현할 컴포넌트 태그&gt; &lt;&gt;..사용자 구현...&lt;&gt; &lt;%= render_slot(@블록명) %&gt; &lt;/동적으로 구현할 컴포넌트 태그&gt; """</span><span class="k">end</span></code></pre></div></div><h3> Slot 정의</h3><ul><li><code>slot :블록명</code> : 컴포넌트 내부에 동적으로 콘텐츠를 삽입할 수 있는 블록명이라는 이름의 슬롯을 정의.</li><li><code>required: true</code>: 이 슬롯이 반드시 제공되어야 함을 의미. 이 컴포넌트를 사용할 때는 블록명 슬롯에 대한 내용을 제공해야 한다.</li></ul><h3>컴포넌트 정의</h3><ul><li><code>def 컴포넌트명(assigns) do ... end</code> :...<a class="read-more" href="./phoenix-slot.html"> read more</a>
 			</div>
 		</div>
 	
