@@ -10,7 +10,7 @@ tags: [elixir, impl, attribute]
 author: Yong gon Yun
 ---
 
-<p>elixir code 를 작성할 때, behaviour 나 macro 의 callback 의 구현체를 정의하는 구조는 일반 함수와 동일하다. 이를 구별하기 위해 <code>@impl true</code>를 사용하는 것이 좋다. 사용하지 않을 경우, 작업에 문제가 발생하지는 않으나 IDE 나 complier 가 아래 내요의 warning 이 나타날 수 있다.</p>
+<p>elixir code 를 작성할 때, behaviour 나 macro 의 callback 의 구현체를 정의하는 구조는 일반 함수와 동일하다. 이를 구별하기 위해 <code>@impl true</code>를 사용하는 것이 좋다. 사용하지 않을 경우, 작업에 문제가 발생하지는 않으나 IDE 나 complier 가 아래 내용의 warning 이 나타날 수 있다.</p>
 
 ```
 module attribute @impl was not set for function init/1 callback (specified in GenServer). This either means you forgot to add the "@impl true" annotation before the definition or that you are accidentally overriding this callback
