@@ -1,4 +1,149 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-01-18T20:01:52+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">changeset/2 in Ecto Library</title><link href="http://localhost:4000/changeset.html" rel="alternate" type="text/html" title="changeset/2 in Ecto Library" /><published>2024-01-15T10:32:20+09:00</published><updated>2024-01-15T10:32:20+09:00</updated><id>http://localhost:4000/changeset</id><content type="html" xml:base="http://localhost:4000/changeset.html"><![CDATA[<p>Phoenix LiveView 에서 DB 처리 작업은 Ecto library 를 사용하여 작업이 진행된다. 이와 관련하여, Ecto 의 기능과 구성요소에 대해 알아보고, 여기에서 <code>changeset/2</code> 함수에 대해 좀더 알아 본다. </p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-01-23T16:48:23+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">Elixir GenServer</title><link href="http://localhost:4000/genserver.html" rel="alternate" type="text/html" title="Elixir GenServer" /><published>2024-01-23T10:32:20+09:00</published><updated>2024-01-23T10:32:20+09:00</updated><id>http://localhost:4000/genserver</id><content type="html" xml:base="http://localhost:4000/genserver.html"><![CDATA[<p>Elixir의 <code>GenServer</code>는 OTP(Open Telecom Platform) behaviour 중 하나로, 서버 프로세스를 구현하기 위한 추상화를 제공한다. GenServer는 클라이언트-서버 관계에서 서버 부분을 담당하며, 상태를 유지하고, 요청을 동기적 또는 비동기적으로 처리할 수 있다. 이는 Elixir/Erlang 시스템에서 병렬처리와 상태 관리를 용이하게 하는 강력한 도구이다.</p>
+
+<p><code>GenServer</code> 의 다양한 macro callback 중 주요한 것을을 사용하여 통신 moudule 을 구현하고자 한다. 해당 module 의 구조는 다음과 같다.</p>
+
+<center>
+  <img src="assets\img\posts\genserver.png" width="500" height="" />
+</center>
+
+<p>module 내 구성은 크게 client 와 server 구현 부분으로 구분 된다. client 는 경우, 해당 module 이 실행되는 application 자체 또는 일부 process 에서 실행될 code 이며, 해당 code 를 통해 server process 를 생성, 동기/비동기 작업 요청 및 응답, 종료 등의 작업을 정의한다.</p>
+<p>server 부분의 경우, client 작업 요청에 대응하는 작업에 대한 code 를 정의한다. 위에 언급된 <code>GenServer</code> callback 들의 경우, 모두 <code>GenServer</code> behaviour의 구현체이다.</p>
+<p>client-server 에 각 callback 들에 대해 간단하게 설명하면 다음과 같다.</p>
+
+<ol>
+  <li>Server 생성
+    <ul>
+      <li><code>start_link/3</code>: 새로운 GenServer 프로세스를 시작하고 연결</li>
+      <li><code>init/1</code>: <code>start_link/3</code> 요청에 의해 GenServer가 시작될 때 호출되며, 초기 상태를 설정</li>
+    </ul>
+  </li>
+  <li>비동기 요청/응답
+    <ul>
+      <li><code>cast/2</code>: 비동기적 통신에 사용. client 는 server 에 메시지를 보내고 즉시 반환됨. 이 메소드는 서버의 <code>handle_cast/2</code> callback을 trigger.</li>
+      <li><code>handle_cast/2</code>: 비동기적 요청을 처리. 클라이언트는 응답을 기다리지 않음.</li>
+    </ul>
+  </li>
+  <li>동기 요청/응답
+    <ul>
+      <li>call/3<code></code>: 동기적 통신에 사용. client는 server에 요청을 보내고, server가 응답할 때까지 기다리며, server의 <code>handle_call/3</code>s callback을 trigger.</li>
+      <li><code>handle_call/3</code>: 동기적 요청을 처리하고 그 결과를 clientd에게 응답.</li>
+    </ul>
+  </li>
+  <li>
+    <ul>Server 종료
+      <li><code>stop/3</code>: <code>GenServer</code> 프로세스를 안전하게 종료하기 위해 사용. 이 함수는 종료 이유(ex.  'normal', 'shutdown', 'kill' 등)와 타임아웃(default : 5 sec)을 지정할 수 있으며, 서버의 <code>terminate/2</code>  callback을 trigger.</li>
+      <li><code>terminate/2</code>: server가 종료되기 전에 호출되는 callback <code>GenServer</code> 프로세스가 정상적으로 종료될 때 호출되며, 종료 전에 필요한 정리 작업(ex.종료되기 전에 상태를 저장하거나 열려 있는 리소스를 닫는 등의 작업 등)을 수행할 수 있습니다.</li>
+    </ul>
+  </li>
+</ol>
+
+<p><strong>예제 코드</strong></p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">defmodule</span> <span class="no">ShopingList</span> <span class="k">do</span>
+  <span class="kn">use</span> <span class="no">GenServer</span>
+
+  <span class="c1">#  ------ client API --------</span>
+
+  <span class="k">def</span> <span class="n">start_link</span><span class="p">()</span> <span class="k">do</span>
+    <span class="no">GenServer</span><span class="o">.</span><span class="n">start_link</span><span class="p">(</span><span class="bp">__MODULE__</span><span class="p">,</span> <span class="p">[])</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="n">add</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span> <span class="k">do</span>
+    <span class="no">GenServer</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="n">view</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span> <span class="k">do</span>
+    <span class="no">GenServer</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="ss">:view</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="n">remove</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span> <span class="k">do</span>
+    <span class="no">GenServer</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="p">{</span><span class="ss">:remove</span><span class="p">,</span> <span class="n">item</span><span class="p">})</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="n">stop</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span> <span class="k">do</span>
+    <span class="no">GenServer</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="ss">:normal</span><span class="p">,</span> <span class="ss">:infinity</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="c1"># ----- server callback -----</span>
+
+  <span class="k">def</span> <span class="n">init</span><span class="p">(</span><span class="n">list</span><span class="p">)</span> <span class="k">do</span>
+    <span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="n">list</span><span class="p">}</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="n">handle_cast</span><span class="p">({</span><span class="ss">:remove</span><span class="p">,</span> <span class="n">item</span><span class="p">},</span> <span class="n">list</span><span class="p">)</span> <span class="k">do</span>
+    <span class="n">updated_list</span> <span class="o">=</span> <span class="no">Enum</span><span class="o">.</span><span class="n">reject</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="k">fn</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">i</span> <span class="o">==</span> <span class="n">item</span> <span class="k">end</span><span class="p">)</span>
+    <span class="p">{</span><span class="ss">:noreply</span><span class="p">,</span> <span class="n">updated_list</span><span class="p">}</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="n">handle_cast</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">list</span><span class="p">)</span> <span class="k">do</span>
+    <span class="n">updated_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">|</span><span class="n">list</span><span class="p">]</span>
+    <span class="p">{</span><span class="ss">:noreply</span><span class="p">,</span> <span class="n">updated_list</span><span class="p">}</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="n">handle_call</span><span class="p">(</span><span class="ss">:view</span><span class="p">,</span> <span class="n">_from</span><span class="p">,</span> <span class="n">list</span><span class="p">)</span> <span class="k">do</span>
+    <span class="p">{</span><span class="ss">:reply</span><span class="p">,</span> <span class="n">list</span><span class="p">,</span> <span class="n">list</span><span class="p">}</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="n">terminate</span><span class="p">(</span><span class="n">_reason</span><span class="p">,</span> <span class="n">list</span><span class="p">)</span> <span class="k">do</span>
+    <span class="no">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">"This Server is termniated."</span><span class="p">)</span>
+    <span class="no">IO</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">list</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p><strong>실행 결과</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iex(1)&gt; {:ok, pid} = ShoppingList.start_link()
+{:ok, #PID&lt;0.422.0&gt;}
+</code></pre></div></div>
+<p><code>ShoppingList.start_link()</code> 를 통해 server process 를 생성한다. server 측 <code>init(list)</code> 함수 callback 이 실행되어 server process 를 초기화 하고 그 결과 및 pid 를 client 에게 반환한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iex(2)&gt; ShoppingList.add(pid, "eggs") 
+:ok
+iex(3)&gt; ShoppingList.add(pid, "milk") 
+:ok
+iex(4)&gt; ShoppingList.add(pid, "cheese") 
+:ok
+iex(5)&gt; ShoppingList.view(pid) 
+["cheese", "milk", "eggs"]
+</code></pre></div></div>
+
+<p><code>ShoppingList.add(pid, "eggs")</code> 등의 함수를 통해 server process 비동기 작업을 요청한다. <code>:ok</code> 응답은 server 작업의 완료와 관계없이 반환된다. <code>handle_cast(item, list)</code>가 작업을 하여 server 자체 list 에 client 가 보낸 메세지를 list 에 추가한다.</p>
+<p><code>ShoppingList.view(pid)</code> 를 통해 동기화된 작업을 요청한다. 해당 요청으로 <code>handle_call(:view, _from, list)</code> callback 이 trigger 된다. 해당 callback 반환값 튜플<code>{:reply, list, list}</code>의 각 요소는 다음의 의미를 가진다.</p>
+<ol>
+  <li><code>:reply</code>: client 에게 동기적으로 응답을 보내야 함을 의미</li>
+  <li><code>list</code>: client 에게 보낼 실제 응답 data</li>
+  <li><code>list</code>: 해당 callback 작업 이후 server 가 가질 data</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iex(6)&gt; ShoppingList.remove(pid, "cheese") 
+:ok
+iex(7)&gt; ShoppingList.view(pid)
+["milk", "eggs"]
+</code></pre></div></div>
+
+<p><code>ShoppingList.remove(pid, "cheese")</code> 의 경우 앞에서 사용한  <code>ShoppingList.add(pid, "eggs")</code> 와 동일하게 비동기 작업을 요청하지만 함수 다형성(polymorphism) 을 적용하여 별도로 정의된 <code>handle_cast({:remove, item}, list)</code> callback 을 trigger 한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iex(8)&gt; ShoppingList.stop(pid) 
+This Server is termniated.
+["milk", "eggs"]
+:ok
+</code></pre></div></div>
+
+<p>server process 을 종료 요청을 보내고 triggering 된 <code>terminate(_reason, list)</code> 작업을 진행하고 해당 process 는 종료된다.</p>
+
+<h3><code>Phoenix PubSub</code>과 <code>GenServer</code></h3>
+
+<p> <code>Phoenix PubSub</code>은 내부적으로 <code>GenServer</code>를 사용하여 구축된다. <code>Phoenix PubSub</code>은 Elixir 어플리케이션 내에서 프로세스 간의 메시징을 쉽게 구현할 수 있도록 해주는 시스템입니다. 이는 주로 Phoenix framework 내에서 실시간 웹 기능을 구현하는 데 사용되며, 웹소켓을 통해 client-server 간의 메시지를 효율적으로 교환할 수 있게 해준다. 그 주요 역할은 다음과 같다.</p>
+
+<ul>
+  <li>상태 관리: 각 PubSub 서버는 구독 정보와 같은 상태를 유지 관리.</li>
+  <li>메시지 처리: 발행된 메시지는 <code>GenServer</code> 프로세스를 통해 구독자들에게 전달.</li>
+  <li>동기화 및 제어: <code>GenServer</code> callback을 통해 메시지 전송 및 구독 관리를 제어.</li>
+</ul>
+
+<p><br />
+<a href="https://elixircasts.io/intro-to-genserver">참고 문헌 - ElixirCasts - #12: Intro to GenServer</a></p>]]></content><author><name>Yong gon Yun</name></author><category term="elixir" /><category term="genserver" /><category term="pubsub" /><summary type="html"><![CDATA[Elixir GenServer]]></summary></entry><entry><title type="html">changeset/2 in Ecto Library</title><link href="http://localhost:4000/changeset.html" rel="alternate" type="text/html" title="changeset/2 in Ecto Library" /><published>2024-01-15T10:32:20+09:00</published><updated>2024-01-15T10:32:20+09:00</updated><id>http://localhost:4000/changeset</id><content type="html" xml:base="http://localhost:4000/changeset.html"><![CDATA[<p>Phoenix LiveView 에서 DB 처리 작업은 Ecto library 를 사용하여 작업이 진행된다. 이와 관련하여, Ecto 의 기능과 구성요소에 대해 알아보고, 여기에서 <code>changeset/2</code> 함수에 대해 좀더 알아 본다. </p>
 
 <h3>Ecto 란?</h3>
 <p>Phoenix LiveView 에서 사용하는 Ecto library 는 Elixir 언어를 위한 database wrapper 이다. 주로 Elixir web-framewor 인 Phoenix 와 함께 사용되며, 데이터베이스 상호작용을 효율적으로 만들어 준다.</p>
@@ -345,61 +490,4 @@
 </ul>
 
 <h3>결론</h3>
-<p>데이터베이스 서버에서의 복잡한 쿼리 처리는 효율성을 저해할 수 있으며, 이를 관리하기 위해서는 쿼리 최적화, 적절한 인프라 선택, 그리고 애플리케이션 설계의 최적화가 필요. 이러한 전략들은 서비스의 규모와 요구사항에 따라 달라질 수 있다.</p>]]></content><author><name>Yong gon Yun</name></author><category term="complex query" /><category term="database" /><category term="phoenix" /><category term="liveview" /><summary type="html"><![CDATA[복합 쿼리의 logic 실행은 client 측에서 진행되는가, 아니면 database server 측에서 진행되는가?]]></summary></entry><entry><title type="html">Open-Closed Principle (OCP)</title><link href="http://localhost:4000/open-closed-principal.html" rel="alternate" type="text/html" title="Open-Closed Principle (OCP)" /><published>2023-12-21T10:32:20+09:00</published><updated>2023-12-21T10:32:20+09:00</updated><id>http://localhost:4000/open-closed-principal</id><content type="html" xml:base="http://localhost:4000/open-closed-principal.html"><![CDATA[<p>Elixir에서 <strong>오픈-클로즈드 원칙(Open-Closed Principle, OCP)</strong>은 소프트웨어 엔지니어링의 SOLID 원칙 중 하나로, <strong>클래스, 모듈, 함수 등이 확장에는 열려 있으나, 수정에는 닫혀 있어야 한다</strong>는 개념. 이 원칙의 목적은 기존의 코드를 변경하지 않으면서도 시스템의 기능을 확장할 수 있게 하는 것이다.</p>
-<p>Elixir는 함수형 언어이며, 모듈과 함수를 사용하여 이 원칙을 적용할 수 있다. Elixir에서 OCP를 적용하는 몇 가지 방법은 다음과 같다:</p>
-
-<p><strong>1. 다형성(Polymorphism)을 사용하는 방법</strong></p>
-<p>Elixir에서는 프로토콜(Protocol)을 사용하여 다형성을 구현할 수 있다. 프로토콜은 서로 다른 데이터 타입에 대해 동일한 인터페이스를 제공하며, 새로운 타입을 추가할 때 기존 코드를 변경하지 않고도 기능을 확장할 수 있다.</p>
-<p>아래 예제와 같이 `great/1` 의 경우, 모두 동일한 parameter 갯수를 갖지만 각각 type 이 다르므로 각각 함수 요청을 구분하여, 해당 함수가 실행되도록 한다.</p>
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">PolymorphismExample</span> <span class="k">do</span>
-  <span class="c1"># 인자가 맵이고 키 :name을 가진 경우</span>
-  <span class="k">def</span> <span class="n">greet</span><span class="p">(%{</span><span class="ss">name:</span> <span class="n">name</span><span class="p">}),</span> <span class="k">do</span><span class="p">:</span> <span class="s2">"Hello, </span><span class="si">#{</span><span class="n">name</span><span class="si">}</span><span class="s2">!"</span> 
-  <span class="c1"># 인자가 문자열일 경우</span>
-  <span class="k">def</span> <span class="n">greet</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="ow">when</span> <span class="n">is_binary</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="k">do</span><span class="p">:</span> <span class="s2">"Hello, </span><span class="si">#{</span><span class="n">name</span><span class="si">}</span><span class="s2">!"</span> 
-  <span class="c1"># 위의 경우에 모두 해당하지 않을 때</span>
-  <span class="k">def</span> <span class="n">greet</span><span class="p">(</span><span class="n">_</span><span class="p">),</span> <span class="k">do</span><span class="p">:</span> <span class="s2">"Hello, there!"</span> 
-<span class="k">end</span>
-</code></pre></div></div>
-
-<p><strong>2. 함수 오버로딩</strong></p>
-<p>함수 오버로딩을 통해 같은 이름의 함수에 대해 다양한 패턴을 정의할 수 있다. 이를 통해 새로운 경우를 처리하기 위해 기존 함수를 수정하는 대신 새로운 함수 정의를 추가할 수 있다.</p>
-<p>다음의 경우, parameter 갯수가 다름에 따라 각 함수는 구분되어진다.</p>
-
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">OverloadingExample</span> <span class="k">do</span>
-  <span class="k">def</span> <span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="k">do</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="c1"># 두 개의 인자를 받는 함수</span>
-  <span class="k">def</span> <span class="n">sum</span><span class="p">(</span><span class="n">list</span><span class="p">)</span> <span class="ow">when</span> <span class="n">is_list</span><span class="p">(</span><span class="n">list</span><span class="p">),</span> <span class="k">do</span><span class="p">:</span> <span class="no">Enum</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">list</span><span class="p">)</span> <span class="c1"># 리스트를 인자로 받는 함수</span>
-<span class="k">end</span>
-</code></pre></div></div>
-
-<p><strong>3. 행위(Behaviour)를 정의하는 방법</strong></p>
-<p>Elixir에서는 행위(behaviour)를 정의하여 모듈이 특정 콜백을 구현하도록 할 수 있다. **(아직 이해가 부족하므로 추가 학습 필요)** 이를 통해 동일한 인터페이스를 가진 다양한 구현을 제공할 수 있으며, 새로운 구현을 추가해도 기존 모듈을 수정할 필요가 없다.</p>
-
-<center>*****</center>
-<p>* Behaviour 에 대하여</p>
-<p>Elixir 는 함수형 언어이므로 JAVA, 나 Python 과 같은 객체에 대한 개념이 존재 하지 않으므로, 상속 또한 존재하지 않는다. 그러나 약간 유사하게 동일한 함수 signiture 를 정의하여, 이를 필요한 상황에 맞춰 callback 함수를 구현할 수 있는 기능이 있으며, 이것이 곧 behaviour 이다. (OOP 에서 부모 객체 'animal' 에서 울음소리에 대한 함수를 구현하고, 자식 객체 'cat', 'dog' 에서 각각 함수를 상속 받아 내용을 다르게 구현하는 것과 유사한 기능을 사용할 수 있음.)</p>
-<p>아래의 예제를 보면, </p>
-
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">Worker</span> <span class="k">do</span>
-  <span class="nv">@callback</span> <span class="n">work</span><span class="p">(</span><span class="n">data</span> <span class="p">::</span> <span class="n">any</span><span class="p">)</span> <span class="p">::</span> <span class="no">String</span><span class="o">.</span><span class="n">t</span><span class="p">()</span>
-<span class="k">end</span>
-<span class="k">defmodule</span> <span class="no">FileWorker</span> <span class="k">do</span>
-  <span class="nv">@behaviour</span> <span class="no">Worker</span>
-  <span class="k">def</span> <span class="n">work</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="k">do</span>
-    <span class="s2">"Processing file: </span><span class="si">#{</span><span class="n">data</span><span class="si">}</span><span class="s2">"</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-<span class="k">defmodule</span> <span class="no">DatabaseWorker</span> <span class="k">do</span>
-  <span class="nv">@behaviour</span> <span class="no">Worker</span>
-  <span class="k">def</span> <span class="n">work</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="k">do</span>
-    <span class="s2">"Processing database entry: </span><span class="si">#{</span><span class="n">data</span><span class="si">}</span><span class="s2">"</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div></div>
-<p> `Worker` module 에서  `work/1` callback 함수를 정의한다. 이 때, 함수명, parameter &amp; return type 에 대해서만 정의한다.<br /><br />그리고 함수의 내용은 다른 module 에서 해당 함수를 필요할 때,  `@behaviour Worker` 로  callback 을 정의 하고, 함수를 구현하여 사용하므로, 각 module 에서 필요한 logic 을 맞추어 사용할 수 있다. <a href="https://elixirschool.com/ko/lessons/advanced/behaviours">[공식 문서 behaviour 설명]</a> </p>
-<center>*****</center>
-
-<p><strong>4. 컨피규레이션을 통한 확장(추후학습 예정)</strong></p>
-<p>시스템을 구성하는 요소들을 컨피규레이션을 통해 정의하고, 새로운 구성 요소를 추가하여 기능을 확장할 수 있다.<strong>(아직 이해가 부족하므로 추가 학습 필요)</strong> 이 방법은 기존 시스템의 코드를 변경하지 않고도 새로운 기능을 추가할 수 있게 한다.</p>
-
-<h3>결론</h3>
-<p>오픈-클로즈드 원칙을 적용하면, 시스템의 유지보수성과 확장성이 향상되며, 기존 코드의 안정성을 유지하면서 새로운 기능을 추가할 수 있다.</p>]]></content><author><name>Yong gon Yun</name></author><category term="elixir" /><category term="polymorphism" /><category term="open-closed principle" /><category term="overloading" /><category term="behaviour" /><summary type="html"><![CDATA[Open-Closed Principle (OCP)]]></summary></entry></feed>
+<p>데이터베이스 서버에서의 복잡한 쿼리 처리는 효율성을 저해할 수 있으며, 이를 관리하기 위해서는 쿼리 최적화, 적절한 인프라 선택, 그리고 애플리케이션 설계의 최적화가 필요. 이러한 전략들은 서비스의 규모와 요구사항에 따라 달라질 수 있다.</p>]]></content><author><name>Yong gon Yun</name></author><category term="complex query" /><category term="database" /><category term="phoenix" /><category term="liveview" /><summary type="html"><![CDATA[복합 쿼리의 logic 실행은 client 측에서 진행되는가, 아니면 database server 측에서 진행되는가?]]></summary></entry></feed>

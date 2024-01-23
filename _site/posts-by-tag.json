@@ -66,6 +66,8 @@
   "tag" : "elixir",
   "posts" : [
       
+      "./genserver.html",
+      
       "./lazy-collection.html",
       
       "./immutable-data-type.html",
@@ -87,6 +89,16 @@
   "posts" : [
       
       "./lazy-collection.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "genserver",
+  "posts" : [
+      
+      "./genserver.html"
       
     ]
   } ,
@@ -229,6 +241,16 @@
   "posts" : [
       
       "./preload.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "pubsub",
+  "posts" : [
+      
+      "./genserver.html"
       
     ]
   } ,

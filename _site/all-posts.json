@@ -1,6 +1,8 @@
 {
   "posts" : [
     
+    "./genserver.html",
+    
     "./changeset.html",
     
     "./lazy-collection.html",

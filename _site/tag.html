@@ -545,6 +545,45 @@
 			
 
 				<div class="post">
+					<a class="post-list-title" href="./genserver.html">Elixir GenServer</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-23T10:32:20+09:00">January 23, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        3 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Elixir의 <code>GenServer</code>는 OTP(Open Telecom Platform) behaviour 중 하나로, 서버 프로세스를 구현하기 위한 추상화를 제공한다. GenServer는 클라이언트-서버 관계에서 서버 부분을 담당하며, 상태를 유지하고, 요청을 동기적 또는 비동기적으로 처리할 수 있다. 이는 Elixir/Erlang 시스템에서 병렬처리와 상태 관리를 용이하게 하는 강력한 도구이다.</p> <p><code>GenServer</code> 의 다양한 macro callback 중 주요한 것을을 사용하여 통신 moudule 을 구현하고자 한다. 해당 module 의 구조는 다음과 같다.</p> <center> <img src="assets\img\posts\genserver.png" width="500" height="" /> </center> <p>module 내 구성은 크게 client 와 server 구현 부분으로 구분 된다. client 는 경우, 해당 module 이 실행되는 application 자체 또는 일부 process 에서 실행될 code 이며, 해당 code 를 통해 server process 를...<a class="read-more" href="./genserver.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
 					<a class="post-list-title" href="./lazy-collection.html">Lazy Collection 과 Stream library</a>
 					
 
@@ -620,45 +659,6 @@
 					</div>
 				</div>
 			
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./create-instance.html">Elixir - intance 생성</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2023-12-29T13:32:20+09:00">December 29, 2023</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        less than 1 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<p>Elixir 문범에서 struct 에 대한 instace를 생성하는 방법은 아래와 같이 두가지가 존재한다. (ChatGPT 가 설명한 그 용도의 차이점에 대해서.. 아직 잘 모르겠다. 내눈에는 그냥 동일한 용도로 사용되는 것 처럼 보인다. ;;)</p> <h3><code>__MODULE__</code> 사용</h3> <ul> <li>사용법: <code>%__MODULE__{}</code> 구문은 주로 모듈 내부에서 해당 모듈의 구조체 인스턴스를 생성할 때 사용. 이 경우, 모듈 내부에서 직접 <code>%__MODULE__{field1: value1, field2: value2}</code>와 같이 구조체 인스턴스를 생성할 수 있다.</li><br /> <li>예시: 모듈 내부에서 <code>def new()</code> 함수를 정의하고, 이 함수 안에서 <code>%__MODULE__{}</code>를 사용하여 인스턴스를 생성할 수 있다.</li> </ul> <h3><code>def new(field \\ []), do: __struct__(field)</code> 정의</h3> <ul> <li>사용법: 이 방법은 모듈 외부에서 인스턴스를 생성할 때 사용합니다. 여기서 new 함수는...<a class="read-more" href="./create-instance.html"> read more</a>
-					</div>
-				</div>
-			
 			</div>
 		</div>
 	</div>
@@ -705,6 +705,55 @@
 
 					<div class="post-excerpt">
 						<h3>Lazy Collection</h3> <p>Lazy Colleciton 은 Elixir와 같은 함수형 프로그래밍 언어에서 중요한 개념 중 하나로 데이터가 실제로 필요할 때까지 그 처리를 연기하는 방식으로 작동한다. 이 방식은 특히 대용량 데이터를 다룰 때 메모리 사용을 최소화하고 성능을 향상시킬 수 있다.</p> <div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stream</span> <span class="o">=</span> <span class="no">Stream</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">10000</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">(</span><span class="nv">&amp;1</span> <span class="o">*</span> <span class="nv">&amp;1</span><span class="p">))</span> </code></pre></div></div> <p>이 코드는 1부터 10,000까지의 숫자 각각에 대해 제곱을 하는 스트림을 생성한다. 그러나 실제 제곱 연산은 스트림을 열거하는 시점, 예를 들어 Enum.to_list(stream)을 호출할 때까지 수행되지 않는다.</p> <p><strong>특징</strong></p> <ul> <li>비동기 처리: lazy collection은 데이터의 전체 집합을 메모리에 한...<a class="read-more" href="./lazy-collection.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
+	<div id="genserver" class="hidden tag-master">
+		<h1>genserver</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./genserver.html">Elixir GenServer</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-23T10:32:20+09:00">January 23, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        3 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Elixir의 <code>GenServer</code>는 OTP(Open Telecom Platform) behaviour 중 하나로, 서버 프로세스를 구현하기 위한 추상화를 제공한다. GenServer는 클라이언트-서버 관계에서 서버 부분을 담당하며, 상태를 유지하고, 요청을 동기적 또는 비동기적으로 처리할 수 있다. 이는 Elixir/Erlang 시스템에서 병렬처리와 상태 관리를 용이하게 하는 강력한 도구이다.</p> <p><code>GenServer</code> 의 다양한 macro callback 중 주요한 것을을 사용하여 통신 moudule 을 구현하고자 한다. 해당 module 의 구조는 다음과 같다.</p> <center> <img src="assets\img\posts\genserver.png" width="500" height="" /> </center> <p>module 내 구성은 크게 client 와 server 구현 부분으로 구분 된다. client 는 경우, 해당 module 이 실행되는 application 자체 또는 일부 process 에서 실행될 code 이며, 해당 code 를 통해 server process 를...<a class="read-more" href="./genserver.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1496,6 +1545,55 @@
 	</div>
 
 	
+	<div id="pubsub" class="hidden tag-master">
+		<h1>pubsub</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./genserver.html">Elixir GenServer</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-23T10:32:20+09:00">January 23, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        3 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Elixir의 <code>GenServer</code>는 OTP(Open Telecom Platform) behaviour 중 하나로, 서버 프로세스를 구현하기 위한 추상화를 제공한다. GenServer는 클라이언트-서버 관계에서 서버 부분을 담당하며, 상태를 유지하고, 요청을 동기적 또는 비동기적으로 처리할 수 있다. 이는 Elixir/Erlang 시스템에서 병렬처리와 상태 관리를 용이하게 하는 강력한 도구이다.</p> <p><code>GenServer</code> 의 다양한 macro callback 중 주요한 것을을 사용하여 통신 moudule 을 구현하고자 한다. 해당 module 의 구조는 다음과 같다.</p> <center> <img src="assets\img\posts\genserver.png" width="500" height="" /> </center> <p>module 내 구성은 크게 client 와 server 구현 부분으로 구분 된다. client 는 경우, 해당 module 이 실행되는 application 자체 또는 일부 process 에서 실행될 code 이며, 해당 code 를 통해 server process 를...<a class="read-more" href="./genserver.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
 	<div id="slop" class="hidden tag-master">
 		<h1>slop</h1>
 		<div class="archive">
@@ -1808,10 +1906,13 @@
                 <li><a href="./tag.html?tag=ecto" class="tag">ecto <span>(1)</span></a></li>
             
                 
-                <li><a href="./tag.html?tag=elixir" class="tag">elixir <span>(6)</span></a></li>
+                <li><a href="./tag.html?tag=elixir" class="tag">elixir <span>(7)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=elixir+stream" class="tag">elixir stream <span>(1)</span></a></li>
+            
+                
+                <li><a href="./tag.html?tag=genserver" class="tag">genserver <span>(1)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=immutable+data+type" class="tag">immutable data type <span>(1)</span></a></li>
@@ -1848,6 +1949,9 @@
             
                 
                 <li><a href="./tag.html?tag=preload%2F1" class="tag">preload/1 <span>(1)</span></a></li>
+            
+                
+                <li><a href="./tag.html?tag=pubsub" class="tag">pubsub <span>(1)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=slop" class="tag">slop <span>(1)</span></a></li>
