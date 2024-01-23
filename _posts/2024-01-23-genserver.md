@@ -18,10 +18,10 @@ module attribute @impl was not set for function init/1 callback (specified in Ge
 <p>아울러 해당 attribute 를 사용했을 때의 장점은 다음과 같다.</p>
 
 <ol>
-  <li>명확성: <code>@impl true</code>는 해당 함수가 특정 행위(behaviour)의 callback 함수임을 명확히 함. 따라서 가독성이 높아질 수 있음.</li>
-  <li>컴파일러 검증: <code>@impl true</code>를 사용하면 Elixir compiler가 해당 함수가 실제로 지정된 행위의 callback 함수인지를 검증함으로 써, 잘못된 callback 함수일 경우, compile 단계에서 이를 감지할 수 있어짐</li>
-  <li>문서화: <code>@impl true</code>를 사용하면 ExDoc과 같은 문서화 도구에서 해당 함수가 콜백 함수임을 자동으로 식별하여 문서화할 수 있음.</li>
-  <li>유지보수 용이성: 코드의 유지보수를 담당하는 다른 개발자들에게 해당 함수의 역할과 중요성을 쉽게 전달할 수 있음.</li> 
+  <li><strong>명확성</strong>: <code>@impl true</code>는 해당 함수가 특정 행위(behaviour)의 callback 함수임을 명확히 함. 따라서 가독성이 높아질 수 있음.</li>
+  <li><strong>컴파일러 검증</strong>: <code>@impl true</code>를 사용하면 Elixir compiler가 해당 함수가 실제로 지정된 행위의 callback 함수인지를 검증함으로 써, 잘못된 callback 함수일 경우, compile 단계에서 이를 감지할 수 있어짐</li>
+  <li><strong>문서화</strong>: <code>@impl true</code>를 사용하면 ExDoc과 같은 문서화 도구에서 해당 함수가 콜백 함수임을 자동으로 식별하여 문서화할 수 있음.</li>
+  <li><strong>유지보수 용이성</strong>: 코드의 유지보수를 담당하는 다른 개발자들에게 해당 함수의 역할과 중요성을 쉽게 전달할 수 있음.</li> 
 </ol>
 
 <p><strong>예시</strong></p>
