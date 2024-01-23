@@ -7,9 +7,9 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Elixir GenServer - Gon's Tech Jurnal</title>
+	<title>impl attribute - Gon's Tech Jurnal</title>
 	<link rel="canonical" href="http://localhost:4000/genserver.html">
-	<meta name="description" content="Elixir GenServer">
+	<meta name="description" content="impl attribute">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 <script type="application/ld+json">
@@ -19,13 +19,13 @@
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "http://localhost:4000"},
-  "headline": "Elixir GenServer",
-  "abstract": "Elixir GenServer",
-    "keywords": "elixir, genserver, pubsub",
-    "wordcount": "655",
-    "image": ["http://localhost:4000/assets/imgposts/general/post_general13.jpg"],
-  "datePublished": "2024-01-23 10:32:20 +0900",
-  "dateModified": "2024-01-23 10:32:20 +0900",
+  "headline": "impl attribute",
+  "abstract": "impl attribute",
+    "keywords": "elixir, impl, attribute",
+    "wordcount": "346",
+    "image": ["http://localhost:4000/assets/imgposts/general/post_general14.jpg"],
+  "datePublished": "2024-01-23 15:32:20 +0900",
+  "dateModified": "2024-01-23 15:32:20 +0900",
   "author": {
     "@type": "Person",
     "name": "Yong gon Yun"},
@@ -42,28 +42,28 @@
 <!-- Open Graph data -->
 <meta property="og:url" content="http://localhost:4000/genserver.html"/>
 <meta property="og:type" content="article"/>
-<meta property="og:title" content="Elixir GenServer"/>
-<meta property="og:description" content="Elixir GenServer"/>
-<meta property="og:image" content="http://localhost:4000/assets/imgposts/general/post_general13.jpg"/>
-<meta property="og:image:alt" content="Elixir GenServer"/>
+<meta property="og:title" content="impl attribute"/>
+<meta property="og:description" content="impl attribute"/>
+<meta property="og:image" content="http://localhost:4000/assets/imgposts/general/post_general14.jpg"/>
+<meta property="og:image:alt" content="impl attribute"/>
 <meta property="og:site_name" content="Gon's Tech Jurnal" />
-<meta property="article:published_time" content="2024-01-23 10:32:20 +0900" />
-<meta property="article:modified_time" content="2024-01-23 10:32:20 +0900" />
-<meta property="article:tag" content="elixir, genserver, pubsub" />
+<meta property="article:published_time" content="2024-01-23 15:32:20 +0900" />
+<meta property="article:modified_time" content="2024-01-23 15:32:20 +0900" />
+<meta property="article:tag" content="elixir, impl, attribute" />
 <meta property="fb:admins" content="ar.maybach" />
 <!-- Schema.org markup for Google -->
-<meta itemprop="name" content="Elixir GenServer">
-<meta itemprop="description" content="Elixir GenServer">
-<meta itemprop="image" content="http://localhost:4000/assets/imgposts/general/post_general13.jpg">
+<meta itemprop="name" content="impl attribute">
+<meta itemprop="description" content="impl attribute">
+<meta itemprop="image" content="http://localhost:4000/assets/imgposts/general/post_general14.jpg">
 <!-- Twitter Card data -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@N/A">
-<meta name="twitter:title" content="Elixir GenServer">
-<meta name="twitter:description" content="Elixir GenServer">
+<meta name="twitter:title" content="impl attribute">
+<meta name="twitter:description" content="impl attribute">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="655"/>
-<meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general13.jpg">
+<meta data-rh="true" name="twitter:data1" content="346"/>
+<meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general14.jpg">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
 	<!-- iOS Safari -->
@@ -150,7 +150,7 @@
 
 <section class="hidden">
   <div class="post">
-      <a  class="post-list-title" href="./genserver.html">Elixir GenServer</a>
+      <a  class="post-list-title" href="./genserver.html">impl attribute</a>
       
 
   <span class = "post-card-meta">
@@ -162,7 +162,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2024-01-23T10:32:20+09:00">January 23, 2024</time>
+        <time datetime="2024-01-23T15:32:20+09:00">January 23, 2024</time>
       </span>
     
     
@@ -174,7 +174,7 @@
     
     <span class="page_meta-readtime">
       
-        3 minute read
+        1 minute read
       
     </span>
   
@@ -182,7 +182,7 @@
   </span>
 
         <div class="post-excerpt">
-            <p>Elixir의 <code>GenServer</code>는 OTP(Open Telecom Platform) behaviour 중 하나로, 서버 프로세스를 구현하기 위한 추상화를 제공한다. GenServer는 클라이언트-서버 관계에서 서버 부분을 담당하며, 상태를 유지하고, 요청을 동기적 또는 비동기적으로 처리할 수 있다. 이는 Elixir/Erlang 시스템에서 병렬처리와 상태 관리를 용이하게 하는 강력한 도구이다.</p><p><code>GenServer</code> 의 다양한 macro callback 중 주요한 것을을 사용하여 통신 moudule 을 구현하고자 한다. 해당 module 의 구조는 다음과 같다.</p><center> <img src="assets\img\posts\genserver.png" width="500" height="" /></center><p>module 내 구성은 크게 client 와 server 구현 부분으로 구분 된다. client 는 경우, 해당 module 이 실행되는 application 자체 또는 일부 process 에서 실행될 code 이며, 해당 code 를 통해 server process 를 생성, 동기/비동기 작업 요청...<a class="read-more" href="./genserver.html"> read more</a>
+            <p>elixir code 를 작성할 때, behaviour 나 macro 의 callback 의 구현체를 정의하는 구조는 일반 함수와 동일하다. 이를 구별하기 위해 <code>@impl true</code>를 사용하는 것이 좋다. 사용하지 않을 경우, 작업에 문제가 발생하지는 않으나 IDE 나 complier 가 아래 내용의 warning 이 나타날 수 있다.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module attribute @impl was not set for function init/1 callback (specified in GenServer). This either means you forgot to add the "@impl true" annotation before the definition or that you are accidentally overriding this callback</code></pre></div></div><p>아울러 해당 attribute 를 사용했을 때의 장점은 다음과 같다.</p><ol> <li>명확성: <code>@impl true</code>는 해당 함수가 특정 행위(behaviour)의 callback 함수임을 명확히 함....<a class="read-more" href="./genserver.html"> read more</a>
         </div>
   </div>
 </section>
@@ -280,14 +280,14 @@
 </header> <!-- End Header -->
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Elixir GenServer">
-<meta itemprop="description" content="Elixir GenServer">
-<meta itemprop="datePublished" content="2024-01-23T10:32:20+09:00">
+    <meta itemprop="headline" content="impl attribute">
+<meta itemprop="description" content="impl attribute">
+<meta itemprop="datePublished" content="2024-01-23T15:32:20+09:00">
 
     <div class="wrapper">
       <div class="page-content">
         <div class="header-page">
-          <h2 class="page-title">Elixir GenServer</h2>
+          <h2 class="page-title">impl attribute</h2>
           
 
   <span class = "post-page-meta">
@@ -299,7 +299,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2024-01-23T10:32:20+09:00">January 23, 2024</time>
+        <time datetime="2024-01-23T15:32:20+09:00">January 23, 2024</time>
       </span>
     
     
@@ -311,7 +311,7 @@
     
     <span class="page_meta-readtime">
       
-        3 minute read
+        1 minute read
       
     </span>
   
@@ -332,9 +332,9 @@
             
                 <li><a href="./tag.html?tag=elixir" class="tag side">elixir</a></li>
             
-                <li><a href="./tag.html?tag=genserver" class="tag side">genserver</a></li>
+                <li><a href="./tag.html?tag=impl" class="tag side">impl</a></li>
             
-                <li><a href="./tag.html?tag=pubsub" class="tag side">pubsub</a></li>
+                <li><a href="./tag.html?tag=attribute" class="tag side">attribute</a></li>
             
     
         </ul>
@@ -343,11 +343,11 @@
     <div class="share-hover side">
         <span class="share-button side"><svg fill="currentColor" width="25" height="25" class="side"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>
         <div class="share-icons side" id="sidebar-icons">
-            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=Elixir GenServer&url=http://localhost:4000/genserver.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=impl attribute&url=http://localhost:4000/genserver.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
             <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/genserver.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/genserver.html&title=Elixir GenServer" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/genserver.html&title=Elixir GenServer&summary=Elixir GenServer&source=http://localhost:4000/genserver.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a class="email" href="mailto:?subject=Elixir GenServer&body=Elixir GenServer%0A%0ARead more here: http://localhost:4000/genserver.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/genserver.html&title=impl attribute" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/genserver.html&title=impl attribute&summary=impl attribute&source=http://localhost:4000/genserver.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a class="email" href="mailto:?subject=impl attribute&body=impl attribute%0A%0ARead more here: http://localhost:4000/genserver.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
             <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="side" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>
         </div>
     </div>
@@ -357,152 +357,89 @@
 
         
         
-        <p>Elixir의 <code>GenServer</code>는 OTP(Open Telecom Platform) behaviour 중 하나로, 서버 프로세스를 구현하기 위한 추상화를 제공한다. GenServer는 클라이언트-서버 관계에서 서버 부분을 담당하며, 상태를 유지하고, 요청을 동기적 또는 비동기적으로 처리할 수 있다. 이는 Elixir/Erlang 시스템에서 병렬처리와 상태 관리를 용이하게 하는 강력한 도구이다.</p>
+        <p>elixir code 를 작성할 때, behaviour 나 macro 의 callback 의 구현체를 정의하는 구조는 일반 함수와 동일하다. 이를 구별하기 위해 <code>@impl true</code>를 사용하는 것이 좋다. 사용하지 않을 경우, 작업에 문제가 발생하지는 않으나 IDE 나 complier 가 아래 내용의 warning 이 나타날 수 있다.</p>
 
-<p><code>GenServer</code> 의 다양한 macro callback 중 주요한 것을을 사용하여 통신 moudule 을 구현하고자 한다. 해당 module 의 구조는 다음과 같다.</p>
-
-<center>
-  <img src="assets\img\posts\genserver.png" width="500" height="" />
-</center>
-
-<p>module 내 구성은 크게 client 와 server 구현 부분으로 구분 된다. client 는 경우, 해당 module 이 실행되는 application 자체 또는 일부 process 에서 실행될 code 이며, 해당 code 를 통해 server process 를 생성, 동기/비동기 작업 요청 및 응답, 종료 등의 작업을 정의한다.</p>
-<p>server 부분의 경우, client 작업 요청에 대응하는 작업에 대한 code 를 정의한다. 위에 언급된 <code>GenServer</code> callback 들의 경우, 모두 <code>GenServer</code> behaviour의 구현체이다.</p>
-<p>client-server 에 각 callback 들에 대해 간단하게 설명하면 다음과 같다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module attribute @impl was not set for function init/1 callback (specified in GenServer). This either means you forgot to add the "@impl true" annotation before the definition or that you are accidentally overriding this callback
+</code></pre></div></div>
+<p>아울러 해당 attribute 를 사용했을 때의 장점은 다음과 같다.</p>
 
 <ol>
-  <li>Server 생성
-    <ul>
-      <li><code>start_link/3</code>: 새로운 GenServer 프로세스를 시작하고 연결</li>
-      <li><code>init/1</code>: <code>start_link/3</code> 요청에 의해 GenServer가 시작될 때 호출되며, 초기 상태를 설정</li>
-    </ul>
-  </li>
-  <li>비동기 요청/응답
-    <ul>
-      <li><code>cast/2</code>: 비동기적 통신에 사용. client 는 server 에 메시지를 보내고 즉시 반환됨. 이 메소드는 서버의 <code>handle_cast/2</code> callback을 trigger.</li>
-      <li><code>handle_cast/2</code>: 비동기적 요청을 처리. 클라이언트는 응답을 기다리지 않음.</li>
-    </ul>
-  </li>
-  <li>동기 요청/응답
-    <ul>
-      <li>call/3<code></code>: 동기적 통신에 사용. client는 server에 요청을 보내고, server가 응답할 때까지 기다리며, server의 <code>handle_call/3</code>s callback을 trigger.</li>
-      <li><code>handle_call/3</code>: 동기적 요청을 처리하고 그 결과를 clientd에게 응답.</li>
-    </ul>
-  </li>
-  <li>Server 종료
-    <ul>
-      <li><code>stop/3</code>: <code>GenServer</code> 프로세스를 안전하게 종료하기 위해 사용. 이 함수는 종료 이유(ex.  'normal', 'shutdown', 'kill' 등)와 타임아웃(default : 5 sec)을 지정할 수 있으며, 서버의 <code>terminate/2</code>  callback을 trigger.</li>
-      <li><code>terminate/2</code>: server가 종료되기 전에 호출되는 callback <code>GenServer</code> 프로세스가 정상적으로 종료될 때 호출되며, 종료 전에 필요한 정리 작업(ex.종료되기 전에 상태를 저장하거나 열려 있는 리소스를 닫는 등의 작업 등)을 수행할 수 있습니다.</li>
-    </ul>
-  </li>
+  <li>명확성: <code>@impl true</code>는 해당 함수가 특정 행위(behaviour)의 callback 함수임을 명확히 함. 따라서 가독성이 높아질 수 있음.</li>
+  <li>컴파일러 검증: <code>@impl true</code>를 사용하면 Elixir compiler가 해당 함수가 실제로 지정된 행위의 callback 함수인지를 검증함으로 써, 잘못된 callback 함수일 경우, compile 단계에서 이를 감지할 수 있어짐</li>
+  <li>문서화: <code>@impl true</code>를 사용하면 ExDoc과 같은 문서화 도구에서 해당 함수가 콜백 함수임을 자동으로 식별하여 문서화할 수 있음.</li>
+  <li>유지보수 용이성: 코드의 유지보수를 담당하는 다른 개발자들에게 해당 함수의 역할과 중요성을 쉽게 전달할 수 있음.</li> 
 </ol>
 
-<p><strong>예제 코드</strong></p>
+<p><strong>예시</strong></p>
 
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">defmodule</span> <span class="no">ShopingList</span> <span class="k">do</span>
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">ImplAttribute</span> <span class="k">do</span>
   <span class="kn">use</span> <span class="no">GenServer</span>
-
-  <span class="c1">#  ------ client API --------</span>
-
-  <span class="k">def</span> <span class="n">start_link</span><span class="p">()</span> <span class="k">do</span>
-    <span class="no">GenServer</span><span class="o">.</span><span class="n">start_link</span><span class="p">(</span><span class="bp">__MODULE__</span><span class="p">,</span> <span class="p">[])</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="n">add</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span> <span class="k">do</span>
-    <span class="no">GenServer</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="n">view</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span> <span class="k">do</span>
-    <span class="no">GenServer</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="ss">:view</span><span class="p">)</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="n">remove</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span> <span class="k">do</span>
-    <span class="no">GenServer</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="p">{</span><span class="ss">:remove</span><span class="p">,</span> <span class="n">item</span><span class="p">})</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="n">stop</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span> <span class="k">do</span>
-    <span class="no">GenServer</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="ss">:normal</span><span class="p">,</span> <span class="ss">:infinity</span><span class="p">)</span>
-  <span class="k">end</span>
-
-  <span class="c1"># ----- server callback -----</span>
-
+  <span class="o">...</span> <span class="o">...</span>
+  <span class="nv">@impl</span> <span class="no">true</span>
   <span class="k">def</span> <span class="n">init</span><span class="p">(</span><span class="n">list</span><span class="p">)</span> <span class="k">do</span>
     <span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="n">list</span><span class="p">}</span>
   <span class="k">end</span>
 
-  <span class="k">def</span> <span class="n">handle_cast</span><span class="p">({</span><span class="ss">:remove</span><span class="p">,</span> <span class="n">item</span><span class="p">},</span> <span class="n">list</span><span class="p">)</span> <span class="k">do</span>
-    <span class="n">updated_list</span> <span class="o">=</span> <span class="no">Enum</span><span class="o">.</span><span class="n">reject</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="k">fn</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">i</span> <span class="o">==</span> <span class="n">item</span> <span class="k">end</span><span class="p">)</span>
-    <span class="p">{</span><span class="ss">:noreply</span><span class="p">,</span> <span class="n">updated_list</span><span class="p">}</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="n">handle_cast</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">list</span><span class="p">)</span> <span class="k">do</span>
-    <span class="n">updated_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">|</span><span class="n">list</span><span class="p">]</span>
-    <span class="p">{</span><span class="ss">:noreply</span><span class="p">,</span> <span class="n">updated_list</span><span class="p">}</span>
-  <span class="k">end</span>
-
+  <span class="nv">@impl</span> <span class="no">true</span>
   <span class="k">def</span> <span class="n">handle_call</span><span class="p">(</span><span class="ss">:view</span><span class="p">,</span> <span class="n">_from</span><span class="p">,</span> <span class="n">list</span><span class="p">)</span> <span class="k">do</span>
     <span class="p">{</span><span class="ss">:reply</span><span class="p">,</span> <span class="n">list</span><span class="p">,</span> <span class="n">list</span><span class="p">}</span>
   <span class="k">end</span>
+  <span class="o">...</span> <span class="o">...</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<p>만약 callback 이 아닌 일반 함수에 해당 attribute 를 사용할 경우 다음과 같은 warning 이 발생한다.</p>
 
-  <span class="k">def</span> <span class="n">terminate</span><span class="p">(</span><span class="n">_reason</span><span class="p">,</span> <span class="n">list</span><span class="p">)</span> <span class="k">do</span>
-    <span class="no">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">"This Server is termniated."</span><span class="p">)</span>
-    <span class="no">IO</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">list</span><span class="p">)</span>
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">ImplAttribute</span> <span class="k">do</span>
+  <span class="kn">use</span> <span class="no">GenServer</span>
+  <span class="o">...</span> <span class="o">...</span>
+  <span class="nv">@impl</span> <span class="no">true</span>
+  <span class="k">def</span> <span class="n">start_link</span><span class="p">()</span> <span class="k">do</span>
+    <span class="no">GenServer</span><span class="o">.</span><span class="n">start_link</span><span class="p">(</span><span class="bp">__MODULE__</span><span class="p">,</span> <span class="p">[])</span>
+  <span class="k">end</span>
+
+  <span class="nv">@impl</span> <span class="no">true</span>
+  <span class="k">def</span> <span class="n">view</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span> <span class="k">do</span>
+    <span class="no">GenServer</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="ss">:view</span><span class="p">)</span>
+  <span class="k">end</span>
+  <span class="o">...</span> <span class="o">...</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>got "@impl true" for function add/2 but no behaviour specifies such callback. The known callbacks are: ... ...
+</code></pre></div></div>
+<h3>그렇다면 다른 @impl attribute 는?</h3>
+
+<p><code>@impl Module</code>: 여기서 Module은 특정 행위를 나타내는 모듈. 이 형식은 함수가 특정 행위의 일부임을 더 명시적으로 나타내는 데 사용된다. 예를 들어, <code>@impl GenServer</code>는 해당 함수가 <code>GenServer</code> 행위의 callback임을 나타낸다.</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">MyGenServer</span> <span class="k">do</span>
+  <span class="kn">use</span> <span class="no">GenServer</span>
+
+  <span class="c1"># Client API</span>
+
+  <span class="k">def</span> <span class="n">start_link</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="k">do</span>
+    <span class="no">GenServer</span><span class="o">.</span><span class="n">start_link</span><span class="p">(</span><span class="bp">__MODULE__</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="ss">name:</span> <span class="bp">__MODULE__</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="n">add</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="k">do</span>
+    <span class="no">GenServer</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="p">{</span><span class="ss">:add</span><span class="p">,</span> <span class="n">value</span><span class="p">})</span>
+  <span class="k">end</span>
+
+  <span class="c1"># Server Callbacks</span>
+
+  <span class="nv">@impl</span> <span class="no">GenServer</span>
+  <span class="k">def</span> <span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="k">do</span>
+    <span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="n">args</span><span class="p">}</span>
+  <span class="k">end</span>
+
+  <span class="nv">@impl</span> <span class="no">GenServer</span>
+  <span class="k">def</span> <span class="n">handle_cast</span><span class="p">({</span><span class="ss">:add</span><span class="p">,</span> <span class="n">value</span><span class="p">},</span> <span class="n">state</span><span class="p">)</span> <span class="k">do</span>
+    <span class="n">new_state</span> <span class="o">=</span> <span class="n">state</span> <span class="o">+</span> <span class="n">value</span>
+    <span class="p">{</span><span class="ss">:noreply</span><span class="p">,</span> <span class="n">new_state</span><span class="p">}</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </code></pre></div></div>
 
-<p><strong>실행 결과</strong></p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iex(1)&gt; {:ok, pid} = ShoppingList.start_link()
-{:ok, #PID&lt;0.422.0&gt;}
-</code></pre></div></div>
-<p><code>ShoppingList.start_link()</code> 를 통해 server process 를 생성한다. server 측 <code>init(list)</code> 함수 callback 이 실행되어 server process 를 초기화 하고 그 결과 및 pid 를 client 에게 반환한다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iex(2)&gt; ShoppingList.add(pid, "eggs") 
-:ok
-iex(3)&gt; ShoppingList.add(pid, "milk") 
-:ok
-iex(4)&gt; ShoppingList.add(pid, "cheese") 
-:ok
-iex(5)&gt; ShoppingList.view(pid) 
-["cheese", "milk", "eggs"]
-</code></pre></div></div>
-
-<p><code>ShoppingList.add(pid, "eggs")</code> 등의 함수를 통해 server process 비동기 작업을 요청한다. <code>:ok</code> 응답은 server 작업의 완료와 관계없이 반환된다. <code>handle_cast(item, list)</code>가 작업을 하여 server 자체 list 에 client 가 보낸 메세지를 list 에 추가한다.</p>
-<p><code>ShoppingList.view(pid)</code> 를 통해 동기화된 작업을 요청한다. 해당 요청으로 <code>handle_call(:view, _from, list)</code> callback 이 trigger 된다. 해당 callback 반환값 튜플<code>{:reply, list, list}</code>의 각 요소는 다음의 의미를 가진다.</p>
-<ol>
-  <li><code>:reply</code>: client 에게 동기적으로 응답을 보내야 함을 의미</li>
-  <li><code>list</code>: client 에게 보낼 실제 응답 data</li>
-  <li><code>list</code>: 해당 callback 작업 이후 server 가 가질 data</li>
-</ol>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iex(6)&gt; ShoppingList.remove(pid, "cheese") 
-:ok
-iex(7)&gt; ShoppingList.view(pid)
-["milk", "eggs"]
-</code></pre></div></div>
-
-<p><code>ShoppingList.remove(pid, "cheese")</code> 의 경우 앞에서 사용한  <code>ShoppingList.add(pid, "eggs")</code> 와 동일하게 비동기 작업을 요청하지만 함수 다형성(polymorphism) 을 적용하여 별도로 정의된 <code>handle_cast({:remove, item}, list)</code> callback 을 trigger 한다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iex(8)&gt; ShoppingList.stop(pid) 
-This Server is termniated.
-["milk", "eggs"]
-:ok
-</code></pre></div></div>
-
-<p>server process 을 종료 요청을 보내고 triggering 된 <code>terminate(_reason, list)</code> 작업을 진행하고 해당 process 는 종료된다.</p>
-
-<h3><code>Phoenix PubSub</code> 과 <code>GenServer</code></h3>
-
-<p> <code>Phoenix PubSub</code>은 내부적으로 <code>GenServer</code>를 사용하여 구축된다. <code>Phoenix PubSub</code>은 Elixir 어플리케이션 내에서 프로세스 간의 메시징을 쉽게 구현할 수 있도록 해주는 시스템입니다. 이는 주로 Phoenix framework 내에서 실시간 웹 기능을 구현하는 데 사용되며, 웹소켓을 통해 client-server 간의 메시지를 효율적으로 교환할 수 있게 해준다. 그 주요 역할은 다음과 같다.</p>
-
-<ul>
-  <li>상태 관리: 각 PubSub 서버는 구독 정보와 같은 상태를 유지 관리.</li>
-  <li>메시지 처리: 발행된 메시지는 <code>GenServer</code> 프로세스를 통해 구독자들에게 전달.</li>
-  <li>동기화 및 제어: <code>GenServer</code> callback을 통해 메시지 전송 및 구독 관리를 제어.</li>
-</ul>
-
-<p><br />
-<a href="https://elixircasts.io/intro-to-genserver">참고 문헌 - ElixirCasts - #12: Intro to GenServer</a></p>
+<p><code>@impl GenServer</code> attribute는 <code>init/1</code> 및 <code>handle_cast/2</code> 함수가 <code>GenServer</code>의 callback임을 명시</p>
 
         <aside class="sidebar inline" id="post-end">
     
@@ -515,9 +452,9 @@ This Server is termniated.
             
                 <li><a href="./tag.html?tag=elixir" class="tag inline">elixir</a></li>
             
-                <li><a href="./tag.html?tag=genserver" class="tag inline">genserver</a></li>
+                <li><a href="./tag.html?tag=impl" class="tag inline">impl</a></li>
             
-                <li><a href="./tag.html?tag=pubsub" class="tag inline">pubsub</a></li>
+                <li><a href="./tag.html?tag=attribute" class="tag inline">attribute</a></li>
             
     
         </ul>
@@ -526,11 +463,11 @@ This Server is termniated.
     <div class="share-hover inline">
         <span class="share-button inline"><svg fill="currentColor" width="25" height="25" class="inline"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>
         <div class="share-icons inline" id="post-end-icons">
-            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=Elixir GenServer&url=http://localhost:4000/genserver.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=impl attribute&url=http://localhost:4000/genserver.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
             <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/genserver.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/genserver.html&title=Elixir GenServer" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/genserver.html&title=Elixir GenServer&summary=Elixir GenServer&source=http://localhost:4000/genserver.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a class="email" href="mailto:?subject=Elixir GenServer&body=Elixir GenServer%0A%0ARead more here: http://localhost:4000/genserver.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/genserver.html&title=impl attribute" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/genserver.html&title=impl attribute&summary=impl attribute&source=http://localhost:4000/genserver.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a class="email" href="mailto:?subject=impl attribute&body=impl attribute%0A%0ARead more here: http://localhost:4000/genserver.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
             <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="inline" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>
         </div>
     </div>
@@ -583,7 +520,38 @@ This Server is termniated.
           
           
 
-          <a href="./genserver.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general13.jpg') center no-repeat; background-size: cover;">
+          <a href="./genserver.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general14.jpg') center no-repeat; background-size: cover;">
+            <div class="recent-item-title">
+              <span>impl attribute</span>
+              
+
+  <span class = "recent-item-meta">
+  
+  
+  
+  
+    
+    
+    <p class="page_meta-readtime">
+      
+        1 minute read
+      
+    </p>
+  
+  
+  </span>
+
+            </div>
+          </a>
+        </div>
+      
+    
+      
+        <div class="recent-item">
+          
+          
+
+          <a href="./impl_attribute.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general13.jpg') center no-repeat; background-size: cover;">
             <div class="recent-item-title">
               <span>Elixir GenServer</span>
               
@@ -660,37 +628,6 @@ This Server is termniated.
     <p class="page_meta-readtime">
       
         2 minute read
-      
-    </p>
-  
-  
-  </span>
-
-            </div>
-          </a>
-        </div>
-      
-    
-      
-        <div class="recent-item">
-          
-          
-
-          <a href="./immutable-data-type.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general10.jpg') center no-repeat; background-size: cover;">
-            <div class="recent-item-title">
-              <span>Elixir 의 Map, Struct 등은 왜 immutable data types 인가?</span>
-              
-
-  <span class = "recent-item-meta">
-  
-  
-  
-  
-    
-    
-    <p class="page_meta-readtime">
-      
-        1 minute read
       
     </p>
   

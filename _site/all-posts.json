@@ -3,6 +3,8 @@
     
     "./genserver.html",
     
+    "./impl_attribute.html",
+    
     "./changeset.html",
     
     "./lazy-collection.html",

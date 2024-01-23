@@ -2,9 +2,9 @@
 layout: post
 read_time: true
 show_date: true
-title:  @impl attribute
+title:  impl attribute
 date:   2024-01-23 15:32:20 +0900
-description: @impl attribute
+description: impl attribute
 img: posts/general/post_general14.jpg
 tags: [elixir, impl, attribute]
 author: Yong gon Yun
@@ -66,7 +66,8 @@ got "@impl true" for function add/2 but no behaviour specifies such callback. Th
 ```
 <h3>그렇다면 다른 @impl attribute 는?</h3>
 
-<p><code>@impl Module</code>: 여기서 Module은 특정 행위를 나타내는 모듈. 이 형식은 함수가 특정 행위의 일부임을 더 명시적으로 나타내는 데 사용된다. 예를 들어, <code>@impl GenServer</code>는 해당 함수가 <code>GenServer 행위의 callback임을 나타낸다.</p>
+<p><code>@impl Module</code>: 여기서 Module은 특정 행위를 나타내는 모듈. 이 형식은 함수가 특정 행위의 일부임을 더 명시적으로 나타내는 데 사용된다. 예를 들어, <code>@impl GenServer</code>는 해당 함수가 <code>GenServer</code> 행위의 callback임을 나타낸다.</p>
+
 
 ```elixir
 defmodule MyGenServer do
