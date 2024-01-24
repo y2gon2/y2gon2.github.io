@@ -251,7 +251,7 @@
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./genserver.html">impl attribute</a>
+					<a class="post-list-title" href="./impl_attribute.html">impl attribute</a>
 					
 
   <span class = "post-card-meta">
@@ -283,7 +283,7 @@
   </span>
 
 					<div class="post-excerpt">
-						<p>elixir code 를 작성할 때, behaviour 나 macro 의 callback 의 구현체를 정의하는 구조는 일반 함수와 동일하다. 이를 구별하기 위해 <code>@impl true</code>를 사용하는 것이 좋다. 사용하지 않을 경우, 작업에 문제가 발생하지는 않으나 IDE 나 complier 가 아래 내용의 warning 이 나타날 수 있다.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module attribute @impl was not set for function init/1 callback (specified in GenServer). This either means you forgot to add the "@impl true" annotation before the definition or that you are accidentally overriding this callback </code></pre></div></div> <p>아울러 해당 attribute 를 사용했을 때의 장점은 다음과 같다.</p> <ol> <li><strong>명확성</strong>: <code>@impl true</code>는 해당 함수가 특정 행위(behaviour)의...<a class="read-more" href="./genserver.html"> read more</a>
+						<p>elixir code 를 작성할 때, behaviour 나 macro 의 callback 의 구현체를 정의하는 구조는 일반 함수와 동일하다. 이를 구별하기 위해 <code>@impl true</code>를 사용하는 것이 좋다. 사용하지 않을 경우, 작업에 문제가 발생하지는 않으나 IDE 나 complier 가 아래 내용의 warning 이 나타날 수 있다.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module attribute @impl was not set for function init/1 callback (specified in GenServer). This either means you forgot to add the "@impl true" annotation before the definition or that you are accidentally overriding this callback </code></pre></div></div> <p>아울러 해당 attribute 를 사용했을 때의 장점은 다음과 같다.</p> <ol> <li><strong>명확성</strong>: <code>@impl true</code>는 해당 함수가 특정 행위(behaviour)의...<a class="read-more" href="./impl_attribute.html"> read more</a>
 					</div>
 				</div>
 			
@@ -488,6 +488,55 @@
 	</div>
 
 	
+	<div id="custom javascript" class="hidden tag-master">
+		<h1>custom javascript</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./custom-js-phoenix.html">Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-24T08:32:20+09:00">January 24, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        3 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Phoenix LiveView 를 사용하여 아래와 같이 버튼 클릭시 번갈아가며 버튼의 배경색과 내용이 바뀌는 toggle button 을 사용하고자 하였다. 그런데 기존의 Phoenix LiveView 제공 html tag 및 css 로 이를 생성할 수 없었으며, 따라서 자체적으로 JS 를 작성하여 기존 button 에 적용해야 하는 상황이다. 해당 과정에서 필요한 설정 및 <code>render/1</code>에 적용하기까지의 과정을 정리하고자 한다. </p> <center> <img src="assets\img\posts\toggle_button.png" width="300" /> </center> <h3>1. Node module 설치 및 관련 package 설치</h3> <p>(1) <code>package.json</code> 생성</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>assets npm init </code></pre></div></div> <p>만약 <code>package.json</code> 파일이 없다면, 새로 생성해야 한다. 이를 위해 <code>npm init</code> 명령어를 실행하여 새로운 <code>package.json</code> 파일을 생성할 수 있다....<a class="read-more" href="./custom-js-phoenix.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
 	<div id="database" class="hidden tag-master">
 		<h1>database</h1>
 		<div class="archive">
@@ -594,7 +643,7 @@
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./genserver.html">impl attribute</a>
+					<a class="post-list-title" href="./impl_attribute.html">impl attribute</a>
 					
 
   <span class = "post-card-meta">
@@ -626,14 +675,14 @@
   </span>
 
 					<div class="post-excerpt">
-						<p>elixir code 를 작성할 때, behaviour 나 macro 의 callback 의 구현체를 정의하는 구조는 일반 함수와 동일하다. 이를 구별하기 위해 <code>@impl true</code>를 사용하는 것이 좋다. 사용하지 않을 경우, 작업에 문제가 발생하지는 않으나 IDE 나 complier 가 아래 내용의 warning 이 나타날 수 있다.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module attribute @impl was not set for function init/1 callback (specified in GenServer). This either means you forgot to add the "@impl true" annotation before the definition or that you are accidentally overriding this callback </code></pre></div></div> <p>아울러 해당 attribute 를 사용했을 때의 장점은 다음과 같다.</p> <ol> <li><strong>명확성</strong>: <code>@impl true</code>는 해당 함수가 특정 행위(behaviour)의...<a class="read-more" href="./genserver.html"> read more</a>
+						<p>elixir code 를 작성할 때, behaviour 나 macro 의 callback 의 구현체를 정의하는 구조는 일반 함수와 동일하다. 이를 구별하기 위해 <code>@impl true</code>를 사용하는 것이 좋다. 사용하지 않을 경우, 작업에 문제가 발생하지는 않으나 IDE 나 complier 가 아래 내용의 warning 이 나타날 수 있다.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module attribute @impl was not set for function init/1 callback (specified in GenServer). This either means you forgot to add the "@impl true" annotation before the definition or that you are accidentally overriding this callback </code></pre></div></div> <p>아울러 해당 attribute 를 사용했을 때의 장점은 다음과 같다.</p> <ol> <li><strong>명확성</strong>: <code>@impl true</code>는 해당 함수가 특정 행위(behaviour)의...<a class="read-more" href="./impl_attribute.html"> read more</a>
 					</div>
 				</div>
 			
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./impl_attribute.html">Elixir GenServer</a>
+					<a class="post-list-title" href="./genserver.html">Elixir GenServer</a>
 					
 
   <span class = "post-card-meta">
@@ -665,7 +714,7 @@
   </span>
 
 					<div class="post-excerpt">
-						<p>Elixir의 <code>GenServer</code>는 OTP(Open Telecom Platform) behaviour 중 하나로, 서버 프로세스를 구현하기 위한 추상화를 제공한다. GenServer는 클라이언트-서버 관계에서 서버 부분을 담당하며, 상태를 유지하고, 요청을 동기적 또는 비동기적으로 처리할 수 있다. 이는 Elixir/Erlang 시스템에서 병렬처리와 상태 관리를 용이하게 하는 강력한 도구이다.</p> <p><code>GenServer</code> 의 다양한 macro callback 중 주요한 것을을 사용하여 통신 moudule 을 구현하고자 한다. 해당 module 의 구조는 다음과 같다.</p> <center> <img src="assets\img\posts\genserver.png" width="500" height="" /> </center> <p>module 내 구성은 크게 client 와 server 구현 부분으로 구분 된다. client 는 경우, 해당 module 이 실행되는 application 자체 또는 일부 process 에서 실행될 code 이며, 해당 code 를 통해 server process 를...<a class="read-more" href="./impl_attribute.html"> read more</a>
+						<p>Elixir의 <code>GenServer</code>는 OTP(Open Telecom Platform) behaviour 중 하나로, 서버 프로세스를 구현하기 위한 추상화를 제공한다. GenServer는 클라이언트-서버 관계에서 서버 부분을 담당하며, 상태를 유지하고, 요청을 동기적 또는 비동기적으로 처리할 수 있다. 이는 Elixir/Erlang 시스템에서 병렬처리와 상태 관리를 용이하게 하는 강력한 도구이다.</p> <p><code>GenServer</code> 의 다양한 macro callback 중 주요한 것을을 사용하여 통신 moudule 을 구현하고자 한다. 해당 module 의 구조는 다음과 같다.</p> <center> <img src="assets\img\posts\genserver.png" width="500" height="" /> </center> <p>module 내 구성은 크게 client 와 server 구현 부분으로 구분 된다. client 는 경우, 해당 module 이 실행되는 application 자체 또는 일부 process 에서 실행될 code 이며, 해당 code 를 통해 server process 를...<a class="read-more" href="./genserver.html"> read more</a>
 					</div>
 				</div>
 			
@@ -770,7 +819,7 @@
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./impl_attribute.html">Elixir GenServer</a>
+					<a class="post-list-title" href="./genserver.html">Elixir GenServer</a>
 					
 
   <span class = "post-card-meta">
@@ -802,7 +851,7 @@
   </span>
 
 					<div class="post-excerpt">
-						<p>Elixir의 <code>GenServer</code>는 OTP(Open Telecom Platform) behaviour 중 하나로, 서버 프로세스를 구현하기 위한 추상화를 제공한다. GenServer는 클라이언트-서버 관계에서 서버 부분을 담당하며, 상태를 유지하고, 요청을 동기적 또는 비동기적으로 처리할 수 있다. 이는 Elixir/Erlang 시스템에서 병렬처리와 상태 관리를 용이하게 하는 강력한 도구이다.</p> <p><code>GenServer</code> 의 다양한 macro callback 중 주요한 것을을 사용하여 통신 moudule 을 구현하고자 한다. 해당 module 의 구조는 다음과 같다.</p> <center> <img src="assets\img\posts\genserver.png" width="500" height="" /> </center> <p>module 내 구성은 크게 client 와 server 구현 부분으로 구분 된다. client 는 경우, 해당 module 이 실행되는 application 자체 또는 일부 process 에서 실행될 code 이며, 해당 code 를 통해 server process 를...<a class="read-more" href="./impl_attribute.html"> read more</a>
+						<p>Elixir의 <code>GenServer</code>는 OTP(Open Telecom Platform) behaviour 중 하나로, 서버 프로세스를 구현하기 위한 추상화를 제공한다. GenServer는 클라이언트-서버 관계에서 서버 부분을 담당하며, 상태를 유지하고, 요청을 동기적 또는 비동기적으로 처리할 수 있다. 이는 Elixir/Erlang 시스템에서 병렬처리와 상태 관리를 용이하게 하는 강력한 도구이다.</p> <p><code>GenServer</code> 의 다양한 macro callback 중 주요한 것을을 사용하여 통신 moudule 을 구현하고자 한다. 해당 module 의 구조는 다음과 같다.</p> <center> <img src="assets\img\posts\genserver.png" width="500" height="" /> </center> <p>module 내 구성은 크게 client 와 server 구현 부분으로 구분 된다. client 는 경우, 해당 module 이 실행되는 application 자체 또는 일부 process 에서 실행될 code 이며, 해당 code 를 통해 server process 를...<a class="read-more" href="./genserver.html"> read more</a>
 					</div>
 				</div>
 			
@@ -868,7 +917,7 @@
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./genserver.html">impl attribute</a>
+					<a class="post-list-title" href="./impl_attribute.html">impl attribute</a>
 					
 
   <span class = "post-card-meta">
@@ -900,7 +949,7 @@
   </span>
 
 					<div class="post-excerpt">
-						<p>elixir code 를 작성할 때, behaviour 나 macro 의 callback 의 구현체를 정의하는 구조는 일반 함수와 동일하다. 이를 구별하기 위해 <code>@impl true</code>를 사용하는 것이 좋다. 사용하지 않을 경우, 작업에 문제가 발생하지는 않으나 IDE 나 complier 가 아래 내용의 warning 이 나타날 수 있다.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module attribute @impl was not set for function init/1 callback (specified in GenServer). This either means you forgot to add the "@impl true" annotation before the definition or that you are accidentally overriding this callback </code></pre></div></div> <p>아울러 해당 attribute 를 사용했을 때의 장점은 다음과 같다.</p> <ol> <li><strong>명확성</strong>: <code>@impl true</code>는 해당 함수가 특정 행위(behaviour)의...<a class="read-more" href="./genserver.html"> read more</a>
+						<p>elixir code 를 작성할 때, behaviour 나 macro 의 callback 의 구현체를 정의하는 구조는 일반 함수와 동일하다. 이를 구별하기 위해 <code>@impl true</code>를 사용하는 것이 좋다. 사용하지 않을 경우, 작업에 문제가 발생하지는 않으나 IDE 나 complier 가 아래 내용의 warning 이 나타날 수 있다.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module attribute @impl was not set for function init/1 callback (specified in GenServer). This either means you forgot to add the "@impl true" annotation before the definition or that you are accidentally overriding this callback </code></pre></div></div> <p>아울러 해당 attribute 를 사용했을 때의 장점은 다음과 같다.</p> <ol> <li><strong>명확성</strong>: <code>@impl true</code>는 해당 함수가 특정 행위(behaviour)의...<a class="read-more" href="./impl_attribute.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1054,6 +1103,45 @@
 			
 
 				<div class="post">
+					<a class="post-list-title" href="./custom-js-phoenix.html">Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-24T08:32:20+09:00">January 24, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        3 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Phoenix LiveView 를 사용하여 아래와 같이 버튼 클릭시 번갈아가며 버튼의 배경색과 내용이 바뀌는 toggle button 을 사용하고자 하였다. 그런데 기존의 Phoenix LiveView 제공 html tag 및 css 로 이를 생성할 수 없었으며, 따라서 자체적으로 JS 를 작성하여 기존 button 에 적용해야 하는 상황이다. 해당 과정에서 필요한 설정 및 <code>render/1</code>에 적용하기까지의 과정을 정리하고자 한다. </p> <center> <img src="assets\img\posts\toggle_button.png" width="300" /> </center> <h3>1. Node module 설치 및 관련 package 설치</h3> <p>(1) <code>package.json</code> 생성</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>assets npm init </code></pre></div></div> <p>만약 <code>package.json</code> 파일이 없다면, 새로 생성해야 한다. 이를 위해 <code>npm init</code> 명령어를 실행하여 새로운 <code>package.json</code> 파일을 생성할 수 있다....<a class="read-more" href="./custom-js-phoenix.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
 					<a class="post-list-title" href="./phoenix-slot.html">slot attribute 사용</a>
 					
 
@@ -1129,45 +1217,6 @@
 					</div>
 				</div>
 			
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./phoenix-presence.html">Phoenix Presence (by ChatGPT)</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2023-12-26T10:32:20+09:00">December 26, 2023</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        2 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<p>Phoenix Presence는 Elixir 언어를 사용하는 Phoenix 프레임워크의 한 부분으로, 실시간으로 사용자의 연결 상태를 추적하고 관리하는 기능을 제공합니다. 이 기능은 주로 채팅 애플리케이션, 게임, 라이브 이벤트 등에서 유용하게 사용됩니다.</p> <p>Phoenix Presence의 핵심은 분산 시스템에서도 사용자의 현재 상태를 효과적으로 관리할 수 있다는 점입니다. 이를 위해, Phoenix는 CRDT(Conflict-Free Replicated Data Type)라는 데이터 타입을 사용하여 네트워크의 다양한 노드 간에 사용자 상태 정보를 동기화합니다. 이를 통해 서버 간의 일관성을 유지하면서도, 네트워크 분할이나 다른 이슈들이 발생해도 사용자의 상태를 정확하게 추적할 수 있습니다.</p> <p>Phoenix Presence를 사용하면 어떤 사용자가 온라인인지, 어느 채널에 있는지 등의 정보를 실시간으로 확인할 수 있습니다. 또한, 이 기능은 Elixir의 가벼운 프로세스와 메시지 전달 시스템을...<a class="read-more" href="./phoenix-presence.html"> read more</a>
-					</div>
-				</div>
-			
 			</div>
 		</div>
 	</div>
@@ -1214,6 +1263,55 @@
 
 					<div class="post-excerpt">
 						<p>Elixir 에서 Map 은 immutable type 이다. 따라서 <code>Map.delete/2</code>, <code>Map.put/3</code>, <code>Map.update/4</code> 등과 같은 함수는 실제로 기존 map data 를 수정하는 것이 아니라, 수정되된 값으로 새로운 map data 를 만들고 이것을 재할당 하는 것이다.</p> <p>Struct 의 경우도, 한번 생성된 instance 의 내부 field 값을 변경하고자 하는 경우, 이는 수정이 아닌, 새로운 data 생성 및 이를 재할당 하는 것이다. 그런데 list, map 과 같이 많은 데이터를 포함하고 있는 경우, 그중 하나의 값이 바뀔 때마다 매번 모든 부분에 대한 재할당을 진행한다면, 메모리 사용이나 성능상 단점이 매 커보인다.</p> <p>그렇다면, immutable data type 으로 처리할 때 어떤 이점이 있을 수 있으며, 예상되는 문제점은 어떻게 해결할까?</p>...<a class="read-more" href="./immutable-data-type.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
+	<div id="node.js" class="hidden tag-master">
+		<h1>node.js</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./custom-js-phoenix.html">Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-24T08:32:20+09:00">January 24, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        3 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Phoenix LiveView 를 사용하여 아래와 같이 버튼 클릭시 번갈아가며 버튼의 배경색과 내용이 바뀌는 toggle button 을 사용하고자 하였다. 그런데 기존의 Phoenix LiveView 제공 html tag 및 css 로 이를 생성할 수 없었으며, 따라서 자체적으로 JS 를 작성하여 기존 button 에 적용해야 하는 상황이다. 해당 과정에서 필요한 설정 및 <code>render/1</code>에 적용하기까지의 과정을 정리하고자 한다. </p> <center> <img src="assets\img\posts\toggle_button.png" width="300" /> </center> <h3>1. Node module 설치 및 관련 package 설치</h3> <p>(1) <code>package.json</code> 생성</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>assets npm init </code></pre></div></div> <p>만약 <code>package.json</code> 파일이 없다면, 새로 생성해야 한다. 이를 위해 <code>npm init</code> 명령어를 실행하여 새로운 <code>package.json</code> 파일을 생성할 수 있다....<a class="read-more" href="./custom-js-phoenix.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1377,6 +1475,45 @@
 			
 
 				<div class="post">
+					<a class="post-list-title" href="./custom-js-phoenix.html">Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-24T08:32:20+09:00">January 24, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        3 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Phoenix LiveView 를 사용하여 아래와 같이 버튼 클릭시 번갈아가며 버튼의 배경색과 내용이 바뀌는 toggle button 을 사용하고자 하였다. 그런데 기존의 Phoenix LiveView 제공 html tag 및 css 로 이를 생성할 수 없었으며, 따라서 자체적으로 JS 를 작성하여 기존 button 에 적용해야 하는 상황이다. 해당 과정에서 필요한 설정 및 <code>render/1</code>에 적용하기까지의 과정을 정리하고자 한다. </p> <center> <img src="assets\img\posts\toggle_button.png" width="300" /> </center> <h3>1. Node module 설치 및 관련 package 설치</h3> <p>(1) <code>package.json</code> 생성</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>assets npm init </code></pre></div></div> <p>만약 <code>package.json</code> 파일이 없다면, 새로 생성해야 한다. 이를 위해 <code>npm init</code> 명령어를 실행하여 새로운 <code>package.json</code> 파일을 생성할 수 있다....<a class="read-more" href="./custom-js-phoenix.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
 					<a class="post-list-title" href="./phoenix-slot.html">slot attribute 사용</a>
 					
 
@@ -1449,45 +1586,6 @@
 
 					<div class="post-excerpt">
 						<p>elixir 에서의 구조체는 상속, 다형성 등이 지원되지 않고 한번 정의되면 구조체 내부 field 값을 변경할 수 없는, 내부에 field 가 존재하는 사용자 정의 type 이며, 해당 구조체 type 에 실제 data 를 가지게 하고 이를 변수 매칭 시킨것이 elixir instance 이다. </p> <h3>유사점</h3> <ol> <li>데이터 캡슐화: Elixir의 구조체와 Java나 Python의 인스턴스 모두 데이터를 캡슐화. 여러 데이터를 하나의 구조로 묶어 관리할 수 있다.</li><br /> <li>필드 정의: 두 언어에서는 자료구조에 필드(데이터 요소)를 정의할 수 있으며, 이러한 필드는 각각의 자료구조에 속한 정보를 나타냄.</li><br /> <li>타입 안정성: Elixir의 구조체와 Java의 객체는 둘 다 특정 타입에 속하는 데이터를 담는데, 이는 데이터 타입에 대한 안정성과 예측...<a class="read-more" href="./instance-with-elixir.html"> read more</a>
-					</div>
-				</div>
-			
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./phoenix-presence.html">Phoenix Presence (by ChatGPT)</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2023-12-26T10:32:20+09:00">December 26, 2023</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        2 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<p>Phoenix Presence는 Elixir 언어를 사용하는 Phoenix 프레임워크의 한 부분으로, 실시간으로 사용자의 연결 상태를 추적하고 관리하는 기능을 제공합니다. 이 기능은 주로 채팅 애플리케이션, 게임, 라이브 이벤트 등에서 유용하게 사용됩니다.</p> <p>Phoenix Presence의 핵심은 분산 시스템에서도 사용자의 현재 상태를 효과적으로 관리할 수 있다는 점입니다. 이를 위해, Phoenix는 CRDT(Conflict-Free Replicated Data Type)라는 데이터 타입을 사용하여 네트워크의 다양한 노드 간에 사용자 상태 정보를 동기화합니다. 이를 통해 서버 간의 일관성을 유지하면서도, 네트워크 분할이나 다른 이슈들이 발생해도 사용자의 상태를 정확하게 추적할 수 있습니다.</p> <p>Phoenix Presence를 사용하면 어떤 사용자가 온라인인지, 어느 채널에 있는지 등의 정보를 실시간으로 확인할 수 있습니다. 또한, 이 기능은 Elixir의 가벼운 프로세스와 메시지 전달 시스템을...<a class="read-more" href="./phoenix-presence.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1651,7 +1749,7 @@
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./impl_attribute.html">Elixir GenServer</a>
+					<a class="post-list-title" href="./genserver.html">Elixir GenServer</a>
 					
 
   <span class = "post-card-meta">
@@ -1683,7 +1781,7 @@
   </span>
 
 					<div class="post-excerpt">
-						<p>Elixir의 <code>GenServer</code>는 OTP(Open Telecom Platform) behaviour 중 하나로, 서버 프로세스를 구현하기 위한 추상화를 제공한다. GenServer는 클라이언트-서버 관계에서 서버 부분을 담당하며, 상태를 유지하고, 요청을 동기적 또는 비동기적으로 처리할 수 있다. 이는 Elixir/Erlang 시스템에서 병렬처리와 상태 관리를 용이하게 하는 강력한 도구이다.</p> <p><code>GenServer</code> 의 다양한 macro callback 중 주요한 것을을 사용하여 통신 moudule 을 구현하고자 한다. 해당 module 의 구조는 다음과 같다.</p> <center> <img src="assets\img\posts\genserver.png" width="500" height="" /> </center> <p>module 내 구성은 크게 client 와 server 구현 부분으로 구분 된다. client 는 경우, 해당 module 이 실행되는 application 자체 또는 일부 process 에서 실행될 code 이며, 해당 code 를 통해 server process 를...<a class="read-more" href="./impl_attribute.html"> read more</a>
+						<p>Elixir의 <code>GenServer</code>는 OTP(Open Telecom Platform) behaviour 중 하나로, 서버 프로세스를 구현하기 위한 추상화를 제공한다. GenServer는 클라이언트-서버 관계에서 서버 부분을 담당하며, 상태를 유지하고, 요청을 동기적 또는 비동기적으로 처리할 수 있다. 이는 Elixir/Erlang 시스템에서 병렬처리와 상태 관리를 용이하게 하는 강력한 도구이다.</p> <p><code>GenServer</code> 의 다양한 macro callback 중 주요한 것을을 사용하여 통신 moudule 을 구현하고자 한다. 해당 module 의 구조는 다음과 같다.</p> <center> <img src="assets\img\posts\genserver.png" width="500" height="" /> </center> <p>module 내 구성은 크게 client 와 server 구현 부분으로 구분 된다. client 는 경우, 해당 module 이 실행되는 application 자체 또는 일부 process 에서 실행될 code 이며, 해당 code 를 통해 server process 를...<a class="read-more" href="./genserver.html"> read more</a>
 					</div>
 				</div>
 			
@@ -2001,6 +2099,9 @@
                 <li><a href="./tag.html?tag=complex+query" class="tag">complex query <span>(1)</span></a></li>
             
                 
+                <li><a href="./tag.html?tag=custom+javascript" class="tag">custom javascript <span>(1)</span></a></li>
+            
+                
                 <li><a href="./tag.html?tag=database" class="tag">database <span>(1)</span></a></li>
             
                 
@@ -2028,10 +2129,13 @@
                 <li><a href="./tag.html?tag=lazy+collection" class="tag">lazy collection <span>(1)</span></a></li>
             
                 
-                <li><a href="./tag.html?tag=liveview" class="tag">liveview <span>(6)</span></a></li>
+                <li><a href="./tag.html?tag=liveview" class="tag">liveview <span>(7)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=map" class="tag">map <span>(1)</span></a></li>
+            
+                
+                <li><a href="./tag.html?tag=node.js" class="tag">node.js <span>(1)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=oop" class="tag">oop <span>(1)</span></a></li>
@@ -2043,7 +2147,7 @@
                 <li><a href="./tag.html?tag=overloading" class="tag">overloading <span>(1)</span></a></li>
             
                 
-                <li><a href="./tag.html?tag=phoenix" class="tag">phoenix <span>(6)</span></a></li>
+                <li><a href="./tag.html?tag=phoenix" class="tag">phoenix <span>(7)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=phoenix+presence" class="tag">phoenix presence <span>(1)</span></a></li>

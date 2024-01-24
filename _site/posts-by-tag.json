@@ -6,7 +6,7 @@
   "tag" : "attribute",
   "posts" : [
       
-      "./genserver.html"
+      "./impl_attribute.html"
       
     ]
   } ,
@@ -53,6 +53,16 @@
     
       
   {
+  "tag" : "custom javascript",
+  "posts" : [
+      
+      "./custom-js-phoenix.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "database",
   "posts" : [
       
@@ -76,9 +86,9 @@
   "tag" : "elixir",
   "posts" : [
       
-      "./genserver.html",
-      
       "./impl_attribute.html",
+      
+      "./genserver.html",
       
       "./lazy-collection.html",
       
@@ -110,7 +120,7 @@
   "tag" : "genserver",
   "posts" : [
       
-      "./impl_attribute.html"
+      "./genserver.html"
       
     ]
   } ,
@@ -130,7 +140,7 @@
   "tag" : "impl",
   "posts" : [
       
-      "./genserver.html"
+      "./impl_attribute.html"
       
     ]
   } ,
@@ -162,6 +172,8 @@
   "tag" : "liveview",
   "posts" : [
       
+      "./custom-js-phoenix.html",
+      
       "./phoenix-slot.html",
       
       "./instance-with-elixir.html",
@@ -183,6 +195,16 @@
   "posts" : [
       
       "./immutable-data-type.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "node.js",
+  "posts" : [
+      
+      "./custom-js-phoenix.html"
       
     ]
   } ,
@@ -221,6 +243,8 @@
   {
   "tag" : "phoenix",
   "posts" : [
+      
+      "./custom-js-phoenix.html",
       
       "./phoenix-slot.html",
       
@@ -272,7 +296,7 @@
   "tag" : "pubsub",
   "posts" : [
       
-      "./impl_attribute.html"
+      "./genserver.html"
       
     ]
   } ,
