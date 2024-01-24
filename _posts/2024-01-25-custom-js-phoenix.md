@@ -203,7 +203,7 @@ window.toggleButton = toggleButton;
 
 ```elixir
 def render(assigns) do
-  ~L"""
+  ~H"""
   ... ...
     <button 
       type="button" 
