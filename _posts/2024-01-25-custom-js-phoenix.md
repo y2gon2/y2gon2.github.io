@@ -37,6 +37,9 @@ npm init
   "version": "1.0.0",
   "description": "phoenix liveview project",
   "main": "tailwind.config.js",
+    "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+  },
   "author": "***",
   "license": "ISC",
   "repository": {
@@ -59,8 +62,8 @@ npm init
 
 ```json
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "webpack --mode production"
+    ...,
+    "deploy": "webpack --mode production" 
   }
 ```
 
