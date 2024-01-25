@@ -243,6 +243,55 @@
 
 
 	
+	<div id="app.html.heex" class="hidden tag-master">
+		<h1>app.html.heex</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./root-and-app.html">root.html.heex 과 app.html.heex 에 대해</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        2 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>현재 Phoenix LiveView application 작업을 진행하면서, 아래와 같이 page 최상단에 메뉴바를 띄우고자 한다.</p> <center><img src="assets\img\posts\header.png" width="500" /></center> <p>다만 <code class="language-plaintext highlighter-rouge">/</code> 과 <code class="language-plaintext highlighter-rouge">/games</code> url 에 대해서는 메뉴바가 있고, <code class="language-plaintext highlighter-rouge">/games/:id</code> url 에 대해서는 메뉴바가 없도록 구성하고 싶다. 해당 작업을 진행하면 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 와 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 파일을 수정하고, 수정된 파일을 어떻게하면 적절하게 이용할 수 있을지 위에서의 고민을 토대로 각 파일에 대해 알아본다.</p> <h3 id="roothtmlheex-역할">root.html.heex 역할</h3> <p>이 파일은 전체 Phoenix 애플리케이션의 최상위 레이아웃을 정의하며, 다른 템플릿들은 이 안에 삽입되어 최종 HTML 문서를 형성한다. 일반적으로 전체 애플리케이션에 걸쳐 공통적으로 사용되는 HTML 요소를 포함한다.(<code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> 태그 내의 meta...<a class="read-more" href="./root-and-app.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
 	<div id="attribute" class="hidden tag-master">
 		<h1>attribute</h1>
 		<div class="archive">
@@ -1103,6 +1152,45 @@
 			
 
 				<div class="post">
+					<a class="post-list-title" href="./root-and-app.html">root.html.heex 과 app.html.heex 에 대해</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        2 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>현재 Phoenix LiveView application 작업을 진행하면서, 아래와 같이 page 최상단에 메뉴바를 띄우고자 한다.</p> <center><img src="assets\img\posts\header.png" width="500" /></center> <p>다만 <code class="language-plaintext highlighter-rouge">/</code> 과 <code class="language-plaintext highlighter-rouge">/games</code> url 에 대해서는 메뉴바가 있고, <code class="language-plaintext highlighter-rouge">/games/:id</code> url 에 대해서는 메뉴바가 없도록 구성하고 싶다. 해당 작업을 진행하면 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 와 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 파일을 수정하고, 수정된 파일을 어떻게하면 적절하게 이용할 수 있을지 위에서의 고민을 토대로 각 파일에 대해 알아본다.</p> <h3 id="roothtmlheex-역할">root.html.heex 역할</h3> <p>이 파일은 전체 Phoenix 애플리케이션의 최상위 레이아웃을 정의하며, 다른 템플릿들은 이 안에 삽입되어 최종 HTML 문서를 형성한다. 일반적으로 전체 애플리케이션에 걸쳐 공통적으로 사용되는 HTML 요소를 포함한다.(<code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> 태그 내의 meta...<a class="read-more" href="./root-and-app.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
 					<a class="post-list-title" href="./custom-js-phoenix.html">Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</a>
 					
 
@@ -1175,45 +1263,6 @@
 
 					<div class="post-excerpt">
 						<p>Phoenix LiveView 에서 동적인 component 를 삽입 하고자 하는 경우, 해당 component attribute 로 `slot` 을 정의하고 이를 사용해 주어야 한다. </p> <h3>사용 방법</h3> <div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">slot</span> <span class="p">:</span><span class="err">블록명</span><span class="p">,</span> <span class="ss">required:</span> <span class="no">true</span> <span class="k">def</span> <span class="err">컴포넌트명</span><span class="p">(</span><span class="n">assigns</span><span class="p">)</span> <span class="k">do</span> <span class="sx">~H""</span><span class="s2">" &lt;동적으로 구현할 컴포넌트 태그&gt; &lt;&gt;..사용자 구현...&lt;&gt; &lt;%= render_slot(@블록명) %&gt; &lt;/동적으로 구현할 컴포넌트 태그&gt; """</span> <span class="k">end</span> </code></pre></div></div> <h3> Slot 정의</h3> <ul> <li><code>slot :블록명</code> : 컴포넌트 내부에 동적으로 콘텐츠를 삽입할 수 있는 블록명이라는 이름의 슬롯을 정의.</li> <li><code>required: true</code>: 이 슬롯이 반드시 제공되어야 함을 의미. 이 컴포넌트를 사용할 때는 블록명 슬롯에 대한...<a class="read-more" href="./phoenix-slot.html"> read more</a>
-					</div>
-				</div>
-			
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./instance-with-elixir.html">struct - instance 에 대해 (Elixir vs OOP languages)</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2023-12-29T10:32:20+09:00">December 29, 2023</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        1 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<p>elixir 에서의 구조체는 상속, 다형성 등이 지원되지 않고 한번 정의되면 구조체 내부 field 값을 변경할 수 없는, 내부에 field 가 존재하는 사용자 정의 type 이며, 해당 구조체 type 에 실제 data 를 가지게 하고 이를 변수 매칭 시킨것이 elixir instance 이다. </p> <h3>유사점</h3> <ol> <li>데이터 캡슐화: Elixir의 구조체와 Java나 Python의 인스턴스 모두 데이터를 캡슐화. 여러 데이터를 하나의 구조로 묶어 관리할 수 있다.</li><br /> <li>필드 정의: 두 언어에서는 자료구조에 필드(데이터 요소)를 정의할 수 있으며, 이러한 필드는 각각의 자료구조에 속한 정보를 나타냄.</li><br /> <li>타입 안정성: Elixir의 구조체와 Java의 객체는 둘 다 특정 타입에 속하는 데이터를 담는데, 이는 데이터 타입에 대한 안정성과 예측...<a class="read-more" href="./instance-with-elixir.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1475,6 +1524,45 @@
 			
 
 				<div class="post">
+					<a class="post-list-title" href="./root-and-app.html">root.html.heex 과 app.html.heex 에 대해</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        2 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>현재 Phoenix LiveView application 작업을 진행하면서, 아래와 같이 page 최상단에 메뉴바를 띄우고자 한다.</p> <center><img src="assets\img\posts\header.png" width="500" /></center> <p>다만 <code class="language-plaintext highlighter-rouge">/</code> 과 <code class="language-plaintext highlighter-rouge">/games</code> url 에 대해서는 메뉴바가 있고, <code class="language-plaintext highlighter-rouge">/games/:id</code> url 에 대해서는 메뉴바가 없도록 구성하고 싶다. 해당 작업을 진행하면 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 와 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 파일을 수정하고, 수정된 파일을 어떻게하면 적절하게 이용할 수 있을지 위에서의 고민을 토대로 각 파일에 대해 알아본다.</p> <h3 id="roothtmlheex-역할">root.html.heex 역할</h3> <p>이 파일은 전체 Phoenix 애플리케이션의 최상위 레이아웃을 정의하며, 다른 템플릿들은 이 안에 삽입되어 최종 HTML 문서를 형성한다. 일반적으로 전체 애플리케이션에 걸쳐 공통적으로 사용되는 HTML 요소를 포함한다.(<code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> 태그 내의 meta...<a class="read-more" href="./root-and-app.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
 					<a class="post-list-title" href="./custom-js-phoenix.html">Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</a>
 					
 
@@ -1547,45 +1635,6 @@
 
 					<div class="post-excerpt">
 						<p>Phoenix LiveView 에서 동적인 component 를 삽입 하고자 하는 경우, 해당 component attribute 로 `slot` 을 정의하고 이를 사용해 주어야 한다. </p> <h3>사용 방법</h3> <div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">slot</span> <span class="p">:</span><span class="err">블록명</span><span class="p">,</span> <span class="ss">required:</span> <span class="no">true</span> <span class="k">def</span> <span class="err">컴포넌트명</span><span class="p">(</span><span class="n">assigns</span><span class="p">)</span> <span class="k">do</span> <span class="sx">~H""</span><span class="s2">" &lt;동적으로 구현할 컴포넌트 태그&gt; &lt;&gt;..사용자 구현...&lt;&gt; &lt;%= render_slot(@블록명) %&gt; &lt;/동적으로 구현할 컴포넌트 태그&gt; """</span> <span class="k">end</span> </code></pre></div></div> <h3> Slot 정의</h3> <ul> <li><code>slot :블록명</code> : 컴포넌트 내부에 동적으로 콘텐츠를 삽입할 수 있는 블록명이라는 이름의 슬롯을 정의.</li> <li><code>required: true</code>: 이 슬롯이 반드시 제공되어야 함을 의미. 이 컴포넌트를 사용할 때는 블록명 슬롯에 대한...<a class="read-more" href="./phoenix-slot.html"> read more</a>
-					</div>
-				</div>
-			
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./instance-with-elixir.html">struct - instance 에 대해 (Elixir vs OOP languages)</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2023-12-29T10:32:20+09:00">December 29, 2023</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        1 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<p>elixir 에서의 구조체는 상속, 다형성 등이 지원되지 않고 한번 정의되면 구조체 내부 field 값을 변경할 수 없는, 내부에 field 가 존재하는 사용자 정의 type 이며, 해당 구조체 type 에 실제 data 를 가지게 하고 이를 변수 매칭 시킨것이 elixir instance 이다. </p> <h3>유사점</h3> <ol> <li>데이터 캡슐화: Elixir의 구조체와 Java나 Python의 인스턴스 모두 데이터를 캡슐화. 여러 데이터를 하나의 구조로 묶어 관리할 수 있다.</li><br /> <li>필드 정의: 두 언어에서는 자료구조에 필드(데이터 요소)를 정의할 수 있으며, 이러한 필드는 각각의 자료구조에 속한 정보를 나타냄.</li><br /> <li>타입 안정성: Elixir의 구조체와 Java의 객체는 둘 다 특정 타입에 속하는 데이터를 담는데, 이는 데이터 타입에 대한 안정성과 예측...<a class="read-more" href="./instance-with-elixir.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1782,6 +1831,55 @@
 
 					<div class="post-excerpt">
 						<p>Elixir의 <code>GenServer</code>는 OTP(Open Telecom Platform) behaviour 중 하나로, 서버 프로세스를 구현하기 위한 추상화를 제공한다. GenServer는 클라이언트-서버 관계에서 서버 부분을 담당하며, 상태를 유지하고, 요청을 동기적 또는 비동기적으로 처리할 수 있다. 이는 Elixir/Erlang 시스템에서 병렬처리와 상태 관리를 용이하게 하는 강력한 도구이다.</p> <p><code>GenServer</code> 의 다양한 macro callback 중 주요한 것을을 사용하여 통신 moudule 을 구현하고자 한다. 해당 module 의 구조는 다음과 같다.</p> <center> <img src="assets\img\posts\genserver.png" width="500" height="" /> </center> <p>module 내 구성은 크게 client 와 server 구현 부분으로 구분 된다. client 는 경우, 해당 module 이 실행되는 application 자체 또는 일부 process 에서 실행될 code 이며, 해당 code 를 통해 server process 를...<a class="read-more" href="./genserver.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
+	<div id="root.html.heex" class="hidden tag-master">
+		<h1>root.html.heex</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./root-and-app.html">root.html.heex 과 app.html.heex 에 대해</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        2 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>현재 Phoenix LiveView application 작업을 진행하면서, 아래와 같이 page 최상단에 메뉴바를 띄우고자 한다.</p> <center><img src="assets\img\posts\header.png" width="500" /></center> <p>다만 <code class="language-plaintext highlighter-rouge">/</code> 과 <code class="language-plaintext highlighter-rouge">/games</code> url 에 대해서는 메뉴바가 있고, <code class="language-plaintext highlighter-rouge">/games/:id</code> url 에 대해서는 메뉴바가 없도록 구성하고 싶다. 해당 작업을 진행하면 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 와 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 파일을 수정하고, 수정된 파일을 어떻게하면 적절하게 이용할 수 있을지 위에서의 고민을 토대로 각 파일에 대해 알아본다.</p> <h3 id="roothtmlheex-역할">root.html.heex 역할</h3> <p>이 파일은 전체 Phoenix 애플리케이션의 최상위 레이아웃을 정의하며, 다른 템플릿들은 이 안에 삽입되어 최종 HTML 문서를 형성한다. 일반적으로 전체 애플리케이션에 걸쳐 공통적으로 사용되는 HTML 요소를 포함한다.(<code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> 태그 내의 meta...<a class="read-more" href="./root-and-app.html"> read more</a>
 					</div>
 				</div>
 			
@@ -2084,6 +2182,9 @@
         <ul class="tags">
             
                 
+                <li><a href="./tag.html?tag=app.html.heex" class="tag">app.html.heex <span>(1)</span></a></li>
+            
+                
                 <li><a href="./tag.html?tag=attribute" class="tag">attribute <span>(1)</span></a></li>
             
                 
@@ -2129,7 +2230,7 @@
                 <li><a href="./tag.html?tag=lazy+collection" class="tag">lazy collection <span>(1)</span></a></li>
             
                 
-                <li><a href="./tag.html?tag=liveview" class="tag">liveview <span>(7)</span></a></li>
+                <li><a href="./tag.html?tag=liveview" class="tag">liveview <span>(8)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=map" class="tag">map <span>(1)</span></a></li>
@@ -2147,7 +2248,7 @@
                 <li><a href="./tag.html?tag=overloading" class="tag">overloading <span>(1)</span></a></li>
             
                 
-                <li><a href="./tag.html?tag=phoenix" class="tag">phoenix <span>(7)</span></a></li>
+                <li><a href="./tag.html?tag=phoenix" class="tag">phoenix <span>(8)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=phoenix+presence" class="tag">phoenix presence <span>(1)</span></a></li>
@@ -2160,6 +2261,9 @@
             
                 
                 <li><a href="./tag.html?tag=pubsub" class="tag">pubsub <span>(1)</span></a></li>
+            
+                
+                <li><a href="./tag.html?tag=root.html.heex" class="tag">root.html.heex <span>(1)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=slop" class="tag">slop <span>(1)</span></a></li>

@@ -1,4 +1,76 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-01-24T14:30:01+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</title><link href="http://localhost:4000/custom-js-phoenix.html" rel="alternate" type="text/html" title="Phoenix LiveView 에서 사용자 정의 JS code 사용 방법" /><published>2024-01-24T08:32:20+09:00</published><updated>2024-01-24T08:32:20+09:00</updated><id>http://localhost:4000/custom-js-phoenix</id><content type="html" xml:base="http://localhost:4000/custom-js-phoenix.html"><![CDATA[<p>Phoenix LiveView 를 사용하여 아래와 같이 버튼 클릭시 번갈아가며 버튼의 배경색과 내용이 바뀌는 toggle button 을 사용하고자 하였다. 그런데 기존의 Phoenix LiveView 제공 html tag 및 css 로 이를 생성할 수 없었으며, 따라서 자체적으로 JS 를 작성하여 기존 button 에 적용해야 하는 상황이다. 해당 과정에서 필요한 설정 및 <code>render/1</code>에 적용하기까지의 과정을 정리하고자 한다. </p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-01-25T14:12:04+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">root.html.heex 과 app.html.heex 에 대해</title><link href="http://localhost:4000/root-and-app.html" rel="alternate" type="text/html" title="root.html.heex 과 app.html.heex 에 대해" /><published>2024-01-25T08:32:20+09:00</published><updated>2024-01-25T08:32:20+09:00</updated><id>http://localhost:4000/root-and-app</id><content type="html" xml:base="http://localhost:4000/root-and-app.html"><![CDATA[<p>현재 Phoenix LiveView application 작업을 진행하면서, 아래와 같이 page 최상단에 메뉴바를 띄우고자 한다.</p>
+
+<center><img src="assets\img\posts\header.png" width="500" /></center>
+
+<p>다만 <code class="language-plaintext highlighter-rouge">/</code> 과 <code class="language-plaintext highlighter-rouge">/games</code> url 에 대해서는 메뉴바가 있고, <code class="language-plaintext highlighter-rouge">/games/:id</code> url 에 대해서는 메뉴바가 없도록 구성하고 싶다. 해당 작업을 진행하면 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 와 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 파일을 수정하고, 수정된 파일을 어떻게하면 적절하게 이용할 수 있을지 위에서의 고민을 토대로 각 파일에 대해 알아본다.</p>
+
+<h3 id="roothtmlheex-역할">root.html.heex 역할</h3>
+
+<p>이 파일은 전체 Phoenix 애플리케이션의 최상위 레이아웃을 정의하며, 다른 템플릿들은 이 안에 삽입되어 최종 HTML 문서를 형성한다. 일반적으로 전체 애플리케이션에 걸쳐 공통적으로 사용되는 HTML 요소를 포함한다.(<code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> 태그 내의 meta data, stylesheet link, javascript 파일 등)</p>
+
+<p><code class="language-plaintext highlighter-rouge">router.ex</code> 에서 <code class="language-plaintext highlighter-rouge">pipeline :browser</code> 를 통해 주입되며, 모든 정적 html와 LiveView는 이 파일의 구조 안에서 렌더링된다.</p>
+
+<p>만약 <code class="language-plaintext highlighter-rouge">root1.html.heex</code> 파일에서 해당 메뉴바를 구현하고, <code class="language-plaintext highlighter-rouge">root2.html.heex</code> 에는 메뉴바를 구현하지 않고, 이렇게 두 개의 파일을 만들어서 <code class="language-plaintext highlighter-rouge">pipeline :browser1</code> , <code class="language-plaintext highlighter-rouge">pipeline :browser2</code> 를 각각 정의하여 이를 각각 필요한 url 에 맞게 사용하고자 시도하였으나, 이런 경우, 동일한 매개변수를 가지는 <code class="language-plaintext highlighter-rouge">live_session</code> macro 가 두번 정의되어야 한다. 이는 다음의 에러가 발생시킨다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">**</span> <span class="o">(</span>RuntimeError<span class="o">)</span> attempting to redefine live_session :require_authenticated_user.
+live_session routes must be declared <span class="k">in </span>a single named block.
+</code></pre></div></div>
+
+<p>따라서 동일한 <code class="language-plaintext highlighter-rouge">scope</code> macro 에서 정의되어야 하는 url page 에 대해서는 동일한 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 가 적용되어야 한다.</p>
+
+<h3 id="apphtmlheex-역할">app.html.heex 역할</h3>
+
+<p><code class="language-plaintext highlighter-rouge">app.html.heex</code>는 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 내에 삽입되는, 특정 부분의 레이아웃을 정의하는 파일로, 주로 애플리케이션의 주요 컨텐츠를 포함하며, 특정 페이지나 섹션에 대한 레이아웃을 정의하는 데 사용된다. 예를 들어, header, footer, sidebar 등 페이지의 주요 부분을 구성할 수 있으며, 페이지 별로 다른 내용을 표시하는데 사용된다.</p>
+
+<p>따라서 url 별로 header 적용 여부를 다르게 하고 싶다면 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 파일을 각각 만들어서 각 page mdoule 에서 다른 template 을 가져오면 된다.</p>
+
+<h3 id="구현">구현</h3>
+
+<p>기존에 작성한 header 는 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 에 있었다. 그래서 해당 code 를 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 로 이동시키고, header 가 없은 <code class="language-plaintext highlighter-rouge">app_no_header.html.heex</code> 를 추가 생성하였다.</p>
+
+<p>그리고 <code class="language-plaintext highlighter-rouge">app_no_header.html.heex</code> 을 liveview 에서 가져올 수 있도록 <code class="language-plaintext highlighter-rouge">my_pjt_web.ex</code> 에 callback 함수를 추가해주었다.</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">MyPjt1Web</span> <span class="k">do</span>
+  <span class="o">...</span>
+  <span class="c1"># 기존 app.html.heex 를 layout 로 사용하는 함수</span>
+  <span class="k">def</span> <span class="n">live_view</span> <span class="k">do</span>
+    <span class="kn">quote</span> <span class="k">do</span>
+      <span class="kn">use</span> <span class="no">Phoenix</span><span class="o">.</span><span class="no">LiveView</span><span class="p">,</span>
+        <span class="ss">layout:</span> <span class="p">{</span><span class="no">MyPjt1Web</span><span class="o">.</span><span class="no">Layouts</span><span class="p">,</span> <span class="ss">:app</span><span class="p">}</span>
+
+      <span class="kn">unquote</span><span class="p">(</span><span class="n">html_helpers</span><span class="p">())</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="c1"># 추가된 함수. app_no_header.html.heex 를 layout 로 사용</span>
+  <span class="k">def</span> <span class="n">live_view_no_header</span> <span class="k">do</span>
+    <span class="kn">quote</span> <span class="k">do</span>
+      <span class="kn">use</span> <span class="no">Phoenix</span><span class="o">.</span><span class="no">LiveView</span><span class="p">,</span>
+        <span class="ss">layout:</span> <span class="p">{</span><span class="no">MyPjt1Web</span><span class="o">.</span><span class="no">Layouts</span><span class="p">,</span> <span class="ss">:app_no_header</span><span class="p">}</span>
+
+      <span class="kn">unquote</span><span class="p">(</span><span class="n">html_helpers</span><span class="p">())</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+  <span class="o">...</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>다음으로 각 url 대한 module 에서 <code class="language-plaintext highlighter-rouge">use</code> macro 를 사용하여 앞에서 정의한 callback 을 맞게 가져옴</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">MyPjt1Web</span><span class="o">.</span><span class="no">GameLive</span><span class="o">.</span><span class="no">Index</span> <span class="k">do</span>
+  <span class="kn">use</span> <span class="no">MyPjt1Web</span><span class="p">,</span> <span class="ss">:live_view</span>
+  <span class="o">...</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">MyPjt1Web</span><span class="o">.</span><span class="no">GameLive</span><span class="o">.</span><span class="no">Show</span> <span class="k">do</span>
+  <span class="kn">use</span> <span class="no">MyPjt1Web</span><span class="p">,</span> <span class="ss">:live_view_no_header</span>
+  <span class="o">...</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>마지막으로 남은 것은 <code class="language-plaintext highlighter-rouge">get "/", PageController, :home</code> 에서 가져오는 module 만 처리해주면 된다. 그런데, 분명 <code class="language-plaintext highlighter-rouge">my_pjt1_web</code>module <code class="language-plaintext highlighter-rouge">controller</code> callback 에 <code class="language-plaintext highlighter-rouge">layout: {MyPjt1Web.Layouts, :app}</code> 이 정의되어 있음에도 불구하고, application 실행시 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 의 header 가 표시되어지지 않았다. 그래서 어쩔수 없이 <code class="language-plaintext highlighter-rouge">home.html.heex</code> 에 동일한 header 를 추가하여 
+자체적으로 header 를 rendering 하도록 구현하였다.</p>]]></content><author><name>Yong gon Yun</name></author><category term="phoenix" /><category term="liveview" /><category term="root.html.heex" /><category term="app.html.heex" /><summary type="html"><![CDATA[Phoenix LiveView 에서 기본 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함]]></summary></entry><entry><title type="html">Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</title><link href="http://localhost:4000/custom-js-phoenix.html" rel="alternate" type="text/html" title="Phoenix LiveView 에서 사용자 정의 JS code 사용 방법" /><published>2024-01-24T08:32:20+09:00</published><updated>2024-01-24T08:32:20+09:00</updated><id>http://localhost:4000/custom-js-phoenix</id><content type="html" xml:base="http://localhost:4000/custom-js-phoenix.html"><![CDATA[<p>Phoenix LiveView 를 사용하여 아래와 같이 버튼 클릭시 번갈아가며 버튼의 배경색과 내용이 바뀌는 toggle button 을 사용하고자 하였다. 그런데 기존의 Phoenix LiveView 제공 html tag 및 css 로 이를 생성할 수 없었으며, 따라서 자체적으로 JS 를 작성하여 기존 button 에 적용해야 하는 상황이다. 해당 과정에서 필요한 설정 및 <code>render/1</code>에 적용하기까지의 과정을 정리하고자 한다. </p>
 
 <center>
   <img src="assets\img\posts\toggle_button.png" width="300" />
@@ -23,6 +95,9 @@ npm init
   </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phoenix liveview project"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"main"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tailwind.config.js"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo </span><span class="se">\"</span><span class="s2">Error: no test specified</span><span class="se">\"</span><span class="s2"> &amp;&amp; exit 1"</span><span class="p">,</span><span class="w">
+  </span><span class="p">},</span><span class="w">
   </span><span class="nl">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"***"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"license"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ISC"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"repository"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -44,8 +119,8 @@ npm init
 <p><code>package.json</code> <code>scripts</code> 섹션에 <code>deploy</code> 스크립트를 추가해야 웹팩을 사용하여 build 할 수 있다. script 섹션 설정을 포함한  다음 코드를 <code>package.json</code> 에 추가한다.</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo </span><span class="se">\"</span><span class="s2">Error: no test specified</span><span class="se">\"</span><span class="s2"> &amp;&amp; exit 1"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"deploy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webpack --mode production"</span><span class="w">
+    </span><span class="err">...</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deploy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webpack --mode production"</span><span class="w"> 
   </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -172,7 +247,7 @@ window.toggleButton = toggleButton;
 <p>LiveView의 <code>render/1</code> 함수에서 해당 JavaScript 함수를 사용하는 HTML을 반환</p>
 
 <div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">render</span><span class="p">(</span><span class="n">assigns</span><span class="p">)</span> <span class="k">do</span>
-  <span class="sx">~L""</span><span class="s2">"
+  <span class="sx">~H""</span><span class="s2">"
   ... ...
     &lt;button 
       type="</span><span class="n">button</span><span class="s2">" 
@@ -644,51 +719,4 @@ This Server is termniated.
 </ol>
 
 <h3>결론</h3>
-<p>Elixir의 구조체는 Java나 Python의 객체와 유사하게 데이터를 캡슐화하는 역할을 하지만, 불변성, 함수형 패러다임, 상속 및 다형성 부재, 메소드와 함수의 차이라는 측면에서 분명한 차이점이 있다. 이러한 차이점들은 Elixir가 가진 함수형 프로그래밍의 특징을 반영한다.</p>]]></content><author><name>Yong gon Yun</name></author><category term="oop" /><category term="instance" /><category term="struct" /><category term="phoenix" /><category term="liveview" /><category term="elixir" /><summary type="html"><![CDATA[struct - instance 에 대해 (Elixir vs OOP languages)]]></summary></entry><entry><title type="html">tail recursion</title><link href="http://localhost:4000/tail-recursion.html" rel="alternate" type="text/html" title="tail recursion" /><published>2023-12-27T15:32:20+09:00</published><updated>2023-12-27T15:32:20+09:00</updated><id>http://localhost:4000/tail-recursion</id><content type="html" xml:base="http://localhost:4000/tail-recursion.html"><![CDATA[<h3>일반 재귀 (Regular Recursion) 예제</h3>
-
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">RegularRecursion</span> <span class="k">do</span>
-  <span class="k">def</span> <span class="n">sum</span><span class="p">([]),</span> <span class="k">do</span><span class="p">:</span> <span class="mi">0</span>
-  <span class="k">def</span> <span class="n">sum</span><span class="p">([</span><span class="n">head</span> <span class="o">|</span> <span class="n">tail</span><span class="p">]),</span> <span class="k">do</span><span class="p">:</span> <span class="n">head</span> <span class="o">+</span> <span class="n">sum</span><span class="p">(</span><span class="n">tail</span><span class="p">)</span>
-<span class="k">end</span>
-</code></pre></div></div>
-<p>이 예제에서 `sum/1` 함수는 리스트의 첫 번째 요소를 취하고, 나머지 리스트에 대해 재귀적으로 `sum/1`을 호출한 다음, 결과에 첫 번째 요소를 더한다. 여기서 중요한 점은 재귀 호출 후에 추가 작업(더하기)이 수행된다는 것.</p>
-
-<h3>꼬리 재귀 (Tail Recursion) 예제</h3>
-
-<p>다음 예제에서 `sum/2` 보조 함수는 누적된 합계를 유지하면서 재귀적으로 호출된다. 각 재귀 호출은 누적된 합계에 현재 요소를 더한 값과 함께 호출되며, 이는 꼬리 호출 최적화를 가능하게 한다.</p>
-
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">TailRecursion</span> <span class="k">do</span>
-  <span class="k">def</span> <span class="n">sum</span><span class="p">(</span><span class="n">list</span><span class="p">),</span> <span class="k">do</span><span class="p">:</span> <span class="n">sum</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
-  <span class="k">defp</span> <span class="n">sum</span><span class="p">([],</span> <span class="n">total</span><span class="p">),</span> <span class="k">do</span><span class="p">:</span> <span class="n">total</span>
-  <span class="k">defp</span> <span class="n">sum</span><span class="p">([</span><span class="n">head</span> <span class="o">|</span> <span class="n">tail</span><span class="p">],</span> <span class="n">total</span><span class="p">)</span> <span class="k">do</span>
-    <span class="n">sum</span><span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">+</span> <span class="n">total</span><span class="p">)</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div></div>
-
-<h3>차이점</h3>
-<ul>
-<li>일반 재귀에서는 각 재귀 호출 후에 추가적인 계산 필요(예: head + sum(tail)).</li>
-<li>꼬리 재귀에서는 재귀 호출이 함수의 마지막 연산이며, 추가 계산이 없음(예: sum(tail, head + total)).</li>
-<li>일반 재귀는 호출 스택에 각 호출의 컨텍스트를 저장해야 하므로 메모리 사용이 더 많고, 깊은 재귀에서 스택 오버플로우를 일으킬 수 있다. 반면, 꼬리 재귀는 최적화를 통해 이러한 문제를 피할 수 있으며, 깊은 재귀 호출에서도 효율적으로 작동한다.</li>
-</ul>
-
-<h3>(Regular) Recursion vs Tail Recursion - 성능 &amp; stack 사용 비교 </h3>
-<h4>꼬리 재귀 (Tail Recursion)</h4>
-<p>Elixir에서 꼬리 재귀는 <strong>꼬리 호출 최적화(Tail-Call Optimization, TCO)</strong>라는 기술을 통해 최적화된다. 꼬리 재귀 함수에서는 재귀 호출이 함수의 마지막 작업으로, Elixir 컴파일러가 현재의 스택 프레임을 재사용할 수 있게 한다. 이러한 최적화는 새로운 스택 프레임을 추가하는 대신 현재의 프레임을 재사용함으로써 메모리 사용량을 최소화한다. 대규모 작업이나 대량의 데이터 처리에 특히 메모리 효율이 좋으며, 스택 오버플로우 위험을 피할 수 있다.</p>
-
-<h4>일반 재귀 (Regular Recursion)</h4>
-<p>반면, Elixir에서 일반 재귀는 각 함수 호출마다 새로운 스택 프레임을 추가한다. 이는 특히 깊은 재귀 또는 큰 리스트를 다룰 때 메모리 사용량을 증가시킬 수 있으며, 각 재귀 호출이 자체 스택 프레임을 요구하기 때문에 성능 문제나 극단적인 경우 스택 오버플로우를 일으킬 수 있다.</p>
-
-<h4>성능적 영향</h4>
-<p>일반적으로 꼬리 재귀는 Elixir에서 더 빠르고 메모리 효율적이며, 특히 리스트 축소나 대규모 데이터 처리에 유리하다. 하지만 모든 경우에 꼬리 재귀가 우월한 것은 아니다. 특정 상황, 특히 함수가 리스트를 축소하지 않고 단순히 매핑하는 경우, 일반 재귀가 더 효율적일 수 있다. 예를 들어, 리스트의 숫자를 두 배로 하는 함수는 일반 재귀를 사용하는 것이 더 빠를 수 있다.</p>
-
-<h3>다른 언어의 logic 처리 (iteration) 과 Tail Recursion 비교</h3>
-<p>Elixir에서 꼬리 재귀를 사용하는 것이 다른 언어에서의 일반적인 반복문(iteration)을 사용하는 것과 유사한 수준의 성능과 메모리 사용을 제공할 수 있다. 꼬리 재귀의 주요 장점 중 하나는 꼬리 호출 최적화(tail-call optimization, TCO)로 인해 메모리 사용이 최소화된다는 것. 이 최적화는 재귀 호출 시 새로운 스택 프레임을 생성하는 대신 현재 스택 프레임을 재사용하게 해, 깊은 재귀 호출에서도 스택 오버플로우 위험을 줄여준다.</p>
-
-<h3>꼬리 재귀와 반복문의 성능 비교</h3>
-<ul>
-<li>메모리 사용량: 꼬리 재귀를 사용하는 Elixir 함수는 일반 반복문을 사용하는 다른 언어의 함수들과 유사하게, 낮은 메모리 사용량을 가질 수 있다. 각 재귀 호출이 새로운 스택 프레임을 추가하지 않기 때문에, 깊은 재귀 수준에서도 메모리 사용량이 제한적이다. </li><br />
-<li>성능: 꼬리 재귀 최적화 덕분에 Elixir의 꼬리 재귀 함수는 일반 반복문을 사용하는 함수들과 비슷한 성능을 낼 수 있다. 반복문은 일반적으로 CPU 사이클을 덜 사용하고, 반복 로직이 명시적이기 때문에 일부 경우에서 더 효율적일 수 있다. 하지만 꼬리 재귀는 이러한 성능 차이를 상당 부분 줄일 수 있다.</li>
-</ul>]]></content><author><name>Yong gon Yun</name></author><category term="tail recursion" /><category term="elixir" /><summary type="html"><![CDATA[tail recursion]]></summary></entry></feed>
+<p>Elixir의 구조체는 Java나 Python의 객체와 유사하게 데이터를 캡슐화하는 역할을 하지만, 불변성, 함수형 패러다임, 상속 및 다형성 부재, 메소드와 함수의 차이라는 측면에서 분명한 차이점이 있다. 이러한 차이점들은 Elixir가 가진 함수형 프로그래밍의 특징을 반영한다.</p>]]></content><author><name>Yong gon Yun</name></author><category term="oop" /><category term="instance" /><category term="struct" /><category term="phoenix" /><category term="liveview" /><category term="elixir" /><summary type="html"><![CDATA[struct - instance 에 대해 (Elixir vs OOP languages)]]></summary></entry></feed>

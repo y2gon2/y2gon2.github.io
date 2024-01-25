@@ -7,9 +7,9 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Elixir 의 Map, Struct 등은 왜 immutable data types 인가? - Gon's Tech Jurnal</title>
-	<link rel="canonical" href="http://localhost:4000/immutable-data-type.html">
-	<meta name="description" content="Elixir 의 immutable data types (Map, Struct)">
+	<title>root.html.heex 과 app.html.heex 에 대해 - Gon's Tech Jurnal</title>
+	<link rel="canonical" href="http://localhost:4000/root-and-app.html">
+	<meta name="description" content="Phoenix LiveView 에서 기본 <head> 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 <script type="application/ld+json">
@@ -19,13 +19,13 @@
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "http://localhost:4000"},
-  "headline": "Elixir 의 Map, Struct 등은 왜 immutable data types 인가?",
-  "abstract": "Elixir 의 immutable data types (Map, Struct)",
-    "keywords": "elixir, map, struct, immutable data type",
-    "wordcount": "211",
-    "image": ["http://localhost:4000/assets/imgposts/general/post_general10.jpg"],
-  "datePublished": "2024-01-03 10:32:20 +0900",
-  "dateModified": "2024-01-03 10:32:20 +0900",
+  "headline": "root.html.heex 과 app.html.heex 에 대해",
+  "abstract": "Phoenix LiveView 에서 기본 <head> 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함",
+    "keywords": "phoenix, liveview, root.html.heex, app.html.heex",
+    "wordcount": "413",
+    "image": ["http://localhost:4000/assets/imgposts/general/post_general16.jpg"],
+  "datePublished": "2024-01-25 08:32:20 +0900",
+  "dateModified": "2024-01-25 08:32:20 +0900",
   "author": {
     "@type": "Person",
     "name": "Yong gon Yun"},
@@ -40,30 +40,30 @@
 }
 </script>
 <!-- Open Graph data -->
-<meta property="og:url" content="http://localhost:4000/immutable-data-type.html"/>
+<meta property="og:url" content="http://localhost:4000/root-and-app.html"/>
 <meta property="og:type" content="article"/>
-<meta property="og:title" content="Elixir 의 Map, Struct 등은 왜 immutable data types 인가?"/>
-<meta property="og:description" content="Elixir 의 immutable data types (Map, Struct)"/>
-<meta property="og:image" content="http://localhost:4000/assets/imgposts/general/post_general10.jpg"/>
-<meta property="og:image:alt" content="Elixir 의 Map, Struct 등은 왜 immutable data types 인가?"/>
+<meta property="og:title" content="root.html.heex 과 app.html.heex 에 대해"/>
+<meta property="og:description" content="Phoenix LiveView 에서 기본 <head> 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함"/>
+<meta property="og:image" content="http://localhost:4000/assets/imgposts/general/post_general16.jpg"/>
+<meta property="og:image:alt" content="root.html.heex 과 app.html.heex 에 대해"/>
 <meta property="og:site_name" content="Gon's Tech Jurnal" />
-<meta property="article:published_time" content="2024-01-03 10:32:20 +0900" />
-<meta property="article:modified_time" content="2024-01-03 10:32:20 +0900" />
-<meta property="article:tag" content="elixir, map, struct, immutable data type" />
+<meta property="article:published_time" content="2024-01-25 08:32:20 +0900" />
+<meta property="article:modified_time" content="2024-01-25 08:32:20 +0900" />
+<meta property="article:tag" content="phoenix, liveview, root.html.heex, app.html.heex" />
 <meta property="fb:admins" content="ar.maybach" />
 <!-- Schema.org markup for Google -->
-<meta itemprop="name" content="Elixir 의 Map, Struct 등은 왜 immutable data types 인가?">
-<meta itemprop="description" content="Elixir 의 immutable data types (Map, Struct)">
-<meta itemprop="image" content="http://localhost:4000/assets/imgposts/general/post_general10.jpg">
+<meta itemprop="name" content="root.html.heex 과 app.html.heex 에 대해">
+<meta itemprop="description" content="Phoenix LiveView 에서 기본 <head> 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함">
+<meta itemprop="image" content="http://localhost:4000/assets/imgposts/general/post_general16.jpg">
 <!-- Twitter Card data -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@N/A">
-<meta name="twitter:title" content="Elixir 의 Map, Struct 등은 왜 immutable data types 인가?">
-<meta name="twitter:description" content="Elixir 의 immutable data types (Map, Struct)">
+<meta name="twitter:title" content="root.html.heex 과 app.html.heex 에 대해">
+<meta name="twitter:description" content="Phoenix LiveView 에서 기본 <head> 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="211"/>
-<meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general10.jpg">
+<meta data-rh="true" name="twitter:data1" content="413"/>
+<meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general16.jpg">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
 	<!-- iOS Safari -->
@@ -150,7 +150,7 @@
 
 <section class="hidden">
   <div class="post">
-      <a  class="post-list-title" href="./immutable-data-type.html">Elixir 의 Map, Struct 등은 왜 immutable data types 인가?</a>
+      <a  class="post-list-title" href="./root-and-app.html">root.html.heex 과 app.html.heex 에 대해</a>
       
 
   <span class = "post-card-meta">
@@ -162,7 +162,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2024-01-03T10:32:20+09:00">January 3, 2024</time>
+        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
       </span>
     
     
@@ -174,7 +174,7 @@
     
     <span class="page_meta-readtime">
       
-        1 minute read
+        2 minute read
       
     </span>
   
@@ -182,7 +182,7 @@
   </span>
 
         <div class="post-excerpt">
-            <p>Elixir 에서 Map 은 immutable type 이다. 따라서 <code>Map.delete/2</code>, <code>Map.put/3</code>, <code>Map.update/4</code> 등과 같은 함수는 실제로 기존 map data 를 수정하는 것이 아니라, 수정되된 값으로 새로운 map data 를 만들고 이것을 재할당 하는 것이다.</p><p>Struct 의 경우도, 한번 생성된 instance 의 내부 field 값을 변경하고자 하는 경우, 이는 수정이 아닌, 새로운 data 생성 및 이를 재할당 하는 것이다. 그런데 list, map 과 같이 많은 데이터를 포함하고 있는 경우, 그중 하나의 값이 바뀔 때마다 매번 모든 부분에 대한 재할당을 진행한다면, 메모리 사용이나 성능상 단점이 매 커보인다.</p><p>그렇다면, immutable data type 으로 처리할 때 어떤 이점이 있을 수 있으며, 예상되는 문제점은 어떻게 해결할까?</p><ul><li>구조적 공유(Structural Sharing):...<a class="read-more" href="./immutable-data-type.html"> read more</a>
+            <p>현재 Phoenix LiveView application 작업을 진행하면서, 아래와 같이 page 최상단에 메뉴바를 띄우고자 한다.</p><center><img src="assets\img\posts\header.png" width="500" /></center><p>다만 <code class="language-plaintext highlighter-rouge">/</code> 과 <code class="language-plaintext highlighter-rouge">/games</code> url 에 대해서는 메뉴바가 있고, <code class="language-plaintext highlighter-rouge">/games/:id</code> url 에 대해서는 메뉴바가 없도록 구성하고 싶다. 해당 작업을 진행하면 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 와 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 파일을 수정하고, 수정된 파일을 어떻게하면 적절하게 이용할 수 있을지 위에서의 고민을 토대로 각 파일에 대해 알아본다.</p><h3 id="roothtmlheex-역할">root.html.heex 역할</h3><p>이 파일은 전체 Phoenix 애플리케이션의 최상위 레이아웃을 정의하며, 다른 템플릿들은 이 안에 삽입되어 최종 HTML 문서를 형성한다. 일반적으로 전체 애플리케이션에 걸쳐 공통적으로 사용되는 HTML 요소를 포함한다.(<code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> 태그 내의 meta data, stylesheet link, javascript...<a class="read-more" href="./root-and-app.html"> read more</a>
         </div>
   </div>
 </section>
@@ -280,14 +280,14 @@
 </header> <!-- End Header -->
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Elixir 의 Map, Struct 등은 왜 immutable data types 인가?">
-<meta itemprop="description" content="Elixir 의 immutable data types (Map, Struct)">
-<meta itemprop="datePublished" content="2024-01-03T10:32:20+09:00">
+    <meta itemprop="headline" content="root.html.heex 과 app.html.heex 에 대해">
+<meta itemprop="description" content="Phoenix LiveView 에서 기본 &lt;head&gt; 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함">
+<meta itemprop="datePublished" content="2024-01-25T08:32:20+09:00">
 
     <div class="wrapper">
       <div class="page-content">
         <div class="header-page">
-          <h2 class="page-title">Elixir 의 Map, Struct 등은 왜 immutable data types 인가?</h2>
+          <h2 class="page-title">root.html.heex 과 app.html.heex 에 대해</h2>
           
 
   <span class = "post-page-meta">
@@ -299,7 +299,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2024-01-03T10:32:20+09:00">January 3, 2024</time>
+        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
       </span>
     
     
@@ -311,7 +311,7 @@
     
     <span class="page_meta-readtime">
       
-        1 minute read
+        2 minute read
       
     </span>
   
@@ -330,13 +330,13 @@
     
         <ul class="tags side">
             
-                <li><a href="./tag.html?tag=elixir" class="tag side">elixir</a></li>
+                <li><a href="./tag.html?tag=phoenix" class="tag side">phoenix</a></li>
             
-                <li><a href="./tag.html?tag=map" class="tag side">map</a></li>
+                <li><a href="./tag.html?tag=liveview" class="tag side">liveview</a></li>
             
-                <li><a href="./tag.html?tag=struct" class="tag side">struct</a></li>
+                <li><a href="./tag.html?tag=root.html.heex" class="tag side">root.html.heex</a></li>
             
-                <li><a href="./tag.html?tag=immutable+data+type" class="tag side">immutable data type</a></li>
+                <li><a href="./tag.html?tag=app.html.heex" class="tag side">app.html.heex</a></li>
             
     
         </ul>
@@ -345,11 +345,11 @@
     <div class="share-hover side">
         <span class="share-button side"><svg fill="currentColor" width="25" height="25" class="side"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>
         <div class="share-icons side" id="sidebar-icons">
-            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=Elixir 의 Map, Struct 등은 왜 immutable data types 인가?&url=http://localhost:4000/immutable-data-type.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/immutable-data-type.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/immutable-data-type.html&title=Elixir 의 Map, Struct 등은 왜 immutable data types 인가?" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/immutable-data-type.html&title=Elixir 의 Map, Struct 등은 왜 immutable data types 인가?&summary=Elixir 의 immutable data types (Map, Struct)&source=http://localhost:4000/immutable-data-type.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a class="email" href="mailto:?subject=Elixir 의 Map, Struct 등은 왜 immutable data types 인가?&body=Elixir 의 immutable data types (Map, Struct)%0A%0ARead more here: http://localhost:4000/immutable-data-type.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=root.html.heex 과 app.html.heex 에 대해&url=http://localhost:4000/root-and-app.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/root-and-app.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/root-and-app.html&title=root.html.heex 과 app.html.heex 에 대해" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/root-and-app.html&title=root.html.heex 과 app.html.heex 에 대해&summary=Phoenix LiveView 에서 기본 <head> 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함&source=http://localhost:4000/root-and-app.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a class="email" href="mailto:?subject=root.html.heex 과 app.html.heex 에 대해&body=Phoenix LiveView 에서 기본 <head> 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함%0A%0ARead more here: http://localhost:4000/root-and-app.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
             <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="side" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>
         </div>
     </div>
@@ -359,24 +359,79 @@
 
         
         
-<div class="center-container">
-  <div class="github-button">
-    <span class="button-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" role="img" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2.2467A10.00042,10.00042,0,0,0,8.83752,21.73419c.5.08752.6875-.21247.6875-.475,0-.23749-.01251-1.025-.01251-1.86249C7,19.85919,6.35,18.78423,6.15,18.22173A3.636,3.636,0,0,0,5.125,16.8092c-.35-.1875-.85-.65-.01251-.66248A2.00117,2.00117,0,0,1,6.65,17.17169a2.13742,2.13742,0,0,0,2.91248.825A2.10376,2.10376,0,0,1,10.2,16.65923c-2.225-.25-4.55-1.11254-4.55-4.9375a3.89187,3.89187,0,0,1,1.025-2.6875,3.59373,3.59373,0,0,1,.1-2.65s.83747-.26251,2.75,1.025a9.42747,9.42747,0,0,1,5,0c1.91248-1.3,2.75-1.025,2.75-1.025a3.59323,3.59323,0,0,1,.1,2.65,3.869,3.869,0,0,1,1.025,2.6875c0,3.83747-2.33752,4.6875-4.5625,4.9375a2.36814,2.36814,0,0,1,.675,1.85c0,1.33752-.01251,2.41248-.01251,2.75,0,.26251.1875.575.6875.475A10.0053,10.0053,0,0,0,12,2.2467Z"/></svg></span>
-    <a class="button-text" href="https://github.com/y2gon2/exercism/blob/main/document" target="_blank" aria-label="Open on GitHub">view on <b>GitHub</b></a>
-  </div>
-</div>
+        <p>현재 Phoenix LiveView application 작업을 진행하면서, 아래와 같이 page 최상단에 메뉴바를 띄우고자 한다.</p>
 
-        <p>Elixir 에서 Map 은 immutable type 이다. 따라서 <code>Map.delete/2</code>, <code>Map.put/3</code>, <code>Map.update/4</code> 등과 같은 함수는 실제로 기존 map data 를 수정하는 것이 아니라, 수정되된 값으로 새로운 map data 를 만들고 이것을 재할당 하는 것이다.</p>
-<p>Struct 의 경우도, 한번 생성된 instance 의 내부 field 값을 변경하고자 하는 경우, 이는 수정이 아닌, 새로운 data 생성 및 이를 재할당 하는 것이다. 그런데 list, map 과 같이 많은 데이터를 포함하고 있는 경우, 그중 하나의 값이 바뀔 때마다 매번 모든 부분에 대한 재할당을 진행한다면, 메모리 사용이나 성능상 단점이 매 커보인다.</p>
-<p>그렇다면, immutable data type 으로 처리할 때 어떤 이점이 있을 수 있으며, 예상되는 문제점은 어떻게 해결할까?</p>
+<center><img src="assets\img\posts\header.png" width="500" /></center>
 
-<ul>
-<li>구조적 공유(Structural Sharing): 변경 불가능한 데이터 구조에서는 종종 구조적 공유 작업이 필요하다. 즉, 새로운 맵을 생성할 때 전체 구조를 복사하는 대신, 변경되지 않은 부분은 기존 구조를 재사용하여 필요한 메모리 양과 복사 작업이 크게 줄인다. (결국 immutable data type 이라도 매번 모든 data 에 대한 memory 할당 및 쓰기 작업이 진행되지는 않는다.)</li><br />
-<li>예측 가능성과 안정성: 데이터의 불변성은 함수의 부작용을 줄여준다. 이는 프로그램의 동작을 예측하기 쉽게 만들고, 디버깅과 유지보수를 용이하게 한다. </li><br />
-<li>병렬 처리: 데이터가 변경 불가능하면 여러 스레드나 프로세스에서 동시에 데이터에 접근해도 안전하므로, 병렬 처리와 동시성 프로그래밍에서 큰 이점을 제공한다.</li><br />
-<li>최적화: 현대의 가비지 컬렉션(GC) 시스템은 변경 불가능한 데이터 구조를 효율적으로 처리할 수 있도록 설계되어 있다. 따라서 새로운 구조를 생성하는 오버헤드는 종종 생각보다 작다.</li>
-</ul>
+<p>다만 <code class="language-plaintext highlighter-rouge">/</code> 과 <code class="language-plaintext highlighter-rouge">/games</code> url 에 대해서는 메뉴바가 있고, <code class="language-plaintext highlighter-rouge">/games/:id</code> url 에 대해서는 메뉴바가 없도록 구성하고 싶다. 해당 작업을 진행하면 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 와 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 파일을 수정하고, 수정된 파일을 어떻게하면 적절하게 이용할 수 있을지 위에서의 고민을 토대로 각 파일에 대해 알아본다.</p>
 
+<h3 id="roothtmlheex-역할">root.html.heex 역할</h3>
+
+<p>이 파일은 전체 Phoenix 애플리케이션의 최상위 레이아웃을 정의하며, 다른 템플릿들은 이 안에 삽입되어 최종 HTML 문서를 형성한다. 일반적으로 전체 애플리케이션에 걸쳐 공통적으로 사용되는 HTML 요소를 포함한다.(<code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> 태그 내의 meta data, stylesheet link, javascript 파일 등)</p>
+
+<p><code class="language-plaintext highlighter-rouge">router.ex</code> 에서 <code class="language-plaintext highlighter-rouge">pipeline :browser</code> 를 통해 주입되며, 모든 정적 html와 LiveView는 이 파일의 구조 안에서 렌더링된다.</p>
+
+<p>만약 <code class="language-plaintext highlighter-rouge">root1.html.heex</code> 파일에서 해당 메뉴바를 구현하고, <code class="language-plaintext highlighter-rouge">root2.html.heex</code> 에는 메뉴바를 구현하지 않고, 이렇게 두 개의 파일을 만들어서 <code class="language-plaintext highlighter-rouge">pipeline :browser1</code> , <code class="language-plaintext highlighter-rouge">pipeline :browser2</code> 를 각각 정의하여 이를 각각 필요한 url 에 맞게 사용하고자 시도하였으나, 이런 경우, 동일한 매개변수를 가지는 <code class="language-plaintext highlighter-rouge">live_session</code> macro 가 두번 정의되어야 한다. 이는 다음의 에러가 발생시킨다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">**</span> <span class="o">(</span>RuntimeError<span class="o">)</span> attempting to redefine live_session :require_authenticated_user.
+live_session routes must be declared <span class="k">in </span>a single named block.
+</code></pre></div></div>
+
+<p>따라서 동일한 <code class="language-plaintext highlighter-rouge">scope</code> macro 에서 정의되어야 하는 url page 에 대해서는 동일한 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 가 적용되어야 한다.</p>
+
+<h3 id="apphtmlheex-역할">app.html.heex 역할</h3>
+
+<p><code class="language-plaintext highlighter-rouge">app.html.heex</code>는 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 내에 삽입되는, 특정 부분의 레이아웃을 정의하는 파일로, 주로 애플리케이션의 주요 컨텐츠를 포함하며, 특정 페이지나 섹션에 대한 레이아웃을 정의하는 데 사용된다. 예를 들어, header, footer, sidebar 등 페이지의 주요 부분을 구성할 수 있으며, 페이지 별로 다른 내용을 표시하는데 사용된다.</p>
+
+<p>따라서 url 별로 header 적용 여부를 다르게 하고 싶다면 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 파일을 각각 만들어서 각 page mdoule 에서 다른 template 을 가져오면 된다.</p>
+
+<h3 id="구현">구현</h3>
+
+<p>기존에 작성한 header 는 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 에 있었다. 그래서 해당 code 를 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 로 이동시키고, header 가 없은 <code class="language-plaintext highlighter-rouge">app_no_header.html.heex</code> 를 추가 생성하였다.</p>
+
+<p>그리고 <code class="language-plaintext highlighter-rouge">app_no_header.html.heex</code> 을 liveview 에서 가져올 수 있도록 <code class="language-plaintext highlighter-rouge">my_pjt_web.ex</code> 에 callback 함수를 추가해주었다.</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">MyPjt1Web</span> <span class="k">do</span>
+  <span class="o">...</span>
+  <span class="c1"># 기존 app.html.heex 를 layout 로 사용하는 함수</span>
+  <span class="k">def</span> <span class="n">live_view</span> <span class="k">do</span>
+    <span class="kn">quote</span> <span class="k">do</span>
+      <span class="kn">use</span> <span class="no">Phoenix</span><span class="o">.</span><span class="no">LiveView</span><span class="p">,</span>
+        <span class="ss">layout:</span> <span class="p">{</span><span class="no">MyPjt1Web</span><span class="o">.</span><span class="no">Layouts</span><span class="p">,</span> <span class="ss">:app</span><span class="p">}</span>
+
+      <span class="kn">unquote</span><span class="p">(</span><span class="n">html_helpers</span><span class="p">())</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="c1"># 추가된 함수. app_no_header.html.heex 를 layout 로 사용</span>
+  <span class="k">def</span> <span class="n">live_view_no_header</span> <span class="k">do</span>
+    <span class="kn">quote</span> <span class="k">do</span>
+      <span class="kn">use</span> <span class="no">Phoenix</span><span class="o">.</span><span class="no">LiveView</span><span class="p">,</span>
+        <span class="ss">layout:</span> <span class="p">{</span><span class="no">MyPjt1Web</span><span class="o">.</span><span class="no">Layouts</span><span class="p">,</span> <span class="ss">:app_no_header</span><span class="p">}</span>
+
+      <span class="kn">unquote</span><span class="p">(</span><span class="n">html_helpers</span><span class="p">())</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+  <span class="o">...</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>다음으로 각 url 대한 module 에서 <code class="language-plaintext highlighter-rouge">use</code> macro 를 사용하여 앞에서 정의한 callback 을 맞게 가져옴</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">MyPjt1Web</span><span class="o">.</span><span class="no">GameLive</span><span class="o">.</span><span class="no">Index</span> <span class="k">do</span>
+  <span class="kn">use</span> <span class="no">MyPjt1Web</span><span class="p">,</span> <span class="ss">:live_view</span>
+  <span class="o">...</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">MyPjt1Web</span><span class="o">.</span><span class="no">GameLive</span><span class="o">.</span><span class="no">Show</span> <span class="k">do</span>
+  <span class="kn">use</span> <span class="no">MyPjt1Web</span><span class="p">,</span> <span class="ss">:live_view_no_header</span>
+  <span class="o">...</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>마지막으로 남은 것은 <code class="language-plaintext highlighter-rouge">get "/", PageController, :home</code> 에서 가져오는 module 만 처리해주면 된다. 그런데, 분명 <code class="language-plaintext highlighter-rouge">my_pjt1_web</code>module <code class="language-plaintext highlighter-rouge">controller</code> callback 에 <code class="language-plaintext highlighter-rouge">layout: {MyPjt1Web.Layouts, :app}</code> 이 정의되어 있음에도 불구하고, application 실행시 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 의 header 가 표시되어지지 않았다. 그래서 어쩔수 없이 <code class="language-plaintext highlighter-rouge">home.html.heex</code> 에 동일한 header 를 추가하여 
+자체적으로 header 를 rendering 하도록 구현하였다.</p>
 
         <aside class="sidebar inline" id="post-end">
     
@@ -387,13 +442,13 @@
     
         <ul class="tags inline">
             
-                <li><a href="./tag.html?tag=elixir" class="tag inline">elixir</a></li>
+                <li><a href="./tag.html?tag=phoenix" class="tag inline">phoenix</a></li>
             
-                <li><a href="./tag.html?tag=map" class="tag inline">map</a></li>
+                <li><a href="./tag.html?tag=liveview" class="tag inline">liveview</a></li>
             
-                <li><a href="./tag.html?tag=struct" class="tag inline">struct</a></li>
+                <li><a href="./tag.html?tag=root.html.heex" class="tag inline">root.html.heex</a></li>
             
-                <li><a href="./tag.html?tag=immutable+data+type" class="tag inline">immutable data type</a></li>
+                <li><a href="./tag.html?tag=app.html.heex" class="tag inline">app.html.heex</a></li>
             
     
         </ul>
@@ -402,11 +457,11 @@
     <div class="share-hover inline">
         <span class="share-button inline"><svg fill="currentColor" width="25" height="25" class="inline"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>
         <div class="share-icons inline" id="post-end-icons">
-            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=Elixir 의 Map, Struct 등은 왜 immutable data types 인가?&url=http://localhost:4000/immutable-data-type.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/immutable-data-type.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/immutable-data-type.html&title=Elixir 의 Map, Struct 등은 왜 immutable data types 인가?" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/immutable-data-type.html&title=Elixir 의 Map, Struct 등은 왜 immutable data types 인가?&summary=Elixir 의 immutable data types (Map, Struct)&source=http://localhost:4000/immutable-data-type.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a class="email" href="mailto:?subject=Elixir 의 Map, Struct 등은 왜 immutable data types 인가?&body=Elixir 의 immutable data types (Map, Struct)%0A%0ARead more here: http://localhost:4000/immutable-data-type.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=root.html.heex 과 app.html.heex 에 대해&url=http://localhost:4000/root-and-app.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/root-and-app.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/root-and-app.html&title=root.html.heex 과 app.html.heex 에 대해" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/root-and-app.html&title=root.html.heex 과 app.html.heex 에 대해&summary=Phoenix LiveView 에서 기본 <head> 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함&source=http://localhost:4000/root-and-app.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a class="email" href="mailto:?subject=root.html.heex 과 app.html.heex 에 대해&body=Phoenix LiveView 에서 기본 <head> 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함%0A%0ARead more here: http://localhost:4000/root-and-app.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
             <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="inline" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>
         </div>
     </div>
@@ -803,14 +858,14 @@
     }
 
     function copyToClipboard() {
-      navigator.clipboard.writeText('http://localhost:4000/immutable-data-type.html').then(function() {
+      navigator.clipboard.writeText('http://localhost:4000/root-and-app.html').then(function() {
       alerts = document.getElementsByClassName('alert')
       for (i=0; i < alerts.length; i++){
         alerts[i].innerHTML='\u00ABlink copied\u00BB';
         setTimeout((function(i){ return function(){alerts[i].innerHTML='';}})(i), 1600 );
       };
       }, function() {
-        prompt("Unable to copy, please use this link:", "http://localhost:4000/immutable-data-type.html");
+        prompt("Unable to copy, please use this link:", "http://localhost:4000/root-and-app.html");
       });
     }
 

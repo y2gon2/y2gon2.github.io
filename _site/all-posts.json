@@ -1,6 +1,8 @@
 {
   "posts" : [
     
+    "./root-and-app.html",
+    
     "./custom-js-phoenix.html",
     
     "./impl_attribute.html",

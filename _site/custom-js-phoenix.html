@@ -22,7 +22,7 @@
   "headline": "Phoenix LiveView 에서 사용자 정의 JS code 사용 방법",
   "abstract": "Phoenix LiveView 에서 사용자 정의 JS code 구현 및 적용을 위한 Node.js 설정 및 render/1 에 적용하는 과정",
     "keywords": "phoenix, liveview, custom javascript, node.js",
-    "wordcount": "731",
+    "wordcount": "735",
     "image": ["http://localhost:4000/assets/imgposts/general/post_general15.jpg"],
   "datePublished": "2024-01-24 08:32:20 +0900",
   "dateModified": "2024-01-24 08:32:20 +0900",
@@ -62,7 +62,7 @@
 <meta name="twitter:description" content="Phoenix LiveView 에서 사용자 정의 JS code 구현 및 적용을 위한 Node.js 설정 및 render/1 에 적용하는 과정">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="731"/>
+<meta data-rh="true" name="twitter:data1" content="735"/>
 <meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general15.jpg">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
@@ -384,6 +384,9 @@ npm init
   </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phoenix liveview project"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"main"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tailwind.config.js"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo </span><span class="se">\"</span><span class="s2">Error: no test specified</span><span class="se">\"</span><span class="s2"> &amp;&amp; exit 1"</span><span class="p">,</span><span class="w">
+  </span><span class="p">},</span><span class="w">
   </span><span class="nl">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"***"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"license"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ISC"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"repository"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -405,8 +408,8 @@ npm init
 <p><code>package.json</code> <code>scripts</code> 섹션에 <code>deploy</code> 스크립트를 추가해야 웹팩을 사용하여 build 할 수 있다. script 섹션 설정을 포함한  다음 코드를 <code>package.json</code> 에 추가한다.</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo </span><span class="se">\"</span><span class="s2">Error: no test specified</span><span class="se">\"</span><span class="s2"> &amp;&amp; exit 1"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"deploy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webpack --mode production"</span><span class="w">
+    </span><span class="err">...</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deploy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webpack --mode production"</span><span class="w"> 
   </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -533,7 +536,7 @@ window.toggleButton = toggleButton;
 <p>LiveView의 <code>render/1</code> 함수에서 해당 JavaScript 함수를 사용하는 HTML을 반환</p>
 
 <div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">render</span><span class="p">(</span><span class="n">assigns</span><span class="p">)</span> <span class="k">do</span>
-  <span class="sx">~L""</span><span class="s2">"
+  <span class="sx">~H""</span><span class="s2">"
   ... ...
     &lt;button 
       type="</span><span class="n">button</span><span class="s2">" 
@@ -635,6 +638,37 @@ window.toggleButton = toggleButton;
           
           
 
+          <a href="./root-and-app.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general16.jpg') center no-repeat; background-size: cover;">
+            <div class="recent-item-title">
+              <span>root.html.heex 과 app.html.heex 에 대해</span>
+              
+
+  <span class = "recent-item-meta">
+  
+  
+  
+  
+    
+    
+    <p class="page_meta-readtime">
+      
+        2 minute read
+      
+    </p>
+  
+  
+  </span>
+
+            </div>
+          </a>
+        </div>
+      
+    
+      
+        <div class="recent-item">
+          
+          
+
           <a href="./custom-js-phoenix.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general15.jpg') center no-repeat; background-size: cover;">
             <div class="recent-item-title">
               <span>Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</span>
@@ -712,37 +746,6 @@ window.toggleButton = toggleButton;
     <p class="page_meta-readtime">
       
         3 minute read
-      
-    </p>
-  
-  
-  </span>
-
-            </div>
-          </a>
-        </div>
-      
-    
-      
-        <div class="recent-item">
-          
-          
-
-          <a href="./changeset.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general12.jpg') center no-repeat; background-size: cover;">
-            <div class="recent-item-title">
-              <span>changeset/2 in Ecto Library</span>
-              
-
-  <span class = "recent-item-meta">
-  
-  
-  
-  
-    
-    
-    <p class="page_meta-readtime">
-      
-        1 minute read
       
     </p>
   
