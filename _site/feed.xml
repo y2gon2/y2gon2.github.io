@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-01-25T14:12:04+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">root.html.heex 과 app.html.heex 에 대해</title><link href="http://localhost:4000/root-and-app.html" rel="alternate" type="text/html" title="root.html.heex 과 app.html.heex 에 대해" /><published>2024-01-25T08:32:20+09:00</published><updated>2024-01-25T08:32:20+09:00</updated><id>http://localhost:4000/root-and-app</id><content type="html" xml:base="http://localhost:4000/root-and-app.html"><![CDATA[<p>현재 Phoenix LiveView application 작업을 진행하면서, 아래와 같이 page 최상단에 메뉴바를 띄우고자 한다.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-01-26T10:58:48+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">root.html.heex 과 app.html.heex 에 대해</title><link href="http://localhost:4000/root-and-app.html" rel="alternate" type="text/html" title="root.html.heex 과 app.html.heex 에 대해" /><published>2024-01-25T08:32:20+09:00</published><updated>2024-01-25T08:32:20+09:00</updated><id>http://localhost:4000/root-and-app</id><content type="html" xml:base="http://localhost:4000/root-and-app.html"><![CDATA[<p>현재 Phoenix LiveView application 작업을 진행하면서, 아래와 같이 page 최상단에 메뉴바를 띄우고자 한다.</p>
 
 <center><img src="assets\img\posts\header.png" width="500" /></center>
 
@@ -70,7 +70,93 @@ live_session routes must be declared <span class="k">in </span>a single named bl
 </code></pre></div></div>
 
 <p>마지막으로 남은 것은 <code class="language-plaintext highlighter-rouge">get "/", PageController, :home</code> 에서 가져오는 module 만 처리해주면 된다. 그런데, 분명 <code class="language-plaintext highlighter-rouge">my_pjt1_web</code>module <code class="language-plaintext highlighter-rouge">controller</code> callback 에 <code class="language-plaintext highlighter-rouge">layout: {MyPjt1Web.Layouts, :app}</code> 이 정의되어 있음에도 불구하고, application 실행시 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 의 header 가 표시되어지지 않았다. 그래서 어쩔수 없이 <code class="language-plaintext highlighter-rouge">home.html.heex</code> 에 동일한 header 를 추가하여 
-자체적으로 header 를 rendering 하도록 구현하였다.</p>]]></content><author><name>Yong gon Yun</name></author><category term="phoenix" /><category term="liveview" /><category term="root.html.heex" /><category term="app.html.heex" /><summary type="html"><![CDATA[Phoenix LiveView 에서 기본 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함]]></summary></entry><entry><title type="html">Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</title><link href="http://localhost:4000/custom-js-phoenix.html" rel="alternate" type="text/html" title="Phoenix LiveView 에서 사용자 정의 JS code 사용 방법" /><published>2024-01-24T08:32:20+09:00</published><updated>2024-01-24T08:32:20+09:00</updated><id>http://localhost:4000/custom-js-phoenix</id><content type="html" xml:base="http://localhost:4000/custom-js-phoenix.html"><![CDATA[<p>Phoenix LiveView 를 사용하여 아래와 같이 버튼 클릭시 번갈아가며 버튼의 배경색과 내용이 바뀌는 toggle button 을 사용하고자 하였다. 그런데 기존의 Phoenix LiveView 제공 html tag 및 css 로 이를 생성할 수 없었으며, 따라서 자체적으로 JS 를 작성하여 기존 button 에 적용해야 하는 상황이다. 해당 과정에서 필요한 설정 및 <code>render/1</code>에 적용하기까지의 과정을 정리하고자 한다. </p>
+자체적으로 header 를 rendering 하도록 구현하였다.</p>]]></content><author><name>Yong gon Yun</name></author><category term="phoenix" /><category term="liveview" /><category term="root.html.heex" /><category term="app.html.heex" /><summary type="html"><![CDATA[Phoenix LiveView 에서 기본 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함]]></summary></entry><entry><title type="html">Account context - users table 에 nickname 항목 추가</title><link href="http://localhost:4000/users-column-add.html" rel="alternate" type="text/html" title="Account context - users table 에 nickname 항목 추가" /><published>2024-01-25T08:32:20+09:00</published><updated>2024-01-25T08:32:20+09:00</updated><id>http://localhost:4000/users-column-add</id><content type="html" xml:base="http://localhost:4000/users-column-add.html"><![CDATA[<p>Phoenix LiveView Authrization 설정을 위해 lon in 기능을 활성화에 필요한 계정 생성 작업이 필요하다. 이 때, <code class="language-plaintext highlighter-rouge">mix phx.gen.auth Accounts User users</code> command 를 통해 사용자 email, password 정보를 저장하고 이를 사용하여 authrization, session 괸리를 위한 service code, template, token 저장 table 까지 모두 알아서 생성해 준다.</p>
+
+<p>매우 편리한 기능이지만, 해당 command 로 추가 정보를 저장/관리하는 기능을 함께 생성할 수는 없음을 확인하였다. 대신 추가 migration 생성 및 필요한 요소를 관련 code 에 직접 추가하여 사용 가능하였다.</p>
+
+<p>현재 작업하고 있는 application 에서 사용자 정보를 노출 시킬 때, email 보다 nickname 으로 보여지는 것이 좋다고 판단되어 이를 추가하고 실제 application 에 반영하는 작업을 정리해 보았다.</p>
+
+<h3 id="1-migration-생성-및-실행">1. migration 생성 및 실행</h3>
+
+<p>다음의 command 를 실행하여 migration script 파일을 생성</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mix ecto.gen.migration add_nickname_to_users
+</code></pre></div></div>
+
+<p>이를 실행하면 <code class="language-plaintext highlighter-rouge">priv/repo/migrations/(생성일시)_add_nickname__to_users.exs</code> 파일이 생성된다. 해당 파일에서 <code class="language-plaintext highlighter-rouge">nickname</code> column 을 추가할 code 를 작성한다.</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">MyPjt1</span><span class="o">.</span><span class="no">Repo</span><span class="o">.</span><span class="no">Migrations</span><span class="o">.</span><span class="no">AddNicknameToUsers</span> <span class="k">do</span>
+  <span class="kn">use</span> <span class="no">Ecto</span><span class="o">.</span><span class="no">Migration</span>
+
+  <span class="k">def</span> <span class="n">change</span> <span class="k">do</span>
+    <span class="n">alter</span> <span class="n">table</span><span class="p">(</span><span class="ss">:users</span><span class="p">)</span> <span class="k">do</span>
+      <span class="n">add</span> <span class="ss">:nickname</span><span class="p">,</span> <span class="ss">:string</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>해당 파일을 아래의 command 로 실행하고, database 에 변경 사항이 반영되었는지 확인한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mix ecto.migrate
+</code></pre></div></div>
+
+<h3 id="2-user-module-에서-schema-및-changeset2-수정">2. <code class="language-plaintext highlighter-rouge">User</code> module 에서 schema 및 <code class="language-plaintext highlighter-rouge">changeset/2</code> 수정</h3>
+
+<p>아래와 같이 <code class="language-plaintext highlighter-rouge">Usher</code> module 에서 <code class="language-plaintext highlighter-rouge">schema</code> 에 field 를 추가시켜 준다.</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">schema</span> <span class="s2">"users"</span> <span class="k">do</span>
+    <span class="n">field</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:string</span>
+    <span class="n">field</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">:string</span><span class="p">,</span> <span class="ss">virtual:</span> <span class="no">true</span><span class="p">,</span> <span class="ss">redact:</span> <span class="no">true</span>
+    <span class="n">field</span> <span class="ss">:hashed_password</span><span class="p">,</span> <span class="ss">:string</span><span class="p">,</span> <span class="ss">redact:</span> <span class="no">true</span>
+    <span class="n">field</span> <span class="ss">:confirmed_at</span><span class="p">,</span> <span class="ss">:naive_datetime</span>
+    <span class="n">field</span> <span class="ss">:nickname</span><span class="p">,</span> <span class="ss">:string</span>  <span class="c1"># field 추가</span>
+
+    <span class="n">timestamps</span><span class="p">(</span><span class="ss">type:</span> <span class="ss">:utc_datetime</span><span class="p">)</span>
+  <span class="k">end</span>
+</code></pre></div></div>
+
+<p>그러나, field 를 추가하고, 계정 등록 module (<code class="language-plaintext highlighter-rouge">user_registration_live.ex</code>) 에서 nickname 입력을 구현하여도 실제로 저장이 되지 않는다. 그 이유는 nickname 정보까지 모두 입력 후 저장 버튼을 누를 때, 입력 값의 유효성 검증이 우선 진행되며, 검증을 통과된 경우, db 에 저장 및 authorization 작업이 진행되게 된다.</p>
+
+<p>그런데, 관련 유효성 검증 작업, 즉 <code class="language-plaintext highlighter-rouge">changeset/2</code> code 를 확인하면</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">def</span> <span class="n">registration_changeset</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">opts</span> <span class="p">\\</span> <span class="p">[])</span> <span class="k">do</span>
+    <span class="n">user</span>
+    <span class="o">|&gt;</span> <span class="n">cast</span><span class="p">(</span><span class="n">attrs</span><span class="p">,</span> <span class="p">[</span><span class="ss">:email</span><span class="p">,</span> <span class="ss">:password</span><span class="p">])</span>
+    <span class="o">|&gt;</span> <span class="n">validate_email</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span>
+    <span class="o">|&gt;</span> <span class="n">validate_password</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span>
+  <span class="k">end</span>
+</code></pre></div></div>
+
+<p>여기에서 <code class="language-plaintext highlighter-rouge">cast(attrs, [:email, :password])</code> 함수는 매개변수로 입력된 key 들 (<code class="language-plaintext highlighter-rouge">:email, :password</code>) 에 대한 value 값이 변경되었을 때, 해당 항목에 대한 <code class="language-plaintext highlighter-rouge">changeset</code> 을 반환하는 함수이다. 즉 해당 항목에 <code class="language-plaintext highlighter-rouge">:nickname</code> 을 추가해 주어야 함께 <code class="language-plaintext highlighter-rouge">changeset</code> 으로 변환되어, 유효성을 검증하고, 다음 작업을 진행할 수 있게 된다. (<code class="language-plaintext highlighter-rouge">:nickname</code>에 대한 vaildation 은 필요하지 않아서 추가하지 않았음.)</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">def</span> <span class="n">registration_changeset</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">opts</span> <span class="p">\\</span> <span class="p">[])</span> <span class="k">do</span>
+    <span class="n">user</span>
+    <span class="o">|&gt;</span> <span class="n">cast</span><span class="p">(</span><span class="n">attrs</span><span class="p">,</span> <span class="p">[</span><span class="ss">:email</span><span class="p">,</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">:nickname</span><span class="p">])</span> <span class="c1"># :nickname 추가</span>
+    <span class="o">|&gt;</span> <span class="n">validate_email</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span>
+    <span class="o">|&gt;</span> <span class="n">validate_password</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span>
+  <span class="k">end</span>
+</code></pre></div></div>
+
+<h3 id="3-계정-생성-시-nickname-추가-화면-구현">3. 계정 생성 시 nickname 추가 화면 구현</h3>
+
+<p><code class="language-plaintext highlighter-rouge">user_registration_live.ex</code> <code class="language-plaintext highlighter-rouge">render/2</code> 내 아래와 같이 nickname 항목을 추가하면 최종적으로 계정 생성시 nickname 정보까지 입력해야 조건을 만들어 줄 수 있다.</p>
+
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">...</span>
+  <span class="o">&lt;.</span><span class="n">simple_form</span> <span class="o">...</span> <span class="o">&gt;</span>
+    <span class="o">...</span>
+    <span class="o">&lt;.</span><span class="n">input</span> <span class="n">field</span><span class="o">=</span><span class="p">{</span><span class="nv">@form</span><span class="p">[</span><span class="ss">:email</span><span class="p">]}</span> <span class="n">type</span><span class="o">=</span><span class="s2">"email"</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Email"</span> <span class="n">required</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;.</span><span class="n">input</span> <span class="n">field</span><span class="o">=</span><span class="p">{</span><span class="nv">@form</span><span class="p">[</span><span class="ss">:password</span><span class="p">]}</span> <span class="n">type</span><span class="o">=</span><span class="s2">"password"</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Password"</span> <span class="n">required</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;.</span><span class="n">input</span> <span class="n">field</span><span class="o">=</span><span class="p">{</span><span class="nv">@form</span><span class="p">[</span><span class="ss">:nickname</span><span class="p">]}</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Nickname"</span> <span class="n">required</span> <span class="o">/&gt;</span>
+    <span class="o">...</span>
+  <span class="o">&lt;/.</span><span class="n">simple_form</span><span class="o">&gt;</span>
+<span class="o">...</span>
+</code></pre></div></div>
+<center><img src="assets\img\posts\nickname_form.png" width="500" /></center>
+<p><br /></p>
+<center><strong>users table</strong></center>
+<center><img src="assets\img\posts\nickname_db.png" width="700" /></center>
+<p><br /></p>]]></content><author><name>Yong gon Yun</name></author><category term="phoenix" /><category term="liveview" /><category term="migration" /><category term="table_항목_추가" /><category term="schema" /><category term="changeset/2" /><summary type="html"><![CDATA[계정 정보에서 nickname 정보가 필요함에 따라, 이를 기존에 생성한 users table 에 추가하고, 계정 생성 시, nickname 을 입력하도록 함.]]></summary></entry><entry><title type="html">Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</title><link href="http://localhost:4000/custom-js-phoenix.html" rel="alternate" type="text/html" title="Phoenix LiveView 에서 사용자 정의 JS code 사용 방법" /><published>2024-01-24T08:32:20+09:00</published><updated>2024-01-24T08:32:20+09:00</updated><id>http://localhost:4000/custom-js-phoenix</id><content type="html" xml:base="http://localhost:4000/custom-js-phoenix.html"><![CDATA[<p>Phoenix LiveView 를 사용하여 아래와 같이 버튼 클릭시 번갈아가며 버튼의 배경색과 내용이 바뀌는 toggle button 을 사용하고자 하였다. 그런데 기존의 Phoenix LiveView 제공 html tag 및 css 로 이를 생성할 수 없었으며, 따라서 자체적으로 JS 를 작성하여 기존 button 에 적용해야 하는 상황이다. 해당 과정에서 필요한 설정 및 <code>render/1</code>에 적용하기까지의 과정을 정리하고자 한다. </p>
 
 <center>
   <img src="assets\img\posts\toggle_button.png" width="300" />
@@ -701,22 +787,4 @@ This Server is termniated.
 </ul>
 
 <h3>결론</h3>
-<p>두 방식 모두 Elixir에서 구조체 인스턴스를 생성하는 방법. <code>__MODULE__</code> 방식은 주로 모듈 내부에서 사용되며, <code>def new(field \\ []), do: __struct__(field)</code> 방식은 모듈 외부에서 구조체 인스턴스를 생성할 때 사용되는 공개 함수를 제공한다. 두 경우 모두, <code>모듈명.new(field 값)</code>과 같은 형태로 호출하여 인스턴스를 생성할 수 있다.</p>]]></content><author><name>Yong gon Yun</name></author><category term="elixir" /><category term="instance" /><category term="struct" /><summary type="html"><![CDATA[Elixir - intance 생성]]></summary></entry><entry><title type="html">struct - instance 에 대해 (Elixir vs OOP languages)</title><link href="http://localhost:4000/instance-with-elixir.html" rel="alternate" type="text/html" title="struct - instance 에 대해 (Elixir vs OOP languages)" /><published>2023-12-29T10:32:20+09:00</published><updated>2023-12-29T10:32:20+09:00</updated><id>http://localhost:4000/instance-with-elixir</id><content type="html" xml:base="http://localhost:4000/instance-with-elixir.html"><![CDATA[<p>elixir 에서의 구조체는 상속, 다형성 등이 지원되지 않고 한번 정의되면 구조체 내부 field 값을 변경할 수 없는, 내부에 field 가 존재하는 사용자 정의 type 이며, 해당 구조체 type 에 실제 data 를 가지게 하고 이를 변수 매칭 시킨것이 elixir instance 이다. </p>
-
-<h3>유사점</h3>
-<ol>
-<li>데이터 캡슐화: Elixir의 구조체와 Java나 Python의 인스턴스 모두 데이터를 캡슐화. 여러 데이터를 하나의 구조로 묶어 관리할 수 있다.</li><br />
-<li>필드 정의: 두 언어에서는 자료구조에 필드(데이터 요소)를 정의할 수 있으며, 이러한 필드는 각각의 자료구조에 속한 정보를 나타냄.</li><br />
-<li>타입 안정성: Elixir의 구조체와 Java의 객체는 둘 다 특정 타입에 속하는 데이터를 담는데, 이는 데이터 타입에 대한 안정성과 예측 가능성을 제공.</li>
-</ol>
-
-<h3>차이점</h3>
-<ol>
-<li>불변성(Immutability) vs 가변성(Mutability): Elixir의 구조체는 불변성을 가짐. 한 번 생성되면 그 상태를 변경할 수 없음. 반면, Java나 Python의 객체는 가변적이며, 객체의 상태(필드 값 등)를 변경할 수 있음.</li><br />
-<li>함수형 vs 객체지향: Elixir는 함수형 프로그래밍 패러다임을 따르기 때문에, 데이터와 함수가 분리되어 있음. 구조체는 단지 데이터를 담는 용도로 사용되며, 모든 작업은 순수 함수를 통해 처리됨. 반면, Java나 Python에서는 객체가 데이터와 그 데이터를 조작하는 메소드를 모두 포함.</li><br />
-<li>상속과 다형성: Java나 Python에서는 클래스 상속과 다형성이 중요한 특징으로 객체는 부모 클래스의 속성과 메소드를 상속받을 수 있으며, 인터페이스나 추상 클래스를 통해 다형성을 구현할 수 있음. 반면, Elixir의 구조체는 이런 상속 메커니즘이나 다형성을 지원하지 않음.</li><br />
-<li>메소드와 함수: Java나 Python에서 객체는 자신의 메소드를 가지고 있으며, 이를 통해 객체의 상태를 변경하거나 정보를 얻을 수 있음. Elixir에서는 모든 작업이 함수를 통해 이루어지며, 이 함수들은 구조체의 데이터에 대한 연산을 수행하지만, 구조체 내부에 정의되지 않음.</li>
-</ol>
-
-<h3>결론</h3>
-<p>Elixir의 구조체는 Java나 Python의 객체와 유사하게 데이터를 캡슐화하는 역할을 하지만, 불변성, 함수형 패러다임, 상속 및 다형성 부재, 메소드와 함수의 차이라는 측면에서 분명한 차이점이 있다. 이러한 차이점들은 Elixir가 가진 함수형 프로그래밍의 특징을 반영한다.</p>]]></content><author><name>Yong gon Yun</name></author><category term="oop" /><category term="instance" /><category term="struct" /><category term="phoenix" /><category term="liveview" /><category term="elixir" /><summary type="html"><![CDATA[struct - instance 에 대해 (Elixir vs OOP languages)]]></summary></entry></feed>
+<p>두 방식 모두 Elixir에서 구조체 인스턴스를 생성하는 방법. <code>__MODULE__</code> 방식은 주로 모듈 내부에서 사용되며, <code>def new(field \\ []), do: __struct__(field)</code> 방식은 모듈 외부에서 구조체 인스턴스를 생성할 때 사용되는 공개 함수를 제공한다. 두 경우 모두, <code>모듈명.new(field 값)</code>과 같은 형태로 호출하여 인스턴스를 생성할 수 있다.</p>]]></content><author><name>Yong gon Yun</name></author><category term="elixir" /><category term="instance" /><category term="struct" /><summary type="html"><![CDATA[Elixir - intance 생성]]></summary></entry></feed>

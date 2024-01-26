@@ -447,6 +447,45 @@
 			
 
 				<div class="post">
+					<a class="post-list-title" href="./users-column-add.html">Account context - users table 에 nickname 항목 추가</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        2 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Phoenix LiveView Authrization 설정을 위해 lon in 기능을 활성화에 필요한 계정 생성 작업이 필요하다. 이 때, <code class="language-plaintext highlighter-rouge">mix phx.gen.auth Accounts User users</code> command 를 통해 사용자 email, password 정보를 저장하고 이를 사용하여 authrization, session 괸리를 위한 service code, template, token 저장 table 까지 모두 알아서 생성해 준다.</p> <p>매우 편리한 기능이지만, 해당 command 로 추가 정보를 저장/관리하는 기능을 함께 생성할 수는 없음을 확인하였다. 대신 추가 migration 생성 및 필요한 요소를 관련 code 에 직접 추가하여 사용 가능하였다.</p> <p>현재 작업하고 있는 application 에서 사용자 정보를 노출 시킬 때, email 보다 nickname 으로 보여지는 것이 좋다고 판단되어 이를 추가하고 실제 application 에...<a class="read-more" href="./users-column-add.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
 					<a class="post-list-title" href="./changeset.html">changeset/2 in Ecto Library</a>
 					
 
@@ -1152,6 +1191,45 @@
 			
 
 				<div class="post">
+					<a class="post-list-title" href="./users-column-add.html">Account context - users table 에 nickname 항목 추가</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        2 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Phoenix LiveView Authrization 설정을 위해 lon in 기능을 활성화에 필요한 계정 생성 작업이 필요하다. 이 때, <code class="language-plaintext highlighter-rouge">mix phx.gen.auth Accounts User users</code> command 를 통해 사용자 email, password 정보를 저장하고 이를 사용하여 authrization, session 괸리를 위한 service code, template, token 저장 table 까지 모두 알아서 생성해 준다.</p> <p>매우 편리한 기능이지만, 해당 command 로 추가 정보를 저장/관리하는 기능을 함께 생성할 수는 없음을 확인하였다. 대신 추가 migration 생성 및 필요한 요소를 관련 code 에 직접 추가하여 사용 가능하였다.</p> <p>현재 작업하고 있는 application 에서 사용자 정보를 노출 시킬 때, email 보다 nickname 으로 보여지는 것이 좋다고 판단되어 이를 추가하고 실제 application 에...<a class="read-more" href="./users-column-add.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
 					<a class="post-list-title" href="./root-and-app.html">root.html.heex 과 app.html.heex 에 대해</a>
 					
 
@@ -1227,45 +1305,6 @@
 					</div>
 				</div>
 			
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./phoenix-slot.html">slot attribute 사용</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2024-01-01T10:32:20+09:00">January 1, 2024</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        1 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<p>Phoenix LiveView 에서 동적인 component 를 삽입 하고자 하는 경우, 해당 component attribute 로 `slot` 을 정의하고 이를 사용해 주어야 한다. </p> <h3>사용 방법</h3> <div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">slot</span> <span class="p">:</span><span class="err">블록명</span><span class="p">,</span> <span class="ss">required:</span> <span class="no">true</span> <span class="k">def</span> <span class="err">컴포넌트명</span><span class="p">(</span><span class="n">assigns</span><span class="p">)</span> <span class="k">do</span> <span class="sx">~H""</span><span class="s2">" &lt;동적으로 구현할 컴포넌트 태그&gt; &lt;&gt;..사용자 구현...&lt;&gt; &lt;%= render_slot(@블록명) %&gt; &lt;/동적으로 구현할 컴포넌트 태그&gt; """</span> <span class="k">end</span> </code></pre></div></div> <h3> Slot 정의</h3> <ul> <li><code>slot :블록명</code> : 컴포넌트 내부에 동적으로 콘텐츠를 삽입할 수 있는 블록명이라는 이름의 슬롯을 정의.</li> <li><code>required: true</code>: 이 슬롯이 반드시 제공되어야 함을 의미. 이 컴포넌트를 사용할 때는 블록명 슬롯에 대한...<a class="read-more" href="./phoenix-slot.html"> read more</a>
-					</div>
-				</div>
-			
 			</div>
 		</div>
 	</div>
@@ -1312,6 +1351,55 @@
 
 					<div class="post-excerpt">
 						<p>Elixir 에서 Map 은 immutable type 이다. 따라서 <code>Map.delete/2</code>, <code>Map.put/3</code>, <code>Map.update/4</code> 등과 같은 함수는 실제로 기존 map data 를 수정하는 것이 아니라, 수정되된 값으로 새로운 map data 를 만들고 이것을 재할당 하는 것이다.</p> <p>Struct 의 경우도, 한번 생성된 instance 의 내부 field 값을 변경하고자 하는 경우, 이는 수정이 아닌, 새로운 data 생성 및 이를 재할당 하는 것이다. 그런데 list, map 과 같이 많은 데이터를 포함하고 있는 경우, 그중 하나의 값이 바뀔 때마다 매번 모든 부분에 대한 재할당을 진행한다면, 메모리 사용이나 성능상 단점이 매 커보인다.</p> <p>그렇다면, immutable data type 으로 처리할 때 어떤 이점이 있을 수 있으며, 예상되는 문제점은 어떻게 해결할까?</p>...<a class="read-more" href="./immutable-data-type.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
+	<div id="migration" class="hidden tag-master">
+		<h1>migration</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./users-column-add.html">Account context - users table 에 nickname 항목 추가</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        2 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Phoenix LiveView Authrization 설정을 위해 lon in 기능을 활성화에 필요한 계정 생성 작업이 필요하다. 이 때, <code class="language-plaintext highlighter-rouge">mix phx.gen.auth Accounts User users</code> command 를 통해 사용자 email, password 정보를 저장하고 이를 사용하여 authrization, session 괸리를 위한 service code, template, token 저장 table 까지 모두 알아서 생성해 준다.</p> <p>매우 편리한 기능이지만, 해당 command 로 추가 정보를 저장/관리하는 기능을 함께 생성할 수는 없음을 확인하였다. 대신 추가 migration 생성 및 필요한 요소를 관련 code 에 직접 추가하여 사용 가능하였다.</p> <p>현재 작업하고 있는 application 에서 사용자 정보를 노출 시킬 때, email 보다 nickname 으로 보여지는 것이 좋다고 판단되어 이를 추가하고 실제 application 에...<a class="read-more" href="./users-column-add.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1524,6 +1612,45 @@
 			
 
 				<div class="post">
+					<a class="post-list-title" href="./users-column-add.html">Account context - users table 에 nickname 항목 추가</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        2 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Phoenix LiveView Authrization 설정을 위해 lon in 기능을 활성화에 필요한 계정 생성 작업이 필요하다. 이 때, <code class="language-plaintext highlighter-rouge">mix phx.gen.auth Accounts User users</code> command 를 통해 사용자 email, password 정보를 저장하고 이를 사용하여 authrization, session 괸리를 위한 service code, template, token 저장 table 까지 모두 알아서 생성해 준다.</p> <p>매우 편리한 기능이지만, 해당 command 로 추가 정보를 저장/관리하는 기능을 함께 생성할 수는 없음을 확인하였다. 대신 추가 migration 생성 및 필요한 요소를 관련 code 에 직접 추가하여 사용 가능하였다.</p> <p>현재 작업하고 있는 application 에서 사용자 정보를 노출 시킬 때, email 보다 nickname 으로 보여지는 것이 좋다고 판단되어 이를 추가하고 실제 application 에...<a class="read-more" href="./users-column-add.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
 					<a class="post-list-title" href="./root-and-app.html">root.html.heex 과 app.html.heex 에 대해</a>
 					
 
@@ -1596,45 +1723,6 @@
 
 					<div class="post-excerpt">
 						<p>Phoenix LiveView 를 사용하여 아래와 같이 버튼 클릭시 번갈아가며 버튼의 배경색과 내용이 바뀌는 toggle button 을 사용하고자 하였다. 그런데 기존의 Phoenix LiveView 제공 html tag 및 css 로 이를 생성할 수 없었으며, 따라서 자체적으로 JS 를 작성하여 기존 button 에 적용해야 하는 상황이다. 해당 과정에서 필요한 설정 및 <code>render/1</code>에 적용하기까지의 과정을 정리하고자 한다. </p> <center> <img src="assets\img\posts\toggle_button.png" width="300" /> </center> <h3>1. Node module 설치 및 관련 package 설치</h3> <p>(1) <code>package.json</code> 생성</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>assets npm init </code></pre></div></div> <p>만약 <code>package.json</code> 파일이 없다면, 새로 생성해야 한다. 이를 위해 <code>npm init</code> 명령어를 실행하여 새로운 <code>package.json</code> 파일을 생성할 수 있다....<a class="read-more" href="./custom-js-phoenix.html"> read more</a>
-					</div>
-				</div>
-			
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./phoenix-slot.html">slot attribute 사용</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2024-01-01T10:32:20+09:00">January 1, 2024</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        1 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<p>Phoenix LiveView 에서 동적인 component 를 삽입 하고자 하는 경우, 해당 component attribute 로 `slot` 을 정의하고 이를 사용해 주어야 한다. </p> <h3>사용 방법</h3> <div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">slot</span> <span class="p">:</span><span class="err">블록명</span><span class="p">,</span> <span class="ss">required:</span> <span class="no">true</span> <span class="k">def</span> <span class="err">컴포넌트명</span><span class="p">(</span><span class="n">assigns</span><span class="p">)</span> <span class="k">do</span> <span class="sx">~H""</span><span class="s2">" &lt;동적으로 구현할 컴포넌트 태그&gt; &lt;&gt;..사용자 구현...&lt;&gt; &lt;%= render_slot(@블록명) %&gt; &lt;/동적으로 구현할 컴포넌트 태그&gt; """</span> <span class="k">end</span> </code></pre></div></div> <h3> Slot 정의</h3> <ul> <li><code>slot :블록명</code> : 컴포넌트 내부에 동적으로 콘텐츠를 삽입할 수 있는 블록명이라는 이름의 슬롯을 정의.</li> <li><code>required: true</code>: 이 슬롯이 반드시 제공되어야 함을 의미. 이 컴포넌트를 사용할 때는 블록명 슬롯에 대한...<a class="read-more" href="./phoenix-slot.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1888,6 +1976,55 @@
 	</div>
 
 	
+	<div id="schema" class="hidden tag-master">
+		<h1>schema</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./users-column-add.html">Account context - users table 에 nickname 항목 추가</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        2 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Phoenix LiveView Authrization 설정을 위해 lon in 기능을 활성화에 필요한 계정 생성 작업이 필요하다. 이 때, <code class="language-plaintext highlighter-rouge">mix phx.gen.auth Accounts User users</code> command 를 통해 사용자 email, password 정보를 저장하고 이를 사용하여 authrization, session 괸리를 위한 service code, template, token 저장 table 까지 모두 알아서 생성해 준다.</p> <p>매우 편리한 기능이지만, 해당 command 로 추가 정보를 저장/관리하는 기능을 함께 생성할 수는 없음을 확인하였다. 대신 추가 migration 생성 및 필요한 요소를 관련 code 에 직접 추가하여 사용 가능하였다.</p> <p>현재 작업하고 있는 application 에서 사용자 정보를 노출 시킬 때, email 보다 nickname 으로 보여지는 것이 좋다고 판단되어 이를 추가하고 실제 application 에...<a class="read-more" href="./users-column-add.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
 	<div id="slop" class="hidden tag-master">
 		<h1>slop</h1>
 		<div class="archive">
@@ -2064,6 +2201,55 @@
 	</div>
 
 	
+	<div id="table_항목_추가" class="hidden tag-master">
+		<h1>table_항목_추가</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./users-column-add.html">Account context - users table 에 nickname 항목 추가</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        2 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Phoenix LiveView Authrization 설정을 위해 lon in 기능을 활성화에 필요한 계정 생성 작업이 필요하다. 이 때, <code class="language-plaintext highlighter-rouge">mix phx.gen.auth Accounts User users</code> command 를 통해 사용자 email, password 정보를 저장하고 이를 사용하여 authrization, session 괸리를 위한 service code, template, token 저장 table 까지 모두 알아서 생성해 준다.</p> <p>매우 편리한 기능이지만, 해당 command 로 추가 정보를 저장/관리하는 기능을 함께 생성할 수는 없음을 확인하였다. 대신 추가 migration 생성 및 필요한 요소를 관련 code 에 직접 추가하여 사용 가능하였다.</p> <p>현재 작업하고 있는 application 에서 사용자 정보를 노출 시킬 때, email 보다 nickname 으로 보여지는 것이 좋다고 판단되어 이를 추가하고 실제 application 에...<a class="read-more" href="./users-column-add.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
 	<div id="tail recursion" class="hidden tag-master">
 		<h1>tail recursion</h1>
 		<div class="archive">
@@ -2194,7 +2380,7 @@
                 <li><a href="./tag.html?tag=behaviour" class="tag">behaviour <span>(1)</span></a></li>
             
                 
-                <li><a href="./tag.html?tag=changeset%2F2" class="tag">changeset/2 <span>(1)</span></a></li>
+                <li><a href="./tag.html?tag=changeset%2F2" class="tag">changeset/2 <span>(2)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=complex+query" class="tag">complex query <span>(1)</span></a></li>
@@ -2230,10 +2416,13 @@
                 <li><a href="./tag.html?tag=lazy+collection" class="tag">lazy collection <span>(1)</span></a></li>
             
                 
-                <li><a href="./tag.html?tag=liveview" class="tag">liveview <span>(8)</span></a></li>
+                <li><a href="./tag.html?tag=liveview" class="tag">liveview <span>(9)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=map" class="tag">map <span>(1)</span></a></li>
+            
+                
+                <li><a href="./tag.html?tag=migration" class="tag">migration <span>(1)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=node.js" class="tag">node.js <span>(1)</span></a></li>
@@ -2248,7 +2437,7 @@
                 <li><a href="./tag.html?tag=overloading" class="tag">overloading <span>(1)</span></a></li>
             
                 
-                <li><a href="./tag.html?tag=phoenix" class="tag">phoenix <span>(8)</span></a></li>
+                <li><a href="./tag.html?tag=phoenix" class="tag">phoenix <span>(9)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=phoenix+presence" class="tag">phoenix presence <span>(1)</span></a></li>
@@ -2266,10 +2455,16 @@
                 <li><a href="./tag.html?tag=root.html.heex" class="tag">root.html.heex <span>(1)</span></a></li>
             
                 
+                <li><a href="./tag.html?tag=schema" class="tag">schema <span>(1)</span></a></li>
+            
+                
                 <li><a href="./tag.html?tag=slop" class="tag">slop <span>(1)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=struct" class="tag">struct <span>(3)</span></a></li>
+            
+                
+                <li><a href="./tag.html?tag=table_%ED%95%AD%EB%AA%A9_%EC%B6%94%EA%B0%80" class="tag">table_항목_추가 <span>(1)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=tail+recursion" class="tag">tail recursion <span>(1)</span></a></li>

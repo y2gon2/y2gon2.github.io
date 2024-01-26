@@ -46,6 +46,8 @@
   "tag" : "changeset/2",
   "posts" : [
       
+      "./users-column-add.html",
+      
       "./changeset.html"
       
     ]
@@ -182,6 +184,8 @@
   "tag" : "liveview",
   "posts" : [
       
+      "./users-column-add.html",
+      
       "./root-and-app.html",
       
       "./custom-js-phoenix.html",
@@ -207,6 +211,16 @@
   "posts" : [
       
       "./immutable-data-type.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "migration",
+  "posts" : [
+      
+      "./users-column-add.html"
       
     ]
   } ,
@@ -255,6 +269,8 @@
   {
   "tag" : "phoenix",
   "posts" : [
+      
+      "./users-column-add.html",
       
       "./root-and-app.html",
       
@@ -327,6 +343,16 @@
     
       
   {
+  "tag" : "schema",
+  "posts" : [
+      
+      "./users-column-add.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "slop",
   "posts" : [
       
@@ -345,6 +371,16 @@
       "./create-instance.html",
       
       "./instance-with-elixir.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "table_항목_추가",
+  "posts" : [
+      
+      "./users-column-add.html"
       
     ]
   } ,

@@ -251,6 +251,45 @@
 		<div class="post">
 			
 
+			<a class="post-list-title" href="./users-column-add.html">Account context - users table 에 nickname 항목 추가</a>
+			
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        2 minute read
+      
+    </span>
+  
+  
+  </span>
+
+			<div class="post-excerpt">
+				<p>Phoenix LiveView Authrization 설정을 위해 lon in 기능을 활성화에 필요한 계정 생성 작업이 필요하다. 이 때, <code class="language-plaintext highlighter-rouge">mix phx.gen.auth Accounts User users</code> command 를 통해 사용자 email, password 정보를 저장하고 이를 사용하여 authrization, session 괸리를 위한 service code, template, token 저장 table 까지 모두 알아서 생성해 준다.</p><p>매우 편리한 기능이지만, 해당 command 로 추가 정보를 저장/관리하는 기능을 함께 생성할 수는 없음을 확인하였다. 대신 추가 migration 생성 및 필요한 요소를 관련 code 에 직접 추가하여 사용 가능하였다.</p><p>현재 작업하고 있는 application 에서 사용자 정보를 노출 시킬 때, email 보다 nickname 으로 보여지는 것이 좋다고 판단되어 이를 추가하고 실제 application 에 반영하는 작업을...<a class="read-more" href="./users-column-add.html"> read more</a>
+			</div>
+		</div>
+	
+		<div class="post">
+			
+
 			<a class="post-list-title" href="./root-and-app.html">root.html.heex 과 app.html.heex 에 대해</a>
 			
 
@@ -323,45 +362,6 @@
 
 			<div class="post-excerpt">
 				<p>Phoenix LiveView 를 사용하여 아래와 같이 버튼 클릭시 번갈아가며 버튼의 배경색과 내용이 바뀌는 toggle button 을 사용하고자 하였다. 그런데 기존의 Phoenix LiveView 제공 html tag 및 css 로 이를 생성할 수 없었으며, 따라서 자체적으로 JS 를 작성하여 기존 button 에 적용해야 하는 상황이다. 해당 과정에서 필요한 설정 및 <code>render/1</code>에 적용하기까지의 과정을 정리하고자 한다. </p><center> <img src="assets\img\posts\toggle_button.png" width="300" /></center><h3>1. Node module 설치 및 관련 package 설치</h3><p>(1) <code>package.json</code> 생성</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>assetsnpm init</code></pre></div></div><p>만약 <code>package.json</code> 파일이 없다면, 새로 생성해야 한다. 이를 위해 <code>npm init</code> 명령어를 실행하여 새로운 <code>package.json</code> 파일을 생성할 수 있다. 이 과정에서 프로젝트에 대한 기본 정보를 입력해야 한다.</p><p>(2)...<a class="read-more" href="./custom-js-phoenix.html"> read more</a>
-			</div>
-		</div>
-	
-		<div class="post">
-			
-
-			<a class="post-list-title" href="./impl_attribute.html">impl attribute</a>
-			
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2024-01-23T15:32:20+09:00">January 23, 2024</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        1 minute read
-      
-    </span>
-  
-  
-  </span>
-
-			<div class="post-excerpt">
-				<p>elixir code 를 작성할 때, behaviour 나 macro 의 callback 의 구현체를 정의하는 구조는 일반 함수와 동일하다. 이를 구별하기 위해 <code>@impl true</code>를 사용하는 것이 좋다. 사용하지 않을 경우, 작업에 문제가 발생하지는 않으나 IDE 나 complier 가 아래 내용의 warning 이 나타날 수 있다.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module attribute @impl was not set for function init/1 callback (specified in GenServer). This either means you forgot to add the "@impl true" annotation before the definition or that you are accidentally overriding this callback</code></pre></div></div><p>아울러 해당 attribute 를 사용했을 때의 장점은 다음과 같다.</p><ol> <li><strong>명확성</strong>: <code>@impl true</code>는 해당 함수가 특정 행위(behaviour)의 callback 함수임을 명확히 함....<a class="read-more" href="./impl_attribute.html"> read more</a>
 			</div>
 		</div>
 	
