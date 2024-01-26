@@ -6,7 +6,7 @@ title:  Account context - users table 에 nickname 항목 추가
 date:   2024-01-25 08:32:20 +0900
 description: 계정 정보에서 nickname 정보가 필요함에 따라, 이를 기존에 생성한 users table 에 추가하고, 계정 생성 시, nickname 을 입력하도록 함. 
 img: posts/general/post_general17.jpg
-tags: [phoenix, liveview, migration, table_항목_추가, schema, changeset/2]
+tags: [phoenix, liveview, migration, table_항목_추가, schema, changeset/2, applciation_개발1]
 author: Yong gon Yun
 ---
 

@@ -6,7 +6,7 @@ title:  Phoenix LiveView 에서 사용자 정의 JS code 사용 방법
 date:   2024-01-24 08:32:20 +0900
 description: Phoenix LiveView 에서 사용자 정의 JS code 구현 및 적용을 위한 Node.js 설정 및 render/1 에 적용하는 과정
 img: posts/general/post_general15.jpg
-tags: [phoenix, liveview, custom javascript, node.js]
+tags: [phoenix, liveview, custom javascript, node.js, applciation_개발1]
 author: Yong gon Yun
 ---
 
