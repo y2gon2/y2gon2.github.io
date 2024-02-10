@@ -251,7 +251,7 @@
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./root-and-app.html">root.html.heex 과 app.html.heex 에 대해</a>
+					<a class="post-list-title" href="./root-and-app.html">(App 개발 02) root.html.heex 과 app.html.heex 에 대해</a>
 					
 
   <span class = "post-card-meta">
@@ -284,6 +284,133 @@
 
 					<div class="post-excerpt">
 						<p>현재 Phoenix LiveView application 작업을 진행하면서, 아래와 같이 page 최상단에 메뉴바를 띄우고자 한다.</p> <center><img src="assets\img\posts\header.png" width="500" /></center> <p>다만 <code class="language-plaintext highlighter-rouge">/</code> 과 <code class="language-plaintext highlighter-rouge">/games</code> url 에 대해서는 메뉴바가 있고, <code class="language-plaintext highlighter-rouge">/games/:id</code> url 에 대해서는 메뉴바가 없도록 구성하고 싶다. 해당 작업을 진행하면 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 와 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 파일을 수정하고, 수정된 파일을 어떻게하면 적절하게 이용할 수 있을지 위에서의 고민을 토대로 각 파일에 대해 알아본다.</p> <h3 id="roothtmlheex-역할">root.html.heex 역할</h3> <p>이 파일은 전체 Phoenix 애플리케이션의 최상위 레이아웃을 정의하며, 다른 템플릿들은 이 안에 삽입되어 최종 HTML 문서를 형성한다. 일반적으로 전체 애플리케이션에 걸쳐 공통적으로 사용되는 HTML 요소를 포함한다.(<code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> 태그 내의 meta...<a class="read-more" href="./root-and-app.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
+	<div id="applciation_개발1" class="hidden tag-master">
+		<h1>applciation_개발1</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./users-column-add.html">(App 개발 03) Account context - users table 에 nickname 항목 추가</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-25T10:32:20+09:00">January 25, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        2 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Phoenix LiveView Authrization 설정을 위해 lon in 기능을 활성화에 필요한 계정 생성 작업이 필요하다. 이 때, <code class="language-plaintext highlighter-rouge">mix phx.gen.auth Accounts User users</code> command 를 통해 사용자 email, password 정보를 저장하고 이를 사용하여 authrization, session 괸리를 위한 service code, template, token 저장 table 까지 모두 알아서 생성해 준다.</p> <p>매우 편리한 기능이지만, 해당 command 로 추가 정보를 저장/관리하는 기능을 함께 생성할 수는 없음을 확인하였다. 대신 추가 migration 생성 및 필요한 요소를 관련 code 에 직접 추가하여 사용 가능하였다.</p> <p>현재 작업하고 있는 application 에서 사용자 정보를 노출 시킬 때, email 보다 nickname 으로 보여지는 것이 좋다고 판단되어 이를 추가하고 실제 application 에...<a class="read-more" href="./users-column-add.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./root-and-app.html">(App 개발 02) root.html.heex 과 app.html.heex 에 대해</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        2 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>현재 Phoenix LiveView application 작업을 진행하면서, 아래와 같이 page 최상단에 메뉴바를 띄우고자 한다.</p> <center><img src="assets\img\posts\header.png" width="500" /></center> <p>다만 <code class="language-plaintext highlighter-rouge">/</code> 과 <code class="language-plaintext highlighter-rouge">/games</code> url 에 대해서는 메뉴바가 있고, <code class="language-plaintext highlighter-rouge">/games/:id</code> url 에 대해서는 메뉴바가 없도록 구성하고 싶다. 해당 작업을 진행하면 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 와 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 파일을 수정하고, 수정된 파일을 어떻게하면 적절하게 이용할 수 있을지 위에서의 고민을 토대로 각 파일에 대해 알아본다.</p> <h3 id="roothtmlheex-역할">root.html.heex 역할</h3> <p>이 파일은 전체 Phoenix 애플리케이션의 최상위 레이아웃을 정의하며, 다른 템플릿들은 이 안에 삽입되어 최종 HTML 문서를 형성한다. 일반적으로 전체 애플리케이션에 걸쳐 공통적으로 사용되는 HTML 요소를 포함한다.(<code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> 태그 내의 meta...<a class="read-more" href="./root-and-app.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./custom-js-phoenix.html">(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-24T08:32:20+09:00">January 24, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        3 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Phoenix LiveView 를 사용하여 아래와 같이 버튼 클릭시 번갈아가며 버튼의 배경색과 내용이 바뀌는 toggle button 을 사용하고자 하였다. 그런데 기존의 Phoenix LiveView 제공 html tag 및 css 로 이를 생성할 수 없었으며, 따라서 자체적으로 JS 를 작성하여 기존 button 에 적용해야 하는 상황이다. 해당 과정에서 필요한 설정 및 <code>render/1</code>에 적용하기까지의 과정을 정리하고자 한다. </p> <center> <img src="assets\img\posts\toggle_button.png" width="300" /> </center> <h3>1. Node module 설치 및 관련 package 설치</h3> <p>(1) <code>package.json</code> 생성</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>assets npm init </code></pre></div></div> <p>만약 <code>package.json</code> 파일이 없다면, 새로 생성해야 한다. 이를 위해 <code>npm init</code> 명령어를 실행하여 새로운 <code>package.json</code> 파일을 생성할 수 있다....<a class="read-more" href="./custom-js-phoenix.html"> read more</a>
 					</div>
 				</div>
 			
@@ -390,6 +517,55 @@
 	</div>
 
 	
+	<div id="bash" class="hidden tag-master">
+		<h1>bash</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./shell-script02-types.html">Shell Script 기본 문법 02 (types)</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-02-10T08:32:20+09:00">February 10, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        1 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Bash Shell Script에서는 다른 프로그래밍 언어들처럼 명시적인 데이터 타입 선언을 사용하지 않는다. Bash는 기본적으로 모든 변수를 문자열로 처리하지만, Bash 스크립트 내에서 다양한 형태의 데이터를 다룰 수 있으며, 이를 위해 특정 명령어나 구문을 사용하여 숫자, 문자열, 배열 등과 같은 다양한 “형태”의 데이터를 다루게 된다. 아래는 Bash에서 사용될 수 있는 주요 “데이터 타입”의 개념과 예시이다.</p> <h3 id="문자열-string">문자열 (String)</h3> <p>Bash에서 가장 기본적이고 자주 사용되는 데이터 타입. 변수에 값을 할당할 때 따옴표를 사용하지 않거나, 단일 따옴표(‘)나 이중 따옴표(“)를 사용하여 문자열을 할당.</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">name</span><span class="o">=</span><span class="s2">"John Doe"</span> <span class="nv">greeting</span><span class="o">=</span><span class="s1">'Hello, World!'</span> </code></pre></div></div> <h3 id="정수integer">정수(Integer)</h3> <p>Bash에서는 declare -i 명령어를 사용하여 변수를...<a class="read-more" href="./shell-script02-types.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
 	<div id="behaviour" class="hidden tag-master">
 		<h1>behaviour</h1>
 		<div class="archive">
@@ -447,7 +623,7 @@
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./users-column-add.html">Account context - users table 에 nickname 항목 추가</a>
+					<a class="post-list-title" href="./users-column-add.html">(App 개발 03) Account context - users table 에 nickname 항목 추가</a>
 					
 
   <span class = "post-card-meta">
@@ -459,7 +635,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
+        <time datetime="2024-01-25T10:32:20+09:00">January 25, 2024</time>
       </span>
     
     
@@ -584,7 +760,7 @@
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./custom-js-phoenix.html">Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</a>
+					<a class="post-list-title" href="./custom-js-phoenix.html">(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</a>
 					
 
   <span class = "post-card-meta">
@@ -899,6 +1075,55 @@
 	</div>
 
 	
+	<div id="generator" class="hidden tag-master">
+		<h1>generator</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./phonix-generator.html">Phoenix Live Generator</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-26T08:32:20+09:00">January 26, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        3 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>(아래 내용은 <a href="https://pragprog.com/titles/liveview/programming-phoenix-liveview/">programming-phoenix-liveview_B10.0 - chapter 3 Generators: Contexts and Schemas</a> 를 정리한 것임을 밝힙니다.)</p> <h3 id="phoenix-live-generator-란">Phoenix Live Generator 란?</h3> <p>Phoenix Live Generator 는 주어진 resource 에 대한 기본적인 CRUD code 생성을 도와주는 utility 로 다음 작업에 대한 설정을 자동을 생성해준다.</p> <ul> <li>backend : schema, context</li> <li>frontend : routs, LiveView, templates</li> </ul> <p>다만 위에서 표현한 ‘code 생성’ 의 의미는 elixir 에서는 조금 다른 의미를 포함하고 있다. 이는 Generator 가 자체적으로 새로운 code 을 생성 해준다기보다, 이미 정의된 macro 를 사용하여 ‘code 를 생성하는 code’ 를 실행시킴으로써, 최종적으로 사용자가 정의한 code 를 얻을 수 있게 되는 것을 의미한다.</p> <p>결과적으로 Generator 를...<a class="read-more" href="./phonix-generator.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
 	<div id="genserver" class="hidden tag-master">
 		<h1>genserver</h1>
 		<div class="archive">
@@ -1183,15 +1408,15 @@
 	</div>
 
 	
-	<div id="liveview" class="hidden tag-master">
-		<h1>liveview</h1>
+	<div id="linux" class="hidden tag-master">
+		<h1>linux</h1>
 		<div class="archive">
 			<div class="post-list">
 		    
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./users-column-add.html">Account context - users table 에 nickname 항목 추가</a>
+					<a class="post-list-title" href="./shell-script02-types.html">Shell Script 기본 문법 02 (types)</a>
 					
 
   <span class = "post-card-meta">
@@ -1203,7 +1428,95 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
+        <time datetime="2024-02-10T08:32:20+09:00">February 10, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        1 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Bash Shell Script에서는 다른 프로그래밍 언어들처럼 명시적인 데이터 타입 선언을 사용하지 않는다. Bash는 기본적으로 모든 변수를 문자열로 처리하지만, Bash 스크립트 내에서 다양한 형태의 데이터를 다룰 수 있으며, 이를 위해 특정 명령어나 구문을 사용하여 숫자, 문자열, 배열 등과 같은 다양한 “형태”의 데이터를 다루게 된다. 아래는 Bash에서 사용될 수 있는 주요 “데이터 타입”의 개념과 예시이다.</p> <h3 id="문자열-string">문자열 (String)</h3> <p>Bash에서 가장 기본적이고 자주 사용되는 데이터 타입. 변수에 값을 할당할 때 따옴표를 사용하지 않거나, 단일 따옴표(‘)나 이중 따옴표(“)를 사용하여 문자열을 할당.</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">name</span><span class="o">=</span><span class="s2">"John Doe"</span> <span class="nv">greeting</span><span class="o">=</span><span class="s1">'Hello, World!'</span> </code></pre></div></div> <h3 id="정수integer">정수(Integer)</h3> <p>Bash에서는 declare -i 명령어를 사용하여 변수를...<a class="read-more" href="./shell-script02-types.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./shell-script01.html">Shell Script 기본 문법 01</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-02-10T08:32:20+09:00">February 10, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        3 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<h3 id="1-간단한-함수를-사용한-script-1">1. 간단한 함수를 사용한 script 1</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span> <span class="c"># 함수 정의: 두 인자를 받아 출력함</span> add_inner_numbers<span class="o">()</span> <span class="o">{</span> <span class="nb">echo</span> <span class="s2">"첫 번째 숫자: </span><span class="nv">$1</span><span class="s2">"</span> <span class="nb">echo</span> <span class="s2">"두 번째 숫자: </span><span class="nv">$2</span><span class="s2">"</span> <span class="nb">local sum</span><span class="o">=</span>0 <span class="nb">sum</span><span class="o">=</span><span class="k">$((</span> <span class="nv">$1</span> <span class="o">+</span> <span class="nv">$2</span> <span class="k">))</span> <span class="nb">echo</span> <span class="s2">"두 수의 합: </span><span class="nv">$sum</span><span class="s2">"</span> <span class="o">}</span> <span class="c"># 함수 호출: 5와 10을 인자로 전달</span> add_inner_numbers 5 10 </code></pre></div></div> <ul> <li><code class="language-plaintext highlighter-rouge">#!/bin/bash</code> <ul> <li>“shebang” (또는 “hashbang”)</li> <li>해당 script를 실행할 때 사용할 interpreter 의 경로를 진행</li> <li>여기서는...<a class="read-more" href="./shell-script01.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
+	<div id="liveview" class="hidden tag-master">
+		<h1>liveview</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./users-column-add.html">(App 개발 03) Account context - users table 에 nickname 항목 추가</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-25T10:32:20+09:00">January 25, 2024</time>
       </span>
     
     
@@ -1230,7 +1543,7 @@
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./root-and-app.html">root.html.heex 과 app.html.heex 에 대해</a>
+					<a class="post-list-title" href="./root-and-app.html">(App 개발 02) root.html.heex 과 app.html.heex 에 대해</a>
 					
 
   <span class = "post-card-meta">
@@ -1269,7 +1582,7 @@
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./custom-js-phoenix.html">Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</a>
+					<a class="post-list-title" href="./custom-js-phoenix.html">(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</a>
 					
 
   <span class = "post-card-meta">
@@ -1367,7 +1680,7 @@
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./users-column-add.html">Account context - users table 에 nickname 항목 추가</a>
+					<a class="post-list-title" href="./users-column-add.html">(App 개발 03) Account context - users table 에 nickname 항목 추가</a>
 					
 
   <span class = "post-card-meta">
@@ -1379,7 +1692,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
+        <time datetime="2024-01-25T10:32:20+09:00">January 25, 2024</time>
       </span>
     
     
@@ -1416,7 +1729,7 @@
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./custom-js-phoenix.html">Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</a>
+					<a class="post-list-title" href="./custom-js-phoenix.html">(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</a>
 					
 
   <span class = "post-card-meta">
@@ -1612,7 +1925,7 @@
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./users-column-add.html">Account context - users table 에 nickname 항목 추가</a>
+					<a class="post-list-title" href="./phonix-generator.html">Phoenix Live Generator</a>
 					
 
   <span class = "post-card-meta">
@@ -1624,7 +1937,46 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
+        <time datetime="2024-01-26T08:32:20+09:00">January 26, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        3 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>(아래 내용은 <a href="https://pragprog.com/titles/liveview/programming-phoenix-liveview/">programming-phoenix-liveview_B10.0 - chapter 3 Generators: Contexts and Schemas</a> 를 정리한 것임을 밝힙니다.)</p> <h3 id="phoenix-live-generator-란">Phoenix Live Generator 란?</h3> <p>Phoenix Live Generator 는 주어진 resource 에 대한 기본적인 CRUD code 생성을 도와주는 utility 로 다음 작업에 대한 설정을 자동을 생성해준다.</p> <ul> <li>backend : schema, context</li> <li>frontend : routs, LiveView, templates</li> </ul> <p>다만 위에서 표현한 ‘code 생성’ 의 의미는 elixir 에서는 조금 다른 의미를 포함하고 있다. 이는 Generator 가 자체적으로 새로운 code 을 생성 해준다기보다, 이미 정의된 macro 를 사용하여 ‘code 를 생성하는 code’ 를 실행시킴으로써, 최종적으로 사용자가 정의한 code 를 얻을 수 있게 되는 것을 의미한다.</p> <p>결과적으로 Generator 를...<a class="read-more" href="./phonix-generator.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./users-column-add.html">(App 개발 03) Account context - users table 에 nickname 항목 추가</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-01-25T10:32:20+09:00">January 25, 2024</time>
       </span>
     
     
@@ -1651,7 +2003,7 @@
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./root-and-app.html">root.html.heex 과 app.html.heex 에 대해</a>
+					<a class="post-list-title" href="./root-and-app.html">(App 개발 02) root.html.heex 과 app.html.heex 에 대해</a>
 					
 
   <span class = "post-card-meta">
@@ -1684,45 +2036,6 @@
 
 					<div class="post-excerpt">
 						<p>현재 Phoenix LiveView application 작업을 진행하면서, 아래와 같이 page 최상단에 메뉴바를 띄우고자 한다.</p> <center><img src="assets\img\posts\header.png" width="500" /></center> <p>다만 <code class="language-plaintext highlighter-rouge">/</code> 과 <code class="language-plaintext highlighter-rouge">/games</code> url 에 대해서는 메뉴바가 있고, <code class="language-plaintext highlighter-rouge">/games/:id</code> url 에 대해서는 메뉴바가 없도록 구성하고 싶다. 해당 작업을 진행하면 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 와 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 파일을 수정하고, 수정된 파일을 어떻게하면 적절하게 이용할 수 있을지 위에서의 고민을 토대로 각 파일에 대해 알아본다.</p> <h3 id="roothtmlheex-역할">root.html.heex 역할</h3> <p>이 파일은 전체 Phoenix 애플리케이션의 최상위 레이아웃을 정의하며, 다른 템플릿들은 이 안에 삽입되어 최종 HTML 문서를 형성한다. 일반적으로 전체 애플리케이션에 걸쳐 공통적으로 사용되는 HTML 요소를 포함한다.(<code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> 태그 내의 meta...<a class="read-more" href="./root-and-app.html"> read more</a>
-					</div>
-				</div>
-			
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./custom-js-phoenix.html">Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2024-01-24T08:32:20+09:00">January 24, 2024</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        3 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<p>Phoenix LiveView 를 사용하여 아래와 같이 버튼 클릭시 번갈아가며 버튼의 배경색과 내용이 바뀌는 toggle button 을 사용하고자 하였다. 그런데 기존의 Phoenix LiveView 제공 html tag 및 css 로 이를 생성할 수 없었으며, 따라서 자체적으로 JS 를 작성하여 기존 button 에 적용해야 하는 상황이다. 해당 과정에서 필요한 설정 및 <code>render/1</code>에 적용하기까지의 과정을 정리하고자 한다. </p> <center> <img src="assets\img\posts\toggle_button.png" width="300" /> </center> <h3>1. Node module 설치 및 관련 package 설치</h3> <p>(1) <code>package.json</code> 생성</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>assets npm init </code></pre></div></div> <p>만약 <code>package.json</code> 파일이 없다면, 새로 생성해야 한다. 이를 위해 <code>npm init</code> 명령어를 실행하여 새로운 <code>package.json</code> 파일을 생성할 수 있다....<a class="read-more" href="./custom-js-phoenix.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1935,7 +2248,7 @@
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./root-and-app.html">root.html.heex 과 app.html.heex 에 대해</a>
+					<a class="post-list-title" href="./root-and-app.html">(App 개발 02) root.html.heex 과 app.html.heex 에 대해</a>
 					
 
   <span class = "post-card-meta">
@@ -1984,7 +2297,7 @@
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./users-column-add.html">Account context - users table 에 nickname 항목 추가</a>
+					<a class="post-list-title" href="./users-column-add.html">(App 개발 03) Account context - users table 에 nickname 항목 추가</a>
 					
 
   <span class = "post-card-meta">
@@ -1996,7 +2309,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
+        <time datetime="2024-01-25T10:32:20+09:00">January 25, 2024</time>
       </span>
     
     
@@ -2017,6 +2330,94 @@
 
 					<div class="post-excerpt">
 						<p>Phoenix LiveView Authrization 설정을 위해 lon in 기능을 활성화에 필요한 계정 생성 작업이 필요하다. 이 때, <code class="language-plaintext highlighter-rouge">mix phx.gen.auth Accounts User users</code> command 를 통해 사용자 email, password 정보를 저장하고 이를 사용하여 authrization, session 괸리를 위한 service code, template, token 저장 table 까지 모두 알아서 생성해 준다.</p> <p>매우 편리한 기능이지만, 해당 command 로 추가 정보를 저장/관리하는 기능을 함께 생성할 수는 없음을 확인하였다. 대신 추가 migration 생성 및 필요한 요소를 관련 code 에 직접 추가하여 사용 가능하였다.</p> <p>현재 작업하고 있는 application 에서 사용자 정보를 노출 시킬 때, email 보다 nickname 으로 보여지는 것이 좋다고 판단되어 이를 추가하고 실제 application 에...<a class="read-more" href="./users-column-add.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
+	<div id="shell scirpt" class="hidden tag-master">
+		<h1>shell scirpt</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./shell-script02-types.html">Shell Script 기본 문법 02 (types)</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-02-10T08:32:20+09:00">February 10, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        1 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<p>Bash Shell Script에서는 다른 프로그래밍 언어들처럼 명시적인 데이터 타입 선언을 사용하지 않는다. Bash는 기본적으로 모든 변수를 문자열로 처리하지만, Bash 스크립트 내에서 다양한 형태의 데이터를 다룰 수 있으며, 이를 위해 특정 명령어나 구문을 사용하여 숫자, 문자열, 배열 등과 같은 다양한 “형태”의 데이터를 다루게 된다. 아래는 Bash에서 사용될 수 있는 주요 “데이터 타입”의 개념과 예시이다.</p> <h3 id="문자열-string">문자열 (String)</h3> <p>Bash에서 가장 기본적이고 자주 사용되는 데이터 타입. 변수에 값을 할당할 때 따옴표를 사용하지 않거나, 단일 따옴표(‘)나 이중 따옴표(“)를 사용하여 문자열을 할당.</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">name</span><span class="o">=</span><span class="s2">"John Doe"</span> <span class="nv">greeting</span><span class="o">=</span><span class="s1">'Hello, World!'</span> </code></pre></div></div> <h3 id="정수integer">정수(Integer)</h3> <p>Bash에서는 declare -i 명령어를 사용하여 변수를...<a class="read-more" href="./shell-script02-types.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./shell-script01.html">Shell Script 기본 문법 01</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-02-10T08:32:20+09:00">February 10, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        3 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<h3 id="1-간단한-함수를-사용한-script-1">1. 간단한 함수를 사용한 script 1</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span> <span class="c"># 함수 정의: 두 인자를 받아 출력함</span> add_inner_numbers<span class="o">()</span> <span class="o">{</span> <span class="nb">echo</span> <span class="s2">"첫 번째 숫자: </span><span class="nv">$1</span><span class="s2">"</span> <span class="nb">echo</span> <span class="s2">"두 번째 숫자: </span><span class="nv">$2</span><span class="s2">"</span> <span class="nb">local sum</span><span class="o">=</span>0 <span class="nb">sum</span><span class="o">=</span><span class="k">$((</span> <span class="nv">$1</span> <span class="o">+</span> <span class="nv">$2</span> <span class="k">))</span> <span class="nb">echo</span> <span class="s2">"두 수의 합: </span><span class="nv">$sum</span><span class="s2">"</span> <span class="o">}</span> <span class="c"># 함수 호출: 5와 10을 인자로 전달</span> add_inner_numbers 5 10 </code></pre></div></div> <ul> <li><code class="language-plaintext highlighter-rouge">#!/bin/bash</code> <ul> <li>“shebang” (또는 “hashbang”)</li> <li>해당 script를 실행할 때 사용할 interpreter 의 경로를 진행</li> <li>여기서는...<a class="read-more" href="./shell-script01.html"> read more</a>
 					</div>
 				</div>
 			
@@ -2209,7 +2610,7 @@
 			
 
 				<div class="post">
-					<a class="post-list-title" href="./users-column-add.html">Account context - users table 에 nickname 항목 추가</a>
+					<a class="post-list-title" href="./users-column-add.html">(App 개발 03) Account context - users table 에 nickname 항목 추가</a>
 					
 
   <span class = "post-card-meta">
@@ -2221,7 +2622,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
+        <time datetime="2024-01-25T10:32:20+09:00">January 25, 2024</time>
       </span>
     
     
@@ -2371,10 +2772,16 @@
                 <li><a href="./tag.html?tag=app.html.heex" class="tag">app.html.heex <span>(1)</span></a></li>
             
                 
+                <li><a href="./tag.html?tag=applciation_%EA%B0%9C%EB%B0%9C1" class="tag">applciation_개발1 <span>(3)</span></a></li>
+            
+                
                 <li><a href="./tag.html?tag=attribute" class="tag">attribute <span>(1)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=authentication" class="tag">authentication <span>(1)</span></a></li>
+            
+                
+                <li><a href="./tag.html?tag=bash" class="tag">bash <span>(1)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=behaviour" class="tag">behaviour <span>(1)</span></a></li>
@@ -2401,6 +2808,9 @@
                 <li><a href="./tag.html?tag=elixir+stream" class="tag">elixir stream <span>(1)</span></a></li>
             
                 
+                <li><a href="./tag.html?tag=generator" class="tag">generator <span>(1)</span></a></li>
+            
+                
                 <li><a href="./tag.html?tag=genserver" class="tag">genserver <span>(1)</span></a></li>
             
                 
@@ -2414,6 +2824,9 @@
             
                 
                 <li><a href="./tag.html?tag=lazy+collection" class="tag">lazy collection <span>(1)</span></a></li>
+            
+                
+                <li><a href="./tag.html?tag=linux" class="tag">linux <span>(2)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=liveview" class="tag">liveview <span>(9)</span></a></li>
@@ -2437,7 +2850,7 @@
                 <li><a href="./tag.html?tag=overloading" class="tag">overloading <span>(1)</span></a></li>
             
                 
-                <li><a href="./tag.html?tag=phoenix" class="tag">phoenix <span>(9)</span></a></li>
+                <li><a href="./tag.html?tag=phoenix" class="tag">phoenix <span>(10)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=phoenix+presence" class="tag">phoenix presence <span>(1)</span></a></li>
@@ -2456,6 +2869,9 @@
             
                 
                 <li><a href="./tag.html?tag=schema" class="tag">schema <span>(1)</span></a></li>
+            
+                
+                <li><a href="./tag.html?tag=shell+scirpt" class="tag">shell scirpt <span>(2)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=slop" class="tag">slop <span>(1)</span></a></li>

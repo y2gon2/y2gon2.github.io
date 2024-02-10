@@ -2,7 +2,7 @@
 layout: post
 read_time: true
 show_date: true
-title:  root.html.heex 과 app.html.heex 에 대해
+title:  (App 개발 02) root.html.heex 과 app.html.heex 에 대해
 date:   2024-01-25 08:32:20 +0900
 description: Phoenix LiveView 에서 기본 <head> 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함
 img: posts/general/post_general16.jpg

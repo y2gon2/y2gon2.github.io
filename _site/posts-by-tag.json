@@ -13,6 +13,20 @@
     
       
   {
+  "tag" : "applciation_개발1",
+  "posts" : [
+      
+      "./users-column-add.html",
+      
+      "./root-and-app.html",
+      
+      "./custom-js-phoenix.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "attribute",
   "posts" : [
       
@@ -27,6 +41,16 @@
   "posts" : [
       
       "./authentication.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "bash",
+  "posts" : [
+      
+      "./shell-script02-types.html"
       
     ]
   } ,
@@ -129,6 +153,16 @@
     
       
   {
+  "tag" : "generator",
+  "posts" : [
+      
+      "./phonix-generator.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "genserver",
   "posts" : [
       
@@ -175,6 +209,18 @@
   "posts" : [
       
       "./lazy-collection.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "linux",
+  "posts" : [
+      
+      "./shell-script02-types.html",
+      
+      "./shell-script01.html"
       
     ]
   } ,
@@ -270,6 +316,8 @@
   "tag" : "phoenix",
   "posts" : [
       
+      "./phonix-generator.html",
+      
       "./users-column-add.html",
       
       "./root-and-app.html",
@@ -347,6 +395,18 @@
   "posts" : [
       
       "./users-column-add.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "shell scirpt",
+  "posts" : [
+      
+      "./shell-script02-types.html",
+      
+      "./shell-script01.html"
       
     ]
   } ,
