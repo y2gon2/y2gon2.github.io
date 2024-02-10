@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-02-10T13:30:54+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">Shell Script 기본 문법 01</title><link href="http://localhost:4000/shell-script01.html" rel="alternate" type="text/html" title="Shell Script 기본 문법 01" /><published>2024-02-10T08:32:20+09:00</published><updated>2024-02-10T08:32:20+09:00</updated><id>http://localhost:4000/shell-script01</id><content type="html" xml:base="http://localhost:4000/shell-script01.html"><![CDATA[<h3 id="1-간단한-함수를-사용한-script-1">1. 간단한 함수를 사용한 script 1</h3>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-02-10T13:55:08+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">Shell Script 기본 문법 01</title><link href="http://localhost:4000/shell-script01.html" rel="alternate" type="text/html" title="Shell Script 기본 문법 01" /><published>2024-02-10T08:32:20+09:00</published><updated>2024-02-10T08:32:20+09:00</updated><id>http://localhost:4000/shell-script01</id><content type="html" xml:base="http://localhost:4000/shell-script01.html"><![CDATA[<h3 id="1-간단한-함수를-사용한-script-1">1. 간단한 함수를 사용한 script 1</h3>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 
@@ -193,6 +193,13 @@ done</span> &lt; <span class="s2">"list"</span>
 (5). 배열 변수 <code class="language-plaintext highlighter-rouge">ADDR</code> 의 값으로 생성한다.</li>
     </ul>
   </li>
+  <li><code class="language-plaintext highlighter-rouge">for i in "${ADDR[@]}"; do ... done</code>
+    <ul>
+      <li>반복문 <code class="language-plaintext highlighter-rouge">for</code> 는 배열 변수 ADDR 의 원소를 순회하면서 원소값 을 대입하여 <code class="language-plaintext highlighter-rouge">do ... done</code> 내 script 를 수행함.</li>
+      <li><code class="language-plaintext highlighter-rouge">ADDR[@]</code> 는 각 원소를 의미</li>
+      <li><code class="language-plaintext highlighter-rouge">""</code> 감싸 해당 원소값을 문자열로 변환, 혹시 문자열 내 다른 문자열을 포함한 경우 (ex. “값은 ${ADDR[@]}”) 다른 문자열과  배열 변수 값 부분을 명확히 구분하기 위해 <code class="language-plaintext highlighter-rouge">${}</code> 로 감싸줌.</li>
+    </ul>
+  </li>
 </ul>
 
 <p><br /></p>
@@ -206,12 +213,6 @@ done</span> &lt; <span class="s2">"list"</span>
 3
 4
 5
-</code></pre></div></div>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-</code></pre></div></div>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 </code></pre></div></div>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="shell scirpt" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 01]]></summary></entry><entry><title type="html">Shell Script 기본 문법 02 (types)</title><link href="http://localhost:4000/shell-script02-types.html" rel="alternate" type="text/html" title="Shell Script 기본 문법 02 (types)" /><published>2024-02-10T08:32:20+09:00</published><updated>2024-02-10T08:32:20+09:00</updated><id>http://localhost:4000/shell-script02-types</id><content type="html" xml:base="http://localhost:4000/shell-script02-types.html"><![CDATA[<p>Bash Shell Script에서는 다른 프로그래밍 언어들처럼 명시적인 데이터 타입 선언을 사용하지 않는다. Bash는 기본적으로 모든 변수를 문자열로 처리하지만, Bash 스크립트 내에서 다양한 형태의 데이터를 다룰 수 있으며, 이를 위해 특정 명령어나 구문을 사용하여 숫자, 문자열, 배열 등과 같은 다양한 “형태”의 데이터를 다루게 된다. 아래는 Bash에서 사용될 수 있는 주요 “데이터 타입”의 개념과 예시이다.</p>
 
 <h3 id="문자열-string">문자열 (String)</h3>
