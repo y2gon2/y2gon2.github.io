@@ -1,4 +1,179 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-02-10T13:55:08+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">Shell Script 기본 문법 01</title><link href="http://localhost:4000/shell-script01.html" rel="alternate" type="text/html" title="Shell Script 기본 문법 01" /><published>2024-02-10T08:32:20+09:00</published><updated>2024-02-10T08:32:20+09:00</updated><id>http://localhost:4000/shell-script01</id><content type="html" xml:base="http://localhost:4000/shell-script01.html"><![CDATA[<h3 id="1-간단한-함수를-사용한-script-1">1. 간단한 함수를 사용한 script 1</h3>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-02-21T13:42:08+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)</title><link href="http://localhost:4000/shell-script04-systemsetting01.html" rel="alternate" type="text/html" title="Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)" /><published>2024-02-20T14:32:20+09:00</published><updated>2024-02-20T14:32:20+09:00</updated><id>http://localhost:4000/shell-script04-systemsetting01</id><content type="html" xml:base="http://localhost:4000/shell-script04-systemsetting01.html"><![CDATA[<p>참고 자료 : <a href="https://product.kyobobook.co.kr/detail/S000001810353">처음 배우는 셸 스크립트 8장 시스템 구축</a></p>
+
+<p>shell script 를 사용하여 사용자 개정을 생성하는 파일을 작성 및 실행</p>
+
+<p>프로세스</p>
+<ol>
+  <li>사용자 계정과 패스워드 입력</li>
+  <li>입력 정보가 없으면 에러 메세지를 보여주고, script 종료</li>
+  <li>여러명의 사용자 계정을 생성할 경우 반복문을 사용하여 순회</li>
+  <li>각 계정이 이미 사용자 계정에 포함되어 있는지 확인</li>
+  <li>포함되어있지 않다면, 계정을 생성하고 패스워드 설정</li>
+  <li>이미 존재하는 계정이라면, 이를 메세지로 보여줌.</li>
+</ol>
+
+<h3 id="1-다수의-사용자-계정-생성">1. 다수의 사용자 계정 생성</h3>
+
+<p>(1) <code class="language-plaintext highlighter-rouge">if [[ -n $1 ]] &amp;&amp; [[ -n $2 ]]</code>
+<br />해당 script 실행시 매개 변수로 사용자 계정(<code class="language-plaintext highlighter-rouge">$1</code>)과 패스워드(<code class="language-plaintext highlighter-rouge">$2</code>)가 모두 입력 되었는지 확인(<code class="language-plaintext highlighter-rouge">-n</code> : 비워있지 않아야 함) 한다. <code class="language-plaintext highlighter-rouge">$1</code> 과 <code class="language-plaintext highlighter-rouge">$2</code> 모두 외부 입력값이므로 이중 중괄호 <code class="language-plaintext highlighter-rouge">[[]]</code> 를 사용한다.
+<br /></p>
+
+<p>(2) <code class="language-plaintext highlighter-rouge">IFS=' ' read -r -a UserList &lt;&lt;&lt; "$1"</code> <br />
+입력된 매개변수 값을 공백을 기준으로 값을 slice 하여 배열의 형태로 shell script 변수로 저장함.<br /></p>
+<ul>
+  <li>IFS (Internal Field Separator) : IFS 는 shell scirpt 에서 사용하는 내부 필드 구분자. 이 변수는 문자열을 분리하여 배열이나 개별 변수로 읽을 때 사용하는 구분자을 정의한다. 기본값은 공백, 탭, 개행 문자.</li>
+  <li><code class="language-plaintext highlighter-rouge">read</code> : 표준 입력이나 파일로부터 입력을 읽어드림. 이 명령어를 사용하여 변수에 값을 할당할 수 있다.</li>
+  <li><code class="language-plaintext highlighter-rouge">-r</code> : <code class="language-plaintext highlighter-rouge">read</code> 옵션 중 백슬래시(<code class="language-plaintext highlighter-rouge">\</code>) 가 이스케이프 문자로 처리되지 않고, 그대로 읽어드림.</li>
+  <li><code class="language-plaintext highlighter-rouge">-a</code> : <code class="language-plaintext highlighter-rouge">read</code> 명령어에 의히 읽힌 값을 배열로 저장.</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;&lt;&lt;</code> (Here String) :  “$1” 로 받은 외부 입력 값을 UserList 변수 값으로 취할 수 있도록 redirection 해줌. 
+<br /></li>
+</ul>
+
+<p>(3) <code class="language-plaintext highlighter-rouge">for (( i=0 ; i &lt; ${#UserList[@]}; i++ ))</code> <br />
+배열 <code class="language-plaintext highlighter-rouge">UserList</code> 의 길이만큼 반복할 수 있도록 설정
+<br /></p>
+
+<p>(4) <code class="language-plaintext highlighter-rouge">if [[ $(cat /etc/passwd | grep -w ${UserList[$i]} | wc -l) == 0 ]] </code><br /></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">$(cat /etc/passwd</code> 파일의 내용을 가져와서,</li>
+  <li><code class="language-plaintext highlighter-rouge">UserList[$i]</code> 의 값과 정확히 (<code class="language-plaintext highlighter-rouge">-w</code>)일치하는 사용자 계정을 찾고,</li>
+  <li><code class="language-plaintext highlighter-rouge">wc</code> (word count) 의 라인 수(<code class="language-plaintext highlighter-rouge">-l</code>) 을 출력,</li>
+  <li>해당 값이 0 아니라면, 동일 계정이 존재한다는 것을 의미함.
+<br /></li>
+</ul>
+
+<p>(5) <code class="language-plaintext highlighter-rouge">useradd ${UserList[$i]}</code> <br />
+기존 계정이 존재하지 않는 경우, 해당 값 <code class="language-plaintext highlighter-rouge">${UserList{$i}}</code> 의 계정을 생성함. 
+<br /></p>
+
+<p>(6) <code class="language-plaintext highlighter-rouge">echo "${UserList[$i]}:${Password[$i]}" | chpasswd</code> <br />
+새로 생성한 계정에 대한 패스워드 값을 사용하여 패스워드를 설정
+<br /></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="c"># 사용자 계정 및 패스워드가 입력되었는지 확인</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="nt">-n</span> <span class="nv">$1</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="o">[[</span> <span class="nt">-n</span> <span class="nv">$2</span> <span class="o">]]</span> <span class="c">#  (1)</span>
+<span class="k">then
+
+        </span><span class="nv">IFS</span><span class="o">=</span><span class="s1">' '</span> <span class="nb">read</span> <span class="nt">-r</span> <span class="nt">-a</span> UserList <span class="o">&lt;&lt;&lt;</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="c">#  (2)</span>
+        <span class="nv">IFS</span><span class="o">=</span><span class="s1">' '</span> <span class="nb">read</span> <span class="nt">-r</span> <span class="nt">-a</span> Password <span class="o">&lt;&lt;&lt;</span> <span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span>
+
+        <span class="c"># for 문을 이용하여 사용자 계정 생성</span>
+        <span class="k">for</span> <span class="o">((</span> <span class="nv">i</span><span class="o">=</span>0 <span class="p">;</span> i &lt; <span class="k">${#</span><span class="nv">UserList</span><span class="p">[@]</span><span class="k">}</span><span class="p">;</span> i++ <span class="o">))</span> <span class="c">#  (3)</span>
+        <span class="k">do</span>
+                <span class="c"># if문을 사용하여 사용자 계정이 있는지 확인</span>
+                <span class="k">if</span> <span class="o">[[</span> <span class="si">$(</span><span class="nb">cat</span> /etc/passwd | <span class="nb">grep</span> <span class="nt">-w</span> <span class="k">${</span><span class="nv">UserList</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span><span class="k">}</span> | <span class="nb">wc</span> <span class="nt">-l</span><span class="si">)</span> <span class="o">==</span> 0 <span class="o">]]</span> <span class="c">#  (4)</span>
+                <span class="k">then</span>
+                        <span class="c"># 사용자 생성 및 패스워드 설정</span>
+                        useradd <span class="k">${</span><span class="nv">UserList</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span><span class="k">}</span> <span class="c">#  (5)</span>
+                        <span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">UserList</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span><span class="k">}</span><span class="s2">:</span><span class="k">${</span><span class="nv">Password</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span><span class="k">}</span><span class="s2">"</span> | chpasswd <span class="c">#  (6)</span>
+                <span class="k">else</span>
+                        <span class="c"># 사용자가 있다고 메세지를 보여줌</span>
+                        <span class="nb">echo</span> <span class="s2">"this user </span><span class="k">${</span><span class="nv">UserList</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span><span class="k">}</span><span class="s2"> is existing."</span>
+                <span class="k">fi
+        done
+
+else</span>
+        <span class="c"># 사용자가 계정과 패스워드를 입력하라는 메세지를 보여줌</span>
+        <span class="nb">echo</span> <span class="nt">-e</span> <span class="s1">'Please input user id and password. \nUsage: adduser-script.sh "user01 user02" "pw01 pw02"'</span>
+<span class="k">fi</span>
+</code></pre></div></div>
+<p>해당 script 를  <code class="language-plaintext highlighter-rouge">adduser-script.sh</code> 에 저장하고 아래와 같이 실행</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gon@DESKTOP:~/book/ch08<span class="nv">$ </span><span class="nb">sudo </span>bash adduser-script.sh <span class="s2">"user1 user2"</span> <span class="s2">"1111 2222"</span>
+</code></pre></div></div>
+<p>여기에서 <code class="language-plaintext highlighter-rouge">sh</code> 가 아닌 <code class="language-plaintext highlighter-rouge">bash</code> 명령어를 사용한 이유는, 일부 리눅스 (ex. Ubuntu) shell 이 <code class="language-plaintext highlighter-rouge">bash</code> 가 아닌 <code class="language-plaintext highlighter-rouge">dash</code> 에서 실행되는 경우가 있다. 이런 경우, <code class="language-plaintext highlighter-rouge">dash</code> 에서 지원되지 않는 기능 (ex. redirection <code class="language-plaintext highlighter-rouge">&lt;&lt;&lt;</code>)을 shell script 내 사용한 경우, 다음과 같은 에러가 발생한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gon@DESKTOP:~/book/ch08<span class="nv">$ </span><span class="nb">sudo </span>sh adduser-script.sh <span class="s2">"user1 user2"</span> <span class="s2">"1111 2222"</span>
+adduser-script.sh: 7: Syntax error: redirection unexpected
+</code></pre></div></div>
+
+<p>이를 해결하는 다른 방법으로, 해당 파일의 실행 권한을 아예 변경하고, 직접 실행 시키면 된다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gon@DESKTOP:~/book/ch08<span class="nv">$ </span><span class="nb">chmod</span> +x adduser-script.sh
+gon@DESKTOP:~/book/ch08<span class="nv">$ </span>./adduser-script.sh <span class="s2">"user1 user2"</span> <span class="s2">"1111 2222"</span>
+</code></pre></div></div>
+
+<p>최종적으로, 해당 실행이 정상적으로 동작했는지를 위해 <code class="language-plaintext highlighter-rouge">/etc/passwd</code> 파일 내용을 확인하면 아래 해당 user 가 추가된 것을 확인할 수 있다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gon@DESKTOP:~/book/ch08<span class="nv">$ </span><span class="nb">cat</span> /etc/passwd
+
+...
+user1:x:1001:1001::/home/user1:/bin/sh
+user2:x:1002:1002::/home/user2:/bin/sh
+</code></pre></div></div>
+
+<h3 id="2-ssh--를-활용하여-다른-서버에-사용자-계정-생성">2. ssh  를 활용하여 다른 서버에 사용자 계정 생성</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="k">for </span>server <span class="k">in</span> <span class="s2">"host01 host02 host03"</span>
+<span class="k">do</span>
+        <span class="c"># 여러 대의 시스템에 사용자 생성 및 패스워드 설정</span>
+        <span class="nb">echo</span> <span class="nv">$server</span>
+        ssh root@<span class="nv">$server</span> <span class="s2">"useradd </span><span class="nv">$1</span><span class="s2">"</span>  <span class="c"># (1)</span>
+        ssh root@<span class="nv">$server</span> <span class="s2">"echo </span><span class="nv">$2</span><span class="s2">:</span><span class="nv">$1</span><span class="s2"> | chpasswd"</span> 
+<span class="k">done</span>
+</code></pre></div></div>
+
+<p>(1) <code class="language-plaintext highlighter-rouge">ssh root@$server "useradd $1"</code></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ssh</code> : SSH protocol 을 사용하여 원격 서버에 접속하가나 원격 서버에서 명령을 실행하기 위한 client 프로그램</li>
+  <li><code class="language-plaintext highlighter-rouge">root@$server</code> : <code class="language-plaintext highlighter-rouge">사용자명@호스트명</code> 형식으로 접속할 원격 서버의 최고 관리자 계정을 의미</li>
+  <li><code class="language-plaintext highlighter-rouge">"useradd $1"</code> : ssh root 계정으로 해당 host 에 접속하여 사용자 계정 추가를 실행</li>
+</ul>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="bash" /><category term="shell scirpt" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 04]]></summary></entry><entry><title type="html">Shell Script 기본 문법 03 (큰따옴표 작은 따음표)</title><link href="http://localhost:4000/shell-script03-quates.html" rel="alternate" type="text/html" title="Shell Script 기본 문법 03 (큰따옴표 작은 따음표)" /><published>2024-02-10T12:32:20+09:00</published><updated>2024-02-10T12:32:20+09:00</updated><id>http://localhost:4000/shell-script03-quates</id><content type="html" xml:base="http://localhost:4000/shell-script03-quates.html"><![CDATA[<p>Bash 스크립트에서 큰따옴표(““)와 작은따옴표(‘‘)는 문자열을 묶는 데 사용되지만, 그들이 처리하는 방식에는 중요한 차이가 있다.</p>
+
+<h3 id="큰따옴표">큰따옴표(“”)</h3>
+
+<ol>
+  <li>
+    <p>변수 확장(Expansion)<br />
+  큰따옴표 안에 있는 변수는 그 값으로 확장됨. 예를 들어, “$VARIABLE”은 VARIABLE의 값을 나타냄.</p>
+  </li>
+  <li>
+    <p>명령어 치환(Command Substitution)<br />
+  큰따옴표 안에서 명령어 치환. 예를 들어, “$(date)”는 현재 날짜와 시간으로 치환됨.</p>
+  </li>
+  <li>
+    <p>공백과 특수 문자<br /> 
+  큰따옴표 안의 공백, 탭 등은 문자열의 일부로 유지됨. 이는 여러 단어나 공백을 포함하는 문자열을 하나의 인자나 값으로 처리해야 할 때 유용.</p>
+  </li>
+</ol>
+
+<h3 id="작은따옴표">작은따옴표(‘’)</h3>
+
+<ol>
+  <li>
+    <p>문자 그대로의 값<br /> 
+  작은따옴표 안의 모든 문자는 그대로의 값으로 처리됨. 변수 확장이나 명령어 치환 같은 것은 일어나지 않는다. 예를 들어, ‘$VARIABLE’은 표기된 문자열 “$VARIABLE” 그 자체를 의미.</p>
+  </li>
+  <li>
+    <p>공백과 특수 문자<br /> 
+  작은따옴표 안의 공백과 특수 문자도 문자열의 일부로 유지되며, 이 역시 여러 단어나 공백을 포함하는 문자열을 하나의 인자나 값으로 처리하고자 할 때 유용.</p>
+  </li>
+</ol>
+
+<h3 id="사용-예시">사용 예시</h3>
+
+<ol>
+  <li>
+    <p>변수 확장이 필요한 경우<br /> 
+  “Hello, $USER” (USER 변수에 해당하는 사용자 이름으로 확장.)</p>
+  </li>
+  <li>
+    <p>명령어 치환을 사용하는 경우<br /> 
+  “Today is $(date)” (현재 날짜로 치환.)</p>
+  </li>
+  <li>
+    <p>문자 그대로의 값이 필요한 경우<br /> 
+  ‘Data $5 not processed’ (문자열이 그대로 출력, 변수 확장이나 치환 없이.)</p>
+  </li>
+</ol>
+
+<h3 id="결론">결론</h3>
+
+<p>각각의 사용법은 스크립트에서 변수의 값이나 명령어의 결과를 어떻게 처리할지에 따라 달라진다. 문자열 내에서 변수의 값을 그대로 사용하고 싶지 않거나, 특수 문자를 명령어의 일부로 해석되지 않게 하고 싶을 때 작은따옴표를 사용한다. 반면, 변수의 값을 확장하거나 명령어의 결과를 사용하고자 할 때는 큰따옴표를 사용한다.</p>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="bash" /><category term="shell scirpt" /><category term="quates" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 03]]></summary></entry><entry><title type="html">Shell Script 기본 문법 01</title><link href="http://localhost:4000/shell-script01.html" rel="alternate" type="text/html" title="Shell Script 기본 문법 01" /><published>2024-02-10T08:32:20+09:00</published><updated>2024-02-10T08:32:20+09:00</updated><id>http://localhost:4000/shell-script01</id><content type="html" xml:base="http://localhost:4000/shell-script01.html"><![CDATA[<h3 id="1-간단한-함수를-사용한-script-1">1. 간단한 함수를 사용한 script 1</h3>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 
@@ -213,7 +388,7 @@ done</span> &lt; <span class="s2">"list"</span>
 3
 4
 5
-</code></pre></div></div>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="shell scirpt" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 01]]></summary></entry><entry><title type="html">Shell Script 기본 문법 02 (types)</title><link href="http://localhost:4000/shell-script02-types.html" rel="alternate" type="text/html" title="Shell Script 기본 문법 02 (types)" /><published>2024-02-10T08:32:20+09:00</published><updated>2024-02-10T08:32:20+09:00</updated><id>http://localhost:4000/shell-script02-types</id><content type="html" xml:base="http://localhost:4000/shell-script02-types.html"><![CDATA[<p>Bash Shell Script에서는 다른 프로그래밍 언어들처럼 명시적인 데이터 타입 선언을 사용하지 않는다. Bash는 기본적으로 모든 변수를 문자열로 처리하지만, Bash 스크립트 내에서 다양한 형태의 데이터를 다룰 수 있으며, 이를 위해 특정 명령어나 구문을 사용하여 숫자, 문자열, 배열 등과 같은 다양한 “형태”의 데이터를 다루게 된다. 아래는 Bash에서 사용될 수 있는 주요 “데이터 타입”의 개념과 예시이다.</p>
+</code></pre></div></div>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="shell scirpt" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 01]]></summary></entry><entry><title type="html">Shell Script 기본 문법 02 (types)</title><link href="http://localhost:4000/shell-script02-types-copy.html" rel="alternate" type="text/html" title="Shell Script 기본 문법 02 (types)" /><published>2024-02-10T08:32:20+09:00</published><updated>2024-02-10T08:32:20+09:00</updated><id>http://localhost:4000/shell-script02-types%20copy</id><content type="html" xml:base="http://localhost:4000/shell-script02-types-copy.html"><![CDATA[<p>Bash Shell Script에서는 다른 프로그래밍 언어들처럼 명시적인 데이터 타입 선언을 사용하지 않는다. Bash는 기본적으로 모든 변수를 문자열로 처리하지만, Bash 스크립트 내에서 다양한 형태의 데이터를 다룰 수 있으며, 이를 위해 특정 명령어나 구문을 사용하여 숫자, 문자열, 배열 등과 같은 다양한 “형태”의 데이터를 다루게 된다. 아래는 Bash에서 사용될 수 있는 주요 “데이터 타입”의 개념과 예시이다.</p>
 
 <h3 id="문자열-string">문자열 (String)</h3>
 <p>Bash에서 가장 기본적이고 자주 사용되는 데이터 타입. 변수에 값을 할당할 때 따옴표를 사용하지 않거나, 단일 따옴표(‘)나 이중 따옴표(“)를 사용하여 문자열을 할당.</p>
@@ -1004,138 +1179,4 @@ This Server is termniated.
 </ul>
 
 <p><br />
-<a href="https://elixircasts.io/intro-to-genserver">참고 문헌 - ElixirCasts - #12: Intro to GenServer</a></p>]]></content><author><name>Yong gon Yun</name></author><category term="elixir" /><category term="genserver" /><category term="pubsub" /><summary type="html"><![CDATA[Elixir GenServer]]></summary></entry><entry><title type="html">changeset/2 in Ecto Library</title><link href="http://localhost:4000/changeset.html" rel="alternate" type="text/html" title="changeset/2 in Ecto Library" /><published>2024-01-15T10:32:20+09:00</published><updated>2024-01-15T10:32:20+09:00</updated><id>http://localhost:4000/changeset</id><content type="html" xml:base="http://localhost:4000/changeset.html"><![CDATA[<p>Phoenix LiveView 에서 DB 처리 작업은 Ecto library 를 사용하여 작업이 진행된다. 이와 관련하여, Ecto 의 기능과 구성요소에 대해 알아보고, 여기에서 <code>changeset/2</code> 함수에 대해 좀더 알아 본다. </p>
-
-<h3>Ecto 란?</h3>
-<p>Phoenix LiveView 에서 사용하는 Ecto library 는 Elixir 언어를 위한 database wrapper 이다. 주로 Elixir web-framewor 인 Phoenix 와 함께 사용되며, 데이터베이스 상호작용을 효율적으로 만들어 준다.</p>
-
-<p><strong>구성요소</strong></p>
-
-<ol>
-  <li>
-    <p>Repo (Repository)</p>
-    <ul>
-      <li>데이터베이스와의 모든 상호작용(CRUD)을 처리</li>
-      <li>데이터베이스에 query를 보내고 결과를 반환 받음</li>
-      <li>여러 Repo 를 지원 할 수 있어, 다양한 데이터베이스와 동시에 작업 가능</li>
-    </ul>
-  </li>
-    <li>
-    <p>Schema</p>
-    <ul>
-      <li>데이터베이스 table 과 Elixir 구조체 간 mapping 을 정의</li>
-      <li>각 field 는 Elixir data type 으로 선언됨</li>
-      <li>schema 는 data 유효성 검사와 제약 조건도 함께 정의함</li>
-    </ul>
-  </li>
-    <li>
-    <p>Changeset</p>
-    <ul>
-      <li>data 를 삽입하거나 업데이트하기 전에 데이터를 검증하고 변환하는 역할</li>
-      <li>유효성 검사, 제약 조건 확인, filtering, 형식 변환 등을 처리</li>
-    </ul>
-  </li>
-    <li>
-    <p>Query</p>
-    <ul>
-      <li>Elixir 의 구문을 사용하여 database query 를 생성 또는 사용자 정의 query 구현 가능하도록 함</li>
-      <li>query 는 Ecto.Query module 을 사용하여 작성됨</li>
-      <li>query 는 compile 타임에 생성되므로, 효율적인 성능을 발휘함</li>
-    </ul>
-  </li>
-</ol>
-
-<p><strong>Ecto 의 특징</strong></p>
-<ul>
-  <li>Database Adapter : PostgreSQL, MySQL, SQLite 등 다양한 데이터베이스를 지원</li>
-  <li>Migration : 데이터베이스 schema 변경을 위한 migration 을 쉽게 관리</li>
-  <li>Transaction: 데이터베이스 transaction을 통해 데이터 일관성을 보장</li>
-  <li>Multi-Tenancy : 필요한 경우, 동일한 app 내에서 여러 데이터베이스를 다룰 수 있음</li>
-</ul>
-
-<h3>changset/2</h3>
-
-<p><strong><code>changset/2</code>의 역할</strong></p>
-<ul>
-  <li><code>cast/3</code>를 사용하여 비 구조체 type 의 user data 를 구조체 형태로 변환하여 Ecto 데이터베이스 schema 와 안전한 상태로 mapping 될 수 있도록 변환</li>
-  <li>관련 feild 값을 capture 하여 데이터베이스에 저장된 값과 비교, 변경 여부를 확인</li>
-  <li>현재 작업 중이 값이 유효한지를 검증한다. 변경된 값이 query 를 통해 데이터베이스에 값이 저장 또는 수정되기 전에, 유효성 (field type, 길이, 값의 범위, 존재 여부 등) 을 확인하여 잘못된 형식 또는 잘못된 값이 아닌지를 먼저 판단한다. 해당 과정은 각 field 에 대해 항상 동일한 규칙과 조건을 적용한다. (consistent rule)</li>
-  <li>유효성 확인의 결과로 <code>:ok</code> 또는 <code>:error</code> 상태를 반환하여 context 가 query 작업을 진행할지 여부에 대한 state 를 제공한다.</li>
-</ul>
-
-<p><strong>예제 code</strong></p>
-
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">changeset</span><span class="p">(</span><span class="n">product</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span> <span class="k">do</span>
-  <span class="n">product</span>
-  <span class="o">|&gt;</span> <span class="n">cast</span><span class="p">(</span><span class="n">attrs</span><span class="p">,</span> <span class="p">[</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:unit_price</span><span class="p">,</span> <span class="ss">:sku</span><span class="p">])</span>
-  <span class="o">|&gt;</span> <span class="n">validate_required</span><span class="p">([</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:unit_price</span><span class="p">,</span> <span class="ss">:sku</span><span class="p">])</span>
-  <span class="o">|&gt;</span> <span class="n">unique_constraint</span><span class="p">(</span><span class="ss">:sku</span><span class="p">)</span>
-  <span class="o">|&gt;</span> <span class="n">validate_number</span><span class="p">(</span><span class="ss">:unit_price</span><span class="p">,</span> <span class="ss">greater_than:</span> <span class="mf">0.0</span><span class="p">)</span>
-<span class="k">end</span>
-</code></pre></div></div>
-<ol>
-  <li><code>cast/3</code> 를 통해 attr key-values 중 <code>product</code> 구조체의 field (<code>[:name, :description, :unit_price, :sku]</code>) 에 해당하는 값이 있는지 확인하고 해당하는 값을 <code>product</code> 구조체로 변환</li>
-  <li><code>validate/2</code>, <code>unique_constraint/2</code>, <code>validate_number/2</code> 함수들을 통해 유효성 검사를 진행</li>
-  <li>최종으로 해당 값이 존재하고, 유효성에 문제가 없으면 <code>:ok</code> 아니면 <code>:error</code> 상태를 반환한다.</li>
-  <li></li>
-</ol>
-
-<ul>
-  <li><a href="https://pragprog.com/titles/liveview/programming-phoenix-liveview/">참고 문헌 - programming-phoenix-liveview_B10.0</a></li>
-</ul>]]></content><author><name>Yong gon Yun</name></author><category term="ecto" /><category term="changeset/2" /><summary type="html"><![CDATA[changeset/2 in Ecto Library]]></summary></entry><entry><title type="html">Lazy Collection 과 Stream library</title><link href="http://localhost:4000/lazy-collection.html" rel="alternate" type="text/html" title="Lazy Collection 과 Stream library" /><published>2024-01-07T10:32:20+09:00</published><updated>2024-01-07T10:32:20+09:00</updated><id>http://localhost:4000/lazy-collection</id><content type="html" xml:base="http://localhost:4000/lazy-collection.html"><![CDATA[<h3>Lazy Collection</h3>
-<p>Lazy Colleciton 은 Elixir와 같은 함수형 프로그래밍 언어에서 중요한 개념 중 하나로 데이터가 실제로 필요할 때까지 그 처리를 연기하는 방식으로 작동한다. 이 방식은 특히 대용량 데이터를 다룰 때 메모리 사용을 최소화하고 성능을 향상시킬 수 있다.</p>
-
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stream</span> <span class="o">=</span> <span class="no">Stream</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">10000</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">(</span><span class="nv">&amp;1</span> <span class="o">*</span> <span class="nv">&amp;1</span><span class="p">))</span>
-</code></pre></div></div>
-
-<p>이 코드는 1부터 10,000까지의 숫자 각각에 대해 제곱을 하는 스트림을 생성한다. 그러나 실제 제곱 연산은 스트림을 열거하는 시점, 예를 들어 Enum.to_list(stream)을 호출할 때까지 수행되지 않는다.</p>
-
-<p><strong>특징</strong></p>
-<ul>
-<li>비동기 처리: lazy collection은 데이터의 전체 집합을 메모리에 한 번에 로드하지 않는다. 대신, 요소들은 필요할 때, 즉 실제로 열거(enumerate)하거나 접근할 때 처리된다.</li><br />
-<li>효율성: lazy collection은 메모리 사용을 최적화한다. 큰 데이터셋을 한 번에 처리하는 대신, 작은 조각으로 나누어 필요한 부분만 처리한다. 이는 특히 파일 읽기, 외부 API 호출, 대규모 계산과 같은 상황에서 유용하다.</li><br />
-<li>Function Chaining: lazy collection은 여러 함수를 연결(chaining)하여 복잡한 데이터 처리 파이프라인을 구축할 수 있다. 각 함수는 이전 함수의 출력을 입력으로 받아 처리한다.(아래 보충 설명 참조)</li><br />
-<li>Stream Module: Elixir에서 lazy collection을 구현하는 데 사용되는 주요 모듈은 Stream이다. Stream 모듈은 다양한 지연 처리 함수를 제공한다. 예를 들어, <code>Stream.map/2</code>은 컬렉션의 각 요소에 주어진 함수를 적용하지만, 실제 계산은 스트림을 열거할 때까지 연기된다.</li>
-</ul>
-
-<h3>즉시 연산 vs 지연 연산</h3>
-<p>아래 두 예제의 경우, 반환값은 동일하지만, 아래와 같이 다른 기능적 특징을 가진다.</p>
-
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">Stream</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">10000</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">(</span><span class="nv">&amp;1</span> <span class="o">*</span> <span class="nv">&amp;1</span><span class="p">))</span>
-</code></pre></div></div>
-<ul>
-<li>지연 연산: Stream.map은 연산을 즉시 수행하지 않고, 각 요소에 대한 연산을 정의하는 스트림을 반환한다. 이 스트림은 실제로 열거되기 전까지는 어떤 연산도 수행하지 않는다.</li><br />
-<li>메모리 효율성: 큰 데이터셋을 처리할 때 Stream.map은 모든 요소를 한 번에 메모리에 로드하지 않는다. 대신, 스트림을 열거할 때 각 요소를 개별적으로 처리한다. 이는 대규모 데이터셋을 다룰 때 메모리 사용을 최소화한다.</li><br />
-<li>적용 예: 위 code 에서 <code>Enum.to_list(stream)</code> 또는 다른 Enum 함수를 사용하여 스트림을 열거할 때까지 실제 연산이 연기된다.</li>
-</ul>
-
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">Enum</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">10000</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">(</span><span class="nv">&amp;1</span> <span class="o">*</span> <span class="nv">&amp;1</span><span class="p">))</span>
-</code></pre></div></div>
-<ul>
-<li>즉시 연산: Enum.map은 함수가 호출되는 즉시 모든 요소에 대해 연산을 수행한다. 연산 결과는 즉시 계산되고 반환된다.</li><br />
-<li>메모리 사용: 이 방식은 연산을 수행한 전체 결과를 메모리에 저장한다. 큰 데이터셋을 처리할 경우, 이는 상당한 양의 메모리를 사용할 수 있다.</li><br />
-<li>적용 예: 연산 결과가 즉시 필요하고 데이터셋이 메모리에 들어갈 수 있을 정도로 작을 때 유용.</li>
-</ul>
-
-<center>*****</center>
-<h3>Function Chaining 상태에서의 Lazy Collection</h3>
-<p>앞에서 관련 장점을 설명했으나, 다양한 함수를 연속적으로 사용하는 function chaining 에서 항상 해당 장점이 발휘되는 것은 아니다.</p>
-<p>예를 들면,</p>
-
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">1</span><span class="o">..</span><span class="mi">10000</span>
-<span class="o">|&gt;</span> <span class="no">Enum</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="nv">&amp;1</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
-<span class="o">|&gt;</span> <span class="no">Stream</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="nv">&amp;1</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">))</span>
-<span class="o">|&gt;</span> <span class="no">Enum</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
-</code></pre></div></div>
-
-<p>의 처리 과정을 보면,</p>
-
-<ol>
-<li>chaining 과정에서 Stream 모듈의 함수 뒤에 Enum 모듈의 함수가 오면, 스트림에 대한 모든 연산이 Enum 함수 호출 시점에 즉시 수행된다. 이는 Enum 함수가 실제 데이터를 필요로 하기 때문이다.</li><br />
-<li>반대로, Enum 함수 다음에 Stream 함수가 오면, Enum 함수는 즉시 실행되고, 그 결과는 Stream 함수에 의해 다시 지연 처리된다.</li><br />
-<li>이 경우, Enum.map은 즉시 모든 요소에 대해 연산을 수행한다. 이어서 <code>Stream.filter</code>는 지연 처리 스트림을 생성하지만, 최종적으로 <code>Enum.to_list</code>에 의해 이 스트림이 즉시 열거되어 모든 데이터 처리가 완료된다.</li>
-</ol>
-
-<p>결론적으로, 예제에서 <code>Stream.filter(&amp;(&amp;1 &lt; 100))</code>는 결국 체인의 마지막에 있는 <code>Enum.to_list()</code> 함수 때문에 즉시 연산 처리된다.</p>
-<p>chaining된 함수들 중 하나라도 즉시 연산을 수행하는 Enum 모듈의 함수를 포함하고 있고, 이것이 체인의 마지막에 위치한다면, 체인의 모든 연산은 결국 즉시 수행된다. 이는 Enum 모듈의 함수가 실제 데이터를 필요로 하기 때문에, 지연된 연산들도 강제로 실행되어 결과를 산출한다.</p>
-<center>*****</center>]]></content><author><name>Yong gon Yun</name></author><category term="elixir" /><category term="lazy collection" /><category term="elixir stream" /><summary type="html"><![CDATA[Lazy Collection 과 Stream library]]></summary></entry></feed>
+<a href="https://elixircasts.io/intro-to-genserver">참고 문헌 - ElixirCasts - #12: Intro to GenServer</a></p>]]></content><author><name>Yong gon Yun</name></author><category term="elixir" /><category term="genserver" /><category term="pubsub" /><summary type="html"><![CDATA[Elixir GenServer]]></summary></entry></feed>

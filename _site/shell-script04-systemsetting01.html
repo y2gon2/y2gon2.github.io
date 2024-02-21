@@ -7,9 +7,9 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>(App 개발 02) root.html.heex 과 app.html.heex 에 대해 - Gon's Tech Jurnal</title>
-	<link rel="canonical" href="http://localhost:4000/root-and-app.html">
-	<meta name="description" content="Phoenix LiveView 에서 기본 <head> 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함">
+	<title>Shell Script 사용한 시스템 구축 01 (사용자 계정 생성) - Gon's Tech Jurnal</title>
+	<link rel="canonical" href="http://localhost:4000/shell-script04-systemsetting01.html">
+	<meta name="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 04">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 <script type="application/ld+json">
@@ -19,13 +19,13 @@
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "http://localhost:4000"},
-  "headline": "(App 개발 02) root.html.heex 과 app.html.heex 에 대해",
-  "abstract": "Phoenix LiveView 에서 기본 <head> 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함",
-    "keywords": "phoenix, liveview, root.html.heex, app.html.heex, applciation_개발1",
-    "wordcount": "413",
-    "image": ["http://localhost:4000/assets/imgposts/general/post_general16.jpg"],
-  "datePublished": "2024-01-25 08:32:20 +0900",
-  "dateModified": "2024-01-25 08:32:20 +0900",
+  "headline": "Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)",
+  "abstract": "개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 04",
+    "keywords": "linux, bash, shell scirpt",
+    "wordcount": "649",
+    "image": ["http://localhost:4000/assets/imgposts/general/post_general22.jpg"],
+  "datePublished": "2024-02-20 14:32:20 +0900",
+  "dateModified": "2024-02-20 14:32:20 +0900",
   "author": {
     "@type": "Person",
     "name": "Yong gon Yun"},
@@ -40,30 +40,30 @@
 }
 </script>
 <!-- Open Graph data -->
-<meta property="og:url" content="http://localhost:4000/root-and-app.html"/>
+<meta property="og:url" content="http://localhost:4000/shell-script04-systemsetting01.html"/>
 <meta property="og:type" content="article"/>
-<meta property="og:title" content="(App 개발 02) root.html.heex 과 app.html.heex 에 대해"/>
-<meta property="og:description" content="Phoenix LiveView 에서 기본 <head> 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함"/>
-<meta property="og:image" content="http://localhost:4000/assets/imgposts/general/post_general16.jpg"/>
-<meta property="og:image:alt" content="(App 개발 02) root.html.heex 과 app.html.heex 에 대해"/>
+<meta property="og:title" content="Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)"/>
+<meta property="og:description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 04"/>
+<meta property="og:image" content="http://localhost:4000/assets/imgposts/general/post_general22.jpg"/>
+<meta property="og:image:alt" content="Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)"/>
 <meta property="og:site_name" content="Gon's Tech Jurnal" />
-<meta property="article:published_time" content="2024-01-25 08:32:20 +0900" />
-<meta property="article:modified_time" content="2024-01-25 08:32:20 +0900" />
-<meta property="article:tag" content="phoenix, liveview, root.html.heex, app.html.heex, applciation_개발1" />
+<meta property="article:published_time" content="2024-02-20 14:32:20 +0900" />
+<meta property="article:modified_time" content="2024-02-20 14:32:20 +0900" />
+<meta property="article:tag" content="linux, bash, shell scirpt" />
 <meta property="fb:admins" content="ar.maybach" />
 <!-- Schema.org markup for Google -->
-<meta itemprop="name" content="(App 개발 02) root.html.heex 과 app.html.heex 에 대해">
-<meta itemprop="description" content="Phoenix LiveView 에서 기본 <head> 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함">
-<meta itemprop="image" content="http://localhost:4000/assets/imgposts/general/post_general16.jpg">
+<meta itemprop="name" content="Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)">
+<meta itemprop="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 04">
+<meta itemprop="image" content="http://localhost:4000/assets/imgposts/general/post_general22.jpg">
 <!-- Twitter Card data -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@N/A">
-<meta name="twitter:title" content="(App 개발 02) root.html.heex 과 app.html.heex 에 대해">
-<meta name="twitter:description" content="Phoenix LiveView 에서 기본 <head> 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함">
+<meta name="twitter:title" content="Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)">
+<meta name="twitter:description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 04">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="413"/>
-<meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general16.jpg">
+<meta data-rh="true" name="twitter:data1" content="649"/>
+<meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general22.jpg">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
 	<!-- iOS Safari -->
@@ -150,7 +150,7 @@
 
 <section class="hidden">
   <div class="post">
-      <a  class="post-list-title" href="./root-and-app.html">(App 개발 02) root.html.heex 과 app.html.heex 에 대해</a>
+      <a  class="post-list-title" href="./shell-script04-systemsetting01.html">Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)</a>
       
 
   <span class = "post-card-meta">
@@ -162,7 +162,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
+        <time datetime="2024-02-20T14:32:20+09:00">February 20, 2024</time>
       </span>
     
     
@@ -174,7 +174,7 @@
     
     <span class="page_meta-readtime">
       
-        2 minute read
+        3 minute read
       
     </span>
   
@@ -182,7 +182,7 @@
   </span>
 
         <div class="post-excerpt">
-            <p>현재 Phoenix LiveView application 작업을 진행하면서, 아래와 같이 page 최상단에 메뉴바를 띄우고자 한다.</p><center><img src="assets\img\posts\header.png" width="500" /></center><p>다만 <code class="language-plaintext highlighter-rouge">/</code> 과 <code class="language-plaintext highlighter-rouge">/games</code> url 에 대해서는 메뉴바가 있고, <code class="language-plaintext highlighter-rouge">/games/:id</code> url 에 대해서는 메뉴바가 없도록 구성하고 싶다. 해당 작업을 진행하면 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 와 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 파일을 수정하고, 수정된 파일을 어떻게하면 적절하게 이용할 수 있을지 위에서의 고민을 토대로 각 파일에 대해 알아본다.</p><h3 id="roothtmlheex-역할">root.html.heex 역할</h3><p>이 파일은 전체 Phoenix 애플리케이션의 최상위 레이아웃을 정의하며, 다른 템플릿들은 이 안에 삽입되어 최종 HTML 문서를 형성한다. 일반적으로 전체 애플리케이션에 걸쳐 공통적으로 사용되는 HTML 요소를 포함한다.(<code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> 태그 내의 meta data, stylesheet link, javascript...<a class="read-more" href="./root-and-app.html"> read more</a>
+            <p>참고 자료 : <a href="https://product.kyobobook.co.kr/detail/S000001810353">처음 배우는 셸 스크립트 8장 시스템 구축</a></p><p>shell script 를 사용하여 사용자 개정을 생성하는 파일을 작성 및 실행</p><p>프로세스</p><ol> <li>사용자 계정과 패스워드 입력</li> <li>입력 정보가 없으면 에러 메세지를 보여주고, script 종료</li> <li>여러명의 사용자 계정을 생성할 경우 반복문을 사용하여 순회</li> <li>각 계정이 이미 사용자 계정에 포함되어 있는지 확인</li> <li>포함되어있지 않다면, 계정을 생성하고 패스워드 설정</li> <li>이미 존재하는 계정이라면, 이를 메세지로 보여줌.</li></ol><h3 id="1-다수의-사용자-계정-생성">1. 다수의 사용자 계정 생성</h3><p>(1) <code class="language-plaintext highlighter-rouge">if [[ -n $1 ]] &amp;&amp; [[ -n $2 ]]</code><br />해당 script 실행시 매개 변수로 사용자 계정(<code class="language-plaintext highlighter-rouge">$1</code>)과 패스워드(<code class="language-plaintext highlighter-rouge">$2</code>)가 모두 입력 되었는지 확인(<code class="language-plaintext highlighter-rouge">-n</code> : 비워있지 않아야 함)...<a class="read-more" href="./shell-script04-systemsetting01.html"> read more</a>
         </div>
   </div>
 </section>
@@ -280,14 +280,14 @@
 </header> <!-- End Header -->
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="(App 개발 02) root.html.heex 과 app.html.heex 에 대해">
-<meta itemprop="description" content="Phoenix LiveView 에서 기본 &lt;head&gt; 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함">
-<meta itemprop="datePublished" content="2024-01-25T08:32:20+09:00">
+    <meta itemprop="headline" content="Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)">
+<meta itemprop="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 04">
+<meta itemprop="datePublished" content="2024-02-20T14:32:20+09:00">
 
     <div class="wrapper">
       <div class="page-content">
         <div class="header-page">
-          <h2 class="page-title">(App 개발 02) root.html.heex 과 app.html.heex 에 대해</h2>
+          <h2 class="page-title">Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)</h2>
           
 
   <span class = "post-page-meta">
@@ -299,7 +299,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2024-01-25T08:32:20+09:00">January 25, 2024</time>
+        <time datetime="2024-02-20T14:32:20+09:00">February 20, 2024</time>
       </span>
     
     
@@ -311,7 +311,7 @@
     
     <span class="page_meta-readtime">
       
-        2 minute read
+        3 minute read
       
     </span>
   
@@ -330,15 +330,11 @@
     
         <ul class="tags side">
             
-                <li><a href="./tag.html?tag=phoenix" class="tag side">phoenix</a></li>
+                <li><a href="./tag.html?tag=linux" class="tag side">linux</a></li>
             
-                <li><a href="./tag.html?tag=liveview" class="tag side">liveview</a></li>
+                <li><a href="./tag.html?tag=bash" class="tag side">bash</a></li>
             
-                <li><a href="./tag.html?tag=root.html.heex" class="tag side">root.html.heex</a></li>
-            
-                <li><a href="./tag.html?tag=app.html.heex" class="tag side">app.html.heex</a></li>
-            
-                <li><a href="./tag.html?tag=applciation_%EA%B0%9C%EB%B0%9C1" class="tag side">applciation_개발1</a></li>
+                <li><a href="./tag.html?tag=shell+scirpt" class="tag side">shell scirpt</a></li>
             
     
         </ul>
@@ -347,11 +343,11 @@
     <div class="share-hover side">
         <span class="share-button side"><svg fill="currentColor" width="25" height="25" class="side"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>
         <div class="share-icons side" id="sidebar-icons">
-            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=(App 개발 02) root.html.heex 과 app.html.heex 에 대해&url=http://localhost:4000/root-and-app.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/root-and-app.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/root-and-app.html&title=(App 개발 02) root.html.heex 과 app.html.heex 에 대해" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/root-and-app.html&title=(App 개발 02) root.html.heex 과 app.html.heex 에 대해&summary=Phoenix LiveView 에서 기본 <head> 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함&source=http://localhost:4000/root-and-app.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a class="email" href="mailto:?subject=(App 개발 02) root.html.heex 과 app.html.heex 에 대해&body=Phoenix LiveView 에서 기본 <head> 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함%0A%0ARead more here: http://localhost:4000/root-and-app.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)&url=http://localhost:4000/shell-script04-systemsetting01.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/shell-script04-systemsetting01.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/shell-script04-systemsetting01.html&title=Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/shell-script04-systemsetting01.html&title=Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)&summary=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 04&source=http://localhost:4000/shell-script04-systemsetting01.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a class="email" href="mailto:?subject=Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)&body=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 04%0A%0ARead more here: http://localhost:4000/shell-script04-systemsetting01.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
             <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="side" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>
         </div>
     </div>
@@ -361,79 +357,132 @@
 
         
         
-        <p>현재 Phoenix LiveView application 작업을 진행하면서, 아래와 같이 page 최상단에 메뉴바를 띄우고자 한다.</p>
+        <p>참고 자료 : <a href="https://product.kyobobook.co.kr/detail/S000001810353">처음 배우는 셸 스크립트 8장 시스템 구축</a></p>
 
-<center><img src="assets\img\posts\header.png" width="500" /></center>
+<p>shell script 를 사용하여 사용자 개정을 생성하는 파일을 작성 및 실행</p>
 
-<p>다만 <code class="language-plaintext highlighter-rouge">/</code> 과 <code class="language-plaintext highlighter-rouge">/games</code> url 에 대해서는 메뉴바가 있고, <code class="language-plaintext highlighter-rouge">/games/:id</code> url 에 대해서는 메뉴바가 없도록 구성하고 싶다. 해당 작업을 진행하면 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 와 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 파일을 수정하고, 수정된 파일을 어떻게하면 적절하게 이용할 수 있을지 위에서의 고민을 토대로 각 파일에 대해 알아본다.</p>
+<p>프로세스</p>
+<ol>
+  <li>사용자 계정과 패스워드 입력</li>
+  <li>입력 정보가 없으면 에러 메세지를 보여주고, script 종료</li>
+  <li>여러명의 사용자 계정을 생성할 경우 반복문을 사용하여 순회</li>
+  <li>각 계정이 이미 사용자 계정에 포함되어 있는지 확인</li>
+  <li>포함되어있지 않다면, 계정을 생성하고 패스워드 설정</li>
+  <li>이미 존재하는 계정이라면, 이를 메세지로 보여줌.</li>
+</ol>
 
-<h3 id="roothtmlheex-역할">root.html.heex 역할</h3>
+<h3 id="1-다수의-사용자-계정-생성">1. 다수의 사용자 계정 생성</h3>
 
-<p>이 파일은 전체 Phoenix 애플리케이션의 최상위 레이아웃을 정의하며, 다른 템플릿들은 이 안에 삽입되어 최종 HTML 문서를 형성한다. 일반적으로 전체 애플리케이션에 걸쳐 공통적으로 사용되는 HTML 요소를 포함한다.(<code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> 태그 내의 meta data, stylesheet link, javascript 파일 등)</p>
+<p>(1) <code class="language-plaintext highlighter-rouge">if [[ -n $1 ]] &amp;&amp; [[ -n $2 ]]</code>
+<br />해당 script 실행시 매개 변수로 사용자 계정(<code class="language-plaintext highlighter-rouge">$1</code>)과 패스워드(<code class="language-plaintext highlighter-rouge">$2</code>)가 모두 입력 되었는지 확인(<code class="language-plaintext highlighter-rouge">-n</code> : 비워있지 않아야 함) 한다. <code class="language-plaintext highlighter-rouge">$1</code> 과 <code class="language-plaintext highlighter-rouge">$2</code> 모두 외부 입력값이므로 이중 중괄호 <code class="language-plaintext highlighter-rouge">[[]]</code> 를 사용한다.
+<br /></p>
 
-<p><code class="language-plaintext highlighter-rouge">router.ex</code> 에서 <code class="language-plaintext highlighter-rouge">pipeline :browser</code> 를 통해 주입되며, 모든 정적 html와 LiveView는 이 파일의 구조 안에서 렌더링된다.</p>
+<p>(2) <code class="language-plaintext highlighter-rouge">IFS=' ' read -r -a UserList &lt;&lt;&lt; "$1"</code> <br />
+입력된 매개변수 값을 공백을 기준으로 값을 slice 하여 배열의 형태로 shell script 변수로 저장함.<br /></p>
+<ul>
+  <li>IFS (Internal Field Separator) : IFS 는 shell scirpt 에서 사용하는 내부 필드 구분자. 이 변수는 문자열을 분리하여 배열이나 개별 변수로 읽을 때 사용하는 구분자을 정의한다. 기본값은 공백, 탭, 개행 문자.</li>
+  <li><code class="language-plaintext highlighter-rouge">read</code> : 표준 입력이나 파일로부터 입력을 읽어드림. 이 명령어를 사용하여 변수에 값을 할당할 수 있다.</li>
+  <li><code class="language-plaintext highlighter-rouge">-r</code> : <code class="language-plaintext highlighter-rouge">read</code> 옵션 중 백슬래시(<code class="language-plaintext highlighter-rouge">\</code>) 가 이스케이프 문자로 처리되지 않고, 그대로 읽어드림.</li>
+  <li><code class="language-plaintext highlighter-rouge">-a</code> : <code class="language-plaintext highlighter-rouge">read</code> 명령어에 의히 읽힌 값을 배열로 저장.</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;&lt;&lt;</code> (Here String) :  “$1” 로 받은 외부 입력 값을 UserList 변수 값으로 취할 수 있도록 redirection 해줌. 
+<br /></li>
+</ul>
 
-<p>만약 <code class="language-plaintext highlighter-rouge">root1.html.heex</code> 파일에서 해당 메뉴바를 구현하고, <code class="language-plaintext highlighter-rouge">root2.html.heex</code> 에는 메뉴바를 구현하지 않고, 이렇게 두 개의 파일을 만들어서 <code class="language-plaintext highlighter-rouge">pipeline :browser1</code> , <code class="language-plaintext highlighter-rouge">pipeline :browser2</code> 를 각각 정의하여 이를 각각 필요한 url 에 맞게 사용하고자 시도하였으나, 이런 경우, 동일한 매개변수를 가지는 <code class="language-plaintext highlighter-rouge">live_session</code> macro 가 두번 정의되어야 한다. 이는 다음의 에러가 발생시킨다.</p>
+<p>(3) <code class="language-plaintext highlighter-rouge">for (( i=0 ; i &lt; ${#UserList[@]}; i++ ))</code> <br />
+배열 <code class="language-plaintext highlighter-rouge">UserList</code> 의 길이만큼 반복할 수 있도록 설정
+<br /></p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">**</span> <span class="o">(</span>RuntimeError<span class="o">)</span> attempting to redefine live_session :require_authenticated_user.
-live_session routes must be declared <span class="k">in </span>a single named block.
+<p>(4) <code class="language-plaintext highlighter-rouge">if [[ $(cat /etc/passwd | grep -w ${UserList[$i]} | wc -l) == 0 ]] </code><br /></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">$(cat /etc/passwd</code> 파일의 내용을 가져와서,</li>
+  <li><code class="language-plaintext highlighter-rouge">UserList[$i]</code> 의 값과 정확히 (<code class="language-plaintext highlighter-rouge">-w</code>)일치하는 사용자 계정을 찾고,</li>
+  <li><code class="language-plaintext highlighter-rouge">wc</code> (word count) 의 라인 수(<code class="language-plaintext highlighter-rouge">-l</code>) 을 출력,</li>
+  <li>해당 값이 0 아니라면, 동일 계정이 존재한다는 것을 의미함.
+<br /></li>
+</ul>
+
+<p>(5) <code class="language-plaintext highlighter-rouge">useradd ${UserList[$i]}</code> <br />
+기존 계정이 존재하지 않는 경우, 해당 값 <code class="language-plaintext highlighter-rouge">${UserList{$i}}</code> 의 계정을 생성함. 
+<br /></p>
+
+<p>(6) <code class="language-plaintext highlighter-rouge">echo "${UserList[$i]}:${Password[$i]}" | chpasswd</code> <br />
+새로 생성한 계정에 대한 패스워드 값을 사용하여 패스워드를 설정
+<br /></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="c"># 사용자 계정 및 패스워드가 입력되었는지 확인</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="nt">-n</span> <span class="nv">$1</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="o">[[</span> <span class="nt">-n</span> <span class="nv">$2</span> <span class="o">]]</span> <span class="c">#  (1)</span>
+<span class="k">then
+
+        </span><span class="nv">IFS</span><span class="o">=</span><span class="s1">' '</span> <span class="nb">read</span> <span class="nt">-r</span> <span class="nt">-a</span> UserList <span class="o">&lt;&lt;&lt;</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="c">#  (2)</span>
+        <span class="nv">IFS</span><span class="o">=</span><span class="s1">' '</span> <span class="nb">read</span> <span class="nt">-r</span> <span class="nt">-a</span> Password <span class="o">&lt;&lt;&lt;</span> <span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span>
+
+        <span class="c"># for 문을 이용하여 사용자 계정 생성</span>
+        <span class="k">for</span> <span class="o">((</span> <span class="nv">i</span><span class="o">=</span>0 <span class="p">;</span> i &lt; <span class="k">${#</span><span class="nv">UserList</span><span class="p">[@]</span><span class="k">}</span><span class="p">;</span> i++ <span class="o">))</span> <span class="c">#  (3)</span>
+        <span class="k">do</span>
+                <span class="c"># if문을 사용하여 사용자 계정이 있는지 확인</span>
+                <span class="k">if</span> <span class="o">[[</span> <span class="si">$(</span><span class="nb">cat</span> /etc/passwd | <span class="nb">grep</span> <span class="nt">-w</span> <span class="k">${</span><span class="nv">UserList</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span><span class="k">}</span> | <span class="nb">wc</span> <span class="nt">-l</span><span class="si">)</span> <span class="o">==</span> 0 <span class="o">]]</span> <span class="c">#  (4)</span>
+                <span class="k">then</span>
+                        <span class="c"># 사용자 생성 및 패스워드 설정</span>
+                        useradd <span class="k">${</span><span class="nv">UserList</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span><span class="k">}</span> <span class="c">#  (5)</span>
+                        <span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">UserList</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span><span class="k">}</span><span class="s2">:</span><span class="k">${</span><span class="nv">Password</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span><span class="k">}</span><span class="s2">"</span> | chpasswd <span class="c">#  (6)</span>
+                <span class="k">else</span>
+                        <span class="c"># 사용자가 있다고 메세지를 보여줌</span>
+                        <span class="nb">echo</span> <span class="s2">"this user </span><span class="k">${</span><span class="nv">UserList</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span><span class="k">}</span><span class="s2"> is existing."</span>
+                <span class="k">fi
+        done
+
+else</span>
+        <span class="c"># 사용자가 계정과 패스워드를 입력하라는 메세지를 보여줌</span>
+        <span class="nb">echo</span> <span class="nt">-e</span> <span class="s1">'Please input user id and password. \nUsage: adduser-script.sh "user01 user02" "pw01 pw02"'</span>
+<span class="k">fi</span>
+</code></pre></div></div>
+<p>해당 script 를  <code class="language-plaintext highlighter-rouge">adduser-script.sh</code> 에 저장하고 아래와 같이 실행</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gon@DESKTOP:~/book/ch08<span class="nv">$ </span><span class="nb">sudo </span>bash adduser-script.sh <span class="s2">"user1 user2"</span> <span class="s2">"1111 2222"</span>
+</code></pre></div></div>
+<p>여기에서 <code class="language-plaintext highlighter-rouge">sh</code> 가 아닌 <code class="language-plaintext highlighter-rouge">bash</code> 명령어를 사용한 이유는, 일부 리눅스 (ex. Ubuntu) shell 이 <code class="language-plaintext highlighter-rouge">bash</code> 가 아닌 <code class="language-plaintext highlighter-rouge">dash</code> 에서 실행되는 경우가 있다. 이런 경우, <code class="language-plaintext highlighter-rouge">dash</code> 에서 지원되지 않는 기능 (ex. redirection <code class="language-plaintext highlighter-rouge">&lt;&lt;&lt;</code>)을 shell script 내 사용한 경우, 다음과 같은 에러가 발생한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gon@DESKTOP:~/book/ch08<span class="nv">$ </span><span class="nb">sudo </span>sh adduser-script.sh <span class="s2">"user1 user2"</span> <span class="s2">"1111 2222"</span>
+adduser-script.sh: 7: Syntax error: redirection unexpected
 </code></pre></div></div>
 
-<p>따라서 동일한 <code class="language-plaintext highlighter-rouge">scope</code> macro 에서 정의되어야 하는 url page 에 대해서는 동일한 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 가 적용되어야 한다.</p>
+<p>이를 해결하는 다른 방법으로, 해당 파일의 실행 권한을 아예 변경하고, 직접 실행 시키면 된다.</p>
 
-<h3 id="apphtmlheex-역할">app.html.heex 역할</h3>
-
-<p><code class="language-plaintext highlighter-rouge">app.html.heex</code>는 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 내에 삽입되는, 특정 부분의 레이아웃을 정의하는 파일로, 주로 애플리케이션의 주요 컨텐츠를 포함하며, 특정 페이지나 섹션에 대한 레이아웃을 정의하는 데 사용된다. 예를 들어, header, footer, sidebar 등 페이지의 주요 부분을 구성할 수 있으며, 페이지 별로 다른 내용을 표시하는데 사용된다.</p>
-
-<p>따라서 url 별로 header 적용 여부를 다르게 하고 싶다면 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 파일을 각각 만들어서 각 page mdoule 에서 다른 template 을 가져오면 된다.</p>
-
-<h3 id="구현">구현</h3>
-
-<p>기존에 작성한 header 는 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 에 있었다. 그래서 해당 code 를 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 로 이동시키고, header 가 없은 <code class="language-plaintext highlighter-rouge">app_no_header.html.heex</code> 를 추가 생성하였다.</p>
-
-<p>그리고 <code class="language-plaintext highlighter-rouge">app_no_header.html.heex</code> 을 liveview 에서 가져올 수 있도록 <code class="language-plaintext highlighter-rouge">my_pjt_web.ex</code> 에 callback 함수를 추가해주었다.</p>
-
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">MyPjt1Web</span> <span class="k">do</span>
-  <span class="o">...</span>
-  <span class="c1"># 기존 app.html.heex 를 layout 로 사용하는 함수</span>
-  <span class="k">def</span> <span class="n">live_view</span> <span class="k">do</span>
-    <span class="kn">quote</span> <span class="k">do</span>
-      <span class="kn">use</span> <span class="no">Phoenix</span><span class="o">.</span><span class="no">LiveView</span><span class="p">,</span>
-        <span class="ss">layout:</span> <span class="p">{</span><span class="no">MyPjt1Web</span><span class="o">.</span><span class="no">Layouts</span><span class="p">,</span> <span class="ss">:app</span><span class="p">}</span>
-
-      <span class="kn">unquote</span><span class="p">(</span><span class="n">html_helpers</span><span class="p">())</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-
-  <span class="c1"># 추가된 함수. app_no_header.html.heex 를 layout 로 사용</span>
-  <span class="k">def</span> <span class="n">live_view_no_header</span> <span class="k">do</span>
-    <span class="kn">quote</span> <span class="k">do</span>
-      <span class="kn">use</span> <span class="no">Phoenix</span><span class="o">.</span><span class="no">LiveView</span><span class="p">,</span>
-        <span class="ss">layout:</span> <span class="p">{</span><span class="no">MyPjt1Web</span><span class="o">.</span><span class="no">Layouts</span><span class="p">,</span> <span class="ss">:app_no_header</span><span class="p">}</span>
-
-      <span class="kn">unquote</span><span class="p">(</span><span class="n">html_helpers</span><span class="p">())</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-  <span class="o">...</span>
-<span class="k">end</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gon@DESKTOP:~/book/ch08<span class="nv">$ </span><span class="nb">chmod</span> +x adduser-script.sh
+gon@DESKTOP:~/book/ch08<span class="nv">$ </span>./adduser-script.sh <span class="s2">"user1 user2"</span> <span class="s2">"1111 2222"</span>
 </code></pre></div></div>
 
-<p>다음으로 각 url 대한 module 에서 <code class="language-plaintext highlighter-rouge">use</code> macro 를 사용하여 앞에서 정의한 callback 을 맞게 가져옴</p>
+<p>최종적으로, 해당 실행이 정상적으로 동작했는지를 위해 <code class="language-plaintext highlighter-rouge">/etc/passwd</code> 파일 내용을 확인하면 아래 해당 user 가 추가된 것을 확인할 수 있다.</p>
 
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">MyPjt1Web</span><span class="o">.</span><span class="no">GameLive</span><span class="o">.</span><span class="no">Index</span> <span class="k">do</span>
-  <span class="kn">use</span> <span class="no">MyPjt1Web</span><span class="p">,</span> <span class="ss">:live_view</span>
-  <span class="o">...</span>
-<span class="k">end</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gon@DESKTOP:~/book/ch08<span class="nv">$ </span><span class="nb">cat</span> /etc/passwd
+
+...
+user1:x:1001:1001::/home/user1:/bin/sh
+user2:x:1002:1002::/home/user2:/bin/sh
 </code></pre></div></div>
 
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">MyPjt1Web</span><span class="o">.</span><span class="no">GameLive</span><span class="o">.</span><span class="no">Show</span> <span class="k">do</span>
-  <span class="kn">use</span> <span class="no">MyPjt1Web</span><span class="p">,</span> <span class="ss">:live_view_no_header</span>
-  <span class="o">...</span>
-<span class="k">end</span>
+<h3 id="2-ssh--를-활용하여-다른-서버에-사용자-계정-생성">2. ssh  를 활용하여 다른 서버에 사용자 계정 생성</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="k">for </span>server <span class="k">in</span> <span class="s2">"host01 host02 host03"</span>
+<span class="k">do</span>
+        <span class="c"># 여러 대의 시스템에 사용자 생성 및 패스워드 설정</span>
+        <span class="nb">echo</span> <span class="nv">$server</span>
+        ssh root@<span class="nv">$server</span> <span class="s2">"useradd </span><span class="nv">$1</span><span class="s2">"</span>  <span class="c"># (1)</span>
+        ssh root@<span class="nv">$server</span> <span class="s2">"echo </span><span class="nv">$2</span><span class="s2">:</span><span class="nv">$1</span><span class="s2"> | chpasswd"</span> 
+<span class="k">done</span>
 </code></pre></div></div>
 
-<p>마지막으로 남은 것은 <code class="language-plaintext highlighter-rouge">get "/", PageController, :home</code> 에서 가져오는 module 만 처리해주면 된다. 그런데, 분명 <code class="language-plaintext highlighter-rouge">my_pjt1_web</code>module <code class="language-plaintext highlighter-rouge">controller</code> callback 에 <code class="language-plaintext highlighter-rouge">layout: {MyPjt1Web.Layouts, :app}</code> 이 정의되어 있음에도 불구하고, application 실행시 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 의 header 가 표시되어지지 않았다. 그래서 어쩔수 없이 <code class="language-plaintext highlighter-rouge">home.html.heex</code> 에 동일한 header 를 추가하여 
-자체적으로 header 를 rendering 하도록 구현하였다.</p>
+<p>(1) <code class="language-plaintext highlighter-rouge">ssh root@$server "useradd $1"</code></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ssh</code> : SSH protocol 을 사용하여 원격 서버에 접속하가나 원격 서버에서 명령을 실행하기 위한 client 프로그램</li>
+  <li><code class="language-plaintext highlighter-rouge">root@$server</code> : <code class="language-plaintext highlighter-rouge">사용자명@호스트명</code> 형식으로 접속할 원격 서버의 최고 관리자 계정을 의미</li>
+  <li><code class="language-plaintext highlighter-rouge">"useradd $1"</code> : ssh root 계정으로 해당 host 에 접속하여 사용자 계정 추가를 실행</li>
+</ul>
+
 
         <aside class="sidebar inline" id="post-end">
     
@@ -444,15 +493,11 @@ live_session routes must be declared <span class="k">in </span>a single named bl
     
         <ul class="tags inline">
             
-                <li><a href="./tag.html?tag=phoenix" class="tag inline">phoenix</a></li>
+                <li><a href="./tag.html?tag=linux" class="tag inline">linux</a></li>
             
-                <li><a href="./tag.html?tag=liveview" class="tag inline">liveview</a></li>
+                <li><a href="./tag.html?tag=bash" class="tag inline">bash</a></li>
             
-                <li><a href="./tag.html?tag=root.html.heex" class="tag inline">root.html.heex</a></li>
-            
-                <li><a href="./tag.html?tag=app.html.heex" class="tag inline">app.html.heex</a></li>
-            
-                <li><a href="./tag.html?tag=applciation_%EA%B0%9C%EB%B0%9C1" class="tag inline">applciation_개발1</a></li>
+                <li><a href="./tag.html?tag=shell+scirpt" class="tag inline">shell scirpt</a></li>
             
     
         </ul>
@@ -461,11 +506,11 @@ live_session routes must be declared <span class="k">in </span>a single named bl
     <div class="share-hover inline">
         <span class="share-button inline"><svg fill="currentColor" width="25" height="25" class="inline"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>
         <div class="share-icons inline" id="post-end-icons">
-            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=(App 개발 02) root.html.heex 과 app.html.heex 에 대해&url=http://localhost:4000/root-and-app.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/root-and-app.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/root-and-app.html&title=(App 개발 02) root.html.heex 과 app.html.heex 에 대해" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/root-and-app.html&title=(App 개발 02) root.html.heex 과 app.html.heex 에 대해&summary=Phoenix LiveView 에서 기본 <head> 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함&source=http://localhost:4000/root-and-app.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a class="email" href="mailto:?subject=(App 개발 02) root.html.heex 과 app.html.heex 에 대해&body=Phoenix LiveView 에서 기본 <head> 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함%0A%0ARead more here: http://localhost:4000/root-and-app.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)&url=http://localhost:4000/shell-script04-systemsetting01.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/shell-script04-systemsetting01.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/shell-script04-systemsetting01.html&title=Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/shell-script04-systemsetting01.html&title=Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)&summary=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 04&source=http://localhost:4000/shell-script04-systemsetting01.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a class="email" href="mailto:?subject=Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)&body=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 04%0A%0ARead more here: http://localhost:4000/shell-script04-systemsetting01.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
             <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="inline" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>
         </div>
     </div>
@@ -862,14 +907,14 @@ live_session routes must be declared <span class="k">in </span>a single named bl
     }
 
     function copyToClipboard() {
-      navigator.clipboard.writeText('http://localhost:4000/root-and-app.html').then(function() {
+      navigator.clipboard.writeText('http://localhost:4000/shell-script04-systemsetting01.html').then(function() {
       alerts = document.getElementsByClassName('alert')
       for (i=0; i < alerts.length; i++){
         alerts[i].innerHTML='\u00ABlink copied\u00BB';
         setTimeout((function(i){ return function(){alerts[i].innerHTML='';}})(i), 1600 );
       };
       }, function() {
-        prompt("Unable to copy, please use this link:", "http://localhost:4000/root-and-app.html");
+        prompt("Unable to copy, please use this link:", "http://localhost:4000/shell-script04-systemsetting01.html");
       });
     }
 

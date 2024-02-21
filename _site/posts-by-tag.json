@@ -50,7 +50,11 @@
   "tag" : "bash",
   "posts" : [
       
-      "./shell-script02-types.html"
+      "./shell-script04-systemsetting01.html",
+      
+      "./shell-script03-quates.html",
+      
+      "./shell-script02-types-copy.html"
       
     ]
   } ,
@@ -218,7 +222,11 @@
   "tag" : "linux",
   "posts" : [
       
-      "./shell-script02-types.html",
+      "./shell-script04-systemsetting01.html",
+      
+      "./shell-script03-quates.html",
+      
+      "./shell-script02-types-copy.html",
       
       "./shell-script01.html"
       
@@ -381,6 +389,16 @@
     
       
   {
+  "tag" : "quates",
+  "posts" : [
+      
+      "./shell-script03-quates.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "root.html.heex",
   "posts" : [
       
@@ -404,7 +422,11 @@
   "tag" : "shell scirpt",
   "posts" : [
       
-      "./shell-script02-types.html",
+      "./shell-script04-systemsetting01.html",
+      
+      "./shell-script03-quates.html",
+      
+      "./shell-script02-types-copy.html",
       
       "./shell-script01.html"
       
