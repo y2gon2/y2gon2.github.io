@@ -1,4 +1,114 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-02-21T13:42:08+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)</title><link href="http://localhost:4000/shell-script04-systemsetting01.html" rel="alternate" type="text/html" title="Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)" /><published>2024-02-20T14:32:20+09:00</published><updated>2024-02-20T14:32:20+09:00</updated><id>http://localhost:4000/shell-script04-systemsetting01</id><content type="html" xml:base="http://localhost:4000/shell-script04-systemsetting01.html"><![CDATA[<p>참고 자료 : <a href="https://product.kyobobook.co.kr/detail/S000001810353">처음 배우는 셸 스크립트 8장 시스템 구축</a></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-02-21T20:08:28+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">Makefile 기본 문법 01</title><link href="http://localhost:4000/makfile01.html" rel="alternate" type="text/html" title="Makefile 기본 문법 01" /><published>2024-02-21T14:32:20+09:00</published><updated>2024-02-21T14:32:20+09:00</updated><id>http://localhost:4000/makfile01</id><content type="html" xml:base="http://localhost:4000/makfile01.html"><![CDATA[<h3 id="makefile-변수-macro-사용">Makefile 변수 (macro) 사용</h3>
+
+<p>의존성 부분은 일반적으로 매크로로 선언하여 사용함.</p>
+
+<p>매크로를 사용하여 값을 할당할 때, 여러가지 할당 방법이 존재</p>
+
+<h4 id="-recursive-assignment"><code class="language-plaintext highlighter-rouge">=</code> (Recursive Assignment)</h4>
+<p><code class="language-plaintext highlighter-rouge">=</code> 연산자는 재귀적 할당을 수행한다. 이는 매크로가 사용될 때마다 평가되어 확장된다. 매크로의 값이 다른 매크로를 참조하는 경우, 참조된 변수의 최종값에 따라 달라진다.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">FOO</span> <span class="o">=</span> <span class="p">${</span>BAR<span class="p">}</span>
+<span class="nv">BAR</span> <span class="o">=</span> bar_value
+
+<span class="nl">all</span><span class="o">:</span>
+        <span class="err">@echo</span> <span class="err">$(FOO)</span>
+</code></pre></div></div>
+
+<p>해당 Makefile 을 실행하면 <code class="language-plaintext highlighter-rouge">FOO</code> 매크로는 <code class="language-plaintext highlighter-rouge">BAR</code>의 값을 참조한다. 따라서 실행될 때, <code class="language-plaintext highlighter-rouge">BAR</code> 의 값은 <code class="language-plaintext highlighter-rouge">bar_value</code> 이므로  <code class="language-plaintext highlighter-rouge">bar_value</code> 가 출력된다.</p>
+
+<h4 id="-simle-assignment"><code class="language-plaintext highlighter-rouge">:=</code> (Simle Assignment)</h4>
+<p><code class="language-plaintext highlighter-rouge">:=</code> 연산자를 사용한 단순할당의 경우, 매크로에 값이 할당될 때 시점의 값으로 바로 평가, 확장된다. 따라서 이후 참조하고 있는 매크로의 값이 변경되더라도, 최초에 할당된 값을 유지한다.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">BAR</span> <span class="o">=</span> bar_value
+<span class="nv">FOO</span> <span class="o">:=</span> <span class="p">$(</span>BAR<span class="p">)</span>
+<span class="nv">BAR</span> <span class="o">=</span> new_value
+
+<span class="nl">all</span><span class="o">:</span>
+        <span class="err">@echo</span> <span class="err">$(FOO)</span>
+</code></pre></div></div>
+
+<p>이 경우, <code class="language-plaintext highlighter-rouge">FOO</code> 는 <code class="language-plaintext highlighter-rouge">BAR</code> 의 현재값인 <code class="language-plaintext highlighter-rouge">bar_value</code> 로 초기화 되고, 이후 <code class="language-plaintext highlighter-rouge">BAR</code> 의 값이 변경되더라도 <code class="language-plaintext highlighter-rouge">FOO</code> 의 값은 변하지 않는다. 따라서 해당 Makefile 을 실행하면 출력값은 <code class="language-plaintext highlighter-rouge">bar_value</code> 가 된다.</p>
+
+<h4 id="-append"><code class="language-plaintext highlighter-rouge">+=</code> (Append)</h4>
+
+<p>기존 변수의 값에 값을 추가함. 만약 매크로가 정의되어 있지 않았었다면 해당 매크로를 생성한다.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CFLAGS</span> <span class="o">:=</span> <span class="nt">-Wall</span>
+<span class="nv">CFLAGS</span> <span class="o">+=</span> <span class="nt">-g</span>   <span class="c"># CFLAGS는 이제 "-Wall -g"</span>
+</code></pre></div></div>
+
+<h4 id="-conditional-assignment"><code class="language-plaintext highlighter-rouge">?=</code> (Conditional Assignment)</h4>
+
+<p>매크로가 아직 값이 할당되어 있지 않을 경우에만 값을 할당. 이미 값이 있으면 할당하지 않음.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CC</span> <span class="o">?=</span> gcc <span class="c"># CC가 이전에 정의되지 않았다면 gcc를 사용</span>
+</code></pre></div></div>
+
+<h4 id="-target-name"><code class="language-plaintext highlighter-rouge">$@</code> (Target Name)</h4>
+
+<p><code class="language-plaintext highlighter-rouge">$@</code> : 현재 target 의 이름을 명시</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">all</span><span class="o">:</span> <span class="nf">program</span>
+<span class="nl">program</span><span class="o">:</span> <span class="nf">program.o</span>
+        <span class="err">gcc</span> <span class="err">-o</span> <span class="err">$@</span> <span class="err">$^</span>
+</code></pre></div></div>
+<p>이 경우 <code class="language-plaintext highlighter-rouge">program: program.o</code> 에서  <code class="language-plaintext highlighter-rouge">program</code> 이 현재 target 이다.  따라서 <code class="language-plaintext highlighter-rouge">$@</code> 는 <code class="language-plaintext highlighter-rouge">program</code> 으로 대체 된다.</p>
+
+<h4 id="-first-dependency"><code class="language-plaintext highlighter-rouge">$&lt;</code> (First Dependency)</h4>
+
+<p><code class="language-plaintext highlighter-rouge">$&lt;</code> 는 규치의 첫 번째 의존성을 나타냄.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">program.o</span><span class="o">:</span> <span class="nf">program.c</span>
+        <span class="err">gcc</span> <span class="err">-c</span> <span class="err">$&lt;</span> <span class="err">-o</span> <span class="err">$@</span>
+</code></pre></div></div>
+<p>여기서  <code class="language-plaintext highlighter-rouge">$&lt;</code> 는 <code class="language-plaintext highlighter-rouge">program.c</code> 을 의미하므로 <code class="language-plaintext highlighter-rouge">gcc -c $&lt; -o $@</code> 는 <code class="language-plaintext highlighter-rouge">gcc -c program.c -o program.o</code> 를 의미한다.</p>
+
+<h4 id="-all-dependencies"><code class="language-plaintext highlighter-rouge">$^</code> (All Dependencies)</h4>
+
+<p>현재 규칙의 모든 의존성 목록을 나타낸다. 중복된 의존성은 제거된다.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">program</span><span class="o">:</span> <span class="nf">main.o lib.o util.o</span>
+        <span class="err">gcc</span> <span class="err">-o</span> <span class="err">$@</span> <span class="err">$^</span>
+</code></pre></div></div>
+<p>여기서 <code class="language-plaintext highlighter-rouge">$^</code> 는 <code class="language-plaintext highlighter-rouge">main.o lib.o util.o</code> 을 의미하므로 <code class="language-plaintext highlighter-rouge">gcc -o $@ $^</code> 는 <code class="language-plaintext highlighter-rouge">gcc -o program main.o lib.o util.o</code> 를 의미한다.</p>
+
+<h4 id="확장자-룰-sffix-rule-과-패턴-규칙pattern-rule">확장자 룰 (sffix rule) 과 패턴 규칙(pattern rule)</h4>
+
+<p>Makefile 의 확장자 룰은 오래된 규칙으로, 파일 변환 규칙을 정의하는데 사용됨. 주로 한 종류의 파일을 다른 종류로 변환하는데 사용되며, 확장자만으로 이 변환 과정을 식별한다. <code class="language-plaintext highlighter-rouge">.SUFFIXES</code> 리스트에 정의된 확장자들을 사용하여, 소스파일에서 목적파일로 변환에 사용될 수 있다.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">.SUFFIXES</span><span class="o">:</span> <span class="nf">.c .o</span>
+
+<span class="nl">.c.o</span><span class="o">:</span>
+        <span class="err">gcc</span> <span class="err">-c</span> <span class="err">$&lt;</span> <span class="err">-o</span> <span class="err">$@</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">.c.o:</code> 은 <code class="language-plaintext highlighter-rouge">.c</code> 파일을 <code class="language-plaintext highlighter-rouge">.o</code> 파일로 변환하는 규칙을 정의한 target 이다. 따라서 <code class="language-plaintext highlighter-rouge">gcc -c $&lt; -o $@</code> 은 첫번째 의존성 <code class="language-plaintext highlighter-rouge">.c</code> 파일을 동일 파일 이름의 <code class="language-plaintext highlighter-rouge">.o</code> 파일로 compile 하라는 의미 이다. <br /></p>
+
+<p>그러나 현대의 Makefile 작성에서는 패턴 규칙을 사용하는 것이 더 권장된다. 확장자 규칙은 유연성과 명확성이 떨어질 수 있으며, GNU Make와 같은 최신 도구에서는 보다 강력하고 유연한 패턴 규칙을 사용할 수 있다. 패턴 규칙은 특정 파일 세트에 대해 적용할 수 있는 규칙을 정의할 때 % 와일드카드를 사용하여 보다 일반적인 규칙을 작성할 수 있게 해준다.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">%.o</span><span class="o">:</span> <span class="nf">%.c</span>
+        <span class="err">gcc</span> <span class="err">-c</span> <span class="err">$&lt;</span> <span class="err">-o</span> <span class="err">$@</span>
+</code></pre></div></div>
+
+<p>이는 앞의 확장자 룰과 동일한 명령을 수행하며, 좀더 명확하고 간결하게 표현된다.</p>
+
+<p>그러나 결론적으로 동일한 파일명의 소스파일에서 목적 파일을 생성하는 룰은 Makefile 에 기본으로 내장되어 있기 때문에 사용자가 정의하는 Makefile 에서는 해당 내용을 생략해도 실행된다.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">executable</span><span class="o">:</span> <span class="nf">distance.o main.o</span>
+        <span class="err">ld</span> <span class="err">-o</span> <span class="err">executable</span> <span class="err">*.o</span> <span class="err">/usr/lib/x86_64-linux-gnu/crt1.o</span> <span class="err">-lm</span> <span class="err">-lc</span> <span class="nv">-dynamic-linker</span><span class="o">=</span>/lib64/ld-linux-x86-64.so.2
+
+<span class="nl">distance.o </span><span class="o">:</span> <span class="nf">distance.c</span>
+        <span class="err">gcc</span> <span class="err">-c</span> <span class="err">-o</span> <span class="err">distance.o</span> <span class="err">distance.c</span>
+
+<span class="nl">main.o </span><span class="o">:</span> <span class="nf">main.c</span>
+        <span class="err">gcc</span> <span class="err">-c</span> <span class="err">-o</span> <span class="err">main.o</span> <span class="err">main.c</span>
+</code></pre></div></div>
+<p>위 내용은 아래와 같이 명시적으로 작성하지 않아도,</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">executable</span><span class="o">:</span> <span class="nf">distance.o main.o</span>
+        <span class="err">ld</span> <span class="err">-o</span> <span class="err">executable</span> <span class="err">*.o</span> <span class="err">/usr/lib/x86_64-linux-gnu/crt1.o</span> <span class="err">-lm</span> <span class="err">-lc</span> <span class="nv">-dynamic-linker</span><span class="o">=</span>/lib64/ld-linux-x86-64.so.2
+</code></pre></div></div>
+<p>최종 실행 파일 생성만 구현하고 <code class="language-plaintext highlighter-rouge">make</code>를 실행해도 이전과 동일하게 각 소스코드에서 목적파일이 생성되고 최종적으로 실행파일이 생성된다. 또한 점진적 빌드 (Incremental build) 도 정상적으로 동작한다.</p>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="bash" /><category term="makefile" /><category term="incremental build" /><category term="suffix rule" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05]]></summary></entry><entry><title type="html">Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)</title><link href="http://localhost:4000/shell-script04-systemsetting01-copy.html" rel="alternate" type="text/html" title="Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)" /><published>2024-02-20T14:32:20+09:00</published><updated>2024-02-20T14:32:20+09:00</updated><id>http://localhost:4000/shell-script04-systemsetting01%20copy</id><content type="html" xml:base="http://localhost:4000/shell-script04-systemsetting01-copy.html"><![CDATA[<p>참고 자료 : <a href="https://product.kyobobook.co.kr/detail/S000001810353">처음 배우는 셸 스크립트 8장 시스템 구축</a></p>
 
 <p>shell script 를 사용하여 사용자 개정을 생성하는 파일을 작성 및 실행</p>
 
@@ -1034,149 +1144,4 @@ window.toggleButton = toggleButton;
 <span class="k">end</span>
 </code></pre></div></div>
 
-<p><code>@impl GenServer</code> attribute는 <code>init/1</code> 및 <code>handle_cast/2</code> 함수가 <code>GenServer</code>의 callback임을 명시</p>]]></content><author><name>Yong gon Yun</name></author><category term="elixir" /><category term="impl" /><category term="attribute" /><summary type="html"><![CDATA[impl attribute]]></summary></entry><entry><title type="html">Elixir GenServer</title><link href="http://localhost:4000/genserver.html" rel="alternate" type="text/html" title="Elixir GenServer" /><published>2024-01-23T10:32:20+09:00</published><updated>2024-01-23T10:32:20+09:00</updated><id>http://localhost:4000/genserver</id><content type="html" xml:base="http://localhost:4000/genserver.html"><![CDATA[<p>Elixir의 <code>GenServer</code>는 OTP(Open Telecom Platform) behaviour 중 하나로, 서버 프로세스를 구현하기 위한 추상화를 제공한다. GenServer는 클라이언트-서버 관계에서 서버 부분을 담당하며, 상태를 유지하고, 요청을 동기적 또는 비동기적으로 처리할 수 있다. 이는 Elixir/Erlang 시스템에서 병렬처리와 상태 관리를 용이하게 하는 강력한 도구이다.</p>
-
-<p><code>GenServer</code> 의 다양한 macro callback 중 주요한 것을을 사용하여 통신 moudule 을 구현하고자 한다. 해당 module 의 구조는 다음과 같다.</p>
-
-<center>
-  <img src="assets\img\posts\genserver.png" width="500" height="" />
-</center>
-
-<p>module 내 구성은 크게 client 와 server 구현 부분으로 구분 된다. client 는 경우, 해당 module 이 실행되는 application 자체 또는 일부 process 에서 실행될 code 이며, 해당 code 를 통해 server process 를 생성, 동기/비동기 작업 요청 및 응답, 종료 등의 작업을 정의한다.</p>
-<p>server 부분의 경우, client 작업 요청에 대응하는 작업에 대한 code 를 정의한다. 위에 언급된 <code>GenServer</code> callback 들의 경우, 모두 <code>GenServer</code> behaviour의 구현체이다.</p>
-<p>client-server 에 각 callback 들에 대해 간단하게 설명하면 다음과 같다.</p>
-
-<ol>
-  <li>Server 생성
-    <ul>
-      <li><code>start_link/3</code>: 새로운 GenServer 프로세스를 시작하고 연결</li>
-      <li><code>init/1</code>: <code>start_link/3</code> 요청에 의해 GenServer가 시작될 때 호출되며, 초기 상태를 설정</li>
-    </ul>
-  </li>
-  <li>비동기 요청/응답
-    <ul>
-      <li><code>cast/2</code>: 비동기적 통신에 사용. client 는 server 에 메시지를 보내고 즉시 반환됨. 이 메소드는 서버의 <code>handle_cast/2</code> callback을 trigger.</li>
-      <li><code>handle_cast/2</code>: 비동기적 요청을 처리. 클라이언트는 응답을 기다리지 않음.</li>
-    </ul>
-  </li>
-  <li>동기 요청/응답
-    <ul>
-      <li>call/3<code></code>: 동기적 통신에 사용. client는 server에 요청을 보내고, server가 응답할 때까지 기다리며, server의 <code>handle_call/3</code>s callback을 trigger.</li>
-      <li><code>handle_call/3</code>: 동기적 요청을 처리하고 그 결과를 clientd에게 응답.</li>
-    </ul>
-  </li>
-  <li>Server 종료
-    <ul>
-      <li><code>stop/3</code>: <code>GenServer</code> 프로세스를 안전하게 종료하기 위해 사용. 이 함수는 종료 이유(ex.  'normal', 'shutdown', 'kill' 등)와 타임아웃(default : 5 sec)을 지정할 수 있으며, 서버의 <code>terminate/2</code>  callback을 trigger.</li>
-      <li><code>terminate/2</code>: server가 종료되기 전에 호출되는 callback <code>GenServer</code> 프로세스가 정상적으로 종료될 때 호출되며, 종료 전에 필요한 정리 작업(ex.종료되기 전에 상태를 저장하거나 열려 있는 리소스를 닫는 등의 작업 등)을 수행할 수 있습니다.</li>
-    </ul>
-  </li>
-</ol>
-
-<p><strong>예제 코드</strong></p>
-
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">defmodule</span> <span class="no">ShopingList</span> <span class="k">do</span>
-  <span class="kn">use</span> <span class="no">GenServer</span>
-
-  <span class="c1">#  ------ client API --------</span>
-
-  <span class="k">def</span> <span class="n">start_link</span><span class="p">()</span> <span class="k">do</span>
-    <span class="no">GenServer</span><span class="o">.</span><span class="n">start_link</span><span class="p">(</span><span class="bp">__MODULE__</span><span class="p">,</span> <span class="p">[])</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="n">add</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span> <span class="k">do</span>
-    <span class="no">GenServer</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="n">view</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span> <span class="k">do</span>
-    <span class="no">GenServer</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="ss">:view</span><span class="p">)</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="n">remove</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span> <span class="k">do</span>
-    <span class="no">GenServer</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="p">{</span><span class="ss">:remove</span><span class="p">,</span> <span class="n">item</span><span class="p">})</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="n">stop</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span> <span class="k">do</span>
-    <span class="no">GenServer</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="ss">:normal</span><span class="p">,</span> <span class="ss">:infinity</span><span class="p">)</span>
-  <span class="k">end</span>
-
-  <span class="c1"># ----- server callback -----</span>
-
-  <span class="k">def</span> <span class="n">init</span><span class="p">(</span><span class="n">list</span><span class="p">)</span> <span class="k">do</span>
-    <span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="n">list</span><span class="p">}</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="n">handle_cast</span><span class="p">({</span><span class="ss">:remove</span><span class="p">,</span> <span class="n">item</span><span class="p">},</span> <span class="n">list</span><span class="p">)</span> <span class="k">do</span>
-    <span class="n">updated_list</span> <span class="o">=</span> <span class="no">Enum</span><span class="o">.</span><span class="n">reject</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="k">fn</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">i</span> <span class="o">==</span> <span class="n">item</span> <span class="k">end</span><span class="p">)</span>
-    <span class="p">{</span><span class="ss">:noreply</span><span class="p">,</span> <span class="n">updated_list</span><span class="p">}</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="n">handle_cast</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">list</span><span class="p">)</span> <span class="k">do</span>
-    <span class="n">updated_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">|</span><span class="n">list</span><span class="p">]</span>
-    <span class="p">{</span><span class="ss">:noreply</span><span class="p">,</span> <span class="n">updated_list</span><span class="p">}</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="n">handle_call</span><span class="p">(</span><span class="ss">:view</span><span class="p">,</span> <span class="n">_from</span><span class="p">,</span> <span class="n">list</span><span class="p">)</span> <span class="k">do</span>
-    <span class="p">{</span><span class="ss">:reply</span><span class="p">,</span> <span class="n">list</span><span class="p">,</span> <span class="n">list</span><span class="p">}</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="n">terminate</span><span class="p">(</span><span class="n">_reason</span><span class="p">,</span> <span class="n">list</span><span class="p">)</span> <span class="k">do</span>
-    <span class="no">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">"This Server is termniated."</span><span class="p">)</span>
-    <span class="no">IO</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">list</span><span class="p">)</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div></div>
-
-<p><strong>실행 결과</strong></p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iex(1)&gt; {:ok, pid} = ShoppingList.start_link()
-{:ok, #PID&lt;0.422.0&gt;}
-</code></pre></div></div>
-<p><code>ShoppingList.start_link()</code> 를 통해 server process 를 생성한다. server 측 <code>init(list)</code> 함수 callback 이 실행되어 server process 를 초기화 하고 그 결과 및 pid 를 client 에게 반환한다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iex(2)&gt; ShoppingList.add(pid, "eggs") 
-:ok
-iex(3)&gt; ShoppingList.add(pid, "milk") 
-:ok
-iex(4)&gt; ShoppingList.add(pid, "cheese") 
-:ok
-iex(5)&gt; ShoppingList.view(pid) 
-["cheese", "milk", "eggs"]
-</code></pre></div></div>
-
-<p><code>ShoppingList.add(pid, "eggs")</code> 등의 함수를 통해 server process 비동기 작업을 요청한다. <code>:ok</code> 응답은 server 작업의 완료와 관계없이 반환된다. <code>handle_cast(item, list)</code>가 작업을 하여 server 자체 list 에 client 가 보낸 메세지를 list 에 추가한다.</p>
-<p><code>ShoppingList.view(pid)</code> 를 통해 동기화된 작업을 요청한다. 해당 요청으로 <code>handle_call(:view, _from, list)</code> callback 이 trigger 된다. 해당 callback 반환값 튜플<code>{:reply, list, list}</code>의 각 요소는 다음의 의미를 가진다.</p>
-<ol>
-  <li><code>:reply</code>: client 에게 동기적으로 응답을 보내야 함을 의미</li>
-  <li><code>list</code>: client 에게 보낼 실제 응답 data</li>
-  <li><code>list</code>: 해당 callback 작업 이후 server 가 가질 data</li>
-</ol>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iex(6)&gt; ShoppingList.remove(pid, "cheese") 
-:ok
-iex(7)&gt; ShoppingList.view(pid)
-["milk", "eggs"]
-</code></pre></div></div>
-
-<p><code>ShoppingList.remove(pid, "cheese")</code> 의 경우 앞에서 사용한  <code>ShoppingList.add(pid, "eggs")</code> 와 동일하게 비동기 작업을 요청하지만 함수 다형성(polymorphism) 을 적용하여 별도로 정의된 <code>handle_cast({:remove, item}, list)</code> callback 을 trigger 한다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iex(8)&gt; ShoppingList.stop(pid) 
-This Server is termniated.
-["milk", "eggs"]
-:ok
-</code></pre></div></div>
-
-<p>server process 을 종료 요청을 보내고 triggering 된 <code>terminate(_reason, list)</code> 작업을 진행하고 해당 process 는 종료된다.</p>
-
-<h3><code>Phoenix PubSub</code> 과 <code>GenServer</code></h3>
-
-<p> <code>Phoenix PubSub</code>은 내부적으로 <code>GenServer</code>를 사용하여 구축된다. <code>Phoenix PubSub</code>은 Elixir 어플리케이션 내에서 프로세스 간의 메시징을 쉽게 구현할 수 있도록 해주는 시스템입니다. 이는 주로 Phoenix framework 내에서 실시간 웹 기능을 구현하는 데 사용되며, 웹소켓을 통해 client-server 간의 메시지를 효율적으로 교환할 수 있게 해준다. 그 주요 역할은 다음과 같다.</p>
-
-<ul>
-  <li>상태 관리: 각 PubSub 서버는 구독 정보와 같은 상태를 유지 관리.</li>
-  <li>메시지 처리: 발행된 메시지는 <code>GenServer</code> 프로세스를 통해 구독자들에게 전달.</li>
-  <li>동기화 및 제어: <code>GenServer</code> callback을 통해 메시지 전송 및 구독 관리를 제어.</li>
-</ul>
-
-<p><br />
-<a href="https://elixircasts.io/intro-to-genserver">참고 문헌 - ElixirCasts - #12: Intro to GenServer</a></p>]]></content><author><name>Yong gon Yun</name></author><category term="elixir" /><category term="genserver" /><category term="pubsub" /><summary type="html"><![CDATA[Elixir GenServer]]></summary></entry></feed>
+<p><code>@impl GenServer</code> attribute는 <code>init/1</code> 및 <code>handle_cast/2</code> 함수가 <code>GenServer</code>의 callback임을 명시</p>]]></content><author><name>Yong gon Yun</name></author><category term="elixir" /><category term="impl" /><category term="attribute" /><summary type="html"><![CDATA[impl attribute]]></summary></entry></feed>

@@ -7,9 +7,9 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Shell Script 사용한 시스템 구축 01 (사용자 계정 생성) - Gon's Tech Jurnal</title>
-	<link rel="canonical" href="http://localhost:4000/shell-script04-systemsetting01.html">
-	<meta name="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 04">
+	<title>Makefile 기본 문법 01 - Gon's Tech Jurnal</title>
+	<link rel="canonical" href="http://localhost:4000/makfile01.html">
+	<meta name="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 <script type="application/ld+json">
@@ -19,13 +19,13 @@
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "http://localhost:4000"},
-  "headline": "Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)",
-  "abstract": "개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 04",
-    "keywords": "linux, bash, shell scirpt",
-    "wordcount": "649",
-    "image": ["http://localhost:4000/assets/imgposts/general/post_general22.jpg"],
-  "datePublished": "2024-02-20 14:32:20 +0900",
-  "dateModified": "2024-02-20 14:32:20 +0900",
+  "headline": "Makefile 기본 문법 01",
+  "abstract": "개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05",
+    "keywords": "linux, bash, makefile, incremental build, suffix rule",
+    "wordcount": "553",
+    "image": ["http://localhost:4000/assets/imgposts/general/post_general23.jpg"],
+  "datePublished": "2024-02-21 14:32:20 +0900",
+  "dateModified": "2024-02-21 14:32:20 +0900",
   "author": {
     "@type": "Person",
     "name": "Yong gon Yun"},
@@ -40,30 +40,30 @@
 }
 </script>
 <!-- Open Graph data -->
-<meta property="og:url" content="http://localhost:4000/shell-script04-systemsetting01.html"/>
+<meta property="og:url" content="http://localhost:4000/makfile01.html"/>
 <meta property="og:type" content="article"/>
-<meta property="og:title" content="Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)"/>
-<meta property="og:description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 04"/>
-<meta property="og:image" content="http://localhost:4000/assets/imgposts/general/post_general22.jpg"/>
-<meta property="og:image:alt" content="Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)"/>
+<meta property="og:title" content="Makefile 기본 문법 01"/>
+<meta property="og:description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05"/>
+<meta property="og:image" content="http://localhost:4000/assets/imgposts/general/post_general23.jpg"/>
+<meta property="og:image:alt" content="Makefile 기본 문법 01"/>
 <meta property="og:site_name" content="Gon's Tech Jurnal" />
-<meta property="article:published_time" content="2024-02-20 14:32:20 +0900" />
-<meta property="article:modified_time" content="2024-02-20 14:32:20 +0900" />
-<meta property="article:tag" content="linux, bash, shell scirpt" />
+<meta property="article:published_time" content="2024-02-21 14:32:20 +0900" />
+<meta property="article:modified_time" content="2024-02-21 14:32:20 +0900" />
+<meta property="article:tag" content="linux, bash, makefile, incremental build, suffix rule" />
 <meta property="fb:admins" content="ar.maybach" />
 <!-- Schema.org markup for Google -->
-<meta itemprop="name" content="Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)">
-<meta itemprop="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 04">
-<meta itemprop="image" content="http://localhost:4000/assets/imgposts/general/post_general22.jpg">
+<meta itemprop="name" content="Makefile 기본 문법 01">
+<meta itemprop="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05">
+<meta itemprop="image" content="http://localhost:4000/assets/imgposts/general/post_general23.jpg">
 <!-- Twitter Card data -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@N/A">
-<meta name="twitter:title" content="Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)">
-<meta name="twitter:description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 04">
+<meta name="twitter:title" content="Makefile 기본 문법 01">
+<meta name="twitter:description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="649"/>
-<meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general22.jpg">
+<meta data-rh="true" name="twitter:data1" content="553"/>
+<meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general23.jpg">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
 	<!-- iOS Safari -->
@@ -150,7 +150,7 @@
 
 <section class="hidden">
   <div class="post">
-      <a  class="post-list-title" href="./shell-script04-systemsetting01.html">Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)</a>
+      <a  class="post-list-title" href="./makfile01.html">Makefile 기본 문법 01</a>
       
 
   <span class = "post-card-meta">
@@ -162,7 +162,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2024-02-20T14:32:20+09:00">February 20, 2024</time>
+        <time datetime="2024-02-21T14:32:20+09:00">February 21, 2024</time>
       </span>
     
     
@@ -174,7 +174,7 @@
     
     <span class="page_meta-readtime">
       
-        3 minute read
+        2 minute read
       
     </span>
   
@@ -182,7 +182,7 @@
   </span>
 
         <div class="post-excerpt">
-            <p>참고 자료 : <a href="https://product.kyobobook.co.kr/detail/S000001810353">처음 배우는 셸 스크립트 8장 시스템 구축</a></p><p>shell script 를 사용하여 사용자 개정을 생성하는 파일을 작성 및 실행</p><p>프로세스</p><ol> <li>사용자 계정과 패스워드 입력</li> <li>입력 정보가 없으면 에러 메세지를 보여주고, script 종료</li> <li>여러명의 사용자 계정을 생성할 경우 반복문을 사용하여 순회</li> <li>각 계정이 이미 사용자 계정에 포함되어 있는지 확인</li> <li>포함되어있지 않다면, 계정을 생성하고 패스워드 설정</li> <li>이미 존재하는 계정이라면, 이를 메세지로 보여줌.</li></ol><h3 id="1-다수의-사용자-계정-생성">1. 다수의 사용자 계정 생성</h3><p>(1) <code class="language-plaintext highlighter-rouge">if [[ -n $1 ]] &amp;&amp; [[ -n $2 ]]</code><br />해당 script 실행시 매개 변수로 사용자 계정(<code class="language-plaintext highlighter-rouge">$1</code>)과 패스워드(<code class="language-plaintext highlighter-rouge">$2</code>)가 모두 입력 되었는지 확인(<code class="language-plaintext highlighter-rouge">-n</code> : 비워있지 않아야 함)...<a class="read-more" href="./shell-script04-systemsetting01.html"> read more</a>
+            <h3 id="makefile-변수-macro-사용">Makefile 변수 (macro) 사용</h3><p>의존성 부분은 일반적으로 매크로로 선언하여 사용함.</p><p>매크로를 사용하여 값을 할당할 때, 여러가지 할당 방법이 존재</p><h4 id="-recursive-assignment"><code class="language-plaintext highlighter-rouge">=</code> (Recursive Assignment)</h4><p><code class="language-plaintext highlighter-rouge">=</code> 연산자는 재귀적 할당을 수행한다. 이는 매크로가 사용될 때마다 평가되어 확장된다. 매크로의 값이 다른 매크로를 참조하는 경우, 참조된 변수의 최종값에 따라 달라진다.</p><div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">FOO</span> <span class="o">=</span> <span class="p">${</span>BAR<span class="p">}</span><span class="nv">BAR</span> <span class="o">=</span> bar_value<span class="nl">all</span><span class="o">:</span> <span class="err">@echo</span> <span class="err">$(FOO)</span></code></pre></div></div><p>해당 Makefile 을 실행하면 <code class="language-plaintext highlighter-rouge">FOO</code> 매크로는 <code class="language-plaintext highlighter-rouge">BAR</code>의 값을 참조한다. 따라서 실행될 때, <code class="language-plaintext highlighter-rouge">BAR</code> 의 값은 <code class="language-plaintext highlighter-rouge">bar_value</code> 이므로 <code class="language-plaintext highlighter-rouge">bar_value</code> 가 출력된다.</p><h4 id="-simle-assignment"><code class="language-plaintext highlighter-rouge">:=</code> (Simle Assignment)</h4><p><code...<a class="read-more" href="./makfile01.html"> read more</a>
         </div>
   </div>
 </section>
@@ -280,14 +280,14 @@
 </header> <!-- End Header -->
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)">
-<meta itemprop="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 04">
-<meta itemprop="datePublished" content="2024-02-20T14:32:20+09:00">
+    <meta itemprop="headline" content="Makefile 기본 문법 01">
+<meta itemprop="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05">
+<meta itemprop="datePublished" content="2024-02-21T14:32:20+09:00">
 
     <div class="wrapper">
       <div class="page-content">
         <div class="header-page">
-          <h2 class="page-title">Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)</h2>
+          <h2 class="page-title">Makefile 기본 문법 01</h2>
           
 
   <span class = "post-page-meta">
@@ -299,7 +299,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2024-02-20T14:32:20+09:00">February 20, 2024</time>
+        <time datetime="2024-02-21T14:32:20+09:00">February 21, 2024</time>
       </span>
     
     
@@ -311,7 +311,7 @@
     
     <span class="page_meta-readtime">
       
-        3 minute read
+        2 minute read
       
     </span>
   
@@ -334,7 +334,11 @@
             
                 <li><a href="./tag.html?tag=bash" class="tag side">bash</a></li>
             
-                <li><a href="./tag.html?tag=shell+scirpt" class="tag side">shell scirpt</a></li>
+                <li><a href="./tag.html?tag=makefile" class="tag side">makefile</a></li>
+            
+                <li><a href="./tag.html?tag=incremental+build" class="tag side">incremental build</a></li>
+            
+                <li><a href="./tag.html?tag=suffix+rule" class="tag side">suffix rule</a></li>
             
     
         </ul>
@@ -343,11 +347,11 @@
     <div class="share-hover side">
         <span class="share-button side"><svg fill="currentColor" width="25" height="25" class="side"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>
         <div class="share-icons side" id="sidebar-icons">
-            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)&url=http://localhost:4000/shell-script04-systemsetting01.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/shell-script04-systemsetting01.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/shell-script04-systemsetting01.html&title=Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/shell-script04-systemsetting01.html&title=Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)&summary=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 04&source=http://localhost:4000/shell-script04-systemsetting01.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a class="email" href="mailto:?subject=Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)&body=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 04%0A%0ARead more here: http://localhost:4000/shell-script04-systemsetting01.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=Makefile 기본 문법 01&url=http://localhost:4000/makfile01.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/makfile01.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/makfile01.html&title=Makefile 기본 문법 01" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/makfile01.html&title=Makefile 기본 문법 01&summary=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05&source=http://localhost:4000/makfile01.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a class="email" href="mailto:?subject=Makefile 기본 문법 01&body=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05%0A%0ARead more here: http://localhost:4000/makfile01.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
             <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="side" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>
         </div>
     </div>
@@ -357,132 +361,117 @@
 
         
         
-        <p>참고 자료 : <a href="https://product.kyobobook.co.kr/detail/S000001810353">처음 배우는 셸 스크립트 8장 시스템 구축</a></p>
+        <h3 id="makefile-변수-macro-사용">Makefile 변수 (macro) 사용</h3>
 
-<p>shell script 를 사용하여 사용자 개정을 생성하는 파일을 작성 및 실행</p>
+<p>의존성 부분은 일반적으로 매크로로 선언하여 사용함.</p>
 
-<p>프로세스</p>
-<ol>
-  <li>사용자 계정과 패스워드 입력</li>
-  <li>입력 정보가 없으면 에러 메세지를 보여주고, script 종료</li>
-  <li>여러명의 사용자 계정을 생성할 경우 반복문을 사용하여 순회</li>
-  <li>각 계정이 이미 사용자 계정에 포함되어 있는지 확인</li>
-  <li>포함되어있지 않다면, 계정을 생성하고 패스워드 설정</li>
-  <li>이미 존재하는 계정이라면, 이를 메세지로 보여줌.</li>
-</ol>
+<p>매크로를 사용하여 값을 할당할 때, 여러가지 할당 방법이 존재</p>
 
-<h3 id="1-다수의-사용자-계정-생성">1. 다수의 사용자 계정 생성</h3>
+<h4 id="-recursive-assignment"><code class="language-plaintext highlighter-rouge">=</code> (Recursive Assignment)</h4>
+<p><code class="language-plaintext highlighter-rouge">=</code> 연산자는 재귀적 할당을 수행한다. 이는 매크로가 사용될 때마다 평가되어 확장된다. 매크로의 값이 다른 매크로를 참조하는 경우, 참조된 변수의 최종값에 따라 달라진다.</p>
 
-<p>(1) <code class="language-plaintext highlighter-rouge">if [[ -n $1 ]] &amp;&amp; [[ -n $2 ]]</code>
-<br />해당 script 실행시 매개 변수로 사용자 계정(<code class="language-plaintext highlighter-rouge">$1</code>)과 패스워드(<code class="language-plaintext highlighter-rouge">$2</code>)가 모두 입력 되었는지 확인(<code class="language-plaintext highlighter-rouge">-n</code> : 비워있지 않아야 함) 한다. <code class="language-plaintext highlighter-rouge">$1</code> 과 <code class="language-plaintext highlighter-rouge">$2</code> 모두 외부 입력값이므로 이중 중괄호 <code class="language-plaintext highlighter-rouge">[[]]</code> 를 사용한다.
-<br /></p>
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">FOO</span> <span class="o">=</span> <span class="p">${</span>BAR<span class="p">}</span>
+<span class="nv">BAR</span> <span class="o">=</span> bar_value
 
-<p>(2) <code class="language-plaintext highlighter-rouge">IFS=' ' read -r -a UserList &lt;&lt;&lt; "$1"</code> <br />
-입력된 매개변수 값을 공백을 기준으로 값을 slice 하여 배열의 형태로 shell script 변수로 저장함.<br /></p>
-<ul>
-  <li>IFS (Internal Field Separator) : IFS 는 shell scirpt 에서 사용하는 내부 필드 구분자. 이 변수는 문자열을 분리하여 배열이나 개별 변수로 읽을 때 사용하는 구분자을 정의한다. 기본값은 공백, 탭, 개행 문자.</li>
-  <li><code class="language-plaintext highlighter-rouge">read</code> : 표준 입력이나 파일로부터 입력을 읽어드림. 이 명령어를 사용하여 변수에 값을 할당할 수 있다.</li>
-  <li><code class="language-plaintext highlighter-rouge">-r</code> : <code class="language-plaintext highlighter-rouge">read</code> 옵션 중 백슬래시(<code class="language-plaintext highlighter-rouge">\</code>) 가 이스케이프 문자로 처리되지 않고, 그대로 읽어드림.</li>
-  <li><code class="language-plaintext highlighter-rouge">-a</code> : <code class="language-plaintext highlighter-rouge">read</code> 명령어에 의히 읽힌 값을 배열로 저장.</li>
-  <li><code class="language-plaintext highlighter-rouge">&lt;&lt;&lt;</code> (Here String) :  “$1” 로 받은 외부 입력 값을 UserList 변수 값으로 취할 수 있도록 redirection 해줌. 
-<br /></li>
-</ul>
-
-<p>(3) <code class="language-plaintext highlighter-rouge">for (( i=0 ; i &lt; ${#UserList[@]}; i++ ))</code> <br />
-배열 <code class="language-plaintext highlighter-rouge">UserList</code> 의 길이만큼 반복할 수 있도록 설정
-<br /></p>
-
-<p>(4) <code class="language-plaintext highlighter-rouge">if [[ $(cat /etc/passwd | grep -w ${UserList[$i]} | wc -l) == 0 ]] </code><br /></p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">$(cat /etc/passwd</code> 파일의 내용을 가져와서,</li>
-  <li><code class="language-plaintext highlighter-rouge">UserList[$i]</code> 의 값과 정확히 (<code class="language-plaintext highlighter-rouge">-w</code>)일치하는 사용자 계정을 찾고,</li>
-  <li><code class="language-plaintext highlighter-rouge">wc</code> (word count) 의 라인 수(<code class="language-plaintext highlighter-rouge">-l</code>) 을 출력,</li>
-  <li>해당 값이 0 아니라면, 동일 계정이 존재한다는 것을 의미함.
-<br /></li>
-</ul>
-
-<p>(5) <code class="language-plaintext highlighter-rouge">useradd ${UserList[$i]}</code> <br />
-기존 계정이 존재하지 않는 경우, 해당 값 <code class="language-plaintext highlighter-rouge">${UserList{$i}}</code> 의 계정을 생성함. 
-<br /></p>
-
-<p>(6) <code class="language-plaintext highlighter-rouge">echo "${UserList[$i]}:${Password[$i]}" | chpasswd</code> <br />
-새로 생성한 계정에 대한 패스워드 값을 사용하여 패스워드를 설정
-<br /></p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
-
-<span class="c"># 사용자 계정 및 패스워드가 입력되었는지 확인</span>
-<span class="k">if</span> <span class="o">[[</span> <span class="nt">-n</span> <span class="nv">$1</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="o">[[</span> <span class="nt">-n</span> <span class="nv">$2</span> <span class="o">]]</span> <span class="c">#  (1)</span>
-<span class="k">then
-
-        </span><span class="nv">IFS</span><span class="o">=</span><span class="s1">' '</span> <span class="nb">read</span> <span class="nt">-r</span> <span class="nt">-a</span> UserList <span class="o">&lt;&lt;&lt;</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="c">#  (2)</span>
-        <span class="nv">IFS</span><span class="o">=</span><span class="s1">' '</span> <span class="nb">read</span> <span class="nt">-r</span> <span class="nt">-a</span> Password <span class="o">&lt;&lt;&lt;</span> <span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span>
-
-        <span class="c"># for 문을 이용하여 사용자 계정 생성</span>
-        <span class="k">for</span> <span class="o">((</span> <span class="nv">i</span><span class="o">=</span>0 <span class="p">;</span> i &lt; <span class="k">${#</span><span class="nv">UserList</span><span class="p">[@]</span><span class="k">}</span><span class="p">;</span> i++ <span class="o">))</span> <span class="c">#  (3)</span>
-        <span class="k">do</span>
-                <span class="c"># if문을 사용하여 사용자 계정이 있는지 확인</span>
-                <span class="k">if</span> <span class="o">[[</span> <span class="si">$(</span><span class="nb">cat</span> /etc/passwd | <span class="nb">grep</span> <span class="nt">-w</span> <span class="k">${</span><span class="nv">UserList</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span><span class="k">}</span> | <span class="nb">wc</span> <span class="nt">-l</span><span class="si">)</span> <span class="o">==</span> 0 <span class="o">]]</span> <span class="c">#  (4)</span>
-                <span class="k">then</span>
-                        <span class="c"># 사용자 생성 및 패스워드 설정</span>
-                        useradd <span class="k">${</span><span class="nv">UserList</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span><span class="k">}</span> <span class="c">#  (5)</span>
-                        <span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">UserList</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span><span class="k">}</span><span class="s2">:</span><span class="k">${</span><span class="nv">Password</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span><span class="k">}</span><span class="s2">"</span> | chpasswd <span class="c">#  (6)</span>
-                <span class="k">else</span>
-                        <span class="c"># 사용자가 있다고 메세지를 보여줌</span>
-                        <span class="nb">echo</span> <span class="s2">"this user </span><span class="k">${</span><span class="nv">UserList</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span><span class="k">}</span><span class="s2"> is existing."</span>
-                <span class="k">fi
-        done
-
-else</span>
-        <span class="c"># 사용자가 계정과 패스워드를 입력하라는 메세지를 보여줌</span>
-        <span class="nb">echo</span> <span class="nt">-e</span> <span class="s1">'Please input user id and password. \nUsage: adduser-script.sh "user01 user02" "pw01 pw02"'</span>
-<span class="k">fi</span>
-</code></pre></div></div>
-<p>해당 script 를  <code class="language-plaintext highlighter-rouge">adduser-script.sh</code> 에 저장하고 아래와 같이 실행</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gon@DESKTOP:~/book/ch08<span class="nv">$ </span><span class="nb">sudo </span>bash adduser-script.sh <span class="s2">"user1 user2"</span> <span class="s2">"1111 2222"</span>
-</code></pre></div></div>
-<p>여기에서 <code class="language-plaintext highlighter-rouge">sh</code> 가 아닌 <code class="language-plaintext highlighter-rouge">bash</code> 명령어를 사용한 이유는, 일부 리눅스 (ex. Ubuntu) shell 이 <code class="language-plaintext highlighter-rouge">bash</code> 가 아닌 <code class="language-plaintext highlighter-rouge">dash</code> 에서 실행되는 경우가 있다. 이런 경우, <code class="language-plaintext highlighter-rouge">dash</code> 에서 지원되지 않는 기능 (ex. redirection <code class="language-plaintext highlighter-rouge">&lt;&lt;&lt;</code>)을 shell script 내 사용한 경우, 다음과 같은 에러가 발생한다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gon@DESKTOP:~/book/ch08<span class="nv">$ </span><span class="nb">sudo </span>sh adduser-script.sh <span class="s2">"user1 user2"</span> <span class="s2">"1111 2222"</span>
-adduser-script.sh: 7: Syntax error: redirection unexpected
+<span class="nl">all</span><span class="o">:</span>
+        <span class="err">@echo</span> <span class="err">$(FOO)</span>
 </code></pre></div></div>
 
-<p>이를 해결하는 다른 방법으로, 해당 파일의 실행 권한을 아예 변경하고, 직접 실행 시키면 된다.</p>
+<p>해당 Makefile 을 실행하면 <code class="language-plaintext highlighter-rouge">FOO</code> 매크로는 <code class="language-plaintext highlighter-rouge">BAR</code>의 값을 참조한다. 따라서 실행될 때, <code class="language-plaintext highlighter-rouge">BAR</code> 의 값은 <code class="language-plaintext highlighter-rouge">bar_value</code> 이므로  <code class="language-plaintext highlighter-rouge">bar_value</code> 가 출력된다.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gon@DESKTOP:~/book/ch08<span class="nv">$ </span><span class="nb">chmod</span> +x adduser-script.sh
-gon@DESKTOP:~/book/ch08<span class="nv">$ </span>./adduser-script.sh <span class="s2">"user1 user2"</span> <span class="s2">"1111 2222"</span>
+<h4 id="-simle-assignment"><code class="language-plaintext highlighter-rouge">:=</code> (Simle Assignment)</h4>
+<p><code class="language-plaintext highlighter-rouge">:=</code> 연산자를 사용한 단순할당의 경우, 매크로에 값이 할당될 때 시점의 값으로 바로 평가, 확장된다. 따라서 이후 참조하고 있는 매크로의 값이 변경되더라도, 최초에 할당된 값을 유지한다.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">BAR</span> <span class="o">=</span> bar_value
+<span class="nv">FOO</span> <span class="o">:=</span> <span class="p">$(</span>BAR<span class="p">)</span>
+<span class="nv">BAR</span> <span class="o">=</span> new_value
+
+<span class="nl">all</span><span class="o">:</span>
+        <span class="err">@echo</span> <span class="err">$(FOO)</span>
 </code></pre></div></div>
 
-<p>최종적으로, 해당 실행이 정상적으로 동작했는지를 위해 <code class="language-plaintext highlighter-rouge">/etc/passwd</code> 파일 내용을 확인하면 아래 해당 user 가 추가된 것을 확인할 수 있다.</p>
+<p>이 경우, <code class="language-plaintext highlighter-rouge">FOO</code> 는 <code class="language-plaintext highlighter-rouge">BAR</code> 의 현재값인 <code class="language-plaintext highlighter-rouge">bar_value</code> 로 초기화 되고, 이후 <code class="language-plaintext highlighter-rouge">BAR</code> 의 값이 변경되더라도 <code class="language-plaintext highlighter-rouge">FOO</code> 의 값은 변하지 않는다. 따라서 해당 Makefile 을 실행하면 출력값은 <code class="language-plaintext highlighter-rouge">bar_value</code> 가 된다.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gon@DESKTOP:~/book/ch08<span class="nv">$ </span><span class="nb">cat</span> /etc/passwd
+<h4 id="-append"><code class="language-plaintext highlighter-rouge">+=</code> (Append)</h4>
 
-...
-user1:x:1001:1001::/home/user1:/bin/sh
-user2:x:1002:1002::/home/user2:/bin/sh
+<p>기존 변수의 값에 값을 추가함. 만약 매크로가 정의되어 있지 않았었다면 해당 매크로를 생성한다.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CFLAGS</span> <span class="o">:=</span> <span class="nt">-Wall</span>
+<span class="nv">CFLAGS</span> <span class="o">+=</span> <span class="nt">-g</span>   <span class="c"># CFLAGS는 이제 "-Wall -g"</span>
 </code></pre></div></div>
 
-<h3 id="2-ssh--를-활용하여-다른-서버에-사용자-계정-생성">2. ssh  를 활용하여 다른 서버에 사용자 계정 생성</h3>
+<h4 id="-conditional-assignment"><code class="language-plaintext highlighter-rouge">?=</code> (Conditional Assignment)</h4>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<p>매크로가 아직 값이 할당되어 있지 않을 경우에만 값을 할당. 이미 값이 있으면 할당하지 않음.</p>
 
-<span class="k">for </span>server <span class="k">in</span> <span class="s2">"host01 host02 host03"</span>
-<span class="k">do</span>
-        <span class="c"># 여러 대의 시스템에 사용자 생성 및 패스워드 설정</span>
-        <span class="nb">echo</span> <span class="nv">$server</span>
-        ssh root@<span class="nv">$server</span> <span class="s2">"useradd </span><span class="nv">$1</span><span class="s2">"</span>  <span class="c"># (1)</span>
-        ssh root@<span class="nv">$server</span> <span class="s2">"echo </span><span class="nv">$2</span><span class="s2">:</span><span class="nv">$1</span><span class="s2"> | chpasswd"</span> 
-<span class="k">done</span>
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CC</span> <span class="o">?=</span> gcc <span class="c"># CC가 이전에 정의되지 않았다면 gcc를 사용</span>
 </code></pre></div></div>
 
-<p>(1) <code class="language-plaintext highlighter-rouge">ssh root@$server "useradd $1"</code></p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">ssh</code> : SSH protocol 을 사용하여 원격 서버에 접속하가나 원격 서버에서 명령을 실행하기 위한 client 프로그램</li>
-  <li><code class="language-plaintext highlighter-rouge">root@$server</code> : <code class="language-plaintext highlighter-rouge">사용자명@호스트명</code> 형식으로 접속할 원격 서버의 최고 관리자 계정을 의미</li>
-  <li><code class="language-plaintext highlighter-rouge">"useradd $1"</code> : ssh root 계정으로 해당 host 에 접속하여 사용자 계정 추가를 실행</li>
-</ul>
+<h4 id="-target-name"><code class="language-plaintext highlighter-rouge">$@</code> (Target Name)</h4>
 
+<p><code class="language-plaintext highlighter-rouge">$@</code> : 현재 target 의 이름을 명시</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">all</span><span class="o">:</span> <span class="nf">program</span>
+<span class="nl">program</span><span class="o">:</span> <span class="nf">program.o</span>
+        <span class="err">gcc</span> <span class="err">-o</span> <span class="err">$@</span> <span class="err">$^</span>
+</code></pre></div></div>
+<p>이 경우 <code class="language-plaintext highlighter-rouge">program: program.o</code> 에서  <code class="language-plaintext highlighter-rouge">program</code> 이 현재 target 이다.  따라서 <code class="language-plaintext highlighter-rouge">$@</code> 는 <code class="language-plaintext highlighter-rouge">program</code> 으로 대체 된다.</p>
+
+<h4 id="-first-dependency"><code class="language-plaintext highlighter-rouge">$&lt;</code> (First Dependency)</h4>
+
+<p><code class="language-plaintext highlighter-rouge">$&lt;</code> 는 규치의 첫 번째 의존성을 나타냄.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">program.o</span><span class="o">:</span> <span class="nf">program.c</span>
+        <span class="err">gcc</span> <span class="err">-c</span> <span class="err">$&lt;</span> <span class="err">-o</span> <span class="err">$@</span>
+</code></pre></div></div>
+<p>여기서  <code class="language-plaintext highlighter-rouge">$&lt;</code> 는 <code class="language-plaintext highlighter-rouge">program.c</code> 을 의미하므로 <code class="language-plaintext highlighter-rouge">gcc -c $&lt; -o $@</code> 는 <code class="language-plaintext highlighter-rouge">gcc -c program.c -o program.o</code> 를 의미한다.</p>
+
+<h4 id="-all-dependencies"><code class="language-plaintext highlighter-rouge">$^</code> (All Dependencies)</h4>
+
+<p>현재 규칙의 모든 의존성 목록을 나타낸다. 중복된 의존성은 제거된다.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">program</span><span class="o">:</span> <span class="nf">main.o lib.o util.o</span>
+        <span class="err">gcc</span> <span class="err">-o</span> <span class="err">$@</span> <span class="err">$^</span>
+</code></pre></div></div>
+<p>여기서 <code class="language-plaintext highlighter-rouge">$^</code> 는 <code class="language-plaintext highlighter-rouge">main.o lib.o util.o</code> 을 의미하므로 <code class="language-plaintext highlighter-rouge">gcc -o $@ $^</code> 는 <code class="language-plaintext highlighter-rouge">gcc -o program main.o lib.o util.o</code> 를 의미한다.</p>
+
+<h4 id="확장자-룰-sffix-rule-과-패턴-규칙pattern-rule">확장자 룰 (sffix rule) 과 패턴 규칙(pattern rule)</h4>
+
+<p>Makefile 의 확장자 룰은 오래된 규칙으로, 파일 변환 규칙을 정의하는데 사용됨. 주로 한 종류의 파일을 다른 종류로 변환하는데 사용되며, 확장자만으로 이 변환 과정을 식별한다. <code class="language-plaintext highlighter-rouge">.SUFFIXES</code> 리스트에 정의된 확장자들을 사용하여, 소스파일에서 목적파일로 변환에 사용될 수 있다.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">.SUFFIXES</span><span class="o">:</span> <span class="nf">.c .o</span>
+
+<span class="nl">.c.o</span><span class="o">:</span>
+        <span class="err">gcc</span> <span class="err">-c</span> <span class="err">$&lt;</span> <span class="err">-o</span> <span class="err">$@</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">.c.o:</code> 은 <code class="language-plaintext highlighter-rouge">.c</code> 파일을 <code class="language-plaintext highlighter-rouge">.o</code> 파일로 변환하는 규칙을 정의한 target 이다. 따라서 <code class="language-plaintext highlighter-rouge">gcc -c $&lt; -o $@</code> 은 첫번째 의존성 <code class="language-plaintext highlighter-rouge">.c</code> 파일을 동일 파일 이름의 <code class="language-plaintext highlighter-rouge">.o</code> 파일로 compile 하라는 의미 이다. <br /></p>
+
+<p>그러나 현대의 Makefile 작성에서는 패턴 규칙을 사용하는 것이 더 권장된다. 확장자 규칙은 유연성과 명확성이 떨어질 수 있으며, GNU Make와 같은 최신 도구에서는 보다 강력하고 유연한 패턴 규칙을 사용할 수 있다. 패턴 규칙은 특정 파일 세트에 대해 적용할 수 있는 규칙을 정의할 때 % 와일드카드를 사용하여 보다 일반적인 규칙을 작성할 수 있게 해준다.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">%.o</span><span class="o">:</span> <span class="nf">%.c</span>
+        <span class="err">gcc</span> <span class="err">-c</span> <span class="err">$&lt;</span> <span class="err">-o</span> <span class="err">$@</span>
+</code></pre></div></div>
+
+<p>이는 앞의 확장자 룰과 동일한 명령을 수행하며, 좀더 명확하고 간결하게 표현된다.</p>
+
+<p>그러나 결론적으로 동일한 파일명의 소스파일에서 목적 파일을 생성하는 룰은 Makefile 에 기본으로 내장되어 있기 때문에 사용자가 정의하는 Makefile 에서는 해당 내용을 생략해도 실행된다.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">executable</span><span class="o">:</span> <span class="nf">distance.o main.o</span>
+        <span class="err">ld</span> <span class="err">-o</span> <span class="err">executable</span> <span class="err">*.o</span> <span class="err">/usr/lib/x86_64-linux-gnu/crt1.o</span> <span class="err">-lm</span> <span class="err">-lc</span> <span class="nv">-dynamic-linker</span><span class="o">=</span>/lib64/ld-linux-x86-64.so.2
+
+<span class="nl">distance.o </span><span class="o">:</span> <span class="nf">distance.c</span>
+        <span class="err">gcc</span> <span class="err">-c</span> <span class="err">-o</span> <span class="err">distance.o</span> <span class="err">distance.c</span>
+
+<span class="nl">main.o </span><span class="o">:</span> <span class="nf">main.c</span>
+        <span class="err">gcc</span> <span class="err">-c</span> <span class="err">-o</span> <span class="err">main.o</span> <span class="err">main.c</span>
+</code></pre></div></div>
+<p>위 내용은 아래와 같이 명시적으로 작성하지 않아도,</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">executable</span><span class="o">:</span> <span class="nf">distance.o main.o</span>
+        <span class="err">ld</span> <span class="err">-o</span> <span class="err">executable</span> <span class="err">*.o</span> <span class="err">/usr/lib/x86_64-linux-gnu/crt1.o</span> <span class="err">-lm</span> <span class="err">-lc</span> <span class="nv">-dynamic-linker</span><span class="o">=</span>/lib64/ld-linux-x86-64.so.2
+</code></pre></div></div>
+<p>최종 실행 파일 생성만 구현하고 <code class="language-plaintext highlighter-rouge">make</code>를 실행해도 이전과 동일하게 각 소스코드에서 목적파일이 생성되고 최종적으로 실행파일이 생성된다. 또한 점진적 빌드 (Incremental build) 도 정상적으로 동작한다.</p>
 
         <aside class="sidebar inline" id="post-end">
     
@@ -497,7 +486,11 @@ user2:x:1002:1002::/home/user2:/bin/sh
             
                 <li><a href="./tag.html?tag=bash" class="tag inline">bash</a></li>
             
-                <li><a href="./tag.html?tag=shell+scirpt" class="tag inline">shell scirpt</a></li>
+                <li><a href="./tag.html?tag=makefile" class="tag inline">makefile</a></li>
+            
+                <li><a href="./tag.html?tag=incremental+build" class="tag inline">incremental build</a></li>
+            
+                <li><a href="./tag.html?tag=suffix+rule" class="tag inline">suffix rule</a></li>
             
     
         </ul>
@@ -506,11 +499,11 @@ user2:x:1002:1002::/home/user2:/bin/sh
     <div class="share-hover inline">
         <span class="share-button inline"><svg fill="currentColor" width="25" height="25" class="inline"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>
         <div class="share-icons inline" id="post-end-icons">
-            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)&url=http://localhost:4000/shell-script04-systemsetting01.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/shell-script04-systemsetting01.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/shell-script04-systemsetting01.html&title=Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/shell-script04-systemsetting01.html&title=Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)&summary=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 04&source=http://localhost:4000/shell-script04-systemsetting01.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a class="email" href="mailto:?subject=Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)&body=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 04%0A%0ARead more here: http://localhost:4000/shell-script04-systemsetting01.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=Makefile 기본 문법 01&url=http://localhost:4000/makfile01.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/makfile01.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/makfile01.html&title=Makefile 기본 문법 01" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/makfile01.html&title=Makefile 기본 문법 01&summary=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05&source=http://localhost:4000/makfile01.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a class="email" href="mailto:?subject=Makefile 기본 문법 01&body=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05%0A%0ARead more here: http://localhost:4000/makfile01.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
             <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="inline" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>
         </div>
     </div>
@@ -563,7 +556,38 @@ user2:x:1002:1002::/home/user2:/bin/sh
           
           
 
-          <a href="./shell-script04-systemsetting01.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general22.jpg') center no-repeat; background-size: cover;">
+          <a href="./makfile01.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general23.jpg') center no-repeat; background-size: cover;">
+            <div class="recent-item-title">
+              <span>Makefile 기본 문법 01</span>
+              
+
+  <span class = "recent-item-meta">
+  
+  
+  
+  
+    
+    
+    <p class="page_meta-readtime">
+      
+        2 minute read
+      
+    </p>
+  
+  
+  </span>
+
+            </div>
+          </a>
+        </div>
+      
+    
+      
+        <div class="recent-item">
+          
+          
+
+          <a href="./shell-script04-systemsetting01-copy.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general22.jpg') center no-repeat; background-size: cover;">
             <div class="recent-item-title">
               <span>Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)</span>
               
@@ -640,37 +664,6 @@ user2:x:1002:1002::/home/user2:/bin/sh
     <p class="page_meta-readtime">
       
         1 minute read
-      
-    </p>
-  
-  
-  </span>
-
-            </div>
-          </a>
-        </div>
-      
-    
-      
-        <div class="recent-item">
-          
-          
-
-          <a href="./shell-script01.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general19.jpg') center no-repeat; background-size: cover;">
-            <div class="recent-item-title">
-              <span>Shell Script 기본 문법 01</span>
-              
-
-  <span class = "recent-item-meta">
-  
-  
-  
-  
-    
-    
-    <p class="page_meta-readtime">
-      
-        3 minute read
       
     </p>
   
@@ -907,14 +900,14 @@ user2:x:1002:1002::/home/user2:/bin/sh
     }
 
     function copyToClipboard() {
-      navigator.clipboard.writeText('http://localhost:4000/shell-script04-systemsetting01.html').then(function() {
+      navigator.clipboard.writeText('http://localhost:4000/makfile01.html').then(function() {
       alerts = document.getElementsByClassName('alert')
       for (i=0; i < alerts.length; i++){
         alerts[i].innerHTML='\u00ABlink copied\u00BB';
         setTimeout((function(i){ return function(){alerts[i].innerHTML='';}})(i), 1600 );
       };
       }, function() {
-        prompt("Unable to copy, please use this link:", "http://localhost:4000/shell-script04-systemsetting01.html");
+        prompt("Unable to copy, please use this link:", "http://localhost:4000/makfile01.html");
       });
     }
 

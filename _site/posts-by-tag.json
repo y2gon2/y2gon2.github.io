@@ -50,7 +50,9 @@
   "tag" : "bash",
   "posts" : [
       
-      "./shell-script04-systemsetting01.html",
+      "./makfile01.html",
+      
+      "./shell-script04-systemsetting01-copy.html",
       
       "./shell-script03-quates.html",
       
@@ -197,6 +199,16 @@
     
       
   {
+  "tag" : "incremental build",
+  "posts" : [
+      
+      "./makfile01.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "instance",
   "posts" : [
       
@@ -222,7 +234,9 @@
   "tag" : "linux",
   "posts" : [
       
-      "./shell-script04-systemsetting01.html",
+      "./makfile01.html",
+      
+      "./shell-script04-systemsetting01-copy.html",
       
       "./shell-script03-quates.html",
       
@@ -255,6 +269,16 @@
       "./preload.html",
       
       "./authentication.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "makefile",
+  "posts" : [
+      
+      "./makfile01.html"
       
     ]
   } ,
@@ -422,7 +446,7 @@
   "tag" : "shell scirpt",
   "posts" : [
       
-      "./shell-script04-systemsetting01.html",
+      "./shell-script04-systemsetting01-copy.html",
       
       "./shell-script03-quates.html",
       
@@ -453,6 +477,16 @@
       "./create-instance.html",
       
       "./instance-with-elixir.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "suffix rule",
+  "posts" : [
+      
+      "./makfile01.html"
       
     ]
   } ,
