@@ -7,9 +7,9 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법 - Gon's Tech Jurnal</title>
-	<link rel="canonical" href="http://localhost:4000/custom-js-phoenix.html">
-	<meta name="description" content="Phoenix LiveView 에서 사용자 정의 JS code 구현 및 적용을 위한 Node.js 설정 및 render/1 에 적용하는 과정">
+	<title>Buildroot 설치 및 Kernel build - Gon's Tech Jurnal</title>
+	<link rel="canonical" href="http://localhost:4000/buildroot-setting01.html">
+	<meta name="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 06">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 <script type="application/ld+json">
@@ -19,13 +19,13 @@
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "http://localhost:4000"},
-  "headline": "(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법",
-  "abstract": "Phoenix LiveView 에서 사용자 정의 JS code 구현 및 적용을 위한 Node.js 설정 및 render/1 에 적용하는 과정",
-    "keywords": "phoenix, liveview, custom javascript, node.js, applciation_개발1",
-    "wordcount": "735",
-    "image": ["http://localhost:4000/assets/imgposts/general/post_general15.jpg"],
-  "datePublished": "2024-01-24 08:32:20 +0900",
-  "dateModified": "2024-01-24 08:32:20 +0900",
+  "headline": "Buildroot 설치 및 Kernel build",
+  "abstract": "개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 06",
+    "keywords": "linux, buildroot, kernel build",
+    "wordcount": "899",
+    "image": ["http://localhost:4000/assets/imgposts/general/post_general24.jpg"],
+  "datePublished": "2024-02-22 10:32:20 +0900",
+  "dateModified": "2024-02-22 10:32:20 +0900",
   "author": {
     "@type": "Person",
     "name": "Yong gon Yun"},
@@ -40,30 +40,30 @@
 }
 </script>
 <!-- Open Graph data -->
-<meta property="og:url" content="http://localhost:4000/custom-js-phoenix.html"/>
+<meta property="og:url" content="http://localhost:4000/buildroot-setting01.html"/>
 <meta property="og:type" content="article"/>
-<meta property="og:title" content="(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법"/>
-<meta property="og:description" content="Phoenix LiveView 에서 사용자 정의 JS code 구현 및 적용을 위한 Node.js 설정 및 render/1 에 적용하는 과정"/>
-<meta property="og:image" content="http://localhost:4000/assets/imgposts/general/post_general15.jpg"/>
-<meta property="og:image:alt" content="(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법"/>
+<meta property="og:title" content="Buildroot 설치 및 Kernel build"/>
+<meta property="og:description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 06"/>
+<meta property="og:image" content="http://localhost:4000/assets/imgposts/general/post_general24.jpg"/>
+<meta property="og:image:alt" content="Buildroot 설치 및 Kernel build"/>
 <meta property="og:site_name" content="Gon's Tech Jurnal" />
-<meta property="article:published_time" content="2024-01-24 08:32:20 +0900" />
-<meta property="article:modified_time" content="2024-01-24 08:32:20 +0900" />
-<meta property="article:tag" content="phoenix, liveview, custom javascript, node.js, applciation_개발1" />
+<meta property="article:published_time" content="2024-02-22 10:32:20 +0900" />
+<meta property="article:modified_time" content="2024-02-22 10:32:20 +0900" />
+<meta property="article:tag" content="linux, buildroot, kernel build" />
 <meta property="fb:admins" content="ar.maybach" />
 <!-- Schema.org markup for Google -->
-<meta itemprop="name" content="(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법">
-<meta itemprop="description" content="Phoenix LiveView 에서 사용자 정의 JS code 구현 및 적용을 위한 Node.js 설정 및 render/1 에 적용하는 과정">
-<meta itemprop="image" content="http://localhost:4000/assets/imgposts/general/post_general15.jpg">
+<meta itemprop="name" content="Buildroot 설치 및 Kernel build">
+<meta itemprop="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 06">
+<meta itemprop="image" content="http://localhost:4000/assets/imgposts/general/post_general24.jpg">
 <!-- Twitter Card data -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@N/A">
-<meta name="twitter:title" content="(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법">
-<meta name="twitter:description" content="Phoenix LiveView 에서 사용자 정의 JS code 구현 및 적용을 위한 Node.js 설정 및 render/1 에 적용하는 과정">
+<meta name="twitter:title" content="Buildroot 설치 및 Kernel build">
+<meta name="twitter:description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 06">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="735"/>
-<meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general15.jpg">
+<meta data-rh="true" name="twitter:data1" content="899"/>
+<meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general24.jpg">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
 	<!-- iOS Safari -->
@@ -150,7 +150,7 @@
 
 <section class="hidden">
   <div class="post">
-      <a  class="post-list-title" href="./custom-js-phoenix.html">(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</a>
+      <a  class="post-list-title" href="./buildroot-setting01.html">Buildroot 설치 및 Kernel build</a>
       
 
   <span class = "post-card-meta">
@@ -162,7 +162,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2024-01-24T08:32:20+09:00">January 24, 2024</time>
+        <time datetime="2024-02-22T10:32:20+09:00">February 22, 2024</time>
       </span>
     
     
@@ -174,7 +174,7 @@
     
     <span class="page_meta-readtime">
       
-        3 minute read
+        4 minute read
       
     </span>
   
@@ -182,7 +182,7 @@
   </span>
 
         <div class="post-excerpt">
-            <p>Phoenix LiveView 를 사용하여 아래와 같이 버튼 클릭시 번갈아가며 버튼의 배경색과 내용이 바뀌는 toggle button 을 사용하고자 하였다. 그런데 기존의 Phoenix LiveView 제공 html tag 및 css 로 이를 생성할 수 없었으며, 따라서 자체적으로 JS 를 작성하여 기존 button 에 적용해야 하는 상황이다. 해당 과정에서 필요한 설정 및 <code>render/1</code>에 적용하기까지의 과정을 정리하고자 한다. </p><center> <img src="assets\img\posts\toggle_button.png" width="300" /></center><h3>1. Node module 설치 및 관련 package 설치</h3><p>(1) <code>package.json</code> 생성</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>assetsnpm init</code></pre></div></div><p>만약 <code>package.json</code> 파일이 없다면, 새로 생성해야 한다. 이를 위해 <code>npm init</code> 명령어를 실행하여 새로운 <code>package.json</code> 파일을 생성할 수 있다. 이 과정에서 프로젝트에 대한 기본 정보를 입력해야 한다.</p><p>(2)...<a class="read-more" href="./custom-js-phoenix.html"> read more</a>
+            <p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) - Rootfs 빌드 강의 내용 (https://comento.kr/)</p><h3 id="1-buildroot--다운로드-및-설치">1. buildroot 다운로드 및 설치</h3><h3 id="11-buildroot--다운로드">1.1 buildroot 다운로드</h3><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span>git clone git://git.buildroot.net/buildroot</code></pre></div></div><h4 id="12-qemu-설정">1.2 qemu 설정</h4><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span><span class="nb">cd </span>buildrootroot@:~/buildroot<span class="nv">$ </span><span class="nb">ls </span>configs <span class="c"># config 종류 확인</span>root@:~/buildroot<span class="nv">$ </span>make qemu_aarch64_virt_defconfigroot@:~/buildroot<span class="nv">$ </span>make menuconfig</code></pre></div></div><center><img src="assets\img\posts\2024-02-22-buildroot-setting01.png" width="600" /></center><p>다음과 같이 설정을 진행</p><ul> <li>system configuration -&gt; init system -&gt; systemd 선택</li> <li>kernel -&gt; linux kernel 해제</li> <li>target packages -&gt; text editors -&gt; vim -&gt; target packages -&gt; libaries -&gt; Crypto -&gt; openssl support 선택 -&gt; openssl binary 도 선택</li> <li>Filesystem images...<a class="read-more" href="./buildroot-setting01.html"> read more</a>
         </div>
   </div>
 </section>
@@ -280,14 +280,14 @@
 </header> <!-- End Header -->
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법">
-<meta itemprop="description" content="Phoenix LiveView 에서 사용자 정의 JS code 구현 및 적용을 위한 Node.js 설정 및 render/1 에 적용하는 과정">
-<meta itemprop="datePublished" content="2024-01-24T08:32:20+09:00">
+    <meta itemprop="headline" content="Buildroot 설치 및 Kernel build">
+<meta itemprop="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 06">
+<meta itemprop="datePublished" content="2024-02-22T10:32:20+09:00">
 
     <div class="wrapper">
       <div class="page-content">
         <div class="header-page">
-          <h2 class="page-title">(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</h2>
+          <h2 class="page-title">Buildroot 설치 및 Kernel build</h2>
           
 
   <span class = "post-page-meta">
@@ -299,7 +299,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2024-01-24T08:32:20+09:00">January 24, 2024</time>
+        <time datetime="2024-02-22T10:32:20+09:00">February 22, 2024</time>
       </span>
     
     
@@ -311,7 +311,7 @@
     
     <span class="page_meta-readtime">
       
-        3 minute read
+        4 minute read
       
     </span>
   
@@ -330,15 +330,11 @@
     
         <ul class="tags side">
             
-                <li><a href="./tag.html?tag=phoenix" class="tag side">phoenix</a></li>
+                <li><a href="./tag.html?tag=linux" class="tag side">linux</a></li>
             
-                <li><a href="./tag.html?tag=liveview" class="tag side">liveview</a></li>
+                <li><a href="./tag.html?tag=buildroot" class="tag side">buildroot</a></li>
             
-                <li><a href="./tag.html?tag=custom+javascript" class="tag side">custom javascript</a></li>
-            
-                <li><a href="./tag.html?tag=node.js" class="tag side">node.js</a></li>
-            
-                <li><a href="./tag.html?tag=applciation_%EA%B0%9C%EB%B0%9C1" class="tag side">applciation_개발1</a></li>
+                <li><a href="./tag.html?tag=kernel+build" class="tag side">kernel build</a></li>
             
     
         </ul>
@@ -347,11 +343,11 @@
     <div class="share-hover side">
         <span class="share-button side"><svg fill="currentColor" width="25" height="25" class="side"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>
         <div class="share-icons side" id="sidebar-icons">
-            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법&url=http://localhost:4000/custom-js-phoenix.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/custom-js-phoenix.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/custom-js-phoenix.html&title=(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/custom-js-phoenix.html&title=(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법&summary=Phoenix LiveView 에서 사용자 정의 JS code 구현 및 적용을 위한 Node.js 설정 및 render/1 에 적용하는 과정&source=http://localhost:4000/custom-js-phoenix.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a class="email" href="mailto:?subject=(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법&body=Phoenix LiveView 에서 사용자 정의 JS code 구현 및 적용을 위한 Node.js 설정 및 render/1 에 적용하는 과정%0A%0ARead more here: http://localhost:4000/custom-js-phoenix.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=Buildroot 설치 및 Kernel build&url=http://localhost:4000/buildroot-setting01.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/buildroot-setting01.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/buildroot-setting01.html&title=Buildroot 설치 및 Kernel build" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/buildroot-setting01.html&title=Buildroot 설치 및 Kernel build&summary=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 06&source=http://localhost:4000/buildroot-setting01.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a class="email" href="mailto:?subject=Buildroot 설치 및 Kernel build&body=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 06%0A%0ARead more here: http://localhost:4000/buildroot-setting01.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
             <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="side" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>
         </div>
     </div>
@@ -361,202 +357,208 @@
 
         
         
-        <p>Phoenix LiveView 를 사용하여 아래와 같이 버튼 클릭시 번갈아가며 버튼의 배경색과 내용이 바뀌는 toggle button 을 사용하고자 하였다. 그런데 기존의 Phoenix LiveView 제공 html tag 및 css 로 이를 생성할 수 없었으며, 따라서 자체적으로 JS 를 작성하여 기존 button 에 적용해야 하는 상황이다. 해당 과정에서 필요한 설정 및 <code>render/1</code>에 적용하기까지의 과정을 정리하고자 한다. </p>
+        <p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) - Rootfs 빌드 강의 내용 (https://comento.kr/)</p>
 
-<center>
-  <img src="assets\img\posts\toggle_button.png" width="300" />
-</center>
+<h3 id="1-buildroot--다운로드-및-설치">1. buildroot  다운로드 및 설치</h3>
 
-<h3>1. Node module 설치 및 관련 package 설치</h3>
+<h3 id="11-buildroot--다운로드">1.1 buildroot  다운로드</h3>
 
-<p>(1) <code>package.json</code> 생성</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>assets
-npm init
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span>git clone git://git.buildroot.net/buildroot
 </code></pre></div></div>
 
-<p>만약 <code>package.json</code> 파일이 없다면, 새로 생성해야 한다. 이를 위해 <code>npm init</code> 명령어를 실행하여 새로운 <code>package.json</code> 파일을 생성할 수 있다. 이 과정에서 프로젝트에 대한 기본 정보를 입력해야 한다.</p>
+<h4 id="12-qemu-설정">1.2 qemu 설정</h4>
 
-<p>(2) <code>npm init</code> 작업을 위한 기본 정보 입력
-</p>
-<p><code>npm init</code> 을 실행하면 프로젝트 이름, 버전, 설명, 진입점(주로 index.js), 테스트 명령어, 저장소, 키워드, 라이선스 등을 입력을 요청 받는다. 입력을 완료하면 <code>package.json</code> 이 생성되며, 여기서 해당 내용 등을 수정, 추가할 수 있다. 해당 script 은 다음과 같다.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span><span class="nb">cd </span>buildroot
+root@:~/buildroot<span class="nv">$ </span><span class="nb">ls </span>configs  <span class="c"># config 종류 확인</span>
+root@:~/buildroot<span class="nv">$ </span>make qemu_aarch64_virt_defconfig
+root@:~/buildroot<span class="nv">$ </span>make menuconfig
+</code></pre></div></div>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"***"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phoenix liveview project"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"main"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tailwind.config.js"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo </span><span class="se">\"</span><span class="s2">Error: no test specified</span><span class="se">\"</span><span class="s2"> &amp;&amp; exit 1"</span><span class="p">,</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"***"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"license"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ISC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"repository"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git+https://github.com/***/***.git"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"phoenix"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"bugs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/***/***/issues"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"homepage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/***/***#readme"</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<center><img src="assets\img\posts\2024-02-22-buildroot-setting01.png" width="600" /></center>
+
+<p>다음과 같이 설정을 진행</p>
+
+<ul>
+  <li>system configuration -&gt; init system -&gt; systemd 선택</li>
+  <li>kernel -&gt; linux kernel  해제</li>
+  <li>target packages -&gt; text editors -&gt; vim -&gt; target packages -&gt; libaries -&gt; Crypto -&gt; openssl support 선택 -&gt; openssl binary 도 선택</li>
+  <li>Filesystem images -&gt; ext2/3/4 -&gt; ext4 -&gt; exact size -&gt; 128M</li>
+  <li>host utilities -&gt; 모두 선택 해제 (해제 불가 항목은 그대로 둠) -&gt; 최종 exit -&gt; 저장</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~/buildroot<span class="nv">$ </span><span class="nb">cat</span> /proc/cpuinfo | <span class="nb">grep </span>processor | <span class="nb">wc</span> <span class="nt">-l</span> <span class="c"># cpu 갯수 확인</span>
+root@:~/buildroot<span class="nv">$ </span>make <span class="nt">-j</span>&lt;cpu 수&gt;
+</code></pre></div></div>
+
+<h4 id="13-에러-처리">1.3 에러 처리</h4>
+
+<p>다만 해당 실행 시 에러가 발생하였는데 관련 내용은 다음과 같다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~/buildroot<span class="nv">$ </span>make <span class="nt">-j</span>&lt;cpu 수&gt;
+Your PATH contains spaces, TABs, and/or newline <span class="o">(</span><span class="se">\n</span><span class="o">)</span> characters.
+This doesn<span class="s1">'t work. Fix you PATH.
+make: *** [support/dependencies/dependencies.mk:27: dependencies] Error 1
 </span></code></pre></div></div>
 
-<p>(3) Webpack 설치 전 설정 추가</p>
+<p>이 에러 메시지는 Linux 시스템의 PATH 환경 변수에 공백, 탭(TABs), 또는 줄바꿈 문자(newline, \n)가 포함되어 있어서 발생한 것이다. make와 같은 빌드 시스템에서는 PATH 환경 변수를 사용하여 필요한 실행 파일들을 찾는다. 만약 PATH에 이러한 특수 문자가 포함되어 있다면, 빌드 프로세스가 제대로 실행 파일들을 찾지 못하게 되어 오류가 발생하게 된다.</p>
 
-<p><code>package.json</code> <code>scripts</code> 섹션에 <code>deploy</code> 스크립트를 추가해야 웹팩을 사용하여 build 할 수 있다. script 섹션 설정을 포함한  다음 코드를 <code>package.json</code> 에 추가한다.</p>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="err">...</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"deploy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webpack --mode production"</span><span class="w"> 
-  </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<p>Webpack 을 설치할 때, 진입점이 필요하다. <code>assets/src</code> 위치에 <code>index.js</code> 파일을 생성하고 프로젝트에 필요한 기본 JavaScript 코드나 모듈 가져오기(import)를 추가한다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 예시: assets/src/index.js
-import "phoenix_html";
-// 다른 필요한 JavaScript 코드나 모듈 import
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~/buildroot<span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$PATH</span>
 </code></pre></div></div>
 
-<p>(4) Webpack 설정 config 파일 추가</p>
+<p>이 명령어를 실행하면 PATH에 설정된 디렉토리들이 콜론(:)으로 구분되어 출력된다. 여기서 공백, 탭, 또는 줄바꿈 문자가 있는지 확인해보니 몇 군데 공백이 확인 되었다. 따라서, PATH에서 문제가 되는 문자를 아래와 같이 제거함.</p>
 
-<p><code>assets</code> 디렉토리 내에 <code>webpack.config.js</code>을 생성하고 진입점(entry point)으로 <code>index.js</code> 을 설정해준다. 그 밖에 output, loader 등을 포함하여 다음과 같이 생성한다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const path = require('path');
-
-module.exports = {
-  // 진입점 설정
-  entry: './js/app.js', // 이 경로는 프로젝트에 맞게 조정해야 합니다
-
-  // 출력 설정
-  output: {
-    path: path.resolve(__dirname, '../priv/static/assets'), // 출력 디렉토리
-    filename: 'app.js', // 출력 파일명
-  },
-
-  // 모듈 설정
-  module: {
-    rules: [
-      {
-        test: /\.js$/, // .js 파일에 대한 처리
-        exclude: /node_modules/, // node_modules 디렉토리 제외
-        use: {
-          loader: 'babel-loader', // Babel 로더 사용
-          options: {
-            presets: ['@babel/preset-env'], // Babel 프리셋 설정
-          },
-        },
-      },
-      // 추가적인 로더 설정(예: CSS, 이미지 파일 등)
-    ],
-  },
-};
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~/buildroot<span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="si">$(</span><span class="nb">echo</span> <span class="nv">$PATH</span> | <span class="nb">tr</span> <span class="nt">-d</span> <span class="s1">' \t\n'</span><span class="si">)</span>
 </code></pre></div></div>
 
-<h3>2. Node 모듈 설치 및 Node.js 의존성 설정</h3>
+<p><code class="language-plaintext highlighter-rouge">echo $PATH</code> 로 제거가 되었는지 확인한 이후, 다시 make 실행에 unzip 이 설치되어 있지 않다고 에러가 발생하여 이를 설치하였다.</p>
 
-<p>(1) Node 모듈 설치</p>
-<p><code>assets</code> 디렉토리로 이동하여 <code>npm install</code>을 실행한다. 이 명령어는 <code>package.json</code>에 정의된 모든 Node 의존성을 설치한다. Phoenix 프로젝트의 경우,<code>phoenix</code>, <code>phoenix_html</code>, <code>phoenix_live_view</code> 패키지들은 자동으로 <code>package.json</code>에 추가되어 있어야 한다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>assets
-npm <span class="nb">install</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~/buildroot<span class="nv">$ </span><span class="nb">sudo </span>apt-get update
+root@:~/buildroot<span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>unzip
 </code></pre></div></div>
 
-<p>(2) Node.js 필수 Package 설치</p>
+<h4 id="14-buildroot-설치">1.4 buildroot 설치</h4>
 
-<p>- Webpack<br /> assets (HTML, CSS, JavaScript 파일, 이미지, 폰트 등 웹 애플리케이션을 구성하는 모든 정적 파일들) 을 bundling (여러 개의 파일을 하나 또는 소수의 파일로 결합하는 과정. 이를 통해 네트워크 요청 최소화, application 최적화, 의존성 관리의 이점이 있음) 하기 위해 필요</p>
+<p>그리고 최종적으로 make 를 실행하여 설치함 (20 여분 소요)</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install </span>webpack webpack-cli <span class="nt">--save-dev</span>
+<p>해당 작업을 통해 Buildroot 는 위 설정에 따라 다음의 주요 작업을 진행, embedded system S/W stackt 을 빌드 한다.</p>
+
+<ol>
+  <li>
+    <p>구성 검증: Buildroot는 .config 파일이나 다른 구성 파일에 정의된 설정을 검증한다. 이 설정은 make menuconfig, make xconfig 또는 make nconfig와 같은 명령어를 통해 사전에 사용자에 의해 정의 것들 이다..</p>
+  </li>
+  <li>
+    <p>툴체인(Toolchain) 빌드 또는 다운로드: 툴체인은 컴파일러, 링커, 라이브러리 등 임베디드 소프트웨어를 컴파일하기 위해 필요한 도구들의 집합이다. Buildroot는 선택된 설정에 따라 적절한 툴체인을 빌드하거나 사전에 빌드된 툴체인을 다운로드한다. 다만 현재의 설정에서 toolchain 빌드는 따로 진행된다.</p>
+  </li>
+  <li>
+    <p>리눅스 커널 빌드: 사용자가 지정한 버전의 리눅스 커널을 다운로드하고, 필요한 패치를 적용한 후 커널을 크로스 컴파일한다. 역시 현재의 설정에서 커널 빌드는 따로 진행된다.</p>
+  </li>
+  <li>
+    <p>루트 파일 시스템(Root Filesystem) 구성: Buildroot는 사용자가 선택한 모든 소프트웨어 패키지를 다운로드하고, 이들을 크로스 컴파일하여 루트 파일 시스템을 구성. 이 과정에는 라이브러리, 시스템 유틸리티, 애플리케이션 등이 포함된다.</p>
+  </li>
+  <li>
+    <p>부트로더(Bootloader) 빌드: 필요한 경우, 선택된 부트로더(예: U-Boot)를 빌드.</p>
+  </li>
+  <li>
+    <p>이미지 생성: 모든 빌드 과정이 완료되면, Buildroot는 이들을 통합하여 임베디드 시스템을 위한 최종 이미지(예: SD 카드 이미지, NAND 플래시 이미지)를 생성한다. 이 이미지는 실제 하드웨어에서 직접 부팅할 수 있다. 3 번과 마찬가지로 현재 설정에서 해당 과정은 별도로 커널 빌드 때 진행된다.</p>
+  </li>
+</ol>
+
+<h3 id="2-kernel-build-다운로드-및-이미지-생성">2. Kernel Build 다운로드 및 이미지 생성</h3>
+
+<h4 id="21-kernel-download-httpskernelorg">2.1 kernel download (https://kernel.org/)</h4>
+
+<center><img src="assets\img\posts\2024-02-22-buildroot-setting012.png" width="600" /></center>
+
+<p>해당 사이트 git 주소 -&gt; “stable/linux” 검색 해서 나온 kernel/git/stable/linux.git 경로를 git clone 하여 다운 받음.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~/buildroot<span class="nv">$ </span><span class="nb">cd</span> ..
+root@:~<span class="nv">$ </span>git clone https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/
+</code></pre></div></div>
+<p>-&gt;  linux 디렉토리에 해다 repository 파일 다운로드 완료</p>
+
+<h4 id="22-kernel-build-에-필요한-라이브러리-설치">2.2 kernel build 에 필요한 라이브러리 설치</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>bison flex libelf-dev libssl-dev
 </code></pre></div></div>
 
-<p>- Babel<br /> JavaScript 코드를 변환하기 위한 컴파일러. ES6 이상의 코드를 이전 버전의 JavaScript로 변환하는데 사용.</p>
+<p>(각 라이브러리 들의 기능에 대한 이해는 부족한 상태임. 추가학습 필요)</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> @babel/core @babel/preset-env babel-loader <span class="nt">--save-dev</span>
+<ol>
+  <li>Bison</li>
+</ol>
+
+<ul>
+  <li>용도: bison은 GNU 프로젝트의 구문 분석기 생성기로, 커널 소스 코드 내의 구문을 분석하는 데 사용된다. 커널 빌드 과정에서는 특히 커널의 구성 설정 도구인 kconfig에 의해 사용됨.</li>
+</ul>
+
+<ol>
+  <li>Flex</li>
+</ol>
+
+<ul>
+  <li>용도: flex는 텍스트 스캔을 위한 패턴 매칭을 수행하는 렉서(lexer) 또는 스캐너(scanner) 생성기. lex의 GNU 버전으로, 텍스트 입력 스트림에서 패턴을 인식하고 처리하는 프로그램을 생성한다. bison과 함께 kconfig에 의해 사용되며, 커널의 설정 옵션을 해석하고 처리하는 데 필요.</li>
+</ul>
+
+<ol>
+  <li>libelf-dev</li>
+</ol>
+
+<ul>
+  <li>용도: libelf-dev는 ELF(Executable and Linkable Format) <a href="https://doitnow-man.tistory.com/entry/ELF-1-ELF-%EB%9E%80">(참고 자료 : ELF 란?)</a> 파일을 다루기 위한 개발 라이브러리. ELF 파일 포맷은 리눅스 시스템에서 실행 파일, 오브젝트 코드, 공유 라이브러리, 코어 덤프 등을 위해 사용. 커널 모듈과 같은 ELF 형식의 바이너리 파일을 생성하고 조작하는 데 사용되므로 커널 모듈을 빌드하고 분석하는 데 필수적.</li>
+</ul>
+
+<ol>
+  <li>libssl-dev</li>
+</ol>
+
+<ul>
+  <li>용도: libssl-dev는 OpenSSL 라이브러리의 개발 버전 패키지. OpenSSL은 네트워크 연결에 대한 암호화 통신을 제공하는 라이브러리로, SSL(Secure Sockets Layer)과 TLS(Transport Layer Security) 프로토콜을 구현한다. 커널에서는 예를 들어, 보안 통신이 필요한 네트워크 기능을 개발할 때 이 라이브러리가 사용될 수 있다.</li>
+</ul>
+
+<h4 id="23-buildroot-에-있는-config-복사-및-config-파일-생성">2.3 buildroot 에 있는 config 복사 및 .config 파일 생성</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~/linux<span class="nv">$ </span><span class="nb">cp</span> ../buildroot/board/qemu/aarch64-virt/linux.config <span class="nb">arch</span>/arm64/configs/qemu_defconfig
+root@:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 make qemu_defconfig <span class="c"># 반환값으로 .config 생성</span>
 </code></pre></div></div>
 
-<p>- CSS 관련 package<br />CSS를 처리하기 위해 필요한 패키지들</p>
+<h4 id="24-kernel-build-를-위한-toolchain-download-httpsdeveloperarmcom">2.4 kernel build 를 위한 toolchain download (https://developer.arm.com/)</h4>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install </span>css-loader style-loader mini-css-extract-plugin <span class="nt">--save-dev</span>
+<p>-&gt; Tools and Software -&gt; Compilers and Libraries -&gt; Arm GNU toolchain -&gt; GNU Toolchain releases for A-profile processors -&gt; GNU-A Downloads (https://developer.arm.com/downloads/-/gnu-a) -&gt; AArch64 GNU/Linux target (aarch64-none-linux-gnu) (gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu.tar.xz) 다운로드</p>
+
+<hr />
+
+<p>(해당 작업을 wsl2 로 설치한 ubuntu 로 진행하는 경우 다운로드 파일은 windows file system) 내부로 들어오게 된다. 이것을 linux 로 복사하기 위해서는 다음과 같이 복사 및 압풀 해제를 진행한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~/linux<span class="nv">$ </span><span class="nb">cd</span> ..
+root@:~<span class="nv">$ </span><span class="nb">cp</span> /mnt/c/Users/&lt;사용자 이름&gt;/Downloads/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu.tar.xz <span class="nb">.</span>
+</code></pre></div></div>
+<hr />
+
+<h4 id="25-toolchain-압축-풀기">2.5 toolchain 압축 풀기</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span> <span class="nb">tar </span>xvf gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu.tar.xz
 </code></pre></div></div>
 
-<p>- Tailwind CSS</p>
+<h4 id="26-build-진행-이미지-생성">2.6 build 진행 (이미지 생성)</h4>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install </span>tailwindcss postcss autoprefixer <span class="nt">--save-dev</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span><span class="nb">cd </span>linux
+root@:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 <span class="nv">CROSS_COMPILE</span><span class="o">=</span>/home/gon/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- make <span class="nt">-j16</span>
+</code></pre></div></div>
+<center><img src="assets\img\posts\2024-02-22-buildroot-setting013.png" width="400" /></center>
+
+<p>build 가 완료되면 위와 같이  vmlinux 를 생성하고 이것을 가지고 arch/arm64/boot/Image 가 생성된것을 확인할 수 있다.</p>
+
+<h3 id="3-buildroot-이미지-실행">3. buildroot 이미지 실행</h3>
+
+<h4 id="31-qemu-설치">3.1 QEMU 설치</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>qemu-system-arm
 </code></pre></div></div>
 
-<p>(3) Node.js Package 중 Phoenix LiveView 관련 설치</p>
+<h4 id="32-이미지-실행">3.2 이미지 실행</h4>
 
-<p><code>phoenix</code>, <code>phoenix_live_view</code>, <code>phoenix_html</code> package 를 설치하기 전, <code>assets/js/app.js</code> 다음 코드가 없다면 추가해준다.(phoenix_live_view 0.20.1 기준 기본적으로 추가되어 있음.)</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import "phoenix_html";
-import { Socket } from "phoenix";
-import { LiveSocket } from "phoenix_live_view";
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span>qemu-system-aarch64 <span class="se">\</span>
+<span class="o">&gt;</span> <span class="nt">-kernel</span> linux/arch/arm64/boot/Image <span class="se">\</span>
+<span class="o">&gt;</span> <span class="nt">-drive</span> <span class="nv">format</span><span class="o">=</span>raw,file<span class="o">=</span>buildroot/output/images/rootfs.ext4,if<span class="o">=</span>virtio <span class="se">\</span>
+<span class="o">&gt;</span> <span class="nt">-append</span> <span class="s2">"root=/dev/vda console=ttyAMA0 nokaslr"</span> <span class="se">\</span>
+<span class="o">&gt;</span> <span class="nt">-nographic</span> <span class="nt">-M</span> virt <span class="nt">-cpu</span> cortex-a72 <span class="se">\</span>
+<span class="o">&gt;</span> <span class="nt">-m</span> 2G <span class="se">\</span>
+<span class="o">&gt;</span> <span class="nt">-smp</span> 2
 </code></pre></div></div>
 
-<p><code>assets</code> 디렉토리에서 해당 package 를 추가해준다.</p>
+<center><img src="assets\img\posts\2024-02-22-buildroot-setting014.png" width="600" /></center>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install --save phoenix phoenix_html phoenix_live_view
-</code></pre></div></div>
-<p>제대로 설치되었다면, 앞에서 설치한 Node.js Package 디렉토리가 <code>assets/node_modules</code>에 생성된다.</p>
+<h4 id="33-이미지-종료">3.3 이미지 종료</h4>
 
-<h3>3. JavaScript 파일 작성</h3>
-<p>앞의 과정에서 사용자 정의 JavaScript 를 사용할 수 있도록 관련 설정을 완료하였으므로, 이제 프로젝트의 <code>assets/js</code> 디렉토리 안에 사용자 정의 JavaScript 파일을 생성 (ex. <code>assets/js/custom.js</code>) 한다.</p>
+<p>터미널 창을 별도로 열어서 kill 명령어로 종료</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export function toggleButton(btn) {
-  btn.classList.toggle('bg-blue-500');
-  btn.classList.toggle('bg-gray-600');
-
-  if (btn.innerText === 'READY !!') {
-    btn.innerText = 'WAIT  ......  ';
-  } else {
-    btn.innerText = 'READY !!';
-  }
-}
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">kill</span> <span class="nt">-9</span> qemu-system-aarch64
 </code></pre></div></div>
 
-<h3>4. Phoenix 프로젝트에 JavaScript 통합</h3>
-<p>(1) <code>app.js</code>에서 사용자 정의 <code>custom.js</code> 가져오기.</p>
+<p>또는 qemu 내에서 shutdown 명령어로 종료</p>
 
-<p><code>assets/js/app.js</code> 파일을 열고, 만들어진 <code>custom.js</code> 을 가져올 수 있도록 import 해준다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// assets/js/app.js
-import { toggleButton } from "./custom";
-window.toggleButton = toggleButton;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>shutdown <span class="nt">-h</span> now
 </code></pre></div></div>
-
-<p>이렇게 하면 <code>customFunction</code>을 전역 변수로 설정하여, HTML에서 접근할 수 있게 된다.</p>
-
-<p>(2) Webpack build</p>
-<p>지금까지의 변경사항을 적용하기 위해 <code>assets</code> 디렉토리에서 <code>npm run deploy</code>를 실행하여 JavaScript 파일을 빌드한다.</p>
-
-<h3>5. LiveView에서 JavaScript 사용</h3>
-<p>(1) LiveView 템플릿에 스크립트 적용</p>
-<p>LiveView의 <code>render/1</code> 함수에서 해당 JavaScript 함수를 사용하는 HTML을 반환</p>
-
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">render</span><span class="p">(</span><span class="n">assigns</span><span class="p">)</span> <span class="k">do</span>
-  <span class="sx">~H""</span><span class="s2">"
-  ... ...
-    &lt;button 
-      type="</span><span class="n">button</span><span class="s2">" 
-      onclick="</span><span class="n">window</span><span class="o">.</span><span class="n">toggleButton</span><span class="p">(</span><span class="n">this</span><span class="p">)</span><span class="s2">"
-      class="</span><span class="n">text</span><span class="o">-</span><span class="n">white</span> <span class="n">bg</span><span class="o">-</span><span class="n">blue</span><span class="o">-</span><span class="mi">500</span> <span class="n">font</span><span class="o">-</span><span class="n">medium</span> <span class="n">rounded</span><span class="o">-</span><span class="n">lg</span> <span class="n">text</span><span class="o">-</span><span class="n">sm</span> <span class="n">px</span><span class="o">-</span><span class="mi">5</span> <span class="n">py</span><span class="o">-</span><span class="mf">2.5</span> <span class="n">me</span><span class="o">-</span><span class="mi">2</span> <span class="n">mb</span><span class="o">-</span><span class="mi">2</span><span class="s2">"&gt;
-        READY !!
-    &lt;/button&gt;    
-  ... ...  
-  """</span>
-<span class="k">end</span>
-</code></pre></div></div>
-
-<h3>결론</h3>
-<center>
-  <img src="assets\img\posts\toggle_button.png" width="300" />
-</center>
-
-<p>위 작업이 정상적으로 완료되었다면 의도한대로 사용자 정의 toggle button 이 동작하는 것을 확인 할 수 있다. </p>
 
 
         <aside class="sidebar inline" id="post-end">
@@ -568,15 +570,11 @@ window.toggleButton = toggleButton;
     
         <ul class="tags inline">
             
-                <li><a href="./tag.html?tag=phoenix" class="tag inline">phoenix</a></li>
+                <li><a href="./tag.html?tag=linux" class="tag inline">linux</a></li>
             
-                <li><a href="./tag.html?tag=liveview" class="tag inline">liveview</a></li>
+                <li><a href="./tag.html?tag=buildroot" class="tag inline">buildroot</a></li>
             
-                <li><a href="./tag.html?tag=custom+javascript" class="tag inline">custom javascript</a></li>
-            
-                <li><a href="./tag.html?tag=node.js" class="tag inline">node.js</a></li>
-            
-                <li><a href="./tag.html?tag=applciation_%EA%B0%9C%EB%B0%9C1" class="tag inline">applciation_개발1</a></li>
+                <li><a href="./tag.html?tag=kernel+build" class="tag inline">kernel build</a></li>
             
     
         </ul>
@@ -585,11 +583,11 @@ window.toggleButton = toggleButton;
     <div class="share-hover inline">
         <span class="share-button inline"><svg fill="currentColor" width="25" height="25" class="inline"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>
         <div class="share-icons inline" id="post-end-icons">
-            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법&url=http://localhost:4000/custom-js-phoenix.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/custom-js-phoenix.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/custom-js-phoenix.html&title=(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/custom-js-phoenix.html&title=(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법&summary=Phoenix LiveView 에서 사용자 정의 JS code 구현 및 적용을 위한 Node.js 설정 및 render/1 에 적용하는 과정&source=http://localhost:4000/custom-js-phoenix.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a class="email" href="mailto:?subject=(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법&body=Phoenix LiveView 에서 사용자 정의 JS code 구현 및 적용을 위한 Node.js 설정 및 render/1 에 적용하는 과정%0A%0ARead more here: http://localhost:4000/custom-js-phoenix.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=Buildroot 설치 및 Kernel build&url=http://localhost:4000/buildroot-setting01.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/buildroot-setting01.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/buildroot-setting01.html&title=Buildroot 설치 및 Kernel build" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/buildroot-setting01.html&title=Buildroot 설치 및 Kernel build&summary=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 06&source=http://localhost:4000/buildroot-setting01.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a class="email" href="mailto:?subject=Buildroot 설치 및 Kernel build&body=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 06%0A%0ARead more here: http://localhost:4000/buildroot-setting01.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
             <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="inline" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>
         </div>
     </div>
@@ -986,14 +984,14 @@ window.toggleButton = toggleButton;
     }
 
     function copyToClipboard() {
-      navigator.clipboard.writeText('http://localhost:4000/custom-js-phoenix.html').then(function() {
+      navigator.clipboard.writeText('http://localhost:4000/buildroot-setting01.html').then(function() {
       alerts = document.getElementsByClassName('alert')
       for (i=0; i < alerts.length; i++){
         alerts[i].innerHTML='\u00ABlink copied\u00BB';
         setTimeout((function(i){ return function(){alerts[i].innerHTML='';}})(i), 1600 );
       };
       }, function() {
-        prompt("Unable to copy, please use this link:", "http://localhost:4000/custom-js-phoenix.html");
+        prompt("Unable to copy, please use this link:", "http://localhost:4000/buildroot-setting01.html");
       });
     }
 

@@ -73,6 +73,16 @@
     
       
   {
+  "tag" : "buildroot",
+  "posts" : [
+      
+      "./buildroot-setting01.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "changeset/2",
   "posts" : [
       
@@ -221,6 +231,16 @@
     
       
   {
+  "tag" : "kernel build",
+  "posts" : [
+      
+      "./buildroot-setting01.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "lazy collection",
   "posts" : [
       
@@ -233,6 +253,8 @@
   {
   "tag" : "linux",
   "posts" : [
+      
+      "./buildroot-setting01.html",
       
       "./makfile01.html",
       

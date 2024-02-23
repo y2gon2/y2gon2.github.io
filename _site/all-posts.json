@@ -1,6 +1,8 @@
 {
   "posts" : [
     
+    "./buildroot-setting01.html",
+    
     "./makfile01.html",
     
     "./shell-script04-systemsetting01-copy.html",
