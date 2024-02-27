@@ -1,6 +1,10 @@
 {
   "posts" : [
     
+    "./gdp01.html",
+    
+    "./systemcall01.html",
+    
     "./buildroot-setting01.html",
     
     "./makfile01.html",

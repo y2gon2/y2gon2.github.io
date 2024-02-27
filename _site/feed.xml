@@ -1,4 +1,470 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-02-23T16:26:21+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">Buildroot 설치 및 Kernel build</title><link href="http://localhost:4000/buildroot-setting01.html" rel="alternate" type="text/html" title="Buildroot 설치 및 Kernel build" /><published>2024-02-22T10:32:20+09:00</published><updated>2024-02-22T10:32:20+09:00</updated><id>http://localhost:4000/buildroot-setting01</id><content type="html" xml:base="http://localhost:4000/buildroot-setting01.html"><![CDATA[<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) - Rootfs 빌드 강의 내용 (https://comento.kr/)</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-02-25T20:26:15+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">GDB 를 사용 기초 및 systemcall GDB 적용</title><link href="http://localhost:4000/gdp01.html" rel="alternate" type="text/html" title="GDB 를 사용 기초 및 systemcall GDB 적용" /><published>2024-02-25T10:32:20+09:00</published><updated>2024-02-25T10:32:20+09:00</updated><id>http://localhost:4000/gdp01</id><content type="html" xml:base="http://localhost:4000/gdp01.html"><![CDATA[<style>
+    summary::-webkit-details-marker {
+        display: none;
+    }
+    summary {
+        list-style: none;
+    }
+</style>
+
+<details><summary></summary>
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+</details>
+
+<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) - Rootfs 빌드 강의 내용 (https://comento.kr/)</p>
+
+<h3 id="gdb-기초">GDB 기초</h3>
+
+<ol>
+  <li>GDB 사용을 위한 라이브러리 설치</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>gdb-multiarch
+</code></pre></div></div>
+
+<ol>
+  <li>GDB 로 관찰할 systemcall 작성</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>vi fact.c
+</code></pre></div></div>
+
+<ul>
+  <li>test 용 code</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">factorial</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ret</span> <span class="o">*=</span> <span class="n">n</span><span class="p">;</span>
+        <span class="n">ret</span> <span class="o">*=</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">factorial</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"result: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>gcc build</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>gcc <span class="nt">-g</span> fact.c <span class="nt">-o</span> fact 
+<span class="c"># -g : 컴파일된 실행 파일에 디버깅 정보를 포함</span>
+<span class="c"># GDB를 사용할 때 소스 코드의 라인 번호, 변수 이름 등의 상세한 정보에 접근 가능</span>
+</code></pre></div></div>
+
+<ol>
+  <li>GDB 실행</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>gdb-multiarch fact
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GNU gdb (Ubuntu 12.1-0ubuntu1~22.04) 12.1
+Copyright (C) 2022 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+&lt;https://www.gnu.org/software/gdb/bugs/&gt;.
+Find the GDB manual and other documentation resources online at:
+    &lt;http://www.gnu.org/software/gdb/documentation/&gt;.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from fact...
+(gdb)
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) start 10          # --- (1)
+Temporary breakpoint 1 at 0x11bd: file fact.c, line 14. # --- (2)
+Starting program: /home/gon/fact 10     
+[Thread debugging using libthread_db enabled]   --- (3)
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1". # --- (4)
+
+Temporary breakpoint 1, main (argc=2, argv=0x7fffffffe108) at fact.c:14
+14          int i = atoi(argv[1]);
+</code></pre></div></div>
+<p>(1) start 명령은 프로그램을 시작하고, 주어진 프로그램의 첫번째 인자(10)와 함께 메인 함수의 첫 번째 라인에서 일시적인 중단점을 설정.  이렇게 하면 프로그램이 실제로 실행되기 시작하며, 사용자가 프로그램의 초기 상태를 검사할 수 있게 된다.</p>
+
+<p>(2) 현재 중단점 code 상 line 의 위치와 메모리 주소. 즉 main 함수 내 첫번째 줄.</p>
+
+<p>(3) 멀티스레딩 프로그램을 디버깅하기 위해 libthread_db 라이브러리를 사용하고 있음을 표시</p>
+
+<p>(4) 호스트 시스템의 libthread_db 라이브러리를 사용하고 있음을 표시. 이 라이브러리는 스레드와 관련된 정보를 제공하여 디버거가 스레드를 효율적으로 관리할 수 있게 돕는다.</p>
+
+<h3 id="systemcall-에-대한-gdb-적용">systemcall 에 대한 GDB 적용</h3>
+
+<ol>
+  <li>Debug mode 로 빌드된 Linux kernel 생성을 위한 설정 변경</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span><span class="nb">cd </span>kernel
+user@DESKTOP:~/kernel<span class="nv">$ ARCH</span><span class="o">=</span>arm64 make menuconfig 
+</code></pre></div></div>
+
+<ul>
+  <li>kernel hacking -&gt;  Kernel debugging 선택</li>
+  <li>kernel hacking -&gt;  Compile-time checks and compiler options -&gt; Debug information (Disable debug information) -&gt;  Rely on the toolchain’s implicit default DWARF version 선택</li>
+</ul>
+
+<ol>
+  <li>re-build</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/kernel<span class="nv">$ </span> make <span class="nt">-j</span>&lt;cpu 수&gt;
+</code></pre></div></div>
+
+<ol>
+  <li>QEMU 실행</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/kernel<span class="nv">$ </span><span class="nb">cd</span> ..
+user@DESKTOP:~<span class="nv">$ </span>qemu-system-aarch64 <span class="nt">-kernel</span> kernel/arch/arm64/boot/Image <span class="nt">-driv</span>
+e <span class="nv">format</span><span class="o">=</span>raw,file<span class="o">=</span>buildroot/output/images/rootfs.ext4,if<span class="o">=</span>virtio <span class="nt">-append</span> <span class="s2">"root=/dev/vda console
+=ttyAMA0 nokaslr"</span> <span class="nt">-nographic</span> <span class="nt">-M</span> virt <span class="nt">-cpu</span> cortex-a72 <span class="nt">-m</span> 2G <span class="nt">-smp</span> 2 <span class="nt">-s</span> <span class="nt">-S</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">-s</code> : gdb 가 붙을 수 있도록 1234 포트를 열어둠
+<code class="language-plaintext highlighter-rouge">-S</code> : QEMU 가 시작하자마자 멈춰있는 상태로 만듬. (break-point 를 걸수 있는 시점을 마련하기 위함)</p>
+
+<p>(실행시 <code class="language-plaintext highlighter-rouge">-S</code> 옵션으로 인해 멈춰있게 됨. 그래서 다른 cli 상에서 <code class="language-plaintext highlighter-rouge">gdb-multiarch</code>를 사용하여 <code class="language-plaintext highlighter-rouge">linux/vmlinux</code> 경로에 위치한 리눅스 커널 이미지를 디버깅 모드로 염)</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>gdb-multiarch kernel/vmlinux
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from kernel/vmlinux...
+(gdb)
+</code></pre></div></div>
+
+<p>따라서 vmlinux 내 debugging 정보가 읽어지게 됨.</p>
+
+<ol>
+  <li>QEUM 가 연 포트에 접근</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) target remote :1234
+Remote debugging using :1234
+warning: Selected architecture i386:x86-64 is not compatible with reported target architecture aarch64
+warning: Architecture rejected target-supplied description
+0x0000000000000000 in fixed_percpu_data ()  # bootloader 의 첫 시작 주소
+</code></pre></div></div>
+
+<ol>
+  <li>break-point 걸기</li>
+</ol>
+
+<p><code class="language-plaintext highlighter-rouge">start_kernel</code> 이라는 가장 처음에 시작되는 함수에 break-point 걸기</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) break start_kernel
+Breakpoint 1 at 0xffffffff821889e0: file init/main.c, line 875.
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="systemcall" /><category term="gdb-multiarch" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 09]]></summary></entry><entry><title type="html">systemcall 기초 1</title><link href="http://localhost:4000/systemcall01.html" rel="alternate" type="text/html" title="systemcall 기초 1" /><published>2024-02-24T10:32:20+09:00</published><updated>2024-02-24T10:32:20+09:00</updated><id>http://localhost:4000/systemcall01</id><content type="html" xml:base="http://localhost:4000/systemcall01.html"><![CDATA[<style>
+    summary::-webkit-details-marker {
+        display: none;
+    }
+    summary {
+        list-style: none;
+    }
+</style>
+
+<details><summary></summary>
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+</details>
+
+<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) - Rootfs 빌드 강의 내용 (https://comento.kr/)</p>
+
+<h4 id="1-syscall_define-매크로">1. SYSCALL_DEFINE 매크로</h4>
+
+<p>1.1 생성할 systemcall 이 추가될 linux kernel 디렉토리 내 해당 source 추가</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span><span class="nb">cd </span>kernel/kernel
+user@DESKTOP:~/kernel/kernel<span class="nv">$ </span>vim new_syscall.
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;linux/kernel.h&gt;</span><span class="c1"> // kenel 에서 사용할 soruce code 에 필요한 라이브러리</span><span class="cp">
+#include</span> <span class="cpf">&lt;linux/syscalls.h&gt;</span><span class="c1"> // SYSCALL_DEFINE 매크로를 사용하기 위한 라이브러리</span><span class="cp">
+</span>
+<span class="n">SYSCALL_DEFINE1</span><span class="p">(</span><span class="n">new_syscall</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="n">code</span><span class="p">)</span> <span class="c1">// SYSCALL_DEFINE 매크로 + 1개 인자 (system call  이름, (첫번째)인자 타입, (첫번째)인자 이름)</span>
+<span class="p">{</span>
+    <span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span> <span class="s">"Hello World~!!!! %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">code</span><span class="p">);</span> <span class="c1">// syscall 호출 확인을 위해 log 출력 \n 로 종료해야 시스템이 해당 로그 message 가 종료 되었음을 인지함. (없으면 종료 상태가 결정되지 않아 원하는 시점에 출력 되지 않을 수 있음.)</span>
+    <span class="k">return</span> <span class="n">code</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> 
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>1.2 Makefile 수정</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/kernel/kernel<span class="nv">$ </span>vi Makefile
+</code></pre></div></div>
+
+<p>해당 파일에 다음과 같이 반드시 실행되는 목적 파일들이 <code class="language-plaintext highlighter-rouge">obj-y</code> 로 나열되어 있다.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">obj-y</span>     <span class="o">=</span> fork.o exec_domain.o panic.o <span class="se">\</span>
+            cpu.o exit.o softirq.o resource.o <span class="se">\</span>
+            sysctl.o capability.o ptrace.o user.o <span class="se">\</span>
+            signal.o sys.o umh.o workqueue.o pid.o task_work.o <span class="se">\</span>
+            extable.o params.o <span class="se">\</span>
+            kthread.o sys_ni.o nsproxy.o <span class="se">\</span>
+            notifier.o ksysfs.o cred.o reboot.o <span class="se">\</span>
+            async.o range.o smpboot.o ucount.o regset.o ksyms_common.o
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">obj-$(CONFIG명)</code> 항목들의 경우, 관련 CONFIG 설정이 <code class="language-plaintext highlighter-rouge">y</code> 라면 실행되지만, 그렇지 않은 경우 실행되지 않는다.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">obj-$(CONFIG_USERMODE_DRIVER)</span> <span class="o">+=</span> usermode_driver.o
+<span class="nv">obj-$(CONFIG_MULTIUSER)</span> <span class="o">+=</span> groups.o
+<span class="nv">obj-$(CONFIG_VHOST_TASK)</span> <span class="o">+=</span> vhost_task.o
+</code></pre></div></div>
+
+<p>해당 항목의 config 값 설정을 보려면 .config 파일에서 찾아 볼 수 있다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/kernel/kernel<span class="nv">$ </span>vim ../.config
+</code></pre></div></div>
+
+<p>해당 파일을 열어보면, <code class="language-plaintext highlighter-rouge">CONFIG_MULTIUSER=y</code> 만 존재한다.</p>
+
+<p>이것은 곧, <code class="language-plaintext highlighter-rouge">CONFIG_MULTIUSER</code> 의 값은 y 로 <code class="language-plaintext highlighter-rouge">obj-y</code>로 설정, 빌드 및 실행에 적용되나, <code class="language-plaintext highlighter-rouge">CONFIG_USERMODE_DRIVER</code>, <code class="language-plaintext highlighter-rouge">CONFIG_VHOST_TASK</code> 는 존재하지 않으므로, <code class="language-plaintext highlighter-rouge">obj-</code> 상태이므로 kernel build 및 실행 시 영향이 없으므로 삭제하여도 동일한 상태임을 확인할 수 있다.</p>
+
+<p>해당 상태는  menuconfig 화면에서도 확인 가능하다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/kernel/kernel<span class="nv">$ </span><span class="nb">cd</span> ..
+user@DESKTOP:~/kernel<span class="nv">$ ARCH</span><span class="o">=</span>arm64 make menuconfig
+</code></pre></div></div>
+<p>화면에서 <code class="language-plaintext highlighter-rouge">/</code> 를 눌러서 찾게 모드 사용 (vi 와 동일). <code class="language-plaintext highlighter-rouge">CONFIG_MULTIUSER</code> 검색 시.</p>
+
+<center><img src="assets\img\posts\2024-02-24-systemcall011.png" width="600" /></center>
+
+<p>해당 Symbol 설정이 <code class="language-plaintext highlighter-rouge">=y</code> 로 되어 있으나,</p>
+
+<center><img src="assets\img\posts\2024-02-24-systemcall012.png" width="600" /></center>
+
+<p><code class="language-plaintext highlighter-rouge">CONFIG_USERMODE_DRIVER</code> 의 경우 <code class="language-plaintext highlighter-rouge">=n</code> 임을 확인할 수 있다.</p>
+
+<p>위와 같이, <code class="language-plaintext highlighter-rouge">obj-y</code> 를 사용하여 새로 작성한 ‘new__syscall<code class="language-plaintext highlighter-rouge"> 을 </code>Makefile` 에 추가해 준다.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CFLAGS_stackleak.o</span> <span class="o">+=</span> <span class="p">$(</span>DISABLE_STACKLEAK_PLUGIN<span class="p">)</span>
+<span class="nv">obj-$(CONFIG_GCC_PLUGIN_STACKLEAK)</span> <span class="o">+=</span> stackleak.o
+<span class="nv">KASAN_SANITIZE_stackleak.o</span> <span class="o">:=</span> n
+<span class="nv">KCSAN_SANITIZE_stackleak.o</span> <span class="o">:=</span> n
+<span class="nv">KCOV_INSTRUMENT_stackleak.o</span> <span class="o">:=</span> n
+
+<span class="nv">obj-$(CONFIG_SCF_TORTURE_TEST)</span> <span class="o">+=</span> scftorture.o
+
+<span class="c"># obj- 추가 가장 마지막 항목으로 신규 systemcall 추가
+</span><span class="nv">obj-y</span> <span class="o">+=</span> new_syscall.o
+
+<span class="nl">$(obj)/configs.o</span><span class="o">:</span> <span class="nf">$(obj)/config_data.gz</span>
+
+<span class="nv">targets</span> <span class="o">+=</span> config_data config_data.gz
+<span class="nl">$(obj)/config_data.gz</span><span class="o">:</span> <span class="nf">$(obj)/config_data FORCE</span>
+        <span class="nf">$(</span><span class="nb">call</span> if_changed,gzip<span class="p">)</span>
+
+<span class="nv">filechk_cat</span> <span class="o">=</span> <span class="nb">cat</span> <span class="nv">$&lt;</span>
+</code></pre></div></div>
+
+<h4 id="2-커널에-새로운-소스-코드-추가">2. 커널에 새로운 소스 코드 추가</h4>
+
+<p>2.1 systemcall 번호 할당</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/kernel<span class="nv">$ </span>vim include/uapi/asm-generic/unistd.h
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+
+<span class="n">__SYSCALL</span><span class="p">(</span><span class="n">__NR_futex_wait</span><span class="p">,</span> <span class="n">sys_futex_wait</span><span class="p">)</span>
+<span class="cp">#define __NR_futex_requeue 456
+</span><span class="n">__SYSCALL</span><span class="p">(</span><span class="n">__NR_futex_requeue</span><span class="p">,</span> <span class="n">sys_futex_requeue</span><span class="p">)</span>
+
+<span class="cp">#undef __NR_syscalls
+#define __NR_syscalls 457 // 기존 마지막 syscall 번호
+</span></code></pre></div></div>
+
+<p>457 번 syscall 을 추가하고 마지막 번호를 458 로 변경한다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+
+<span class="n">__SYSCALL</span><span class="p">(</span><span class="n">__NR_futex_wait</span><span class="p">,</span> <span class="n">sys_futex_wait</span><span class="p">)</span>
+<span class="cp">#define __NR_futex_requeue 456
+</span><span class="n">__SYSCALL</span><span class="p">(</span><span class="n">__NR_futex_requeue</span><span class="p">,</span> <span class="n">sys_futex_requeue</span><span class="p">)</span>
+
+<span class="cp">#define __NR_new_syscall 457
+</span><span class="n">__SYSCALL</span><span class="p">(</span><span class="n">__NR_new_syscall</span><span class="p">,</span> <span class="n">sys_new_syscall</span><span class="p">)</span> <span class="c1">// SYSCALL_DEFINE macro 를 사용함</span>
+
+<span class="cp">#undef __NR_syscalls
+#define __NR_syscalls 458
+</span></code></pre></div></div>
+
+<p>여기서 사용한 SYSCALL_DEFINE macro 의 내용은  <code class="language-plaintext highlighter-rouge">syscall_wrapper.h</code> 에 포함되어 있으며 architecture 마다 다르므로 아래 경로 파일에서 확인 가능하다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/kernel<span class="nv">$ </span>vi <span class="nb">arch</span>/arm64/include/asm/syscall_wrapper.h
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define COMPAT_SYSCALL_DEFINEx(x, name, ...)                                            \
+        asmlinkage long __arm64_compat_sys##name(const struct pt_regs *regs);           \
+        ALLOW_ERROR_INJECTION(__arm64_compat_sys##name, ERRNO);                         \
+        static long __se_compat_sys##name(__MAP(x,__SC_LONG,__VA_ARGS__));              \
+        static inline long __do_compat_sys##name(__MAP(x,__SC_DECL,__VA_ARGS__));       \
+        asmlinkage long __arm64_compat_sys##name(const struct pt_regs *regs)            \
+        {                                                                               \
+                return __se_compat_sys##name(SC_ARM64_REGS_TO_ARGS(x,__VA_ARGS__));     \
+        }                                                                               \
+        static long __se_compat_sys##name(__MAP(x,__SC_LONG,__VA_ARGS__))               \
+        {                                                                               \
+                return __do_compat_sys##name(__MAP(x,__SC_DELOUSE,__VA_ARGS__));        \
+        }                                                                               \
+        static inline long __do_compat_sys##name(__MAP(x,__SC_DECL,__VA_ARGS__))
+</span></code></pre></div></div>
+
+<h4 id="3-커널에-새로운-시스템콜-추가">3. 커널에 새로운 시스템콜 추가</h4>
+
+<p>3.1 build 진행 (이미지 생성)</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/kernel<span class="nv">$ ARCH</span><span class="o">=</span>arm64 <span class="nv">CROSS_COMPILE</span><span class="o">=</span>/home/gon/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- make <span class="nt">-j16</span>
+</code></pre></div></div>
+
+<h4 id="4-새로운-시스템콜을-사용하는-응용프로그램-만들기">4. 새로운 시스템콜을 사용하는 응용프로그램 만들기</h4>
+
+<p>4.1 응용 프로그램 추가</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>vi hello.c
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="c1"> // syscall 함수 포함</span><span class="cp">
+</span>
+<span class="cp">#define  __NR_new_syscall 462 // 커널 쪽 unistd.h 에는 추가하였으나, toolchaing 측 unistd.h 에는 추가히자 않았으며로 여기에서 명시해줌
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">syscall</span><span class="p">(</span><span class="n">__NR_new_syscall</span><span class="p">,</span> <span class="mi">15</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"ret : %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">ret</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>4.2 응용 프로그램 빌드</p>
+
+<p>여기서 빌드될 응용 프로그램은 앞에서 작업한 커널 이미지를 QEMU 를 통해 실행한 환경에서 사용할 것이므로 단순 <code class="language-plaintext highlighter-rouge">gcc</code> 아닌 해당 toolchain 을 사용하여 빌드해야 한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-gcc <span class="nt">-o</span> hello hello.c
+</code></pre></div></div>
+
+<p>제대로 빌드되었는지 생서된 실행파일의 정보를 확인한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>file hello
+hello: ELF 64-bit LSB executable, ARM aarch64, version 1 <span class="o">(</span>SYSV<span class="o">)</span>, dynamically linked, interpreter /lib/ld-linux-aarch64.so.1, <span class="k">for </span>GNU/Linux 3.7.0, with debug_info, not stripped
+</code></pre></div></div>
+
+<p>위와 같이 <code class="language-plaintext highlighter-rouge">ARM aarch64</code> 로 정상적으로 빌드되었음을 확인할 수 있다.</p>
+
+<h4 id="5-새로운-시스템콜-실행하기">5. 새로운 시스템콜 실행하기</h4>
+
+<p>5.1 빌드한 프로그램을 rootfs 이미지 내로 (<code class="language-plaintext highlighter-rouge">/usr/bin</code>) 에 복사하기</p>
+
+<p>해당 작업은 mnt 디렉토리에 mount 하여 사용할 수 있다. 여깃 <code class="language-plaintext highlighter-rouge">/mnt</code> 는 일반적으로 임시적으로 mount 할 공간이 필요할 경우 사용되는 디렉토리이다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span><span class="nb">sudo </span>mount <span class="nt">-o</span> loop buildroot/output/images/rootfs.ext4 /mnt
+</code></pre></div></div>
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">-o loop</code> : loop는 이 옵션의 인자로, 일반적인 파일 시스템이 아닌 파일(예: 이미지 파일)을 마운트할 때 사용되는 옵션. loop 장치를 사용하면, 파일을 마치 별도의 물리적 드라이브인 것처럼 마운트할 수 있다.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">buildroot/output/images/rootfs.ext4</code> : 리눅스 루트 파일 시스템 중 ext4 파일 시스템 포맷을 사용하는 이미지</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">/mnt</code> : 이는 마운트 포인트를 지정</p>
+  </li>
+</ul>
+
+<p>이러게 마우트된 파일 시스템에 앞에서 필드한 <code class="language-plaintext highlighter-rouge">hello</code> 를 복사한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span><span class="nb">sudo cp </span>hello /mnt/usr/bin
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span><span class="nb">sync</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">sync</code> 명령어는 리눅스 및 유닉스 계열 운영 시스템에서 사용되며, 메모리에 버퍼링된 파일 시스템의 쓰기 작업을 디스크에 강제로 동기화하는 역할을 한다. 시스템이 정상적으로 셧다운되기 전이나 중요한 파일 시스템 작업을 수행한 후 데이터의 손실을 방지하기 위해 사용된다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">sync</code> 명령어를 사용하면, 이러한 버퍼링된 모든 쓰기 작업이 완료되고 디스크에 안전하게 저장될 때까지 기다린다. 명령어는 별도의 출력 없이 실행되며, 명령이 완료되면 모든 변경 사항이 디스크에 반영된 상태가 된다.</p>
+
+<p>이렇게 작업이 <code class="language-plaintext highlighter-rouge">hello</code> 실행 파일을 이미지에 추가시킨 후 마우트 해제한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span><span class="nb">sudo </span>umount /mnt
+</code></pre></div></div>
+
+<p>5.2 QEMU 실행하기</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>qemu-system-aarch64 <span class="nt">-kernel</span> kernel/arch/arm64/boot/Image <span class="nt">-drive</span> <span class="nv">format</span><span class="o">=</span>raw,file<span class="o">=</span>buildroot/output/images/rootfs.ext4,if<span class="o">=</span>virtio <span class="nt">-append</span> <span class="s2">"root=/dev/vda console=ttyAMA0 nokaslr"</span> <span class="nt">-nographic</span> <span class="nt">-M</span> virt <span class="nt">-cpu</span> cortex-a72 <span class="nt">-m</span> 2G <span class="nt">-smp</span> 2
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>
+</code></pre></div></div>
+
+<p>5.3 빌드한 프로그램 실행하기</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>
+</code></pre></div></div>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="systemcall" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 08]]></summary></entry><entry><title type="html">Buildroot 설치 및 Kernel build</title><link href="http://localhost:4000/buildroot-setting01.html" rel="alternate" type="text/html" title="Buildroot 설치 및 Kernel build" /><published>2024-02-22T10:32:20+09:00</published><updated>2024-02-22T10:32:20+09:00</updated><id>http://localhost:4000/buildroot-setting01</id><content type="html" xml:base="http://localhost:4000/buildroot-setting01.html"><![CDATA[<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) - Rootfs 빌드 강의 내용 (https://comento.kr/)</p>
 
 <h3 id="1-buildroot--다운로드-및-설치">1. buildroot  다운로드 및 설치</h3>
 
@@ -9,7 +475,8 @@
 
 <h4 id="12-qemu-설정">1.2 qemu 설정</h4>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span><span class="nb">cd </span>buildroot
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span> <span class="nb">sudo </span>apt-get <span class="nb">install </span>libncurses-dev <span class="c"># 필수 라이브러리 설치</span>
+root@:~<span class="nv">$ </span><span class="nb">cd </span>buildroot
 root@:~/buildroot<span class="nv">$ </span><span class="nb">ls </span>configs  <span class="c"># config 종류 확인</span>
 root@:~/buildroot<span class="nv">$ </span>make qemu_aarch64_virt_defconfig
 root@:~/buildroot<span class="nv">$ </span>make menuconfig
@@ -95,7 +562,7 @@ root@:~/buildroot<span class="nv">$ </span><span class="nb">sudo </span>apt-get 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~/buildroot<span class="nv">$ </span><span class="nb">cd</span> ..
 root@:~<span class="nv">$ </span>git clone https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/
 </code></pre></div></div>
-<p>-&gt;  linux 디렉토리에 해다 repository 파일 다운로드 완료</p>
+<p>-&gt;  linux 디렉토리에 해당 repository 파일 다운로드 완료</p>
 
 <h4 id="22-kernel-build-에-필요한-라이브러리-설치">2.2 kernel build 에 필요한 라이브러리 설치</h4>
 
@@ -309,7 +776,13 @@ root@:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 <span c
 <div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">executable</span><span class="o">:</span> <span class="nf">distance.o main.o</span>
         <span class="err">ld</span> <span class="err">-o</span> <span class="err">executable</span> <span class="err">*.o</span> <span class="err">/usr/lib/x86_64-linux-gnu/crt1.o</span> <span class="err">-lm</span> <span class="err">-lc</span> <span class="nv">-dynamic-linker</span><span class="o">=</span>/lib64/ld-linux-x86-64.so.2
 </code></pre></div></div>
-<p>최종 실행 파일 생성만 구현하고 <code class="language-plaintext highlighter-rouge">make</code>를 실행해도 이전과 동일하게 각 소스코드에서 목적파일이 생성되고 최종적으로 실행파일이 생성된다. 또한 점진적 빌드 (Incremental build) 도 정상적으로 동작한다.</p>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="bash" /><category term="makefile" /><category term="incremental build" /><category term="suffix rule" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05]]></summary></entry><entry><title type="html">Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)</title><link href="http://localhost:4000/shell-script04-systemsetting01-copy.html" rel="alternate" type="text/html" title="Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)" /><published>2024-02-20T14:32:20+09:00</published><updated>2024-02-20T14:32:20+09:00</updated><id>http://localhost:4000/shell-script04-systemsetting01%20copy</id><content type="html" xml:base="http://localhost:4000/shell-script04-systemsetting01-copy.html"><![CDATA[<p>참고 자료 : <a href="https://product.kyobobook.co.kr/detail/S000001810353">처음 배우는 셸 스크립트 8장 시스템 구축</a></p>
+<p>최종 실행 파일 생성만 구현하고 <code class="language-plaintext highlighter-rouge">make</code>를 실행해도 이전과 동일하게 각 소스코드에서 목적파일이 생성되고 최종적으로 실행파일이 생성된다. 또한 점진적 빌드 (Incremental build) 도 정상적으로 동작한다.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nl">buildroot_download</span><span class="o">:</span> 
+        
+
+</code></pre></div></div>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="bash" /><category term="makefile" /><category term="incremental build" /><category term="suffix rule" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05]]></summary></entry><entry><title type="html">Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)</title><link href="http://localhost:4000/shell-script04-systemsetting01-copy.html" rel="alternate" type="text/html" title="Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)" /><published>2024-02-20T14:32:20+09:00</published><updated>2024-02-20T14:32:20+09:00</updated><id>http://localhost:4000/shell-script04-systemsetting01%20copy</id><content type="html" xml:base="http://localhost:4000/shell-script04-systemsetting01-copy.html"><![CDATA[<p>참고 자료 : <a href="https://product.kyobobook.co.kr/detail/S000001810353">처음 배우는 셸 스크립트 8장 시스템 구축</a></p>
 
 <p>shell script 를 사용하여 사용자 개정을 생성하는 파일을 작성 및 실행</p>
 
@@ -524,7 +997,7 @@ Bash는 필요에 따라 동적으로 메모리를 할당하고, 배열의 원�
   </li>
   <li>
     <p>추상화된 접근 방식<br />
-사용자가 배열의 원소에 접근할 때, Bash는 추상화된 인터페이스(예: 인덱스를 사용-한 접근)를 제공한다. 사용자는 인덱스를 통해 간단하게 원소에 접근할 수 있으며, Bash가 원소의 실제 메모리 위치와 경계를 관리한다.<br /></p>
+사용자가 배열의 원소에 접근할 때, Bash는 추상화된 인터페이스(예: 인덱스를 사용-한 접근)를 제공ㄹ. 사용자는 인덱스를 통해 간단하게 원소에 접근할 수 있으며, Bash가 원소의 실제 메모리 위치와 경계를 관리한다.<br /></p>
   </li>
 </ol>
 
@@ -996,271 +1469,4 @@ __struct__/1 changeset/2
 <p><br /></p>
 <center><strong>users table</strong></center>
 <center><img src="assets\img\posts\nickname_db.png" width="700" /></center>
-<p><br /></p>]]></content><author><name>Yong gon Yun</name></author><category term="phoenix" /><category term="liveview" /><category term="migration" /><category term="table_항목_추가" /><category term="schema" /><category term="changeset/2" /><category term="applciation_개발1" /><summary type="html"><![CDATA[계정 정보에서 nickname 정보가 필요함에 따라, 이를 기존에 생성한 users table 에 추가하고, 계정 생성 시, nickname 을 입력하도록 함.]]></summary></entry><entry><title type="html">(App 개발 02) root.html.heex 과 app.html.heex 에 대해</title><link href="http://localhost:4000/root-and-app.html" rel="alternate" type="text/html" title="(App 개발 02) root.html.heex 과 app.html.heex 에 대해" /><published>2024-01-25T08:32:20+09:00</published><updated>2024-01-25T08:32:20+09:00</updated><id>http://localhost:4000/root-and-app</id><content type="html" xml:base="http://localhost:4000/root-and-app.html"><![CDATA[<p>현재 Phoenix LiveView application 작업을 진행하면서, 아래와 같이 page 최상단에 메뉴바를 띄우고자 한다.</p>
-
-<center><img src="assets\img\posts\header.png" width="500" /></center>
-
-<p>다만 <code class="language-plaintext highlighter-rouge">/</code> 과 <code class="language-plaintext highlighter-rouge">/games</code> url 에 대해서는 메뉴바가 있고, <code class="language-plaintext highlighter-rouge">/games/:id</code> url 에 대해서는 메뉴바가 없도록 구성하고 싶다. 해당 작업을 진행하면 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 와 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 파일을 수정하고, 수정된 파일을 어떻게하면 적절하게 이용할 수 있을지 위에서의 고민을 토대로 각 파일에 대해 알아본다.</p>
-
-<h3 id="roothtmlheex-역할">root.html.heex 역할</h3>
-
-<p>이 파일은 전체 Phoenix 애플리케이션의 최상위 레이아웃을 정의하며, 다른 템플릿들은 이 안에 삽입되어 최종 HTML 문서를 형성한다. 일반적으로 전체 애플리케이션에 걸쳐 공통적으로 사용되는 HTML 요소를 포함한다.(<code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> 태그 내의 meta data, stylesheet link, javascript 파일 등)</p>
-
-<p><code class="language-plaintext highlighter-rouge">router.ex</code> 에서 <code class="language-plaintext highlighter-rouge">pipeline :browser</code> 를 통해 주입되며, 모든 정적 html와 LiveView는 이 파일의 구조 안에서 렌더링된다.</p>
-
-<p>만약 <code class="language-plaintext highlighter-rouge">root1.html.heex</code> 파일에서 해당 메뉴바를 구현하고, <code class="language-plaintext highlighter-rouge">root2.html.heex</code> 에는 메뉴바를 구현하지 않고, 이렇게 두 개의 파일을 만들어서 <code class="language-plaintext highlighter-rouge">pipeline :browser1</code> , <code class="language-plaintext highlighter-rouge">pipeline :browser2</code> 를 각각 정의하여 이를 각각 필요한 url 에 맞게 사용하고자 시도하였으나, 이런 경우, 동일한 매개변수를 가지는 <code class="language-plaintext highlighter-rouge">live_session</code> macro 가 두번 정의되어야 한다. 이는 다음의 에러가 발생시킨다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">**</span> <span class="o">(</span>RuntimeError<span class="o">)</span> attempting to redefine live_session :require_authenticated_user.
-live_session routes must be declared <span class="k">in </span>a single named block.
-</code></pre></div></div>
-
-<p>따라서 동일한 <code class="language-plaintext highlighter-rouge">scope</code> macro 에서 정의되어야 하는 url page 에 대해서는 동일한 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 가 적용되어야 한다.</p>
-
-<h3 id="apphtmlheex-역할">app.html.heex 역할</h3>
-
-<p><code class="language-plaintext highlighter-rouge">app.html.heex</code>는 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 내에 삽입되는, 특정 부분의 레이아웃을 정의하는 파일로, 주로 애플리케이션의 주요 컨텐츠를 포함하며, 특정 페이지나 섹션에 대한 레이아웃을 정의하는 데 사용된다. 예를 들어, header, footer, sidebar 등 페이지의 주요 부분을 구성할 수 있으며, 페이지 별로 다른 내용을 표시하는데 사용된다.</p>
-
-<p>따라서 url 별로 header 적용 여부를 다르게 하고 싶다면 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 파일을 각각 만들어서 각 page mdoule 에서 다른 template 을 가져오면 된다.</p>
-
-<h3 id="구현">구현</h3>
-
-<p>기존에 작성한 header 는 <code class="language-plaintext highlighter-rouge">root.html.heex</code> 에 있었다. 그래서 해당 code 를 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 로 이동시키고, header 가 없은 <code class="language-plaintext highlighter-rouge">app_no_header.html.heex</code> 를 추가 생성하였다.</p>
-
-<p>그리고 <code class="language-plaintext highlighter-rouge">app_no_header.html.heex</code> 을 liveview 에서 가져올 수 있도록 <code class="language-plaintext highlighter-rouge">my_pjt_web.ex</code> 에 callback 함수를 추가해주었다.</p>
-
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">MyPjt1Web</span> <span class="k">do</span>
-  <span class="o">...</span>
-  <span class="c1"># 기존 app.html.heex 를 layout 로 사용하는 함수</span>
-  <span class="k">def</span> <span class="n">live_view</span> <span class="k">do</span>
-    <span class="kn">quote</span> <span class="k">do</span>
-      <span class="kn">use</span> <span class="no">Phoenix</span><span class="o">.</span><span class="no">LiveView</span><span class="p">,</span>
-        <span class="ss">layout:</span> <span class="p">{</span><span class="no">MyPjt1Web</span><span class="o">.</span><span class="no">Layouts</span><span class="p">,</span> <span class="ss">:app</span><span class="p">}</span>
-
-      <span class="kn">unquote</span><span class="p">(</span><span class="n">html_helpers</span><span class="p">())</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-
-  <span class="c1"># 추가된 함수. app_no_header.html.heex 를 layout 로 사용</span>
-  <span class="k">def</span> <span class="n">live_view_no_header</span> <span class="k">do</span>
-    <span class="kn">quote</span> <span class="k">do</span>
-      <span class="kn">use</span> <span class="no">Phoenix</span><span class="o">.</span><span class="no">LiveView</span><span class="p">,</span>
-        <span class="ss">layout:</span> <span class="p">{</span><span class="no">MyPjt1Web</span><span class="o">.</span><span class="no">Layouts</span><span class="p">,</span> <span class="ss">:app_no_header</span><span class="p">}</span>
-
-      <span class="kn">unquote</span><span class="p">(</span><span class="n">html_helpers</span><span class="p">())</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-  <span class="o">...</span>
-<span class="k">end</span>
-</code></pre></div></div>
-
-<p>다음으로 각 url 대한 module 에서 <code class="language-plaintext highlighter-rouge">use</code> macro 를 사용하여 앞에서 정의한 callback 을 맞게 가져옴</p>
-
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">MyPjt1Web</span><span class="o">.</span><span class="no">GameLive</span><span class="o">.</span><span class="no">Index</span> <span class="k">do</span>
-  <span class="kn">use</span> <span class="no">MyPjt1Web</span><span class="p">,</span> <span class="ss">:live_view</span>
-  <span class="o">...</span>
-<span class="k">end</span>
-</code></pre></div></div>
-
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">MyPjt1Web</span><span class="o">.</span><span class="no">GameLive</span><span class="o">.</span><span class="no">Show</span> <span class="k">do</span>
-  <span class="kn">use</span> <span class="no">MyPjt1Web</span><span class="p">,</span> <span class="ss">:live_view_no_header</span>
-  <span class="o">...</span>
-<span class="k">end</span>
-</code></pre></div></div>
-
-<p>마지막으로 남은 것은 <code class="language-plaintext highlighter-rouge">get "/", PageController, :home</code> 에서 가져오는 module 만 처리해주면 된다. 그런데, 분명 <code class="language-plaintext highlighter-rouge">my_pjt1_web</code>module <code class="language-plaintext highlighter-rouge">controller</code> callback 에 <code class="language-plaintext highlighter-rouge">layout: {MyPjt1Web.Layouts, :app}</code> 이 정의되어 있음에도 불구하고, application 실행시 <code class="language-plaintext highlighter-rouge">app.html.heex</code> 의 header 가 표시되어지지 않았다. 그래서 어쩔수 없이 <code class="language-plaintext highlighter-rouge">home.html.heex</code> 에 동일한 header 를 추가하여 
-자체적으로 header 를 rendering 하도록 구현하였다.</p>]]></content><author><name>Yong gon Yun</name></author><category term="phoenix" /><category term="liveview" /><category term="root.html.heex" /><category term="app.html.heex" /><category term="applciation_개발1" /><summary type="html"><![CDATA[Phoenix LiveView 에서 기본 설정 및 공통으로 rendering 될 요소를 넣을 수 있는 root.html.heex 과 app.html.heex 에 대해 각각의 용도를 확인하고 이를 수정 사용하는 작업 방법 확인함]]></summary></entry><entry><title type="html">(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법</title><link href="http://localhost:4000/custom-js-phoenix.html" rel="alternate" type="text/html" title="(App 개발 01) Phoenix LiveView 에서 사용자 정의 JS code 사용 방법" /><published>2024-01-24T08:32:20+09:00</published><updated>2024-01-24T08:32:20+09:00</updated><id>http://localhost:4000/custom-js-phoenix</id><content type="html" xml:base="http://localhost:4000/custom-js-phoenix.html"><![CDATA[<p>Phoenix LiveView 를 사용하여 아래와 같이 버튼 클릭시 번갈아가며 버튼의 배경색과 내용이 바뀌는 toggle button 을 사용하고자 하였다. 그런데 기존의 Phoenix LiveView 제공 html tag 및 css 로 이를 생성할 수 없었으며, 따라서 자체적으로 JS 를 작성하여 기존 button 에 적용해야 하는 상황이다. 해당 과정에서 필요한 설정 및 <code>render/1</code>에 적용하기까지의 과정을 정리하고자 한다. </p>
-
-<center>
-  <img src="assets\img\posts\toggle_button.png" width="300" />
-</center>
-
-<h3>1. Node module 설치 및 관련 package 설치</h3>
-
-<p>(1) <code>package.json</code> 생성</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>assets
-npm init
-</code></pre></div></div>
-
-<p>만약 <code>package.json</code> 파일이 없다면, 새로 생성해야 한다. 이를 위해 <code>npm init</code> 명령어를 실행하여 새로운 <code>package.json</code> 파일을 생성할 수 있다. 이 과정에서 프로젝트에 대한 기본 정보를 입력해야 한다.</p>
-
-<p>(2) <code>npm init</code> 작업을 위한 기본 정보 입력
-</p>
-<p><code>npm init</code> 을 실행하면 프로젝트 이름, 버전, 설명, 진입점(주로 index.js), 테스트 명령어, 저장소, 키워드, 라이선스 등을 입력을 요청 받는다. 입력을 완료하면 <code>package.json</code> 이 생성되며, 여기서 해당 내용 등을 수정, 추가할 수 있다. 해당 script 은 다음과 같다.</p>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"***"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phoenix liveview project"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"main"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tailwind.config.js"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo </span><span class="se">\"</span><span class="s2">Error: no test specified</span><span class="se">\"</span><span class="s2"> &amp;&amp; exit 1"</span><span class="p">,</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"***"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"license"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ISC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"repository"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git+https://github.com/***/***.git"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"phoenix"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"bugs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/***/***/issues"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"homepage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/***/***#readme"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<p>(3) Webpack 설치 전 설정 추가</p>
-
-<p><code>package.json</code> <code>scripts</code> 섹션에 <code>deploy</code> 스크립트를 추가해야 웹팩을 사용하여 build 할 수 있다. script 섹션 설정을 포함한  다음 코드를 <code>package.json</code> 에 추가한다.</p>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="err">...</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"deploy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webpack --mode production"</span><span class="w"> 
-  </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<p>Webpack 을 설치할 때, 진입점이 필요하다. <code>assets/src</code> 위치에 <code>index.js</code> 파일을 생성하고 프로젝트에 필요한 기본 JavaScript 코드나 모듈 가져오기(import)를 추가한다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 예시: assets/src/index.js
-import "phoenix_html";
-// 다른 필요한 JavaScript 코드나 모듈 import
-</code></pre></div></div>
-
-<p>(4) Webpack 설정 config 파일 추가</p>
-
-<p><code>assets</code> 디렉토리 내에 <code>webpack.config.js</code>을 생성하고 진입점(entry point)으로 <code>index.js</code> 을 설정해준다. 그 밖에 output, loader 등을 포함하여 다음과 같이 생성한다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const path = require('path');
-
-module.exports = {
-  // 진입점 설정
-  entry: './js/app.js', // 이 경로는 프로젝트에 맞게 조정해야 합니다
-
-  // 출력 설정
-  output: {
-    path: path.resolve(__dirname, '../priv/static/assets'), // 출력 디렉토리
-    filename: 'app.js', // 출력 파일명
-  },
-
-  // 모듈 설정
-  module: {
-    rules: [
-      {
-        test: /\.js$/, // .js 파일에 대한 처리
-        exclude: /node_modules/, // node_modules 디렉토리 제외
-        use: {
-          loader: 'babel-loader', // Babel 로더 사용
-          options: {
-            presets: ['@babel/preset-env'], // Babel 프리셋 설정
-          },
-        },
-      },
-      // 추가적인 로더 설정(예: CSS, 이미지 파일 등)
-    ],
-  },
-};
-</code></pre></div></div>
-
-<h3>2. Node 모듈 설치 및 Node.js 의존성 설정</h3>
-
-<p>(1) Node 모듈 설치</p>
-<p><code>assets</code> 디렉토리로 이동하여 <code>npm install</code>을 실행한다. 이 명령어는 <code>package.json</code>에 정의된 모든 Node 의존성을 설치한다. Phoenix 프로젝트의 경우,<code>phoenix</code>, <code>phoenix_html</code>, <code>phoenix_live_view</code> 패키지들은 자동으로 <code>package.json</code>에 추가되어 있어야 한다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>assets
-npm <span class="nb">install</span>
-</code></pre></div></div>
-
-<p>(2) Node.js 필수 Package 설치</p>
-
-<p>- Webpack<br /> assets (HTML, CSS, JavaScript 파일, 이미지, 폰트 등 웹 애플리케이션을 구성하는 모든 정적 파일들) 을 bundling (여러 개의 파일을 하나 또는 소수의 파일로 결합하는 과정. 이를 통해 네트워크 요청 최소화, application 최적화, 의존성 관리의 이점이 있음) 하기 위해 필요</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install </span>webpack webpack-cli <span class="nt">--save-dev</span>
-</code></pre></div></div>
-
-<p>- Babel<br /> JavaScript 코드를 변환하기 위한 컴파일러. ES6 이상의 코드를 이전 버전의 JavaScript로 변환하는데 사용.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> @babel/core @babel/preset-env babel-loader <span class="nt">--save-dev</span>
-</code></pre></div></div>
-
-<p>- CSS 관련 package<br />CSS를 처리하기 위해 필요한 패키지들</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install </span>css-loader style-loader mini-css-extract-plugin <span class="nt">--save-dev</span>
-</code></pre></div></div>
-
-<p>- Tailwind CSS</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install </span>tailwindcss postcss autoprefixer <span class="nt">--save-dev</span>
-</code></pre></div></div>
-
-<p>(3) Node.js Package 중 Phoenix LiveView 관련 설치</p>
-
-<p><code>phoenix</code>, <code>phoenix_live_view</code>, <code>phoenix_html</code> package 를 설치하기 전, <code>assets/js/app.js</code> 다음 코드가 없다면 추가해준다.(phoenix_live_view 0.20.1 기준 기본적으로 추가되어 있음.)</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import "phoenix_html";
-import { Socket } from "phoenix";
-import { LiveSocket } from "phoenix_live_view";
-</code></pre></div></div>
-
-<p><code>assets</code> 디렉토리에서 해당 package 를 추가해준다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install --save phoenix phoenix_html phoenix_live_view
-</code></pre></div></div>
-<p>제대로 설치되었다면, 앞에서 설치한 Node.js Package 디렉토리가 <code>assets/node_modules</code>에 생성된다.</p>
-
-<h3>3. JavaScript 파일 작성</h3>
-<p>앞의 과정에서 사용자 정의 JavaScript 를 사용할 수 있도록 관련 설정을 완료하였으므로, 이제 프로젝트의 <code>assets/js</code> 디렉토리 안에 사용자 정의 JavaScript 파일을 생성 (ex. <code>assets/js/custom.js</code>) 한다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export function toggleButton(btn) {
-  btn.classList.toggle('bg-blue-500');
-  btn.classList.toggle('bg-gray-600');
-
-  if (btn.innerText === 'READY !!') {
-    btn.innerText = 'WAIT  ......  ';
-  } else {
-    btn.innerText = 'READY !!';
-  }
-}
-</code></pre></div></div>
-
-<h3>4. Phoenix 프로젝트에 JavaScript 통합</h3>
-<p>(1) <code>app.js</code>에서 사용자 정의 <code>custom.js</code> 가져오기.</p>
-
-<p><code>assets/js/app.js</code> 파일을 열고, 만들어진 <code>custom.js</code> 을 가져올 수 있도록 import 해준다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// assets/js/app.js
-import { toggleButton } from "./custom";
-window.toggleButton = toggleButton;
-</code></pre></div></div>
-
-<p>이렇게 하면 <code>customFunction</code>을 전역 변수로 설정하여, HTML에서 접근할 수 있게 된다.</p>
-
-<p>(2) Webpack build</p>
-<p>지금까지의 변경사항을 적용하기 위해 <code>assets</code> 디렉토리에서 <code>npm run deploy</code>를 실행하여 JavaScript 파일을 빌드한다.</p>
-
-<h3>5. LiveView에서 JavaScript 사용</h3>
-<p>(1) LiveView 템플릿에 스크립트 적용</p>
-<p>LiveView의 <code>render/1</code> 함수에서 해당 JavaScript 함수를 사용하는 HTML을 반환</p>
-
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">render</span><span class="p">(</span><span class="n">assigns</span><span class="p">)</span> <span class="k">do</span>
-  <span class="sx">~H""</span><span class="s2">"
-  ... ...
-    &lt;button 
-      type="</span><span class="n">button</span><span class="s2">" 
-      onclick="</span><span class="n">window</span><span class="o">.</span><span class="n">toggleButton</span><span class="p">(</span><span class="n">this</span><span class="p">)</span><span class="s2">"
-      class="</span><span class="n">text</span><span class="o">-</span><span class="n">white</span> <span class="n">bg</span><span class="o">-</span><span class="n">blue</span><span class="o">-</span><span class="mi">500</span> <span class="n">font</span><span class="o">-</span><span class="n">medium</span> <span class="n">rounded</span><span class="o">-</span><span class="n">lg</span> <span class="n">text</span><span class="o">-</span><span class="n">sm</span> <span class="n">px</span><span class="o">-</span><span class="mi">5</span> <span class="n">py</span><span class="o">-</span><span class="mf">2.5</span> <span class="n">me</span><span class="o">-</span><span class="mi">2</span> <span class="n">mb</span><span class="o">-</span><span class="mi">2</span><span class="s2">"&gt;
-        READY !!
-    &lt;/button&gt;    
-  ... ...  
-  """</span>
-<span class="k">end</span>
-</code></pre></div></div>
-
-<h3>결론</h3>
-<center>
-  <img src="assets\img\posts\toggle_button.png" width="300" />
-</center>
-
-<p>위 작업이 정상적으로 완료되었다면 의도한대로 사용자 정의 toggle button 이 동작하는 것을 확인 할 수 있다. </p>]]></content><author><name>Yong gon Yun</name></author><category term="phoenix" /><category term="liveview" /><category term="custom javascript" /><category term="node.js" /><category term="applciation_개발1" /><summary type="html"><![CDATA[Phoenix LiveView 에서 사용자 정의 JS code 구현 및 적용을 위한 Node.js 설정 및 render/1 에 적용하는 과정]]></summary></entry></feed>
+<p><br /></p>]]></content><author><name>Yong gon Yun</name></author><category term="phoenix" /><category term="liveview" /><category term="migration" /><category term="table_항목_추가" /><category term="schema" /><category term="changeset/2" /><category term="applciation_개발1" /><summary type="html"><![CDATA[계정 정보에서 nickname 정보가 필요함에 따라, 이를 기존에 생성한 users table 에 추가하고, 계정 생성 시, nickname 을 입력하도록 함.]]></summary></entry></feed>

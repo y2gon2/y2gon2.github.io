@@ -24,6 +24,7 @@ root@:~$ git clone git://git.buildroot.net/buildroot
 #### 1.2 qemu 설정
 
 ```bash
+root@:~$  sudo apt-get install libncurses-dev # 필수 라이브러리 설치
 root@:~$ cd buildroot
 root@:~/buildroot$ ls configs  # config 종류 확인
 root@:~/buildroot$ make qemu_aarch64_virt_defconfig
@@ -106,7 +107,7 @@ root@:~/buildroot$ sudo apt-get install unzip
 root@:~/buildroot$ cd ..
 root@:~$ git clone https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/
 ```
-->  linux 디렉토리에 해다 repository 파일 다운로드 완료
+->  linux 디렉토리에 해당 repository 파일 다운로드 완료
 
 #### 2.2 kernel build 에 필요한 라이브러리 설치
 
@@ -151,7 +152,13 @@ root@:~/linux$ ARCH=arm64 make qemu_defconfig # 반환값으로 .config 생성
 root@:~/linux$ cd ..
 root@:~$ cp /mnt/c/Users/<사용자 이름>/Downloads/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu.tar.xz .
 ```
------------------------
+
+또는
+
+```bash
+root@:~$ wget https://developer.arm.com/-/media/Files/downloads/gnu-a/10.3-2021.07/binrel/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu.tar.xz
+
+```
 
 #### 2.5 toolchain 압축 풀기
 
@@ -181,12 +188,12 @@ root@:~$ sudo apt install qemu-system-arm
 
 ```bash
 root@:~$ qemu-system-aarch64 \
-> -kernel linux/arch/arm64/boot/Image \
-> -drive format=raw,file=buildroot/output/images/rootfs.ext4,if=virtio \
-> -append "root=/dev/vda console=ttyAMA0 nokaslr" \
-> -nographic -M virt -cpu cortex-a72 \
-> -m 2G \
-> -smp 2
+ -kernel linux/arch/arm64/boot/Image \
+ -drive format=raw,file=buildroot/output/images/rootfs.ext4,if=virtio \
+ -append "root=/dev/vda console=ttyAMA0 nokaslr" \
+ -nographic -M virt -cpu cortex-a72 \
+ -m 2G \
+ -smp 2
 ```
 
 <center><img src="assets\img\posts\2024-02-22-buildroot-setting014.png" width="600"></center>

@@ -169,6 +169,16 @@
     
       
   {
+  "tag" : "gdb-multiarch",
+  "posts" : [
+      
+      "./gdp01.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "generator",
   "posts" : [
       
@@ -253,6 +263,10 @@
   {
   "tag" : "linux",
   "posts" : [
+      
+      "./gdp01.html",
+      
+      "./systemcall01.html",
       
       "./buildroot-setting01.html",
       
@@ -509,6 +523,18 @@
   "posts" : [
       
       "./makfile01.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "systemcall",
+  "posts" : [
+      
+      "./gdp01.html",
+      
+      "./systemcall01.html"
       
     ]
   } ,

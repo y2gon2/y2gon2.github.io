@@ -733,7 +733,7 @@
   </span>
 
 					<div class="post-excerpt">
-						<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) - Rootfs 빌드 강의 내용 (https://comento.kr/)</p> <h3 id="1-buildroot--다운로드-및-설치">1. buildroot 다운로드 및 설치</h3> <h3 id="11-buildroot--다운로드">1.1 buildroot 다운로드</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span>git clone git://git.buildroot.net/buildroot </code></pre></div></div> <h4 id="12-qemu-설정">1.2 qemu 설정</h4> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span><span class="nb">cd </span>buildroot root@:~/buildroot<span class="nv">$ </span><span class="nb">ls </span>configs <span class="c"># config 종류 확인</span> root@:~/buildroot<span class="nv">$ </span>make qemu_aarch64_virt_defconfig root@:~/buildroot<span class="nv">$ </span>make menuconfig </code></pre></div></div> <center><img src="assets\img\posts\2024-02-22-buildroot-setting01.png" width="600" /></center> <p>다음과 같이 설정을 진행</p> <ul> <li>system configuration -&gt; init system -&gt; systemd 선택</li> <li>kernel -&gt; linux kernel 해제</li> <li>target packages -&gt; text editors -&gt; vim -&gt; target packages -&gt; libaries...<a class="read-more" href="./buildroot-setting01.html"> read more</a>
+						<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) - Rootfs 빌드 강의 내용 (https://comento.kr/)</p> <h3 id="1-buildroot--다운로드-및-설치">1. buildroot 다운로드 및 설치</h3> <h3 id="11-buildroot--다운로드">1.1 buildroot 다운로드</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span>git clone git://git.buildroot.net/buildroot </code></pre></div></div> <h4 id="12-qemu-설정">1.2 qemu 설정</h4> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span> <span class="nb">sudo </span>apt-get <span class="nb">install </span>libncurses-dev <span class="c"># 필수 라이브러리 설치</span> root@:~<span class="nv">$ </span><span class="nb">cd </span>buildroot root@:~/buildroot<span class="nv">$ </span><span class="nb">ls </span>configs <span class="c"># config 종류 확인</span> root@:~/buildroot<span class="nv">$ </span>make qemu_aarch64_virt_defconfig root@:~/buildroot<span class="nv">$ </span>make menuconfig </code></pre></div></div> <center><img src="assets\img\posts\2024-02-22-buildroot-setting01.png" width="600" /></center> <p>다음과 같이 설정을 진행</p> <ul> <li>system configuration -&gt; init system -&gt; systemd 선택</li> <li>kernel -&gt; linux...<a class="read-more" href="./buildroot-setting01.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1202,6 +1202,55 @@
 	</div>
 
 	
+	<div id="gdb-multiarch" class="hidden tag-master">
+		<h1>gdb-multiarch</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./gdp01.html">GDB 를 사용 기초 및 systemcall GDB 적용</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-02-25T10:32:20+09:00">February 25, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        3 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<style> summary::-webkit-details-marker { display: none; } summary { list-style: none; } </style> <details><summary></summary> 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지...<a class="read-more" href="./gdp01.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
 	<div id="generator" class="hidden tag-master">
 		<h1>generator</h1>
 		<div class="archive">
@@ -1575,7 +1624,7 @@
   </span>
 
 					<div class="post-excerpt">
-						<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) - Rootfs 빌드 강의 내용 (https://comento.kr/)</p> <h3 id="1-buildroot--다운로드-및-설치">1. buildroot 다운로드 및 설치</h3> <h3 id="11-buildroot--다운로드">1.1 buildroot 다운로드</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span>git clone git://git.buildroot.net/buildroot </code></pre></div></div> <h4 id="12-qemu-설정">1.2 qemu 설정</h4> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span><span class="nb">cd </span>buildroot root@:~/buildroot<span class="nv">$ </span><span class="nb">ls </span>configs <span class="c"># config 종류 확인</span> root@:~/buildroot<span class="nv">$ </span>make qemu_aarch64_virt_defconfig root@:~/buildroot<span class="nv">$ </span>make menuconfig </code></pre></div></div> <center><img src="assets\img\posts\2024-02-22-buildroot-setting01.png" width="600" /></center> <p>다음과 같이 설정을 진행</p> <ul> <li>system configuration -&gt; init system -&gt; systemd 선택</li> <li>kernel -&gt; linux kernel 해제</li> <li>target packages -&gt; text editors -&gt; vim -&gt; target packages -&gt; libaries...<a class="read-more" href="./buildroot-setting01.html"> read more</a>
+						<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) - Rootfs 빌드 강의 내용 (https://comento.kr/)</p> <h3 id="1-buildroot--다운로드-및-설치">1. buildroot 다운로드 및 설치</h3> <h3 id="11-buildroot--다운로드">1.1 buildroot 다운로드</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span>git clone git://git.buildroot.net/buildroot </code></pre></div></div> <h4 id="12-qemu-설정">1.2 qemu 설정</h4> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span> <span class="nb">sudo </span>apt-get <span class="nb">install </span>libncurses-dev <span class="c"># 필수 라이브러리 설치</span> root@:~<span class="nv">$ </span><span class="nb">cd </span>buildroot root@:~/buildroot<span class="nv">$ </span><span class="nb">ls </span>configs <span class="c"># config 종류 확인</span> root@:~/buildroot<span class="nv">$ </span>make qemu_aarch64_virt_defconfig root@:~/buildroot<span class="nv">$ </span>make menuconfig </code></pre></div></div> <center><img src="assets\img\posts\2024-02-22-buildroot-setting01.png" width="600" /></center> <p>다음과 같이 설정을 진행</p> <ul> <li>system configuration -&gt; init system -&gt; systemd 선택</li> <li>kernel -&gt; linux...<a class="read-more" href="./buildroot-setting01.html"> read more</a>
 					</div>
 				</div>
 			
@@ -1641,6 +1690,84 @@
 			
 
 				<div class="post">
+					<a class="post-list-title" href="./gdp01.html">GDB 를 사용 기초 및 systemcall GDB 적용</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-02-25T10:32:20+09:00">February 25, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        3 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<style> summary::-webkit-details-marker { display: none; } summary { list-style: none; } </style> <details><summary></summary> 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지...<a class="read-more" href="./gdp01.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./systemcall01.html">systemcall 기초 1</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-02-24T10:32:20+09:00">February 24, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        4 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<style> summary::-webkit-details-marker { display: none; } summary { list-style: none; } </style> <details><summary></summary> 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지...<a class="read-more" href="./systemcall01.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
 					<a class="post-list-title" href="./buildroot-setting01.html">Buildroot 설치 및 Kernel build</a>
 					
 
@@ -1673,85 +1800,7 @@
   </span>
 
 					<div class="post-excerpt">
-						<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) - Rootfs 빌드 강의 내용 (https://comento.kr/)</p> <h3 id="1-buildroot--다운로드-및-설치">1. buildroot 다운로드 및 설치</h3> <h3 id="11-buildroot--다운로드">1.1 buildroot 다운로드</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span>git clone git://git.buildroot.net/buildroot </code></pre></div></div> <h4 id="12-qemu-설정">1.2 qemu 설정</h4> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span><span class="nb">cd </span>buildroot root@:~/buildroot<span class="nv">$ </span><span class="nb">ls </span>configs <span class="c"># config 종류 확인</span> root@:~/buildroot<span class="nv">$ </span>make qemu_aarch64_virt_defconfig root@:~/buildroot<span class="nv">$ </span>make menuconfig </code></pre></div></div> <center><img src="assets\img\posts\2024-02-22-buildroot-setting01.png" width="600" /></center> <p>다음과 같이 설정을 진행</p> <ul> <li>system configuration -&gt; init system -&gt; systemd 선택</li> <li>kernel -&gt; linux kernel 해제</li> <li>target packages -&gt; text editors -&gt; vim -&gt; target packages -&gt; libaries...<a class="read-more" href="./buildroot-setting01.html"> read more</a>
-					</div>
-				</div>
-			
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./makfile01.html">Makefile 기본 문법 01</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2024-02-21T14:32:20+09:00">February 21, 2024</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        2 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<h3 id="makefile-변수-macro-사용">Makefile 변수 (macro) 사용</h3> <p>의존성 부분은 일반적으로 매크로로 선언하여 사용함.</p> <p>매크로를 사용하여 값을 할당할 때, 여러가지 할당 방법이 존재</p> <h4 id="-recursive-assignment"><code class="language-plaintext highlighter-rouge">=</code> (Recursive Assignment)</h4> <p><code class="language-plaintext highlighter-rouge">=</code> 연산자는 재귀적 할당을 수행한다. 이는 매크로가 사용될 때마다 평가되어 확장된다. 매크로의 값이 다른 매크로를 참조하는 경우, 참조된 변수의 최종값에 따라 달라진다.</p> <div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">FOO</span> <span class="o">=</span> <span class="p">${</span>BAR<span class="p">}</span> <span class="nv">BAR</span> <span class="o">=</span> bar_value <span class="nl">all</span><span class="o">:</span> <span class="err">@echo</span> <span class="err">$(FOO)</span> </code></pre></div></div> <p>해당 Makefile 을 실행하면 <code class="language-plaintext highlighter-rouge">FOO</code> 매크로는 <code class="language-plaintext highlighter-rouge">BAR</code>의 값을 참조한다. 따라서 실행될 때, <code class="language-plaintext highlighter-rouge">BAR</code> 의 값은 <code class="language-plaintext highlighter-rouge">bar_value</code> 이므로 <code...<a class="read-more" href="./makfile01.html"> read more</a>
-					</div>
-				</div>
-			
-			
-
-				<div class="post">
-					<a class="post-list-title" href="./shell-script04-systemsetting01-copy.html">Shell Script 사용한 시스템 구축 01 (사용자 계정 생성)</a>
-					
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2024-02-20T14:32:20+09:00">February 20, 2024</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        3 minute read
-      
-    </span>
-  
-  
-  </span>
-
-					<div class="post-excerpt">
-						<p>참고 자료 : <a href="https://product.kyobobook.co.kr/detail/S000001810353">처음 배우는 셸 스크립트 8장 시스템 구축</a></p> <p>shell script 를 사용하여 사용자 개정을 생성하는 파일을 작성 및 실행</p> <p>프로세스</p> <ol> <li>사용자 계정과 패스워드 입력</li> <li>입력 정보가 없으면 에러 메세지를 보여주고, script 종료</li> <li>여러명의 사용자 계정을 생성할 경우 반복문을 사용하여 순회</li> <li>각 계정이 이미 사용자 계정에 포함되어 있는지 확인</li> <li>포함되어있지 않다면, 계정을 생성하고 패스워드 설정</li> <li>이미 존재하는 계정이라면, 이를 메세지로 보여줌.</li> </ol> <h3 id="1-다수의-사용자-계정-생성">1. 다수의 사용자 계정 생성</h3> <p>(1) <code class="language-plaintext highlighter-rouge">if [[ -n $1 ]] &amp;&amp; [[ -n $2 ]]</code> <br />해당 script 실행시 매개 변수로 사용자 계정(<code class="language-plaintext highlighter-rouge">$1</code>)과 패스워드(<code class="language-plaintext highlighter-rouge">$2</code>)가 모두 입력 되었는지...<a class="read-more" href="./shell-script04-systemsetting01-copy.html"> read more</a>
+						<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) - Rootfs 빌드 강의 내용 (https://comento.kr/)</p> <h3 id="1-buildroot--다운로드-및-설치">1. buildroot 다운로드 및 설치</h3> <h3 id="11-buildroot--다운로드">1.1 buildroot 다운로드</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span>git clone git://git.buildroot.net/buildroot </code></pre></div></div> <h4 id="12-qemu-설정">1.2 qemu 설정</h4> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span> <span class="nb">sudo </span>apt-get <span class="nb">install </span>libncurses-dev <span class="c"># 필수 라이브러리 설치</span> root@:~<span class="nv">$ </span><span class="nb">cd </span>buildroot root@:~/buildroot<span class="nv">$ </span><span class="nb">ls </span>configs <span class="c"># config 종류 확인</span> root@:~/buildroot<span class="nv">$ </span>make qemu_aarch64_virt_defconfig root@:~/buildroot<span class="nv">$ </span>make menuconfig </code></pre></div></div> <center><img src="assets\img\posts\2024-02-22-buildroot-setting01.png" width="600" /></center> <p>다음과 같이 설정을 진행</p> <ul> <li>system configuration -&gt; init system -&gt; systemd 선택</li> <li>kernel -&gt; linux...<a class="read-more" href="./buildroot-setting01.html"> read more</a>
 					</div>
 				</div>
 			
@@ -3052,6 +3101,94 @@
 	</div>
 
 	
+	<div id="systemcall" class="hidden tag-master">
+		<h1>systemcall</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./gdp01.html">GDB 를 사용 기초 및 systemcall GDB 적용</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-02-25T10:32:20+09:00">February 25, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        3 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<style> summary::-webkit-details-marker { display: none; } summary { list-style: none; } </style> <details><summary></summary> 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지...<a class="read-more" href="./gdp01.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./systemcall01.html">systemcall 기초 1</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2024-02-24T10:32:20+09:00">February 24, 2024</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        4 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<style> summary::-webkit-details-marker { display: none; } summary { list-style: none; } </style> <details><summary></summary> 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지...<a class="read-more" href="./systemcall01.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+	
 	<div id="table_항목_추가" class="hidden tag-master">
 		<h1>table_항목_추가</h1>
 		<div class="archive">
@@ -3261,6 +3398,9 @@
                 <li><a href="./tag.html?tag=elixir+stream" class="tag">elixir stream <span>(1)</span></a></li>
             
                 
+                <li><a href="./tag.html?tag=gdb-multiarch" class="tag">gdb-multiarch <span>(1)</span></a></li>
+            
+                
                 <li><a href="./tag.html?tag=generator" class="tag">generator <span>(1)</span></a></li>
             
                 
@@ -3285,7 +3425,7 @@
                 <li><a href="./tag.html?tag=lazy+collection" class="tag">lazy collection <span>(1)</span></a></li>
             
                 
-                <li><a href="./tag.html?tag=linux" class="tag">linux <span>(6)</span></a></li>
+                <li><a href="./tag.html?tag=linux" class="tag">linux <span>(8)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=liveview" class="tag">liveview <span>(9)</span></a></li>
@@ -3346,6 +3486,9 @@
             
                 
                 <li><a href="./tag.html?tag=suffix+rule" class="tag">suffix rule <span>(1)</span></a></li>
+            
+                
+                <li><a href="./tag.html?tag=systemcall" class="tag">systemcall <span>(2)</span></a></li>
             
                 
                 <li><a href="./tag.html?tag=table_%ED%95%AD%EB%AA%A9_%EC%B6%94%EA%B0%80" class="tag">table_항목_추가 <span>(1)</span></a></li>
