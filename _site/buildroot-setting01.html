@@ -22,7 +22,7 @@
   "headline": "Buildroot 설치 및 Kernel build",
   "abstract": "개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 06",
     "keywords": "linux, buildroot, kernel build",
-    "wordcount": "908",
+    "wordcount": "906",
     "image": ["http://localhost:4000/assets/imgposts/general/post_general24.jpg"],
   "datePublished": "2024-02-22 10:32:20 +0900",
   "dateModified": "2024-02-22 10:32:20 +0900",
@@ -62,7 +62,7 @@
 <meta name="twitter:description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 06">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="908"/>
+<meta data-rh="true" name="twitter:data1" content="906"/>
 <meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general24.jpg">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
@@ -513,7 +513,12 @@ root@:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 make qe
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~/linux<span class="nv">$ </span><span class="nb">cd</span> ..
 root@:~<span class="nv">$ </span><span class="nb">cp</span> /mnt/c/Users/&lt;사용자 이름&gt;/Downloads/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu.tar.xz <span class="nb">.</span>
 </code></pre></div></div>
-<hr />
+
+<p>또는</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span>wget https://developer.arm.com/-/media/Files/downloads/gnu-a/10.3-2021.07/binrel/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu.tar.xz
+
+</code></pre></div></div>
 
 <h4 id="25-toolchain-압축-풀기">2.5 toolchain 압축 풀기</h4>
 
@@ -539,12 +544,12 @@ root@:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 <span c
 <h4 id="32-이미지-실행">3.2 이미지 실행</h4>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span>qemu-system-aarch64 <span class="se">\</span>
-<span class="o">&gt;</span> <span class="nt">-kernel</span> linux/arch/arm64/boot/Image <span class="se">\</span>
-<span class="o">&gt;</span> <span class="nt">-drive</span> <span class="nv">format</span><span class="o">=</span>raw,file<span class="o">=</span>buildroot/output/images/rootfs.ext4,if<span class="o">=</span>virtio <span class="se">\</span>
-<span class="o">&gt;</span> <span class="nt">-append</span> <span class="s2">"root=/dev/vda console=ttyAMA0 nokaslr"</span> <span class="se">\</span>
-<span class="o">&gt;</span> <span class="nt">-nographic</span> <span class="nt">-M</span> virt <span class="nt">-cpu</span> cortex-a72 <span class="se">\</span>
-<span class="o">&gt;</span> <span class="nt">-m</span> 2G <span class="se">\</span>
-<span class="o">&gt;</span> <span class="nt">-smp</span> 2
+ <span class="nt">-kernel</span> linux/arch/arm64/boot/Image <span class="se">\</span>
+ <span class="nt">-drive</span> <span class="nv">format</span><span class="o">=</span>raw,file<span class="o">=</span>buildroot/output/images/rootfs.ext4,if<span class="o">=</span>virtio <span class="se">\</span>
+ <span class="nt">-append</span> <span class="s2">"root=/dev/vda console=ttyAMA0 nokaslr"</span> <span class="se">\</span>
+ <span class="nt">-nographic</span> <span class="nt">-M</span> virt <span class="nt">-cpu</span> cortex-a72 <span class="se">\</span>
+ <span class="nt">-m</span> 2G <span class="se">\</span>
+ <span class="nt">-smp</span> 2
 </code></pre></div></div>
 
 <center><img src="assets\img\posts\2024-02-22-buildroot-setting014.png" width="600" /></center>
@@ -641,6 +646,37 @@ root@:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 <span c
           
           
 
+          <a href="./kernelmodule01.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general02.jpg') center no-repeat; background-size: cover;">
+            <div class="recent-item-title">
+              <span>Kernel Module 만들기</span>
+              
+
+  <span class = "recent-item-meta">
+  
+  
+  
+  
+    
+    
+    <p class="page_meta-readtime">
+      
+        4 minute read
+      
+    </p>
+  
+  
+  </span>
+
+            </div>
+          </a>
+        </div>
+      
+    
+      
+        <div class="recent-item">
+          
+          
+
           <a href="./gdp01.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general01.jpg') center no-repeat; background-size: cover;">
             <div class="recent-item-title">
               <span>GDB 를 사용 기초 및 systemcall GDB 적용</span>
@@ -655,7 +691,7 @@ root@:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 <span c
     
     <p class="page_meta-readtime">
       
-        3 minute read
+        4 minute read
       
     </p>
   
@@ -718,37 +754,6 @@ root@:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 <span c
     <p class="page_meta-readtime">
       
         4 minute read
-      
-    </p>
-  
-  
-  </span>
-
-            </div>
-          </a>
-        </div>
-      
-    
-      
-        <div class="recent-item">
-          
-          
-
-          <a href="./makfile01.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general23.jpg') center no-repeat; background-size: cover;">
-            <div class="recent-item-title">
-              <span>Makefile 기본 문법 01</span>
-              
-
-  <span class = "recent-item-meta">
-  
-  
-  
-  
-    
-    
-    <p class="page_meta-readtime">
-      
-        2 minute read
       
     </p>
   

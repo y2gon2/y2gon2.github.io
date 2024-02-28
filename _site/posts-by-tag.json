@@ -251,6 +251,16 @@
     
       
   {
+  "tag" : "kernel module",
+  "posts" : [
+      
+      "./kernelmodule01.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "lazy collection",
   "posts" : [
       
@@ -263,6 +273,8 @@
   {
   "tag" : "linux",
   "posts" : [
+      
+      "./kernelmodule01.html",
       
       "./gdp01.html",
       

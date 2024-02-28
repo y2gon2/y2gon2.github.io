@@ -22,7 +22,7 @@
   "headline": "GDB 를 사용 기초 및 systemcall GDB 적용",
   "abstract": "개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 09",
     "keywords": "linux, systemcall, gdb-multiarch",
-    "wordcount": "673",
+    "wordcount": "802",
     "image": ["http://localhost:4000/assets/imgposts/general/post_general01.jpg"],
   "datePublished": "2024-02-25 10:32:20 +0900",
   "dateModified": "2024-02-25 10:32:20 +0900",
@@ -62,7 +62,7 @@
 <meta name="twitter:description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 09">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="673"/>
+<meta data-rh="true" name="twitter:data1" content="802"/>
 <meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general01.jpg">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
@@ -174,7 +174,7 @@
     
     <span class="page_meta-readtime">
       
-        3 minute read
+        4 minute read
       
     </span>
   
@@ -311,7 +311,7 @@
     
     <span class="page_meta-readtime">
       
-        3 minute read
+        4 minute read
       
     </span>
   
@@ -474,14 +474,14 @@ Temporary breakpoint 1, main (argc=2, argv=0x7fffffffe108) at fact.c:14
 
 <p>(4) 호스트 시스템의 libthread_db 라이브러리를 사용하고 있음을 표시. 이 라이브러리는 스레드와 관련된 정보를 제공하여 디버거가 스레드를 효율적으로 관리할 수 있게 돕는다.</p>
 
-<h3 id="systemcall-에-대한-gdb-적용">systemcall 에 대한 GDB 적용</h3>
+<h3 id="qeme-gdb-적용">QEME GDB 적용</h3>
 
 <ol>
-  <li>Debug mode 로 빌드된 Linux kernel 생성을 위한 설정 변경</li>
+  <li>Debug mode 로 빌드되도록 Linux kernel 설정 변경</li>
 </ol>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span><span class="nb">cd </span>kernel
-user@DESKTOP:~/kernel<span class="nv">$ ARCH</span><span class="o">=</span>arm64 make menuconfig 
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span><span class="nb">cd </span>linux
+user@DESKTOP:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 make menuconfig 
 </code></pre></div></div>
 
 <ul>
@@ -493,17 +493,15 @@ user@DESKTOP:~/kernel<span class="nv">$ ARCH</span><span class="o">=</span>arm64
   <li>re-build</li>
 </ol>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/kernel<span class="nv">$ </span> make <span class="nt">-j</span>&lt;cpu 수&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ </span> make <span class="nt">-j</span>&lt;cpu 수&gt;
 </code></pre></div></div>
 
 <ol>
   <li>QEMU 실행</li>
 </ol>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/kernel<span class="nv">$ </span><span class="nb">cd</span> ..
-user@DESKTOP:~<span class="nv">$ </span>qemu-system-aarch64 <span class="nt">-kernel</span> kernel/arch/arm64/boot/Image <span class="nt">-driv</span>
-e <span class="nv">format</span><span class="o">=</span>raw,file<span class="o">=</span>buildroot/output/images/rootfs.ext4,if<span class="o">=</span>virtio <span class="nt">-append</span> <span class="s2">"root=/dev/vda console
-=ttyAMA0 nokaslr"</span> <span class="nt">-nographic</span> <span class="nt">-M</span> virt <span class="nt">-cpu</span> cortex-a72 <span class="nt">-m</span> 2G <span class="nt">-smp</span> 2 <span class="nt">-s</span> <span class="nt">-S</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">cd</span> ..
+user@DESKTOP:~<span class="nv">$ </span>qemu-system-aarch64 <span class="nt">-kernel</span> linux/arch/arm64/boot/Image <span class="nt">-drive</span> <span class="nv">format</span><span class="o">=</span>raw,file<span class="o">=</span>buildroot/output/images/rootfs.ext4,if<span class="o">=</span>virtio <span class="nt">-append</span> <span class="s2">"root=/dev/vda console=ttyAMA0 nokaslr"</span> <span class="nt">-nographic</span> <span class="nt">-M</span> virt <span class="nt">-cpu</span> cortex-a72 <span class="nt">-m</span> 2G <span class="nt">-smp</span> 2 <span class="nt">-s</span> <span class="nt">-S</span>
 </code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">-s</code> : gdb 가 붙을 수 있도록 1234 포트를 열어둠
@@ -511,25 +509,35 @@ e <span class="nv">format</span><span class="o">=</span>raw,file<span class="o">
 
 <p>(실행시 <code class="language-plaintext highlighter-rouge">-S</code> 옵션으로 인해 멈춰있게 됨. 그래서 다른 cli 상에서 <code class="language-plaintext highlighter-rouge">gdb-multiarch</code>를 사용하여 <code class="language-plaintext highlighter-rouge">linux/vmlinux</code> 경로에 위치한 리눅스 커널 이미지를 디버깅 모드로 염)</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>gdb-multiarch kernel/vmlinux
-</code></pre></div></div>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>For help, type "help".
-Type "apropos word" to search for commands related to "word"...
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>gdb-multiarch linux/vmlinux
+For <span class="nb">help</span>, <span class="nb">type</span> <span class="s2">"help"</span><span class="nb">.</span>
+Type <span class="s2">"apropos word"</span> to search <span class="k">for </span>commands related to <span class="s2">"word"</span>...
 Reading symbols from kernel/vmlinux...
-(gdb)
+<span class="o">(</span>gdb<span class="o">)</span>
 </code></pre></div></div>
 
 <p>따라서 vmlinux 내 debugging 정보가 읽어지게 됨.</p>
 
+<ul>
+  <li>기존 buildroot 이미지에는 모든 정보가 담겨있는것이 아니라 kernel 을 실행할 수 있는 코드만 포함된 단순화된 파일이다. 따라서 해당 이미지 만으로 모든 디버깅 정보를 볼 수는 없는 환경이다. 그런데 <code class="language-plaintext highlighter-rouge">vmlinux</code> 파일의 경우, 커널의 디버깅 정보, 함수 및 변수 이름 정보, 코드 라인 정보 등이 모두 담긴 목적 파일이므로 <code class="language-plaintext highlighter-rouge">gdb-multiarch linux/vmlinux</code> 와 같이 해당 파일을 디버거 인자로 넘겨 주어야 한다.</li>
+</ul>
+
+<p>그리고 gdb prompt 창에 <code class="language-plaintext highlighter-rouge">target remote :1234</code> 를 입력하여 qemu 에서 열어둔 디버깅 포트 1234 에 접속한다. 연결된 이후, 원하는  break-point 를 걸 수 있다.  예를 들면,</p>
+
+<p><code class="language-plaintext highlighter-rouge">(gdb) break start_kernel</code> 로 입력하면 리눅스 커널에서 제일 먼저 실행되는 c 함수에 중단점을 생성하고,</p>
+
+<p><code class="language-plaintext highlighter-rouge">(gdb)__do_sys_&lt;시스템콜 함수 이름&gt;</code> 의 겅우 앞서 실습한 systemcall 을 디버깅 가능하다. 여기에서 <code class="language-plaintext highlighter-rouge">__do_sys_</code> 접두사는 SYSCALL_DEFINE 매크로가 자동 생성한 것이다.</p>
+
 <ol>
-  <li>QEUM 가 연 포트에 접근</li>
+  <li>QEMU 가 연 포트에 접근</li>
 </ol>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) target remote :1234
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set </span>architecture aarch64
+<span class="o">(</span>gdb<span class="o">)</span> target remote :1234
 Remote debugging using :1234
 warning: Selected architecture i386:x86-64 is not compatible with reported target architecture aarch64
 warning: Architecture rejected target-supplied description
-0x0000000000000000 in fixed_percpu_data ()  # bootloader 의 첫 시작 주소
+0x0000000000000000 <span class="k">in </span>fixed_percpu_data <span class="o">()</span>  <span class="c"># bootloader 의 첫 시작 주소</span>
 </code></pre></div></div>
 
 <ol>
@@ -538,30 +546,16 @@ warning: Architecture rejected target-supplied description
 
 <p><code class="language-plaintext highlighter-rouge">start_kernel</code> 이라는 가장 처음에 시작되는 함수에 break-point 걸기</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) break start_kernel
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break </span>start_kernel
 Breakpoint 1 at 0xffffffff821889e0: file init/main.c, line 875.
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<p>우리가 추가한 systemcall 함수 break-point 걸기</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>
-</code></pre></div></div>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>
-</code></pre></div></div>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>
-</code></pre></div></div>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break </span>__do_sys_new_syscall
+Breakpoint 2 at 0xffffffff811391c9: file kernel/new_syscall.c, line 6.
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
 
         <aside class="sidebar inline" id="post-end">
     
@@ -642,6 +636,37 @@ Breakpoint 1 at 0xffffffff821889e0: file init/main.c, line 875.
           
           
 
+          <a href="./kernelmodule01.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general02.jpg') center no-repeat; background-size: cover;">
+            <div class="recent-item-title">
+              <span>Kernel Module 만들기</span>
+              
+
+  <span class = "recent-item-meta">
+  
+  
+  
+  
+    
+    
+    <p class="page_meta-readtime">
+      
+        4 minute read
+      
+    </p>
+  
+  
+  </span>
+
+            </div>
+          </a>
+        </div>
+      
+    
+      
+        <div class="recent-item">
+          
+          
+
           <a href="./gdp01.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general01.jpg') center no-repeat; background-size: cover;">
             <div class="recent-item-title">
               <span>GDB 를 사용 기초 및 systemcall GDB 적용</span>
@@ -656,7 +681,7 @@ Breakpoint 1 at 0xffffffff821889e0: file init/main.c, line 875.
     
     <p class="page_meta-readtime">
       
-        3 minute read
+        4 minute read
       
     </p>
   
@@ -687,7 +712,7 @@ Breakpoint 1 at 0xffffffff821889e0: file init/main.c, line 875.
     
     <p class="page_meta-readtime">
       
-        4 minute read
+        5 minute read
       
     </p>
   
@@ -719,37 +744,6 @@ Breakpoint 1 at 0xffffffff821889e0: file init/main.c, line 875.
     <p class="page_meta-readtime">
       
         4 minute read
-      
-    </p>
-  
-  
-  </span>
-
-            </div>
-          </a>
-        </div>
-      
-    
-      
-        <div class="recent-item">
-          
-          
-
-          <a href="./makfile01.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general23.jpg') center no-repeat; background-size: cover;">
-            <div class="recent-item-title">
-              <span>Makefile 기본 문법 01</span>
-              
-
-  <span class = "recent-item-meta">
-  
-  
-  
-  
-    
-    
-    <p class="page_meta-readtime">
-      
-        2 minute read
       
     </p>
   

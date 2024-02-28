@@ -7,9 +7,9 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Makefile 기본 문법 01 - Gon's Tech Jurnal</title>
-	<link rel="canonical" href="http://localhost:4000/makfile01.html">
-	<meta name="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05">
+	<title>Kernel Module 만들기 - Gon's Tech Jurnal</title>
+	<link rel="canonical" href="http://localhost:4000/kernelmodule01.html">
+	<meta name="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 10">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 <script type="application/ld+json">
@@ -19,13 +19,13 @@
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "http://localhost:4000"},
-  "headline": "Makefile 기본 문법 01",
-  "abstract": "개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05",
-    "keywords": "linux, bash, makefile, incremental build, suffix rule",
-    "wordcount": "554",
-    "image": ["http://localhost:4000/assets/imgposts/general/post_general23.jpg"],
-  "datePublished": "2024-02-21 14:32:20 +0900",
-  "dateModified": "2024-02-21 14:32:20 +0900",
+  "headline": "Kernel Module 만들기",
+  "abstract": "개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 10",
+    "keywords": "linux, kernel module",
+    "wordcount": "771",
+    "image": ["http://localhost:4000/assets/imgposts/general/post_general02.jpg"],
+  "datePublished": "2024-02-28 10:32:20 +0900",
+  "dateModified": "2024-02-28 10:32:20 +0900",
   "author": {
     "@type": "Person",
     "name": "Yong gon Yun"},
@@ -40,30 +40,30 @@
 }
 </script>
 <!-- Open Graph data -->
-<meta property="og:url" content="http://localhost:4000/makfile01.html"/>
+<meta property="og:url" content="http://localhost:4000/kernelmodule01.html"/>
 <meta property="og:type" content="article"/>
-<meta property="og:title" content="Makefile 기본 문법 01"/>
-<meta property="og:description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05"/>
-<meta property="og:image" content="http://localhost:4000/assets/imgposts/general/post_general23.jpg"/>
-<meta property="og:image:alt" content="Makefile 기본 문법 01"/>
+<meta property="og:title" content="Kernel Module 만들기"/>
+<meta property="og:description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 10"/>
+<meta property="og:image" content="http://localhost:4000/assets/imgposts/general/post_general02.jpg"/>
+<meta property="og:image:alt" content="Kernel Module 만들기"/>
 <meta property="og:site_name" content="Gon's Tech Jurnal" />
-<meta property="article:published_time" content="2024-02-21 14:32:20 +0900" />
-<meta property="article:modified_time" content="2024-02-21 14:32:20 +0900" />
-<meta property="article:tag" content="linux, bash, makefile, incremental build, suffix rule" />
+<meta property="article:published_time" content="2024-02-28 10:32:20 +0900" />
+<meta property="article:modified_time" content="2024-02-28 10:32:20 +0900" />
+<meta property="article:tag" content="linux, kernel module" />
 <meta property="fb:admins" content="ar.maybach" />
 <!-- Schema.org markup for Google -->
-<meta itemprop="name" content="Makefile 기본 문법 01">
-<meta itemprop="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05">
-<meta itemprop="image" content="http://localhost:4000/assets/imgposts/general/post_general23.jpg">
+<meta itemprop="name" content="Kernel Module 만들기">
+<meta itemprop="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 10">
+<meta itemprop="image" content="http://localhost:4000/assets/imgposts/general/post_general02.jpg">
 <!-- Twitter Card data -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@N/A">
-<meta name="twitter:title" content="Makefile 기본 문법 01">
-<meta name="twitter:description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05">
+<meta name="twitter:title" content="Kernel Module 만들기">
+<meta name="twitter:description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 10">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="554"/>
-<meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general23.jpg">
+<meta data-rh="true" name="twitter:data1" content="771"/>
+<meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general02.jpg">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
 	<!-- iOS Safari -->
@@ -150,7 +150,7 @@
 
 <section class="hidden">
   <div class="post">
-      <a  class="post-list-title" href="./makfile01.html">Makefile 기본 문법 01</a>
+      <a  class="post-list-title" href="./kernelmodule01.html">Kernel Module 만들기</a>
       
 
   <span class = "post-card-meta">
@@ -162,7 +162,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2024-02-21T14:32:20+09:00">February 21, 2024</time>
+        <time datetime="2024-02-28T10:32:20+09:00">February 28, 2024</time>
       </span>
     
     
@@ -174,7 +174,7 @@
     
     <span class="page_meta-readtime">
       
-        2 minute read
+        3 minute read
       
     </span>
   
@@ -182,7 +182,7 @@
   </span>
 
         <div class="post-excerpt">
-            <h3 id="makefile-변수-macro-사용">Makefile 변수 (macro) 사용</h3><p>의존성 부분은 일반적으로 매크로로 선언하여 사용함.</p><p>매크로를 사용하여 값을 할당할 때, 여러가지 할당 방법이 존재</p><h4 id="-recursive-assignment"><code class="language-plaintext highlighter-rouge">=</code> (Recursive Assignment)</h4><p><code class="language-plaintext highlighter-rouge">=</code> 연산자는 재귀적 할당을 수행한다. 이는 매크로가 사용될 때마다 평가되어 확장된다. 매크로의 값이 다른 매크로를 참조하는 경우, 참조된 변수의 최종값에 따라 달라진다.</p><div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">FOO</span> <span class="o">=</span> <span class="p">${</span>BAR<span class="p">}</span><span class="nv">BAR</span> <span class="o">=</span> bar_value<span class="nl">all</span><span class="o">:</span> <span class="err">@echo</span> <span class="err">$(FOO)</span></code></pre></div></div><p>해당 Makefile 을 실행하면 <code class="language-plaintext highlighter-rouge">FOO</code> 매크로는 <code class="language-plaintext highlighter-rouge">BAR</code>의 값을 참조한다. 따라서 실행될 때, <code class="language-plaintext highlighter-rouge">BAR</code> 의 값은 <code class="language-plaintext highlighter-rouge">bar_value</code> 이므로 <code class="language-plaintext highlighter-rouge">bar_value</code> 가 출력된다.</p><h4 id="-simle-assignment"><code class="language-plaintext highlighter-rouge">:=</code> (Simle Assignment)</h4><p><code...<a class="read-more" href="./makfile01.html"> read more</a>
+            <style> summary::-webkit-details-marker { display: none; } summary { list-style: none; }</style><details><summary></summary>에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지</details><p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스...<a class="read-more" href="./kernelmodule01.html"> read more</a>
         </div>
   </div>
 </section>
@@ -280,14 +280,14 @@
 </header> <!-- End Header -->
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Makefile 기본 문법 01">
-<meta itemprop="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05">
-<meta itemprop="datePublished" content="2024-02-21T14:32:20+09:00">
+    <meta itemprop="headline" content="Kernel Module 만들기">
+<meta itemprop="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 10">
+<meta itemprop="datePublished" content="2024-02-28T10:32:20+09:00">
 
     <div class="wrapper">
       <div class="page-content">
         <div class="header-page">
-          <h2 class="page-title">Makefile 기본 문법 01</h2>
+          <h2 class="page-title">Kernel Module 만들기</h2>
           
 
   <span class = "post-page-meta">
@@ -299,7 +299,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2024-02-21T14:32:20+09:00">February 21, 2024</time>
+        <time datetime="2024-02-28T10:32:20+09:00">February 28, 2024</time>
       </span>
     
     
@@ -311,7 +311,7 @@
     
     <span class="page_meta-readtime">
       
-        2 minute read
+        3 minute read
       
     </span>
   
@@ -332,13 +332,7 @@
             
                 <li><a href="./tag.html?tag=linux" class="tag side">linux</a></li>
             
-                <li><a href="./tag.html?tag=bash" class="tag side">bash</a></li>
-            
-                <li><a href="./tag.html?tag=makefile" class="tag side">makefile</a></li>
-            
-                <li><a href="./tag.html?tag=incremental+build" class="tag side">incremental build</a></li>
-            
-                <li><a href="./tag.html?tag=suffix+rule" class="tag side">suffix rule</a></li>
+                <li><a href="./tag.html?tag=kernel+module" class="tag side">kernel module</a></li>
             
     
         </ul>
@@ -347,11 +341,11 @@
     <div class="share-hover side">
         <span class="share-button side"><svg fill="currentColor" width="25" height="25" class="side"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>
         <div class="share-icons side" id="sidebar-icons">
-            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=Makefile 기본 문법 01&url=http://localhost:4000/makfile01.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/makfile01.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/makfile01.html&title=Makefile 기본 문법 01" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/makfile01.html&title=Makefile 기본 문법 01&summary=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05&source=http://localhost:4000/makfile01.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a class="email" href="mailto:?subject=Makefile 기본 문법 01&body=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05%0A%0ARead more here: http://localhost:4000/makfile01.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=Kernel Module 만들기&url=http://localhost:4000/kernelmodule01.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/kernelmodule01.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/kernelmodule01.html&title=Kernel Module 만들기" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/kernelmodule01.html&title=Kernel Module 만들기&summary=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 10&source=http://localhost:4000/kernelmodule01.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a class="email" href="mailto:?subject=Kernel Module 만들기&body=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 10%0A%0ARead more here: http://localhost:4000/kernelmodule01.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
             <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="side" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>
         </div>
     </div>
@@ -361,123 +355,232 @@
 
         
         
-        <h3 id="makefile-변수-macro-사용">Makefile 변수 (macro) 사용</h3>
+        <style>
+    summary::-webkit-details-marker {
+        display: none;
+    }
+    summary {
+        list-style: none;
+    }
+</style>
 
-<p>의존성 부분은 일반적으로 매크로로 선언하여 사용함.</p>
+<details><summary></summary>
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+</details>
 
-<p>매크로를 사용하여 값을 할당할 때, 여러가지 할당 방법이 존재</p>
+<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) - Rootfs 빌드 강의 내용 (https://comento.kr/)</p>
 
-<h4 id="-recursive-assignment"><code class="language-plaintext highlighter-rouge">=</code> (Recursive Assignment)</h4>
-<p><code class="language-plaintext highlighter-rouge">=</code> 연산자는 재귀적 할당을 수행한다. 이는 매크로가 사용될 때마다 평가되어 확장된다. 매크로의 값이 다른 매크로를 참조하는 경우, 참조된 변수의 최종값에 따라 달라진다.</p>
+<h3 id="1-관련-설정-추가-및-source-code-생성">1. 관련 설정 추가 및 source code 생성</h3>
 
-<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">FOO</span> <span class="o">=</span> <span class="p">${</span>BAR<span class="p">}</span>
-<span class="nv">BAR</span> <span class="o">=</span> bar_value
+<p>1.1 드라이버 디렉토리 생성 및 Makefile 에 해당 디렉토리 추가</p>
 
-<span class="nl">all</span><span class="o">:</span>
-        <span class="err">@echo</span> <span class="err">$(FOO)</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span><span class="nb">cd </span>linux/drivers
+user@DESKTOP:~/linux/drivers<span class="nv">$ </span><span class="nb">mkdir </span>comento
+user@DESKTOP:~/linux/drivers<span class="nv">$ </span>vim Makefile
 </code></pre></div></div>
 
-<p>해당 Makefile 을 실행하면 <code class="language-plaintext highlighter-rouge">FOO</code> 매크로는 <code class="language-plaintext highlighter-rouge">BAR</code>의 값을 참조한다. 따라서 실행될 때, <code class="language-plaintext highlighter-rouge">BAR</code> 의 값은 <code class="language-plaintext highlighter-rouge">bar_value</code> 이므로  <code class="language-plaintext highlighter-rouge">bar_value</code> 가 출력된다.</p>
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">...</span>
+<span class="nv">obj-$(CONFIG_DRM_ACCEL)</span>         <span class="o">+=</span> accel/
+<span class="nv">obj-$(CONFIG_CDX_BUS)</span>           <span class="o">+=</span> cdx/
+<span class="nv">obj-$(CONFIG_DPLL)</span>              <span class="o">+=</span> dpll/
 
-<h4 id="-simle-assignment"><code class="language-plaintext highlighter-rouge">:=</code> (Simle Assignment)</h4>
-<p><code class="language-plaintext highlighter-rouge">:=</code> 연산자를 사용한 단순할당의 경우, 매크로에 값이 할당될 때 시점의 값으로 바로 평가, 확장된다. 따라서 이후 참조하고 있는 매크로의 값이 변경되더라도, 최초에 할당된 값을 유지한다.</p>
-
-<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">BAR</span> <span class="o">=</span> bar_value
-<span class="nv">FOO</span> <span class="o">:=</span> <span class="p">$(</span>BAR<span class="p">)</span>
-<span class="nv">BAR</span> <span class="o">=</span> new_value
-
-<span class="nl">all</span><span class="o">:</span>
-        <span class="err">@echo</span> <span class="err">$(FOO)</span>
+<span class="nv">obj-$(CONFIG_S390)</span>              <span class="o">+=</span> s390/
+<span class="c"># 추가 내용
+</span><span class="nv">obj-y</span>                           <span class="o">+=</span> comento/ 
 </code></pre></div></div>
 
-<p>이 경우, <code class="language-plaintext highlighter-rouge">FOO</code> 는 <code class="language-plaintext highlighter-rouge">BAR</code> 의 현재값인 <code class="language-plaintext highlighter-rouge">bar_value</code> 로 초기화 되고, 이후 <code class="language-plaintext highlighter-rouge">BAR</code> 의 값이 변경되더라도 <code class="language-plaintext highlighter-rouge">FOO</code> 의 값은 변하지 않는다. 따라서 해당 Makefile 을 실행하면 출력값은 <code class="language-plaintext highlighter-rouge">bar_value</code> 가 된다.</p>
+<p>1.2 drivers Kconfig 에도 추가될 디렉토리 Kconfig 항목 추가</p>
 
-<h4 id="-append"><code class="language-plaintext highlighter-rouge">+=</code> (Append)</h4>
-
-<p>기존 변수의 값에 값을 추가함. 만약 매크로가 정의되어 있지 않았었다면 해당 매크로를 생성한다.</p>
-
-<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CFLAGS</span> <span class="o">:=</span> <span class="nt">-Wall</span>
-<span class="nv">CFLAGS</span> <span class="o">+=</span> <span class="nt">-g</span>   <span class="c"># CFLAGS는 이제 "-Wall -g"</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux/drivers<span class="nv">$ </span>vim Kconfig
 </code></pre></div></div>
 
-<h4 id="-conditional-assignment"><code class="language-plaintext highlighter-rouge">?=</code> (Conditional Assignment)</h4>
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">...</span>
+<span class="err">source</span> <span class="s2">"drivers/cdx/Kconfig"</span>
 
-<p>매크로가 아직 값이 할당되어 있지 않을 경우에만 값을 할당. 이미 값이 있으면 할당하지 않음.</p>
+<span class="err">source</span> <span class="s2">"drivers/dpll/Kconfig"</span>
 
-<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CC</span> <span class="o">?=</span> gcc <span class="c"># CC가 이전에 정의되지 않았다면 gcc를 사용</span>
+<span class="err">source</span> <span class="s2">"drivers/comento/Kconfig"</span>  <span class="c"># 추가 내용
+</span>
+<span class="err">endmenu</span>
 </code></pre></div></div>
 
-<h4 id="-target-name"><code class="language-plaintext highlighter-rouge">$@</code> (Target Name)</h4>
+<p>1.3 해당 디렉토리에 Kconfig 파일 추가</p>
 
-<p><code class="language-plaintext highlighter-rouge">$@</code> : 현재 target 의 이름을 명시</p>
-
-<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">all</span><span class="o">:</span> <span class="nf">program</span>
-<span class="nl">program</span><span class="o">:</span> <span class="nf">program.o</span>
-        <span class="err">gcc</span> <span class="err">-o</span> <span class="err">$@</span> <span class="err">$^</span>
-</code></pre></div></div>
-<p>이 경우 <code class="language-plaintext highlighter-rouge">program: program.o</code> 에서  <code class="language-plaintext highlighter-rouge">program</code> 이 현재 target 이다.  따라서 <code class="language-plaintext highlighter-rouge">$@</code> 는 <code class="language-plaintext highlighter-rouge">program</code> 으로 대체 된다.</p>
-
-<h4 id="-first-dependency"><code class="language-plaintext highlighter-rouge">$&lt;</code> (First Dependency)</h4>
-
-<p><code class="language-plaintext highlighter-rouge">$&lt;</code> 는 규치의 첫 번째 의존성을 나타냄.</p>
-
-<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">program.o</span><span class="o">:</span> <span class="nf">program.c</span>
-        <span class="err">gcc</span> <span class="err">-c</span> <span class="err">$&lt;</span> <span class="err">-o</span> <span class="err">$@</span>
-</code></pre></div></div>
-<p>여기서  <code class="language-plaintext highlighter-rouge">$&lt;</code> 는 <code class="language-plaintext highlighter-rouge">program.c</code> 을 의미하므로 <code class="language-plaintext highlighter-rouge">gcc -c $&lt; -o $@</code> 는 <code class="language-plaintext highlighter-rouge">gcc -c program.c -o program.o</code> 를 의미한다.</p>
-
-<h4 id="-all-dependencies"><code class="language-plaintext highlighter-rouge">$^</code> (All Dependencies)</h4>
-
-<p>현재 규칙의 모든 의존성 목록을 나타낸다. 중복된 의존성은 제거된다.</p>
-
-<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">program</span><span class="o">:</span> <span class="nf">main.o lib.o util.o</span>
-        <span class="err">gcc</span> <span class="err">-o</span> <span class="err">$@</span> <span class="err">$^</span>
-</code></pre></div></div>
-<p>여기서 <code class="language-plaintext highlighter-rouge">$^</code> 는 <code class="language-plaintext highlighter-rouge">main.o lib.o util.o</code> 을 의미하므로 <code class="language-plaintext highlighter-rouge">gcc -o $@ $^</code> 는 <code class="language-plaintext highlighter-rouge">gcc -o program main.o lib.o util.o</code> 를 의미한다.</p>
-
-<h4 id="확장자-룰-sffix-rule-과-패턴-규칙pattern-rule">확장자 룰 (sffix rule) 과 패턴 규칙(pattern rule)</h4>
-
-<p>Makefile 의 확장자 룰은 오래된 규칙으로, 파일 변환 규칙을 정의하는데 사용됨. 주로 한 종류의 파일을 다른 종류로 변환하는데 사용되며, 확장자만으로 이 변환 과정을 식별한다. <code class="language-plaintext highlighter-rouge">.SUFFIXES</code> 리스트에 정의된 확장자들을 사용하여, 소스파일에서 목적파일로 변환에 사용될 수 있다.</p>
-
-<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">.SUFFIXES</span><span class="o">:</span> <span class="nf">.c .o</span>
-
-<span class="nl">.c.o</span><span class="o">:</span>
-        <span class="err">gcc</span> <span class="err">-c</span> <span class="err">$&lt;</span> <span class="err">-o</span> <span class="err">$@</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux/drivers<span class="nv">$ </span><span class="nb">cd </span>comento
+user@DESKTOP:~/linux/drivers/comento<span class="nv">$ </span>vim Kconfig 
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">.c.o:</code> 은 <code class="language-plaintext highlighter-rouge">.c</code> 파일을 <code class="language-plaintext highlighter-rouge">.o</code> 파일로 변환하는 규칙을 정의한 target 이다. 따라서 <code class="language-plaintext highlighter-rouge">gcc -c $&lt; -o $@</code> 은 첫번째 의존성 <code class="language-plaintext highlighter-rouge">.c</code> 파일을 동일 파일 이름의 <code class="language-plaintext highlighter-rouge">.o</code> 파일로 compile 하라는 의미 이다. <br /></p>
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">menu</span> <span class="s2">"Comento Example Driver"</span>
 
-<p>그러나 현대의 Makefile 작성에서는 패턴 규칙을 사용하는 것이 더 권장된다. 확장자 규칙은 유연성과 명확성이 떨어질 수 있으며, GNU Make와 같은 최신 도구에서는 보다 강력하고 유연한 패턴 규칙을 사용할 수 있다. 패턴 규칙은 특정 파일 세트에 대해 적용할 수 있는 규칙을 정의할 때 % 와일드카드를 사용하여 보다 일반적인 규칙을 작성할 수 있게 해준다.</p>
+<span class="err">config</span> <span class="err">COMENTO_EXAMPLE</span>
+    <span class="err">tristate</span> <span class="s2">"Comento Example Dirver Module"</span>
+    <span class="err">help</span>
+        <span class="err">This</span> <span class="err">is</span> <span class="err">an</span> <span class="err">example</span>
 
-<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">%.o</span><span class="o">:</span> <span class="nf">%.c</span>
-        <span class="err">gcc</span> <span class="err">-c</span> <span class="err">$&lt;</span> <span class="err">-o</span> <span class="err">$@</span>
+<span class="err">endmenu</span>
 </code></pre></div></div>
 
-<p>이는 앞의 확장자 룰과 동일한 명령을 수행하며, 좀더 명확하고 간결하게 표현된다.</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">config COMENTO_EXAMPLE</code> : .config 파일에서는 CONFIG prefix 를 붙여 <code class="language-plaintext highlighter-rouge">CONFIG_COMENTO_EXAMPLE</code> 로 사용됨.</li>
+</ul>
 
-<p>그러나 결론적으로 동일한 파일명의 소스파일에서 목적 파일을 생성하는 룰은 Makefile 에 기본으로 내장되어 있기 때문에 사용자가 정의하는 Makefile 에서는 해당 내용을 생략해도 실행된다.</p>
+<p>1.4 해당 디렉토리 내 main.c 로 목적파일이 만들어 질 수 있도록 Makefile 추가</p>
 
-<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">executable</span><span class="o">:</span> <span class="nf">distance.o main.o</span>
-        <span class="err">ld</span> <span class="err">-o</span> <span class="err">executable</span> <span class="err">*.o</span> <span class="err">/usr/lib/x86_64-linux-gnu/crt1.o</span> <span class="err">-lm</span> <span class="err">-lc</span> <span class="nv">-dynamic-linker</span><span class="o">=</span>/lib64/ld-linux-x86-64.so.2
-
-<span class="nl">distance.o </span><span class="o">:</span> <span class="nf">distance.c</span>
-        <span class="err">gcc</span> <span class="err">-c</span> <span class="err">-o</span> <span class="err">distance.o</span> <span class="err">distance.c</span>
-
-<span class="nl">main.o </span><span class="o">:</span> <span class="nf">main.c</span>
-        <span class="err">gcc</span> <span class="err">-c</span> <span class="err">-o</span> <span class="err">main.o</span> <span class="err">main.c</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux/drivers/comento<span class="nv">$ </span>vim Makefile
 </code></pre></div></div>
-<p>위 내용은 아래와 같이 명시적으로 작성하지 않아도,</p>
 
-<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">executable</span><span class="o">:</span> <span class="nf">distance.o main.o</span>
-        <span class="err">ld</span> <span class="err">-o</span> <span class="err">executable</span> <span class="err">*.o</span> <span class="err">/usr/lib/x86_64-linux-gnu/crt1.o</span> <span class="err">-lm</span> <span class="err">-lc</span> <span class="nv">-dynamic-linker</span><span class="o">=</span>/lib64/ld-linux-x86-64.so.2
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">obj-$(CONFIG_COMENTO_EXAMPLE)</span> <span class="o">+=</span> comento.o
+<span class="nv">comento-objs</span> <span class="o">+=</span> main.o
 </code></pre></div></div>
-<p>최종 실행 파일 생성만 구현하고 <code class="language-plaintext highlighter-rouge">make</code>를 실행해도 이전과 동일하게 각 소스코드에서 목적파일이 생성되고 최종적으로 실행파일이 생성된다. 또한 점진적 빌드 (Incremental build) 도 정상적으로 동작한다.</p>
 
-<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="nl">buildroot_download</span><span class="o">:</span> 
-        
+<p>1.5 linux kernel module 내용을 담은 소스 코드 <code class="language-plaintext highlighter-rouge">main.c</code> 작성</p>
 
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux/drivers/comento<span class="nv">$ </span>vim main.c
 </code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span>  <span class="cpf">&lt;linux/module.h&gt;</span><span class="cp">
+</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="n">__init</span> <span class="nf">comento_module_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printk</span><span class="p">(</span><span class="n">KERN_DEBUG</span> <span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>  <span class="n">__func__</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="n">__exit</span> <span class="nf">comento_module_exit</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printk</span><span class="p">(</span><span class="n">KERN_DEBUG</span> <span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>  <span class="n">__func__</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">module_init</span><span class="p">(</span><span class="n">comento_module_init</span><span class="p">);</span>
+<span class="n">module_exit</span><span class="p">(</span><span class="n">comento_module_exit</span><span class="p">);</span>
+
+<span class="n">MODULE_AUTHOR</span><span class="p">(</span><span class="s">"Hello&lt;hello@comento.com&gt;"</span><span class="p">);</span>
+<span class="n">MODULE_DESCRIPTION</span><span class="p">(</span><span class="s">"Example module"</span><span class="p">);</span>
+<span class="n">MODULE_LICENSE</span><span class="p">(</span><span class="s">"GPL v2"</span><span class="p">);</span>
+</code></pre></div></div>
+<h4 id="모듈-초기화-및-종료-함수">모듈 초기화 및 종료 함수</h4>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">__init</code> 함수 (comento_module_init): 모듈이 커널에 로드될 때 자동으로 실행됨. <code class="language-plaintext highlighter-rouge">__init</code> 매크로는 이 함수가 초기화 코드에만 사용되며, 초기화 후에는 메모리에서 해제될 수 있음을 커널에 알린다. 이 예에서, printk 함수를 사용하여 커널 로그에 메시지 (<code class="language-plaintext highlighter-rouge">__func__</code> 매크로는 현재 함수 이름의 문자열을 반환) 를 출력한다. <code class="language-plaintext highlighter-rouge">__init</code> 은 init 관련 함수임을 표시한 attribute 이다.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">__exit</code> 함수 (comento_module_exit): 모듈이 커널에서 제거될 때 실행됨. <code class="language-plaintext highlighter-rouge">__exit</code> 매크로는 이 함수가 종료 코드에만 사용되며, 모듈이 커널에 계속 로드되어 있는 경우 메모리를 절약하기 위해 해제될 수 있음을 나타낸다.</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">module_init</code> 매크로
+    <ul>
+      <li>목적: 커널 모듈이 시스템에 로드될 때 실행될 초기화 함수를 지정</li>
+      <li>동작: 지정된 초기화 함수는 모듈이 커널에 삽입될 때(insmod 명령어 사용 시) 자동으로 호출된다. 이 함수 내에서는 모듈이 제대로 작동하기 위해 필요한 리소스 할당, 상태 초기화, 디바이스 등록 등의 작업을 수행한다.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">module_exit</code> 매크로
+    <ul>
+      <li>목적: 커널 모듈이 시스템에서 제거될 때 실행될 종료 함수를 지정</li>
+      <li>동작: 지정된 종료 함수는 모듈이 커널에서 제거될 때(rmmod 명령어 사용 시) 자동으로 호출된다. 이 함수 내에서는 모듈의 정상적인 종료를 위해 할당된 리소스의 해제, 등록된 디바이스의 등록 해제 등의 작업을 수행한다.</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">MODULE_AUTHOR</code>: 모듈의 작성자.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">MODULE_DESCRIPTION</code>: 모듈에 대한 간단한 설명.</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">MODULE_LICENSE</code>: 모듈의 라이선스 유형. “GPL v2”는, 모듈이 GNU General Public License 버전 2에 따라 배포됨을 나타낸다. 이는 모듈이 GPL 호환 코드와 함께 사용되어야 함을 의미한다.</li>
+</ul>
+
+<p>1.6 menuconfig 실행하여 항목 추가되었음을 확인하고 설정 반영</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux/drivers/comento<span class="nv">$ </span><span class="nb">cd</span> ..
+user@DESKTOP:~/linux/drivers<span class="nv">$ </span><span class="nb">cd</span> ..
+user@DESKTOP:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 make menuconfig
+</code></pre></div></div>
+<p>Device Driver 항목 맨 아래 다음과 같이 추가되었음을 확인할 수 있다.</p>
+
+<center><img src="assets\img\posts\2024-02-28-kernelmodule011.png" width="600" /></center>
+<p><br /></p>
+<center><img src="assets\img\posts\2024-02-28-kernelmodule012.png" width="600" /></center>
+
+<h3 id="2-kernel-build">2. kernel build</h3>
+
+<p>2.1  kernel build</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 <span class="nv">CROSS_COMPILE</span><span class="o">=</span>/home/gon/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- make 
+  CALL    scripts/checksyscalls.sh
+  CC <span class="o">[</span>M]  drivers/comento/main.o
+  LD <span class="o">[</span>M]  drivers/comento/comento.o
+  ...
+  CC <span class="o">[</span>M]  drivers/comento/comento.mod.o
+  LD <span class="o">[</span>M]  drivers/comento/comento.ko
+  ...
+</code></pre></div></div>
+
+<p>해당 kernel 을 build 하면 위와 같이 사용자가 작성한 <code class="language-plaintext highlighter-rouge">drivers/comento/main.o</code> 가 gcc 에 의해 빌드되고, 해당 linker script 가 <code class="language-plaintext highlighter-rouge">comento-objs += main.o</code> 에 명시된 대로 <code class="language-plaintext highlighter-rouge">main.o</code> 를 모아서 <code class="language-plaintext highlighter-rouge">obj-$(CONFIG_COMENTO_EXAMPLE) += comento.o</code> 대로 <code class="language-plaintext highlighter-rouge">drivers/comento/comento.o</code> 을 생성한다.</p>
+
+<p>그리고 <code class="language-plaintext highlighter-rouge">commento.o</code> 가 모듈관련 목적 파일 <code class="language-plaintext highlighter-rouge">drivers/comento/comento.mod.o</code> 과 함께 link 되서 linker 가 <code class="language-plaintext highlighter-rouge">drivers/comento/comento.ko</code> 를 만든다.</p>
+
+<h3 id="3-buildroot-이미지에-해당-ko-파일-추가-및-qemu-에서-모듈-로드가-정상적으로-되었는지-확인">3. buildroot 이미지에 해당 ko 파일 추가 및 QEMU 에서 모듈 로드가 정상적으로 되었는지 확인</h3>
+
+<p>3.1 buildroot 이미지에 해당 ko 파일 추가</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">sudo </span>mount <span class="nt">-o</span> loop ../buildroot/output/images/rootfs.ext4 /mnt
+user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">sudo mkdir</span> /mnt/usr/lib/modules
+user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">sudo cp </span>drivers/comento/comento.ko /mnt/usr/lib/modules
+user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">sync
+</span>user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">sudo </span>umount /mnt
+</code></pre></div></div>
+
+<p>3.2 QEMU 실행</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">cd</span> ..
+user@DESKTOP:~<span class="nv">$ </span>qemu-system-aarch64 <span class="nt">-kernel</span> linux/arch/arm64/boot/Image <span class="nt">-drive</span> <span class="nv">format</span><span class="o">=</span>raw,file<span class="o">=</span>buildroot/output/images/rootfs.ext4,if<span class="o">=</span>virtio <span class="nt">-append</span> <span class="s2">"root=/dev/vda console=ttyAMA0 nokaslr"</span> <span class="nt">-nographic</span> <span class="nt">-M</span> virt <span class="nt">-cpu</span> cortex-a72 <span class="nt">-m</span> 2G <span class="nt">-smp</span> 2
+</code></pre></div></div>
+
+<p>3.3 모듈 추가 확인</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ls /usr/lib/modules
+comento.ko
+</code></pre></div></div>
+
+<p>해당 커널에서 삽입한 경로에 보면 <code class="language-plaintext highlighter-rouge">comento.ko</code> 이 정상적으로 추가되어 있음을 볼 수 있다.</p>
+
+<h3 id="4-moudule-load--unload">4. moudule load / unload</h3>
+
+<p>4.1 load</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># insmod /usr/lib/moduels/comento.ko
+# dmesg -c
+comento_module_init
+</code></pre></div></div>
+<p>insmod 하여 모듈을 삽입하고 <code class="language-plaintext highlighter-rouge">dmesg</code> 를 하면, <code class="language-plaintext highlighter-rouge">main.c</code> 에 작성 했던 <code class="language-plaintext highlighter-rouge">comento_module_init()</code> 에서 작성한 대로 함수명 (<code class="language-plaintext highlighter-rouge">comento_module_init</code>) 을 출력하게 된다. 아래와 같이 <code class="language-plaintext highlighter-rouge">lsmod</code> 명령어로 현재 로드된 모듈들을 볼 수도 있다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># lsmod
+Module                  Size  Used by
+comento                12288  0
+</code></pre></div></div>
+
+<p>4.2 unload</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># rmmod comento.ko
+# dmesg -c
+comento_module_exit
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">rmmod</code> 를 통해 지정된 모듈을 제거 한다. 제거하면서 “comento_module_exit” 메세지가 출력되었음을 볼 수 있다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># lsmod
+Module                  Size  Used by
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">lsmod</code> 로 보면 이제 로드된 모듈이 없음을 확인할 수 있다.</p>
 
         <aside class="sidebar inline" id="post-end">
     
@@ -490,13 +593,7 @@
             
                 <li><a href="./tag.html?tag=linux" class="tag inline">linux</a></li>
             
-                <li><a href="./tag.html?tag=bash" class="tag inline">bash</a></li>
-            
-                <li><a href="./tag.html?tag=makefile" class="tag inline">makefile</a></li>
-            
-                <li><a href="./tag.html?tag=incremental+build" class="tag inline">incremental build</a></li>
-            
-                <li><a href="./tag.html?tag=suffix+rule" class="tag inline">suffix rule</a></li>
+                <li><a href="./tag.html?tag=kernel+module" class="tag inline">kernel module</a></li>
             
     
         </ul>
@@ -505,11 +602,11 @@
     <div class="share-hover inline">
         <span class="share-button inline"><svg fill="currentColor" width="25" height="25" class="inline"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>
         <div class="share-icons inline" id="post-end-icons">
-            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=Makefile 기본 문법 01&url=http://localhost:4000/makfile01.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/makfile01.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/makfile01.html&title=Makefile 기본 문법 01" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/makfile01.html&title=Makefile 기본 문법 01&summary=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05&source=http://localhost:4000/makfile01.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a class="email" href="mailto:?subject=Makefile 기본 문법 01&body=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 05%0A%0ARead more here: http://localhost:4000/makfile01.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=Kernel Module 만들기&url=http://localhost:4000/kernelmodule01.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/kernelmodule01.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/kernelmodule01.html&title=Kernel Module 만들기" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/kernelmodule01.html&title=Kernel Module 만들기&summary=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 10&source=http://localhost:4000/kernelmodule01.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a class="email" href="mailto:?subject=Kernel Module 만들기&body=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 10%0A%0ARead more here: http://localhost:4000/kernelmodule01.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
             <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="inline" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>
         </div>
     </div>
@@ -576,7 +673,7 @@
     
     <p class="page_meta-readtime">
       
-        4 minute read
+        3 minute read
       
     </p>
   
@@ -638,7 +735,7 @@
     
     <p class="page_meta-readtime">
       
-        4 minute read
+        5 minute read
       
     </p>
   
@@ -906,14 +1003,14 @@
     }
 
     function copyToClipboard() {
-      navigator.clipboard.writeText('http://localhost:4000/makfile01.html').then(function() {
+      navigator.clipboard.writeText('http://localhost:4000/kernelmodule01.html').then(function() {
       alerts = document.getElementsByClassName('alert')
       for (i=0; i < alerts.length; i++){
         alerts[i].innerHTML='\u00ABlink copied\u00BB';
         setTimeout((function(i){ return function(){alerts[i].innerHTML='';}})(i), 1600 );
       };
       }, function() {
-        prompt("Unable to copy, please use this link:", "http://localhost:4000/makfile01.html");
+        prompt("Unable to copy, please use this link:", "http://localhost:4000/kernelmodule01.html");
       });
     }
 

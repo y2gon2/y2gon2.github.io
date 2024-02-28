@@ -22,7 +22,7 @@
   "headline": "systemcall 기초 1",
   "abstract": "개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 08",
     "keywords": "linux, systemcall",
-    "wordcount": "934",
+    "wordcount": "1121",
     "image": ["http://localhost:4000/assets/imgposts/general/post_general25.jpg"],
   "datePublished": "2024-02-24 10:32:20 +0900",
   "dateModified": "2024-02-24 10:32:20 +0900",
@@ -62,7 +62,7 @@
 <meta name="twitter:description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 08">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="934"/>
+<meta data-rh="true" name="twitter:data1" content="1121"/>
 <meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general25.jpg">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
@@ -174,7 +174,7 @@
     
     <span class="page_meta-readtime">
       
-        4 minute read
+        5 minute read
       
     </span>
   
@@ -311,7 +311,7 @@
     
     <span class="page_meta-readtime">
       
-        4 minute read
+        5 minute read
       
     </span>
   
@@ -383,10 +383,10 @@
 
 <h4 id="1-syscall_define-매크로">1. SYSCALL_DEFINE 매크로</h4>
 
-<p>1.1 생성할 systemcall 이 추가될 linux kernel 디렉토리 내 해당 source 추가</p>
+<p>1.1 생성할 systemcall 이 추가될 linux 디렉토리 내 해당 source 추가</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span><span class="nb">cd </span>kernel/kernel
-user@DESKTOP:~/kernel/kernel<span class="nv">$ </span>vim new_syscall.
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span><span class="nb">cd </span>linux/kernel
+user@DESKTOP:~/linux/kernel<span class="nv">$ </span>vim new_syscall.c
 </code></pre></div></div>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;linux/kernel.h&gt;</span><span class="c1"> // kenel 에서 사용할 soruce code 에 필요한 라이브러리</span><span class="cp">
@@ -401,7 +401,7 @@ user@DESKTOP:~/kernel/kernel<span class="nv">$ </span>vim new_syscall.
 
 <p>1.2 Makefile 수정</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/kernel/kernel<span class="nv">$ </span>vi Makefile
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux/kernel<span class="nv">$ </span>vi Makefile
 </code></pre></div></div>
 
 <p>해당 파일에 다음과 같이 반드시 실행되는 목적 파일들이 <code class="language-plaintext highlighter-rouge">obj-y</code> 로 나열되어 있다.</p>
@@ -416,6 +416,12 @@ user@DESKTOP:~/kernel/kernel<span class="nv">$ </span>vim new_syscall.
             async.o range.o smpboot.o ucount.o regset.o ksyms_common.o
 </code></pre></div></div>
 
+<p>이 변수에 지정된 오브젝트 파일들은 커널 빌드 과정에서 항상 포함된다. 그 밖에,</p>
+
+<p><code class="language-plaintext highlighter-rouge">obj-m</code>: 모듈로 빌드될 오브젝트 파일들을 지정한다. 이 변수에 지정된 항목들은 커널 모듈로 컴파일되며, 필요에 따라 동적으로 커널에 로드하거나 언로드할 수 있다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">obj-n</code>: 빌드에서 제외될 오브젝트 파일을 지정한다. 이는 해당 항목이 커널 빌드 과정에서 무시됨을 의미.</p>
+
 <p><code class="language-plaintext highlighter-rouge">obj-$(CONFIG명)</code> 항목들의 경우, 관련 CONFIG 설정이 <code class="language-plaintext highlighter-rouge">y</code> 라면 실행되지만, 그렇지 않은 경우 실행되지 않는다.</p>
 
 <div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">obj-$(CONFIG_USERMODE_DRIVER)</span> <span class="o">+=</span> usermode_driver.o
@@ -425,7 +431,7 @@ user@DESKTOP:~/kernel/kernel<span class="nv">$ </span>vim new_syscall.
 
 <p>해당 항목의 config 값 설정을 보려면 .config 파일에서 찾아 볼 수 있다.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/kernel/kernel<span class="nv">$ </span>vim ../.config
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux/kernel<span class="nv">$ </span>vim ../.config
 </code></pre></div></div>
 
 <p>해당 파일을 열어보면, <code class="language-plaintext highlighter-rouge">CONFIG_MULTIUSER=y</code> 만 존재한다.</p>
@@ -434,8 +440,8 @@ user@DESKTOP:~/kernel/kernel<span class="nv">$ </span>vim new_syscall.
 
 <p>해당 상태는  menuconfig 화면에서도 확인 가능하다.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/kernel/kernel<span class="nv">$ </span><span class="nb">cd</span> ..
-user@DESKTOP:~/kernel<span class="nv">$ ARCH</span><span class="o">=</span>arm64 make menuconfig
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux/kernel<span class="nv">$ </span><span class="nb">cd</span> ..
+user@DESKTOP:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 make menuconfig
 </code></pre></div></div>
 <p>화면에서 <code class="language-plaintext highlighter-rouge">/</code> 를 눌러서 찾게 모드 사용 (vi 와 동일). <code class="language-plaintext highlighter-rouge">CONFIG_MULTIUSER</code> 검색 시.</p>
 
@@ -447,7 +453,7 @@ user@DESKTOP:~/kernel<span class="nv">$ ARCH</span><span class="o">=</span>arm64
 
 <p><code class="language-plaintext highlighter-rouge">CONFIG_USERMODE_DRIVER</code> 의 경우 <code class="language-plaintext highlighter-rouge">=n</code> 임을 확인할 수 있다.</p>
 
-<p>위와 같이, <code class="language-plaintext highlighter-rouge">obj-y</code> 를 사용하여 새로 작성한 ‘new__syscall<code class="language-plaintext highlighter-rouge"> 을 </code>Makefile` 에 추가해 준다.</p>
+<p>위와 같이, <code class="language-plaintext highlighter-rouge">obj-y</code> 를 사용하여 새로 작성한 ‘new_syscall<code class="language-plaintext highlighter-rouge"> 을 </code>Makefile` 에 추가해 준다.</p>
 
 <div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CFLAGS_stackleak.o</span> <span class="o">+=</span> <span class="p">$(</span>DISABLE_STACKLEAK_PLUGIN<span class="p">)</span>
 <span class="nv">obj-$(CONFIG_GCC_PLUGIN_STACKLEAK)</span> <span class="o">+=</span> stackleak.o
@@ -473,18 +479,22 @@ user@DESKTOP:~/kernel<span class="nv">$ ARCH</span><span class="o">=</span>arm64
 
 <p>2.1 systemcall 번호 할당</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/kernel<span class="nv">$ </span>vim include/uapi/asm-generic/unistd.h
+<p><code class="language-plaintext highlighter-rouge">linux/include/uapi/asm-generic/unistd.h</code> 파일은 표준 시스템 호출 번호를 정의하는 파일이다. Linux 에서 systemcall 은 user 프로그램이 커널의 기능을 요청할 때 사용되는 메커니즘이다. 이러한 systemcall을 통해 파일 작업, 프로세스 관리, 통신 등의 작업을 수행할 수 있다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ </span>vim include/uapi/asm-generic/unistd.h
 </code></pre></div></div>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
 
 <span class="n">__SYSCALL</span><span class="p">(</span><span class="n">__NR_futex_wait</span><span class="p">,</span> <span class="n">sys_futex_wait</span><span class="p">)</span>
 <span class="cp">#define __NR_futex_requeue 456
-</span><span class="n">__SYSCALL</span><span class="p">(</span><span class="n">__NR_futex_requeue</span><span class="p">,</span> <span class="n">sys_futex_requeue</span><span class="p">)</span>
+</span><span class="n">__SYSCALL</span><span class="p">(</span><span class="n">__NR_futex_requeue</span><span class="p">,</span> <span class="n">sys_futex_requeue</span><span class="p">)</span> <span class="c1">// (1)</span>
 
 <span class="cp">#undef __NR_syscalls
 #define __NR_syscalls 457 // 기존 마지막 syscall 번호
 </span></code></pre></div></div>
+<p>(1) <code class="language-plaintext highlighter-rouge">__NR_futex_requeue</code> : 정의된 시스템 호출의 고유 번호
+    <code class="language-plaintext highlighter-rouge">sys_futex_requeue</code> : 정의된 시스템 호출에 대응하는 커널 함수의 이름</p>
 
 <p>457 번 syscall 을 추가하고 마지막 번호를 458 로 변경한다.</p>
 
@@ -503,7 +513,7 @@ user@DESKTOP:~/kernel<span class="nv">$ ARCH</span><span class="o">=</span>arm64
 
 <p>여기서 사용한 SYSCALL_DEFINE macro 의 내용은  <code class="language-plaintext highlighter-rouge">syscall_wrapper.h</code> 에 포함되어 있으며 architecture 마다 다르므로 아래 경로 파일에서 확인 가능하다.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/kernel<span class="nv">$ </span>vi <span class="nb">arch</span>/arm64/include/asm/syscall_wrapper.h
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ </span>vi <span class="nb">arch</span>/arm64/include/asm/syscall_wrapper.h
 </code></pre></div></div>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define COMPAT_SYSCALL_DEFINEx(x, name, ...)                                            \
@@ -526,7 +536,7 @@ user@DESKTOP:~/kernel<span class="nv">$ ARCH</span><span class="o">=</span>arm64
 
 <p>3.1 build 진행 (이미지 생성)</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/kernel<span class="nv">$ ARCH</span><span class="o">=</span>arm64 <span class="nv">CROSS_COMPILE</span><span class="o">=</span>/home/gon/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- make <span class="nt">-j16</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 <span class="nv">CROSS_COMPILE</span><span class="o">=</span>/home/gon/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- make <span class="nt">-j16</span>
 </code></pre></div></div>
 
 <h4 id="4-새로운-시스템콜을-사용하는-응용프로그램-만들기">4. 새로운 시스템콜을 사용하는 응용프로그램 만들기</h4>
@@ -539,7 +549,7 @@ user@DESKTOP:~/kernel<span class="nv">$ ARCH</span><span class="o">=</span>arm64
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
 #include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="c1"> // syscall 함수 포함</span><span class="cp">
 </span>
-<span class="cp">#define  __NR_new_syscall 462 // 커널 쪽 unistd.h 에는 추가하였으나, toolchaing 측 unistd.h 에는 추가히자 않았으며로 여기에서 명시해줌
+<span class="cp">#define  __NR_new_syscall 457 // 커널 쪽 unistd.h 에는 추가하였으나, toolchaing 측 unistd.h 에는 추가히자 않았으며로 여기에서 명시해줌
 </span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">syscall</span><span class="p">(</span><span class="n">__NR_new_syscall</span><span class="p">,</span> <span class="mi">15</span><span class="p">);</span>
@@ -602,22 +612,28 @@ hello: ELF 64-bit LSB executable, ARM aarch64, version 1 <span class="o">(</span
 
 <p>5.2 QEMU 실행하기</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>qemu-system-aarch64 <span class="nt">-kernel</span> kernel/arch/arm64/boot/Image <span class="nt">-drive</span> <span class="nv">format</span><span class="o">=</span>raw,file<span class="o">=</span>buildroot/output/images/rootfs.ext4,if<span class="o">=</span>virtio <span class="nt">-append</span> <span class="s2">"root=/dev/vda console=ttyAMA0 nokaslr"</span> <span class="nt">-nographic</span> <span class="nt">-M</span> virt <span class="nt">-cpu</span> cortex-a72 <span class="nt">-m</span> 2G <span class="nt">-smp</span> 2
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>qemu-system-aarch64 <span class="nt">-kernel</span> linux/arch/arm64/boot/Image <span class="nt">-drive</span> <span class="nv">format</span><span class="o">=</span>raw,file<span class="o">=</span>buildroot/output/images/rootfs.ext4,if<span class="o">=</span>virtio <span class="nt">-append</span> <span class="s2">"root=/dev/vda console=ttyAMA0 nokaslr"</span> <span class="nt">-nographic</span> <span class="nt">-M</span> virt <span class="nt">-cpu</span> cortex-a72 <span class="nt">-m</span> 2G <span class="nt">-smp</span> 2
 </code></pre></div></div>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>
+<ol>
+  <li>buildroot 내에서 추가한 systemcall 동작 확인</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># hello</span>
+Hello World~!!!! 15
+ret : 16
 </code></pre></div></div>
 
-<p>5.3 빌드한 프로그램 실행하기</p>
+<p>위와 같이, linux rootfs 에 추가한 <code class="language-plaintext highlighter-rouge">hello</code> 실행 파일을 바로 실행 시킬 수 있으며, 그 실행 과정에서 <code class="language-plaintext highlighter-rouge">new_syscall</code> 의 <code class="language-plaintext highlighter-rouge">printk(KERN_INFO "Hello World~!!!! %d\n", code); </code> 가 실행되어 <code class="language-plaintext highlighter-rouge">Hello World~!!!! 15</code> 가 출력 되고, 다시 <code class="language-plaintext highlighter-rouge">hello</code> 의 <code class="language-plaintext highlighter-rouge">printf("ret : %d\n", ret);</code> 실행으로 <code class="language-plaintext highlighter-rouge">ret : 16</code> 가 출력됨을 확인할 수 있다.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># dmesg</span>
+...
+virtio_net virtio0 enp0s1: renamed from eth0
+random: crng init <span class="k">done
+</span>Hello World~!!!! 15
 </code></pre></div></div>
+<p>커널에서 프린트 되는 모든 로그 메세지 출력해보면, 해당 systemcall 이 실행되면서 출력된 로그값이 마지막에 존재하는 것을 확인할 수 있다.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>
-</code></pre></div></div>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>
-</code></pre></div></div>
 
         <aside class="sidebar inline" id="post-end">
     
@@ -696,6 +712,37 @@ hello: ELF 64-bit LSB executable, ARM aarch64, version 1 <span class="o">(</span
           
           
 
+          <a href="./kernelmodule01.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general02.jpg') center no-repeat; background-size: cover;">
+            <div class="recent-item-title">
+              <span>Kernel Module 만들기</span>
+              
+
+  <span class = "recent-item-meta">
+  
+  
+  
+  
+    
+    
+    <p class="page_meta-readtime">
+      
+        4 minute read
+      
+    </p>
+  
+  
+  </span>
+
+            </div>
+          </a>
+        </div>
+      
+    
+      
+        <div class="recent-item">
+          
+          
+
           <a href="./gdp01.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general01.jpg') center no-repeat; background-size: cover;">
             <div class="recent-item-title">
               <span>GDB 를 사용 기초 및 systemcall GDB 적용</span>
@@ -710,7 +757,7 @@ hello: ELF 64-bit LSB executable, ARM aarch64, version 1 <span class="o">(</span
     
     <p class="page_meta-readtime">
       
-        3 minute read
+        4 minute read
       
     </p>
   
@@ -741,7 +788,7 @@ hello: ELF 64-bit LSB executable, ARM aarch64, version 1 <span class="o">(</span
     
     <p class="page_meta-readtime">
       
-        4 minute read
+        5 minute read
       
     </p>
   
@@ -773,37 +820,6 @@ hello: ELF 64-bit LSB executable, ARM aarch64, version 1 <span class="o">(</span
     <p class="page_meta-readtime">
       
         4 minute read
-      
-    </p>
-  
-  
-  </span>
-
-            </div>
-          </a>
-        </div>
-      
-    
-      
-        <div class="recent-item">
-          
-          
-
-          <a href="./makfile01.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general23.jpg') center no-repeat; background-size: cover;">
-            <div class="recent-item-title">
-              <span>Makefile 기본 문법 01</span>
-              
-
-  <span class = "recent-item-meta">
-  
-  
-  
-  
-    
-    
-    <p class="page_meta-readtime">
-      
-        2 minute read
       
     </p>
   
