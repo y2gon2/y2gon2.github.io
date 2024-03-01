@@ -7,9 +7,9 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>기본적인 LiveView Authentication 적용 - Gon's Tech Jurnal</title>
-	<link rel="canonical" href="http://localhost:4000/authentication.html">
-	<meta name="description" content="LiveView 라이브러리가 제공하는 Authentication 을 적용">
+	<title>Device Driver 개발 1 - Gon's Tech Jurnal</title>
+	<link rel="canonical" href="http://localhost:4000/device_driver1.html">
+	<meta name="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 11">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 <script type="application/ld+json">
@@ -19,13 +19,13 @@
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "http://localhost:4000"},
-  "headline": "기본적인 LiveView Authentication 적용",
-  "abstract": "LiveView 라이브러리가 제공하는 Authentication 을 적용",
-    "keywords": "authentication, phoenix, liveview",
-    "wordcount": "187",
-    "image": ["http://localhost:4000/assets/imgposts/general/post_general01.jpg"],
-  "datePublished": "2023-12-18 13:32:20 +0900",
-  "dateModified": "2023-12-18 13:32:20 +0900",
+  "headline": "Device Driver 개발 1",
+  "abstract": "개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 11",
+    "keywords": "linux, device driver, device node",
+    "wordcount": "1274",
+    "image": ["http://localhost:4000/assets/imgposts/general/post_general03.jpg"],
+  "datePublished": "2024-02-29 10:32:20 +0900",
+  "dateModified": "2024-02-29 10:32:20 +0900",
   "author": {
     "@type": "Person",
     "name": "Yong gon Yun"},
@@ -40,30 +40,30 @@
 }
 </script>
 <!-- Open Graph data -->
-<meta property="og:url" content="http://localhost:4000/authentication.html"/>
+<meta property="og:url" content="http://localhost:4000/device_driver1.html"/>
 <meta property="og:type" content="article"/>
-<meta property="og:title" content="기본적인 LiveView Authentication 적용"/>
-<meta property="og:description" content="LiveView 라이브러리가 제공하는 Authentication 을 적용"/>
-<meta property="og:image" content="http://localhost:4000/assets/imgposts/general/post_general01.jpg"/>
-<meta property="og:image:alt" content="기본적인 LiveView Authentication 적용"/>
+<meta property="og:title" content="Device Driver 개발 1"/>
+<meta property="og:description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 11"/>
+<meta property="og:image" content="http://localhost:4000/assets/imgposts/general/post_general03.jpg"/>
+<meta property="og:image:alt" content="Device Driver 개발 1"/>
 <meta property="og:site_name" content="Gon's Tech Jurnal" />
-<meta property="article:published_time" content="2023-12-18 13:32:20 +0900" />
-<meta property="article:modified_time" content="2023-12-18 13:32:20 +0900" />
-<meta property="article:tag" content="authentication, phoenix, liveview" />
+<meta property="article:published_time" content="2024-02-29 10:32:20 +0900" />
+<meta property="article:modified_time" content="2024-02-29 10:32:20 +0900" />
+<meta property="article:tag" content="linux, device driver, device node" />
 <meta property="fb:admins" content="ar.maybach" />
 <!-- Schema.org markup for Google -->
-<meta itemprop="name" content="기본적인 LiveView Authentication 적용">
-<meta itemprop="description" content="LiveView 라이브러리가 제공하는 Authentication 을 적용">
-<meta itemprop="image" content="http://localhost:4000/assets/imgposts/general/post_general01.jpg">
+<meta itemprop="name" content="Device Driver 개발 1">
+<meta itemprop="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 11">
+<meta itemprop="image" content="http://localhost:4000/assets/imgposts/general/post_general03.jpg">
 <!-- Twitter Card data -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@N/A">
-<meta name="twitter:title" content="기본적인 LiveView Authentication 적용">
-<meta name="twitter:description" content="LiveView 라이브러리가 제공하는 Authentication 을 적용">
+<meta name="twitter:title" content="Device Driver 개발 1">
+<meta name="twitter:description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 11">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="187"/>
-<meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general01.jpg">
+<meta data-rh="true" name="twitter:data1" content="1274"/>
+<meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general03.jpg">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
 	<!-- iOS Safari -->
@@ -150,7 +150,7 @@
 
 <section class="hidden">
   <div class="post">
-      <a  class="post-list-title" href="./authentication.html">기본적인 LiveView Authentication 적용</a>
+      <a  class="post-list-title" href="./device_driver1.html">Device Driver 개발 1</a>
       
 
   <span class = "post-card-meta">
@@ -162,7 +162,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2023-12-18T13:32:20+09:00">December 18, 2023</time>
+        <time datetime="2024-02-29T10:32:20+09:00">February 29, 2024</time>
       </span>
     
     
@@ -174,7 +174,7 @@
     
     <span class="page_meta-readtime">
       
-        less than 1 minute read
+        6 minute read
       
     </span>
   
@@ -182,7 +182,7 @@
   </span>
 
         <div class="post-excerpt">
-            <ul><li>Authentication Generator 사용을 위한 phx.gen 추가</li></ul><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen</code></pre></div></div><ul><li>이 중 auth 관련 generator 사용</li></ul><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen.auth Accounts User uers</code></pre></div></div><ul><li>Authentication Generator 사용을 위한 phx.gen 추가</li></ul><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen</code></pre></div></div><ul><li>이 중 auth 관련 generator 사용</li></ul><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen.auth Accounts User uers</code></pre></div></div><p>1. Context ('Accounts') <br /> Context는 Phoenix에서 도메인 특정 로직을 캡슐화하는 모듈. 이는 데이터베이스와의 상호작용을 관리하고, 애플리케이션의 나머지 부분에 서비스 API를 제공한다. "Accounts"는 이 예제에서 생성될 context의 이름으로 이 context는 인증과 관련된 모든 함수와 로직을 포함하게 된다.</p><p>2. Schema ('User') <br /> Schema는 데이터베이스 테이블의 구조를 설명하는 Elixir 모듈. 이는 테이블의...<a class="read-more" href="./authentication.html"> read more</a>
+            <style> summary::-webkit-details-marker { display: none; } summary { list-style: none; }</style><details><summary></summary>에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지</details><p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스...<a class="read-more" href="./device_driver1.html"> read more</a>
         </div>
   </div>
 </section>
@@ -280,14 +280,14 @@
 </header> <!-- End Header -->
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="기본적인 LiveView Authentication 적용">
-<meta itemprop="description" content="LiveView 라이브러리가 제공하는 Authentication 을 적용">
-<meta itemprop="datePublished" content="2023-12-18T13:32:20+09:00">
+    <meta itemprop="headline" content="Device Driver 개발 1">
+<meta itemprop="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 11">
+<meta itemprop="datePublished" content="2024-02-29T10:32:20+09:00">
 
     <div class="wrapper">
       <div class="page-content">
         <div class="header-page">
-          <h2 class="page-title">기본적인 LiveView Authentication 적용</h2>
+          <h2 class="page-title">Device Driver 개발 1</h2>
           
 
   <span class = "post-page-meta">
@@ -299,7 +299,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2023-12-18T13:32:20+09:00">December 18, 2023</time>
+        <time datetime="2024-02-29T10:32:20+09:00">February 29, 2024</time>
       </span>
     
     
@@ -311,7 +311,7 @@
     
     <span class="page_meta-readtime">
       
-        less than 1 minute read
+        6 minute read
       
     </span>
   
@@ -330,11 +330,11 @@
     
         <ul class="tags side">
             
-                <li><a href="./tag.html?tag=authentication" class="tag side">authentication</a></li>
+                <li><a href="./tag.html?tag=linux" class="tag side">linux</a></li>
             
-                <li><a href="./tag.html?tag=phoenix" class="tag side">phoenix</a></li>
+                <li><a href="./tag.html?tag=device+driver" class="tag side">device driver</a></li>
             
-                <li><a href="./tag.html?tag=liveview" class="tag side">liveview</a></li>
+                <li><a href="./tag.html?tag=device+node" class="tag side">device node</a></li>
             
     
         </ul>
@@ -343,11 +343,11 @@
     <div class="share-hover side">
         <span class="share-button side"><svg fill="currentColor" width="25" height="25" class="side"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>
         <div class="share-icons side" id="sidebar-icons">
-            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=기본적인 LiveView Authentication 적용&url=http://localhost:4000/authentication.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/authentication.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/authentication.html&title=기본적인 LiveView Authentication 적용" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/authentication.html&title=기본적인 LiveView Authentication 적용&summary=LiveView 라이브러리가 제공하는 Authentication 을 적용&source=http://localhost:4000/authentication.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a class="email" href="mailto:?subject=기본적인 LiveView Authentication 적용&body=LiveView 라이브러리가 제공하는 Authentication 을 적용%0A%0ARead more here: http://localhost:4000/authentication.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=Device Driver 개발 1&url=http://localhost:4000/device_driver1.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/device_driver1.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/device_driver1.html&title=Device Driver 개발 1" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/device_driver1.html&title=Device Driver 개발 1&summary=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 11&source=http://localhost:4000/device_driver1.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a class="email" href="mailto:?subject=Device Driver 개발 1&body=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 11%0A%0ARead more here: http://localhost:4000/device_driver1.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
             <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="side" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>
         </div>
     </div>
@@ -357,58 +357,244 @@
 
         
         
-<div class="center-container">
-  <div class="github-button">
-    <span class="button-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" role="img" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2.2467A10.00042,10.00042,0,0,0,8.83752,21.73419c.5.08752.6875-.21247.6875-.475,0-.23749-.01251-1.025-.01251-1.86249C7,19.85919,6.35,18.78423,6.15,18.22173A3.636,3.636,0,0,0,5.125,16.8092c-.35-.1875-.85-.65-.01251-.66248A2.00117,2.00117,0,0,1,6.65,17.17169a2.13742,2.13742,0,0,0,2.91248.825A2.10376,2.10376,0,0,1,10.2,16.65923c-2.225-.25-4.55-1.11254-4.55-4.9375a3.89187,3.89187,0,0,1,1.025-2.6875,3.59373,3.59373,0,0,1,.1-2.65s.83747-.26251,2.75,1.025a9.42747,9.42747,0,0,1,5,0c1.91248-1.3,2.75-1.025,2.75-1.025a3.59323,3.59323,0,0,1,.1,2.65,3.869,3.869,0,0,1,1.025,2.6875c0,3.83747-2.33752,4.6875-4.5625,4.9375a2.36814,2.36814,0,0,1,.675,1.85c0,1.33752-.01251,2.41248-.01251,2.75,0,.26251.1875.575.6875.475A10.0053,10.0053,0,0,0,12,2.2467Z"/></svg></span>
-    <a class="button-text" href="https://github.com/y2gon2/pento1/tree/main/document" target="_blank" aria-label="Open on GitHub">view on <b>GitHub</b></a>
-  </div>
-</div>
+        <style>
+    summary::-webkit-details-marker {
+        display: none;
+    }
+    summary {
+        list-style: none;
+    }
+</style>
 
-        <ul><li>Authentication Generator 사용을 위한 phx.gen 추가</li></ul>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen
+<details><summary></summary>
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+</details>
+
+<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) - Rootfs 빌드 강의 내용 (https://comento.kr/)</p>
+
+<h3 id="1-디바이스-드라이버-종류">1. 디바이스 드라이버 종류</h3>
+
+<p>디바이스 드라이버는 플랫폼 별 (윈도우 드라이버, 리눅스 드라이버, 맥 OS 드라이버) 등 또는 OS 수준 별(커널 모드 드라이버, 사용자 모드 드라이버) 로 구분되기도 하며, 아래와 같이 하드웨어의 유형과 기능에 따라 장치별 드라이버로 구분되기도 한다.</p>
+
+<ol>
+  <li>
+    <p>블록 장치 드라이버<br />
+데이터를 블록이라는 고정된 크기의 단위로 저장하고 검색하는 저장 장치를 관리. 이러한 장치에는 하드 디스크 드라이브(HDD), 솔리드 스테이트 드라이브(SSD), USB 플래시 드라이브 등이 포함되며. 블록 장치 드라이버는 파일 시스템을 지원하여, 사용자와 시스템이 데이터를 효율적으로 저장하고 액세스할 수 있게 한다. (ex. 블록 장치 드라이버는 운영 체제가 디스크의 특정 블록을 읽거나 쓸 수 있도록 하며, 디스크 상의 데이터의 물리적 위치를 추상화.)</p>
+  </li>
+  <li>
+    <p>문자 장치 드라이버<br />
+데이터를 문자 단위로 처리하는 장치, 즉 한 번에 하나의 문자(또는 바이트)를 전송하는 장치를 관리한다. 이에는 키보드, 마우스, 시리얼 포트, 프린터 등이 포함된다. 문자 장치 드라이버는 사용자 입력을 처리하거나 문자 기반의 데이터를 장치로 전송하는 역할을 한다. (ex. 키보드 드라이버는 사용자가 누른 키의 신호를 받아 운영 체제가 이해할 수 있는 입력 데이터로 변환.)</p>
+  </li>
+  <li>
+    <p>네트워크 드라이버<br />
+네트워크 인터페이스 카드(NIC)나 기타 네트워킹 하드웨어 장치를 관리한다. 이 드라이버는 데이터 패킷을 네트워크를 통해 송수신하는 데 필요한 기능을 제공한다. 네트워크 드라이버는 네트워크 프로토콜(예: TCP/IP)과 상호 작용하여 데이터를 올바르게 포맷하고, 주소를 지정하며, 에러 검사를 수행한다. 네트워크 드라이버는 데이터의 안정적인 전송을 보장하기 위해 중요한 역할을 한다.</p>
+  </li>
+  <li>
+    <p>버스 디바이스 드라이버<br />
+컴퓨터 내의 다양한 하드웨어 장치를 연결하는 통신 경로인 버스를 관리한다. 대표적인 예로는 PCI(Peripheral Component Interconnect), USB(Universal Serial Bus), SATA(Serial ATA) 등이 있습니다. 버스 드라이버는 하드웨어 장치 간의 데이터 전송을 조정하고, 장치 간의 호환성을 보장한다. (ex. USB 버스 드라이버는 USB 장치가 컴퓨터에 연결될 때 필요한 전력 관리, 데이터 전송 속도 조정, 연결된 장치의 식별 및 구성을 담당.)</p>
+  </li>
+</ol>
+
+<h3 id="2-디바이스-노드">2. 디바이스 노드</h3>
+
+<p>디바이스 노드(Device Node)는 유닉스 및 유닉스 계열 운영 체제에서 하드웨어 장치를 파일 시스템 내의 파일로 표현하는 방법. 유닉스 계열 시스템은 ‘모든 것은 파일’이라는 철학을 따르는데, 이는 하드웨어 장치를 포함한 모든 자원을 파일처럼 취급한다는 의미이다. 디바이스 노드를 통해, 사용자와 응용 프로그램은 표준 파일 입출력(IO) 시스템 호출을 사용하여 하드웨어 장치와 통신할 수 있다.</p>
+
+<h4 id="디바이스-노드의-종류-타입">디바이스 노드의 종류 (타입)</h4>
+
+<ul>
+  <li>
+    <p>문자 디바이스(Character Device) : c <br /></p>
+  </li>
+  <li>
+    <p>블록 디바이스(Block Device) : b <br /></p>
+
+    <p>(네트워크 드라이버와 버스 디바이스 드라이버는 노출되지 않고 별도로 관리됨.)</p>
+  </li>
+</ul>
+
+<h4 id="디바이스-노드의-특징-및-사용-방법">디바이스 노드의 특징 및 사용 방법</h4>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">mknod &lt;파일이름&gt; &lt;타입&gt; &lt;주번호&gt; &lt;부번호&gt;</code> : 디바이스 노드 파일 생성</p>
+  </li>
+  <li>
+    <p>파일 시스템 내 위치 <br />
+디바이스 노드는 주로 /dev 디렉토리에 위치한다. 예를 들어, /dev/sda는 첫 번째 SATA 하드 드라이브를, /dev/tty는 현재 터미널을 나타낸다.</p>
+  </li>
+  <li>
+    <p>특수 파일 <br />
+디바이스 노드는 특수 파일로 분류된다. 일반 파일과 달리, 실제 데이터를 디스크에 저장하는 대신, 커널의 하드웨어 장치 드라이버와 통신하는 인터페이스 역할을 한다.</p>
+  </li>
+  <li>
+    <p>MAJOR/MINOR 번호 <br />
+각 디바이스 노드는 MAJOR 번호와 MINOR 번호를 가진다.</p>
+
+    <p>MAJOR 번호(0 ~ 511)는 장치 유형(예: 하드 디스크, 시리얼 포트)을 식별한다. 디바이스 드라이버마다 고유하며 커널이 자동으로 할당하기도 한다.</p>
+
+    <p>MINOR 번호(0 ~ 1048576)는 해당 유형 내의 개별 장치를 구분한다. 즉 디바이스마다 고유하며 디바이스 드라이버가 할당을 관리한다.</p>
+
+    <p>ex. USB 마우스를 여러개 꽂았을 경우 - 디바이스(minor 번호)는 여러개, 디바이스 드라이버(major 번호) 는 하나</p>
+  </li>
+  <li>
+    <p>사용자와 그룹 권한 <br />
+디바이스 노드는 파일과 마찬가지로 사용자와 그룹 권한을 가진다. 이를 통해 특정 사용자 또는 그룹만이 장치에 접근하거나 사용할 수 있는 권한을 제어할 수 있다.</p>
+  </li>
+</ul>
+
+<h3 id="3-문자-디바이스-드라이버-등록-실습">3. 문자 디바이스 드라이버 등록 실습</h3>
+
+<h4 id="31-문자-디바이스-드러이버-구현-시스템콜-파일-생성">3.1 문자 디바이스 드러이버 구현 시스템콜 파일 생성</h4>
+
+<p>(이전 post 에서 구현한 <code class="language-plaintext highlighter-rouge">linux/drivers/coment/main.c</code> 파일을 사용하여 진행)</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux/drivers/comento<span class="nv">$ </span>vim main.c
 </code></pre></div></div>
-<ul><li>이 중 auth 관련 generator 사용</li></ul>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen.auth Accounts User uers
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;linux/module.h&gt;</span><span class="cp">
+</span>
+<span class="c1">// (1)</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="nf">comento_device_open</span><span class="p">(</span><span class="k">struct</span> <span class="n">inode</span> <span class="o">*</span><span class="n">inode</span><span class="p">,</span> <span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">file</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">minor</span> <span class="o">=</span> <span class="n">iminor</span><span class="p">(</span><span class="n">inode</span><span class="p">);</span>
+    <span class="n">printk</span><span class="p">(</span><span class="n">KERN_DEBUG</span> <span class="s">"%s - minor : %d/n"</span><span class="p">,</span> <span class="n">__func__</span><span class="p">,</span> <span class="n">minor</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span> 
+
+<span class="c1">// (2)</span>
+<span class="k">struct</span> <span class="n">file_operations</span> <span class="n">fops</span><span class="o">=</span> <span class="p">{</span>
+    <span class="p">.</span><span class="n">open</span> <span class="o">=</span> <span class="n">comento_device_open</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="k">static</span> <span class="kt">int</span> <span class="n">__init</span> <span class="nf">comento_module_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> 
+<span class="p">{</span>
+    <span class="n">printk</span><span class="p">(</span><span class="n">KERN_DEBUG</span> <span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">__func__</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">register_chrdev</span><span class="p">(</span><span class="mi">177</span><span class="p">,</span> <span class="s">"comento"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">fops</span><span class="p">);</span> <span class="c1">// (3)</span>
+    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="n">__exit</span> <span class="nf">comento_module_exit</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> 
+<span class="p">{</span>
+    <span class="n">unregister_chrdev</span><span class="p">(</span><span class="mi">177</span><span class="p">,</span> <span class="s">"comento"</span><span class="p">);</span>
+    <span class="n">printk</span><span class="p">(</span><span class="n">KERN_DEBUG</span> <span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">__func__</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">module_init</span><span class="p">(</span><span class="n">comento_module_init</span><span class="p">);</span>
+<span class="n">module_exit</span><span class="p">(</span><span class="n">comento_module_exit</span><span class="p">);</span>
+
+<span class="n">MODULE_AUTHOR</span><span class="p">(</span><span class="s">"Hello&lt;hello@comento.com&gt;"</span><span class="p">);</span>
+<span class="n">MODULE_DESCRIPTION</span><span class="p">(</span><span class="s">"Example module"</span><span class="p">);</span>
+<span class="n">MODULE_LICENSE</span><span class="p">(</span><span class="s">"GPL v2"</span><span class="p">);</span>
 </code></pre></div></div>
-<ul><li>Authentication Generator 사용을 위한 phx.gen 추가</li></ul>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen
+
+<p>(1) static int comento_device_open(struct inode *inode, struct file *file) {} <br />
+리눅스 커널 내에서 디바이스 파일을 열려고 할 때 호출되는 함수. 이 함수는 file_operations 구조체 내에서 .open 포인터에 의해 참조되며, 사용자 공간에서 디바이스 파일(예: /dev/comento)에 대한 open 시스템 콜이 발생할 때 실행된다.
+해당 함수는 디바이스 파일이 열릴 때 필요한 초기화나 상태 확인 등의 작업을 수행하기 위애 정의 된다. <br />
+<code class="language-plaintext highlighter-rouge">struct file_operations</code> 의 주요 필드 callback 함수에 대한 정의를 살펴보면</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">struct</span> <span class="n">file_operations</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">module</span> <span class="o">*</span><span class="n">owner</span><span class="p">;</span>
+    <span class="n">loff_t</span> <span class="p">(</span><span class="o">*</span><span class="n">llseek</span><span class="p">)</span> <span class="p">(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="p">,</span> <span class="n">loff_t</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+    <span class="kt">ssize_t</span> <span class="p">(</span><span class="o">*</span><span class="n">read</span><span class="p">)</span> <span class="p">(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="p">,</span> <span class="kt">char</span> <span class="n">__user</span> <span class="o">*</span><span class="p">,</span> <span class="kt">size_t</span><span class="p">,</span> <span class="n">loff_t</span> <span class="o">*</span><span class="p">);</span>
+    <span class="kt">ssize_t</span> <span class="p">(</span><span class="o">*</span><span class="n">write</span><span class="p">)</span> <span class="p">(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">__user</span> <span class="o">*</span><span class="p">,</span> <span class="kt">size_t</span><span class="p">,</span> <span class="n">loff_t</span> <span class="o">*</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">open</span><span class="p">)</span> <span class="p">(</span><span class="k">struct</span> <span class="n">inode</span> <span class="o">*</span><span class="p">,</span> <span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">release</span><span class="p">)</span> <span class="p">(</span><span class="k">struct</span> <span class="n">inode</span> <span class="o">*</span><span class="p">,</span> <span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="p">);</span>
+    <span class="c1">// 다른 필드들...</span>
+  <span class="p">};</span>
 </code></pre></div></div>
-<ul><li>이 중 auth 관련 generator 사용</li></ul>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix phx.gen.auth Accounts User uers
+<p>이와 같이 open 필드의 경우, inode 포인터와 file 포인터를 인자로 취하는 함수이여야 한다.</p>
+
+<ul>
+  <li>inode <br />
+inode는 유닉스 및 유닉스 계열 시스템에서 파일 시스템의 파일이나 디렉터리에 대한 메타데이터를 저장하는 데이터 구조 (구조체 타입) 각 파일이나 디렉터리는 고유한 inode를 가지며, 이 inode에는 파일의 소유자, 파일 모드(권한), 파일 크기, 파일이 저장된 디스크 상의 위치, 생성 및 수정 날짜 등의 정보가 포함된다. <br /> 
+디바이스 드라이버의 컨텍스트에서 inode 구조체는 디바이스 파일의 메타데이터에 접근하는 데 사용된다. 특히, 디바이스 파일을 나타내는 inode에서 Major 번호와 Minor 번호를 추출하여, 해당 디바이스 파일이 어떤 디바이스를 참조하는지 식별할 수 있다.<br /></li>
+</ul>
+
+<p>(2) file_operations <br />
+리눅스 커널 내에서 파일 작업을 위한 callback 함수를 정의하는데 사용되느 구조체. 커널 모듈이나 디바이스 드라이버가 파일 시스템의 파일이나 디바이스 파일에 대한 다양한 작업(예: 열기, 읽기, 쓰기 등)을 수행할 수 있도록 하는 인터페이스를 제공한다. 각 필드는 특정 파일 작업을 위한 함수 포인터를 가리키며, 해당 작업이 호출될 때 실행될 함수를 지정한다. <br /><br /></p>
+<ul>
+  <li>.open   : 파일이나 디바이스를 열 때 호출됨</li>
+  <li>.read   : 파일이나 디바이스에서 데이터를 읽을 때 호출됨</li>
+  <li>.write  : 파일이나 디바이스에 데이터를 쓸 때 호출됨</li>
+  <li>.release: 파일이나 디바이스가 닫힐 때 호출됨 (종종 close 작업으로 참조됨).</li>
+  <li>.llseek : 파일 내에서 읽기/쓰기 위치를 변경할 때 호출됨</li>
+  <li>.ioctl  : 장치에 특정 명령을 보낼 때 사용됨 (장치 제어).<br /><br /></li>
+</ul>
+
+<p>(3) register_chrdev(major, name, fops)  <br /> 
+새로운 문자 디바이스 드라이버 등록에 사용되는 API</p>
+<ul>
+  <li>major : 주번호로 사용할 번호를 지정, (0으로 지정시 커널이 자동 할당)</li>
+  <li>name : 디바이스의 이름</li>
+  <li>fops : 디바이스 드라이버가 구현할 file_operations</li>
+  <li>등록이 성공했다면 0 또는 할당받은 major 번호를 반환, 실패시 음수 반환</li>
+</ul>
+
+<p><br />
+이제 아래와 같이 수정한 소스 파일을 빌드하여 ko dynamic linker 파일 생성한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 <span class="nv">CROSS_COMPILE</span><span class="o">=</span>/home/gon/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- make
+  CALL    scripts/checksyscalls.sh
+  CC <span class="o">[</span>M]  drivers/comento/main.o
+  LD <span class="o">[</span>M]  drivers/comento/comento.o
+  MODPOST Module.symvers
+  LD <span class="o">[</span>M]  drivers/comento/comento.ko
 </code></pre></div></div>
 
-<p>
-1. Context ('Accounts') <br />
-  Context는 Phoenix에서 도메인 특정 로직을 캡슐화하는 모듈. 이는 데이터베이스와의 상호작용을 관리하고, 애플리케이션의 나머지 부분에 서비스 API를 제공한다.
-  "Accounts"는 이 예제에서 생성될 context의 이름으로 이 context는 인증과 관련된 모든 함수와 로직을 포함하게 된다.
-</p>
+<p>rootfs 에 마운트 해당 파일을 마우트 이미지에 삽입</p>
 
-<p>
-2. Schema ('User') <br />
-  Schema는 데이터베이스 테이블의 구조를 설명하는 Elixir 모듈. 이는 테이블의 각 열에 해당하는 필드와 그 타입을 정의한다.
-  "User"는 사용자 데이터를 나타내는 schema의 이름으로 이 schema는 사용자 데이터를 저장하고 쿼리하는 데 사용된다.
-</p>
-
-<p>
-3. Plural name of the schema ('users')<br />
-  이것은 데이터베이스 내에서 사용될 테이블의 이름. Phoenix는 일반적으로 schema 이름의 복수형을 테이블 이름으로 사용한다.
-  "users"는 "User" schema에 대응하는 데이터베이스 테이블의 이름.
-</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix deps.get
-</code></pre></div></div>
-<ul><li>Run Migration</li></ul>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; mix ecto.migrate
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux/<span class="nv">$ </span><span class="nb">sudo </span>mount <span class="nt">-o</span> loop ../buildroot/output/images/rootfs.ext4 /mnt
+user@DESKTOP:~/linux/<span class="nv">$ </span><span class="nb">sudo cp </span>drivers/comento/comento.ko /mnt/usr/lib/modules/.
+user@DESKTOP:~/linux/<span class="nv">$ </span><span class="nb">sync
+</span>user@DESKTOP:~/linux/<span class="nv">$ </span><span class="nb">sudo </span>umount /mnt
 </code></pre></div></div>
 
-<p>
-해당 설정 이후 기존 `live "/guess", WrongLive` 를 :require_authenticated_user plug 를 실행하는 scope 로 옮겨서 추가해준다.
-</p>
+<p>QEMU 로 커널 실행</p>
 
-<p>
-따라서 해당 경로 접속은 Authentication 이 필요하며, 해당 인증은 LiveView 에서 재공하는 login / signup page 를 사용하여 회원 등록을 손쉽게 적용할 수 있게 된다.
-</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux/<span class="nv">$ </span><span class="nb">cd</span> ..
+user@DESKTOP:~<span class="nv">$ </span>qemu-system-aarch64 <span class="nt">-kernel</span> linux/arch/arm64/boot/Image <span class="nt">-drive</span> <span class="nv">format</span><span class="o">=</span>raw,file<span class="o">=</span>buildroot/output/images/rootfs.ext4,if<span class="o">=</span>virtio <span class="nt">-append</span> <span class="s2">"root=/dev/vda console=ttyAMA0 nokaslr"</span> <span class="nt">-nographic</span> <span class="nt">-M</span> virt <span class="nt">-cpu</span> cortex-a72 <span class="nt">-m</span> 2G <span class="nt">-smp</span> 2
+</code></pre></div></div>
+
+<h4 id="32-디바이스-노드-만들기">3.2 디바이스 노드 만들기</h4>
+
+<p>mknod 명령어로 디바이스 노드를 생성한다. 순서대로 c (문자 디바이스), 177 (기존에 지정한 major 번호) 32 (임의의 minor 번호) 를 입력한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># cd /dev/
+# mknod /dev/comento c 177 43
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># cat /dev/comento
+cat: can't open '/dev/comento': No such device or address
+</code></pre></div></div>
+
+<p>명령어 수행 결과를 확인했을 때, 아직 디바이스 드라이버가 로드되지 않아 찾지 못한다고 나온다. 따라서 아래와 같이 해당 디바이스 드라이버를 등록 시키고 다시 확인해보면,</p>
+
+<h4 id="33-모듈-로드">3.3 모듈 로드</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># insmod /usr/lib/modules/comento.ko
+# cat /dev/comento
+cat: read error: Invalid argument
+</code></pre></div></div>
+
+<p>해당 결과와 같이, 드라이버 노드는 찾은 것 같다. 다만 read 대한 구현이 없기 때문에 해당 에러가 발생하였다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># dmesg
+...
+comento_module_init
+# ls -lah comento
+crw-r--r--    1 root     root      177,  43 Feb 29 07:20 comento
+</code></pre></div></div>
+
+<p>dmesg 로 init 되었음이 확인 되었으며, (그런데 <code class="language-plaintext highlighter-rouge">comento_device_open</code> 함수 실행 메세지는 안나왔네 ;;) ls 명령어를 통해 <code class="language-plaintext highlighter-rouge">comento</code> 파일이 생성 및 major, minor 번호가 정상적으로 부여되었음을 볼 수 있다.</p>
 
 
         <aside class="sidebar inline" id="post-end">
@@ -420,11 +606,11 @@
     
         <ul class="tags inline">
             
-                <li><a href="./tag.html?tag=authentication" class="tag inline">authentication</a></li>
+                <li><a href="./tag.html?tag=linux" class="tag inline">linux</a></li>
             
-                <li><a href="./tag.html?tag=phoenix" class="tag inline">phoenix</a></li>
+                <li><a href="./tag.html?tag=device+driver" class="tag inline">device driver</a></li>
             
-                <li><a href="./tag.html?tag=liveview" class="tag inline">liveview</a></li>
+                <li><a href="./tag.html?tag=device+node" class="tag inline">device node</a></li>
             
     
         </ul>
@@ -433,11 +619,11 @@
     <div class="share-hover inline">
         <span class="share-button inline"><svg fill="currentColor" width="25" height="25" class="inline"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>
         <div class="share-icons inline" id="post-end-icons">
-            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=기본적인 LiveView Authentication 적용&url=http://localhost:4000/authentication.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/authentication.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/authentication.html&title=기본적인 LiveView Authentication 적용" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/authentication.html&title=기본적인 LiveView Authentication 적용&summary=LiveView 라이브러리가 제공하는 Authentication 을 적용&source=http://localhost:4000/authentication.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a class="email" href="mailto:?subject=기본적인 LiveView Authentication 적용&body=LiveView 라이브러리가 제공하는 Authentication 을 적용%0A%0ARead more here: http://localhost:4000/authentication.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=Device Driver 개발 1&url=http://localhost:4000/device_driver1.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/device_driver1.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/device_driver1.html&title=Device Driver 개발 1" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/device_driver1.html&title=Device Driver 개발 1&summary=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 11&source=http://localhost:4000/device_driver1.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a class="email" href="mailto:?subject=Device Driver 개발 1&body=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 11%0A%0ARead more here: http://localhost:4000/device_driver1.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
             <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="inline" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>
         </div>
     </div>
@@ -566,7 +752,7 @@
     
     <p class="page_meta-readtime">
       
-        4 minute read
+        3 minute read
       
     </p>
   
@@ -834,14 +1020,14 @@
     }
 
     function copyToClipboard() {
-      navigator.clipboard.writeText('http://localhost:4000/authentication.html').then(function() {
+      navigator.clipboard.writeText('http://localhost:4000/device_driver1.html').then(function() {
       alerts = document.getElementsByClassName('alert')
       for (i=0; i < alerts.length; i++){
         alerts[i].innerHTML='\u00ABlink copied\u00BB';
         setTimeout((function(i){ return function(){alerts[i].innerHTML='';}})(i), 1600 );
       };
       }, function() {
-        prompt("Unable to copy, please use this link:", "http://localhost:4000/authentication.html");
+        prompt("Unable to copy, please use this link:", "http://localhost:4000/device_driver1.html");
       });
     }
 

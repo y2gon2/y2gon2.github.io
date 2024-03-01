@@ -1,6 +1,10 @@
 {
   "posts" : [
     
+    "./device_driver2.html",
+    
+    "./device_driver1.html",
+    
     "./kernelmodule01.html",
     
     "./gdp01.html",
