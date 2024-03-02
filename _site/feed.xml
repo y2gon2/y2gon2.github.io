@@ -1,4 +1,201 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-03-01T15:29:12+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">Device Driver 개발 2 (파일 읽기/ 쓰기)</title><link href="http://localhost:4000/device_driver2.html" rel="alternate" type="text/html" title="Device Driver 개발 2 (파일 읽기/ 쓰기)" /><published>2024-03-01T10:32:20+09:00</published><updated>2024-03-01T10:32:20+09:00</updated><id>http://localhost:4000/device_driver2</id><content type="html" xml:base="http://localhost:4000/device_driver2.html"><![CDATA[<style>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-03-02T16:21:54+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">Device Driver 개발 3 (파일 특수 제어 (ioctl) 구현)</title><link href="http://localhost:4000/device_driver3.html" rel="alternate" type="text/html" title="Device Driver 개발 3 (파일 특수 제어 (ioctl) 구현)" /><published>2024-03-02T10:32:20+09:00</published><updated>2024-03-02T10:32:20+09:00</updated><id>http://localhost:4000/device_driver3</id><content type="html" xml:base="http://localhost:4000/device_driver3.html"><![CDATA[<style>
+    summary::-webkit-details-marker {
+        display: none;
+    }
+    summary {
+        list-style: none;
+    }
+</style>
+
+<details><summary></summary>
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+</details>
+
+<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) - Rootfs 빌드 강의 내용 (https://comento.kr/)</p>
+
+<h3 id="1-파일-특수-제어-ioctl-이란">1. 파일 특수 제어 (ioctl) 이란?</h3>
+
+<p>ioctl은 리눅스에서 주로 사용되는 시스템 콜 중 하나로, “Input/Output Control”의 약자이다. 단순 읽기/쓰기 외 디바이스 드라이버에 특정 명령을 전달하거나, 드라이버의 상태를 변경하거나, 내부 데이터를 얻기 위해 사용된다. 일반적인 파일 입출력 시스템 콜과는 달리, ioctl을 통해 디바이스 특화 명령을 수행할 수 있기 때문에, 다양한 종류의 하드웨어 디바이스와 상호작용하는 데 매우 유용하다.</p>
+
+<p>unlocked_ioctl 함수 포인터 프로토타입 : <br />
+<strong>long (*unlocked_ioctl)(struct file *file, unsigned int cmd, unsigned long arg);</strong></p>
+
+<ul>
+  <li>
+    <p>struct file *file : <br />
+현재 열린 파일(디바이스)을 나타내는 file 구조체에 대한 포인터. 이 구조체는 파일에 대한 중요한 정보를 담고 있으며, ioctl 호출 시 해당 디바이스 파일에 대한 참조를 제공.</p>
+  </li>
+  <li>
+    <p>unsigned int cmd : <br />
+디바이스 드라이버에 전달된 명령. user space에서 ioctl 함수를 호출할 때 지정한 명령 코드가 이 인자로 전달된다. 드라이버는 이 코드를 사용하여 어떤 작업을 수행할지 결정한다. 명령 코드는 보통 드라이버의 헤더 파일에 상수로 정의되어 있다.</p>
+
+    <p>cmd 의 경우 일반적을 _IOR과 _IOW 매크로를 사용해서 정의 한다.</p>
+
+    <ul>
+      <li>_IO(type, nr): arg 없이 단순한 명령 매크로. type은 (디바이스 고유의) 명령 유형, nr 은 명령의 고유 번호를 의미</li>
+      <li>_IOW(type, nr, size): arg 를 사용해서 user space 에 size 만큼의 데이터를 kernel 에 넘김.</li>
+      <li>_IOR(type, nr, size): arg 를 사용해서 kernel 내에서 읽고, 해당 data 를 size 크기 만큼 가져옴.</li>
+    </ul>
+
+    <p>이를 사용하여 파일 읽기/쓰기와는 다른 디바이스의 상태, 구성, 또는 내부 정보 등을 읽거나 수정할 수 있다.</p>
+  </li>
+  <li>
+    <p>unsigned long arg : <br />
+명령에 대한 추가 데이터를 포함할 수 있는 사용자 공간의 포인터 또는 값. 명령의 성격에 따라 이 값은 주소 값일 수도 있고, 직접적인 데이터 값일 수도 있다. 드라이버는 이 값을 통해 필요한 추가 정보를 얻거나 사용자 공간으로 데이터를 전달할 수 있다.</p>
+  </li>
+</ul>
+
+<p>unlocked_ioctl 함수는 성공 시 0 또는 양의 정수를, 실패 시 음의 에러 코드를 반환한다. 이 반환 값은 시스템 콜을 호출한 사용자 공간 프로세스에게 전달된다.</p>
+
+<p>(unlocked_ioctl 대신 ioctl 함수 포인터를 사용하는 이유 중 하나는, unlocked_ioctl이 빅 커널 락(BKL, Big Kernel Lock)을 사용하지 않기 때문이다. 이는 더 나은 성능과 동시성을 제공하며, 현대의 멀티코어 시스템에서 중요한 특징이다. 따라서, 새로운 드라이버를 작성할 때는 unlocked_ioctl을 사용하는 것이 권장된다.)</p>
+
+<h3 id="2-파일-특수-제어-ioctl-구현">2. 파일 특수 제어 (ioctl) 구현</h3>
+
+<p>기존의 main.c 파일에 ioctl 관련 구현 내용을 추가해 준다. 해당 코드는 buffer 내용을 지우는 (clear) 하는 작업을 정의하였다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define COMENTO_MAGIC 'c'  // type ( ioctl 명령을 유일하게 식별하기 위한 문자)
+#define COMENTO_IOCTL_CLEAR _IO(COMENTO_MAGIC, 0) // nr: 0 함수 내부 switch 문의 구분 번호
+</span>
+<span class="k">static</span> <span class="kt">long</span> <span class="nf">comento_device_ioctl</span><span class="p">(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">fp</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">cmd</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">switch</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="n">COMENTO_IOCTL_CLEAR</span><span class="p">:</span>
+            <span class="n">memset</span><span class="p">(</span><span class="n">comento_device_buf</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">COMENTO_BUF_SIZE</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="nl">default:</span>
+            <span class="n">printk</span><span class="p">(</span><span class="n">KERN_DEBUG</span> <span class="s">"%s failed - %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">__func__</span><span class="p">,</span> <span class="n">cmd</span><span class="p">);</span>
+            <span class="k">return</span> <span class="o">-</span><span class="n">EINVAL</span><span class="p">;</span> <span class="c1">// 정의되지 않은 값이 입력된 경우, "Invalid Argument" 오류 반환</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//...</span>
+<span class="k">static</span> <span class="k">struct</span> <span class="n">file_operations</span> <span class="n">comento_device_fops</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="p">.</span><span class="n">unlocked_ioctl</span> <span class="o">=</span> <span class="n">comento_device_ioctl</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>한편, <a href="https://y2gon2.github.io/device_driver2.html">이전 post - 파일 읽기/ 쓰기</a> 에서는 파일 읽기/쓰기 기능만 사용되므로, 기존의 읽기/쓰기 함수를 사용하여 구현하였다. 그러나 ioctl 은 사용자 정의 명령을 통해 특정 디바이스 드라이버와 상호작용해야 하므로, 이를 별도로 구현해 주어야 한다. 이와 관련하여 해당 내용은 다음과 같다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;sys/ioctl.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;linux/limits.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#define COMENTO_DEVICE_NAME "comento" // 디바이스 파일명 
+#define COMENTO_MAGIC 'c'
+</span>
+<span class="c1">// 디바이스에 대한 ioctl 명령을 정의, _IO 매크로를 사용하여 COMENTO_IOCTL_CLEAR 명령을 생성</span>
+<span class="c1">// 해당 정의는 앞에 커널 모듈의 소스코드에서 정의한 것과 일치해야 한다.</span>
+<span class="cp">#define COMENTO_IOCTL_CLEAR _IO(COMENTO_MAGIC, 0) 
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="c1">// open 함수를 사용하여 /dev/comento-device 디바이스 파일을 읽기/쓰기 모드(O_RDWR)로 염</span>
+    <span class="c1">// 파일 디스크립터는 fd 변수에 저장</span>
+    <span class="c1">// 파일 열기에 실패한 경우, 오류 메시지를 출력하고 프로그램을 종료</span>
+    <span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">"/dev/"</span> <span class="n">COMENTO_DEVICE_NAME</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">);</span> 
+    <span class="k">if</span><span class="p">(</span><span class="n">fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Failed to open device</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ioctl(fd, COMENTO_DEVICE_IOCTL_CLEAR, 0) 해당 호출을 통해 </span>
+    <span class="c1">// 시스템 콜을 통해 커널 공간으로 전달되고, 커널은 등록된 디바이스 드라이버의 ioctl 처리 함수 </span>
+    <span class="c1">// 'comento_device_ioctl' - case COMENTO_DEVICE_IOCTL_CLEAR 이 실행되게 된다. </span>
+    <span class="c1">// 파일 디스크립터는 fd 변수에 저장되며, 파일 열기에 실패한 경우, </span>
+    <span class="c1">// 오류 메시지를 출력하고 프로그램을 종료합니다.</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">ioctl</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">COMENTO_IOCTL_CLEAR</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Failed to do ioctl command</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="3-구현-작업">3. 구현 작업</h3>
+
+<p>main.c 을 열어 위 소스 코드 추가</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ </span>vim drivers/comento/main.c
+</code></pre></div></div>
+
+<p>소스 코드 빌드</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 <span class="nv">CROSS_COMPILE</span><span class="o">=</span>/home/gon/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- make
+  CALL    scripts/checksyscalls.sh
+  CC <span class="o">[</span>M]  drivers/comento/main.o
+  LD <span class="o">[</span>M]  drivers/comento/comento.o
+  MODPOST Module.symvers
+  LD <span class="o">[</span>M]  drivers/comento/comento.ko
+</code></pre></div></div>
+
+<p>빌드된 커널 모듈을 이미지내 삽입</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">sudo </span>mount <span class="nt">-o</span> loop ../buildroot/output/images/rootfs.ext4 /mnt
+user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">sudo cp </span>drivers/comento/comento.ko /mnt/usr/lib/modules/.
+</code></pre></div></div>
+
+<p>사용자 프로그램 생성 (위 작성 코드 내용 사용)</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">cd</span> ..
+user@DESKTOP:~<span class="nv">$ </span>vim ioctl.c
+</code></pre></div></div>
+
+<p>toolchain 을 사용하여 사용자 프로그램 빌드</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-gcc <span class="nt">-o</span> ioctl ioctl.c
+</code></pre></div></div>
+
+<p>사용자 프로그램 이미지 내 추가</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span><span class="nb">sudo cp </span>ioctl /mnt/usr/bin
+user@DESKTOP:~<span class="nv">$ </span><span class="nb">sync
+</span>user@DESKTOP:~<span class="nv">$ </span><span class="nb">sudo </span>umount /mnt
+</code></pre></div></div>
+
+<p>QEMU 실행</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>qemu-system-aarch64 <span class="nt">-kernel</span> linux/arch/arm64/boot/Image <span class="nt">-drive</span> <span class="nv">format</span><span class="o">=</span>raw,file<span class="o">=</span>buildroot/output/images/rootfs.ext4,if<span class="o">=</span>virtio <span class="nt">-append</span> <span class="s2">"root=/dev/vda console=ttyAMA0 nokaslr"</span> <span class="nt">-nographic</span> <span class="nt">-M</span> virt <span class="nt">-cpu</span> cortex-a72 <span class="nt">-m</span> 2G <span class="nt">-smp</span> 2
+</code></pre></div></div>
+
+<h3 id="4-ioclt-사용">4. ioclt 사용</h3>
+
+<p>모듈 삽입 및 드라이버 노드 파일 생성</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># insmod /usr/lib/modules/comento.ko
+# cd /dev/
+# mkmod /dev/comento c 177 34
+# ls -lah comento
+crw-r--r--    1 root     root      177,  34 Mar  2 07:12 comento
+</code></pre></div></div>
+
+<p>node file buffer 문자열 넣기 및 확인</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># echo "hello~~!!" &gt; /dev/comento
+# cat /dev/comento
+hello~~!!
+</code></pre></div></div>
+
+<p>사용자 프로그램(ioctl) 을 실행하여 buffer 초기화 (clear) 실행</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ioctl
+# cat /dev/comento
+(출력 내용 없음)
+</code></pre></div></div>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="device driver" /><category term="device node" /><category term="ioctl" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 13]]></summary></entry><entry><title type="html">Device Driver 개발 2 (파일 읽기/ 쓰기)</title><link href="http://localhost:4000/device_driver2.html" rel="alternate" type="text/html" title="Device Driver 개발 2 (파일 읽기/ 쓰기)" /><published>2024-03-01T10:32:20+09:00</published><updated>2024-03-01T10:32:20+09:00</updated><id>http://localhost:4000/device_driver2</id><content type="html" xml:base="http://localhost:4000/device_driver2.html"><![CDATA[<style>
     summary::-webkit-details-marker {
         display: none;
     }
@@ -1673,219 +1870,4 @@ user2:x:1002:1002::/home/user2:/bin/sh
 
 <h3 id="결론">결론</h3>
 
-<p>각각의 사용법은 스크립트에서 변수의 값이나 명령어의 결과를 어떻게 처리할지에 따라 달라진다. 문자열 내에서 변수의 값을 그대로 사용하고 싶지 않거나, 특수 문자를 명령어의 일부로 해석되지 않게 하고 싶을 때 작은따옴표를 사용한다. 반면, 변수의 값을 확장하거나 명령어의 결과를 사용하고자 할 때는 큰따옴표를 사용한다.</p>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="bash" /><category term="shell scirpt" /><category term="quates" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 03]]></summary></entry><entry><title type="html">Shell Script 기본 문법 01</title><link href="http://localhost:4000/shell-script01.html" rel="alternate" type="text/html" title="Shell Script 기본 문법 01" /><published>2024-02-10T08:32:20+09:00</published><updated>2024-02-10T08:32:20+09:00</updated><id>http://localhost:4000/shell-script01</id><content type="html" xml:base="http://localhost:4000/shell-script01.html"><![CDATA[<h3 id="1-간단한-함수를-사용한-script-1">1. 간단한 함수를 사용한 script 1</h3>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
-
-<span class="c"># 함수 정의: 두 인자를 받아 출력함</span>
-add_inner_numbers<span class="o">()</span> <span class="o">{</span>
-    <span class="nb">echo</span> <span class="s2">"첫 번째 숫자: </span><span class="nv">$1</span><span class="s2">"</span>
-    <span class="nb">echo</span> <span class="s2">"두 번째 숫자: </span><span class="nv">$2</span><span class="s2">"</span>
-    
-    <span class="nb">local sum</span><span class="o">=</span>0
-    <span class="nb">sum</span><span class="o">=</span><span class="k">$((</span> <span class="nv">$1</span> <span class="o">+</span> <span class="nv">$2</span> <span class="k">))</span>
-    <span class="nb">echo</span> <span class="s2">"두 수의 합: </span><span class="nv">$sum</span><span class="s2">"</span>
-<span class="o">}</span>
-
-<span class="c"># 함수 호출: 5와 10을 인자로 전달</span>
-add_inner_numbers 5 10
-</code></pre></div></div>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">#!/bin/bash</code>
-    <ul>
-      <li>“shebang” (또는 “hashbang”)</li>
-      <li>해당 script를 실행할 때 사용할 interpreter 의 경로를 진행</li>
-      <li>여기서는 Bash shell 을 사용하여 실행되어야 함을 의미</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">subtract_num() {}</code></li>
-  <li>
-    <p>script 함수를 정의할 때, 매개변수는 명시하지 않는다. 함수 내 $1, $2, $3 … 과 같이 함수 내부에 명시된 value 의 숫자값에 순서대로 매칭되어 입력된다.</p>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">sum=$(( $1 + $2 ))</code>
-    <ul>
-      <li>첫번째 괄호는 $() 로 연산 결과를 값으로 취함을 의미</li>
-      <li>두번째 괄호는 연산에 대한 괄호</li>
-      <li>띄어쓰기는 여기서는 결과에 영향을 미치지는 않지만 일반적인 작성 기준을 따름.</li>
-    </ul>
-  </li>
-</ul>
-
-<p><br /></p>
-<ul>
-  <li>실행 결과</li>
-</ul>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@DESKTOP:~<span class="nv">$ </span>./example.sh
-첫 번째 숫자: 5
-두 번째 숫자: 10
-두 수의 합: 15
-</code></pre></div></div>
-
-<h3 id="2-간단한-함수를-사용한-script-2-외부-입력">2. 간단한 함수를 사용한 script 2 (외부 입력)</h3>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
-
-<span class="c">#  두수를 빼는  함수 정의</span>
-subtract_num<span class="o">()</span> <span class="o">{</span>
-        <span class="nb">local </span><span class="nv">sub</span><span class="o">=</span>0
-        <span class="nv">sub</span><span class="o">=</span><span class="k">$((</span> <span class="nv">$2</span> <span class="o">-</span> <span class="nv">$1</span> <span class="k">))</span>
-        <span class="nb">echo</span> <span class="s2">"두 수의 차: </span><span class="nv">$sub</span><span class="s2">"</span>
-<span class="o">}</span>
-
-<span class="c"># 사용자로부터 두수 입력 받기</span>
-<span class="nb">read</span> <span class="nt">-p</span> <span class="s2">"첫번째 수를 입력하세요: "</span> num1
-<span class="nb">read</span> <span class="nt">-p</span> <span class="s2">"두번째 수를 입력하세요: "</span> num2
-
-<span class="c"># 함수 호출</span>
-subtract_num <span class="nv">$num1</span> <span class="nv">$num2</span>
-</code></pre></div></div>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">read -p "첫번째 수를 입력하세요: " num1</code>
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">read</code> 명령어로 표준입력 값을 받을 수 있다.</li>
-      <li><code class="language-plaintext highlighter-rouge">-p</code> 옵션으로 <code class="language-plaintext highlighter-rouge">echo</code> 명령어를 사용하지 않고 프롬프트 메세지를 보여줄 수 있다.</li>
-    </ul>
-  </li>
-</ul>
-
-<p><br /></p>
-<ul>
-  <li>실행 결과</li>
-</ul>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@DESKTOP:~<span class="nv">$ </span>./example.sh
-첫번째 수를 입력하세요: 2
-두번째 수를 입력하세요: <span class="nt">-5</span>
-두 수의 차: <span class="nt">-7</span>
-</code></pre></div></div>
-
-<h3 id="3-간단한-함수를-사용한-script-3-외부-입력-조건문">3. 간단한 함수를 사용한 script 3 (외부 입력, 조건문)</h3>
-
-<p>외부 입력을 함수의 실행과 함께 받도록 아래와 같이 구현할 수 있다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
-
-<span class="c">#  두수를 빼는  함수 정의</span>
-subtract_num<span class="o">()</span> <span class="o">{</span>
-        <span class="nb">local </span><span class="nv">sub</span><span class="o">=</span>0
-        <span class="nv">sub</span><span class="o">=</span><span class="k">$((</span> <span class="nv">$2</span> <span class="o">-</span> <span class="nv">$1</span> <span class="k">))</span>
-        <span class="nb">echo</span> <span class="s2">"두 수의 차: </span><span class="nv">$sub</span><span class="s2">"</span>
-<span class="o">}</span>
-
-<span class="k">if</span> <span class="o">[</span> <span class="nv">$# </span><span class="nt">-ne</span> 2 <span class="o">]</span><span class="p">;</span> <span class="k">then
-        </span><span class="nb">echo</span> <span class="s2">"사용방법: </span><span class="nv">$0</span><span class="s2"> 숫자1 숫자2"</span>
-        <span class="nb">exit </span>1
-<span class="k">fi</span>
-
-<span class="c"># 함수 호출</span>
-subtract_num <span class="nv">$1</span> <span class="nv">$2</span>
-</code></pre></div></div>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">if [ $# -ne 2 ]; then ... fi</code>
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">[];</code> 내 조건이 참일 경우, <code class="language-plaintext highlighter-rouge">then ... fi</code> 내 명령어를 실행</li>
-      <li><code class="language-plaintext highlighter-rouge">if</code>, <code class="language-plaintext highlighter-rouge">[];</code>, <code class="language-plaintext highlighter-rouge">then</code> 사이에는 띄어쓰기를 반드시 해야 함.</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">$# -ne 2</code>
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">$#</code> 은 script 에 전달된 positional parameter 의 갯수. 위 예제의 경우, <code class="language-plaintext highlighter-rouge">./example.sh 1 2</code> 와 같이 실행되는데, 이 때 <code class="language-plaintext highlighter-rouge">$#</code> 값은 2 이다.</li>
-      <li><code class="language-plaintext highlighter-rouge">-ne</code> 은 “not equal”  의 약자로, 두 값이 서로 다른지를 비교</li>
-      <li><code class="language-plaintext highlighter-rouge">2</code> 는 비교 대상의 값</li>
-      <li>즉 해당 script 부분은 “입력된 positional parameter 갯수가 2개가 아니라면” 이라는 조건을 정의함.</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">echo "..." exit 1</code>
-    <ul>
-      <li>해당 조건일 때, 메세지를 출력하고 에러 상태로 script 를 종료</li>
-      <li><code class="language-plaintext highlighter-rouge">exit 0</code> 인 경우, 정상적으로 작업이 성공되고 종료됨을 의미, 0 이 아닌 경우는, 에러나 특정 조건으로 인한 종료를 의미</li>
-    </ul>
-  </li>
-</ul>
-
-<p><br /></p>
-<ul>
-  <li>실행 결과</li>
-</ul>
-
-<p>매개변수를 입력하지 않은 경우</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@DESKTOP~<span class="nv">$ </span>./example.sh
-사용방법: ./example.sh 숫자1 숫자2
-</code></pre></div></div>
-
-<p>매개변수 값을 함께 입력한 경우</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@DESKTOP:~<span class="nv">$ </span>./example.sh 3 3
-두 수의 차: 0
-</code></pre></div></div>
-
-<h3 id="4-파일-입력--반복문을-이용-script">4. 파일 입력 &amp; 반복문을 이용 script</h3>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
-
-<span class="c"># 'list' 파일을 읽어와 line 변수에 저장</span>
-<span class="k">while </span><span class="nb">read</span> <span class="nt">-r</span> line<span class="p">;</span> <span class="k">do</span>
-    <span class="c"># 공백으로 구분된 값을 배열로 변환</span>
-    <span class="nv">IFS</span><span class="o">=</span><span class="s1">' '</span> <span class="nb">read</span> <span class="nt">-ra</span> ADDR <span class="o">&lt;&lt;&lt;</span> <span class="s2">"</span><span class="nv">$line</span><span class="s2">"</span>
-    <span class="c"># 배열의 각 요소를 반복하여 출력</span>
-    <span class="k">for </span>i <span class="k">in</span> <span class="s2">"</span><span class="k">${</span><span class="nv">ADDR</span><span class="p">[@]</span><span class="k">}</span><span class="s2">"</span><span class="p">;</span> <span class="k">do
-        </span><span class="nb">echo</span> <span class="nv">$i</span>
-    <span class="k">done
-done</span> &lt; <span class="s2">"list"</span>
-</code></pre></div></div>
-
-<p>list 파일</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 2 3 4 5
-</code></pre></div></div>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">while read -r line: do ... done &lt; "list"</code>
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">list</code> 파일로 부터 해당 내용을 줄별로 읽어와서 각 줄의 값을 <code class="language-plaintext highlighter-rouge">line</code> 변수의 값으로 생성한다.</li>
-      <li><code class="language-plaintext highlighter-rouge">-r</code> 옵션은 <code class="language-plaintext highlighter-rouge">read</code> 명령어가 <code class="language-plaintext highlighter-rouge">\</code> 을 이스케이프 문자가 아닌 데이터 원본 그대로 무결성을 유지한채로 값을 가질 수 있도록 조건을 부여한다.</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">IFS=' ' read -ra ADDR &lt;&lt;&lt; "$line"</code>
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">IFS</code> 는 “Internal Field Separator” 의 약자, Bash 에서 단어 경계를 정의하는데 사용되는 환경 변수. 이 구분에서 <code class="language-plaintext highlighter-rouge">IFS</code> 는 공백문자 <code class="language-plaintext highlighter-rouge">' '</code> 로 설정되어 단어의 구분을 공백으로 사용하겠다는 의미.</li>
-      <li><code class="language-plaintext highlighter-rouge">-ra</code> 에서 <code class="language-plaintext highlighter-rouge">a</code> 옵션은 입력된 data 를 배열로 변수 <code class="language-plaintext highlighter-rouge">ADDR</code> 에 저장함을 의미</li>
-      <li><code class="language-plaintext highlighter-rouge">&lt;&lt;&lt;</code> 은 here string redirction 을 의미. <code class="language-plaintext highlighter-rouge">here string</code> 은 문자열 데이터를 명령어의 표준입력으로 직접 전달할 수 있게 해준다. <code class="language-plaintext highlighter-rouge">명령어 &lt;&lt;&lt; "문자열"</code> 과 같은 형태로, redirection 을 뒤에 오는 문자열 값을 바로 가져와서 사용할 수 있게 해준다. 예를 들어,
-        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@DESKTOP:~<span class="nv">$ </span><span class="nb">grep</span> <span class="s2">"찾는"</span> <span class="o">&lt;&lt;&lt;</span> <span class="s2">"여기에는 찾는 단어가 있을까요?"</span>
-여기에는 찾는 단어가 있을까요?
-</code></pre></div>        </div>
-        <p>와 같이, 외부 파일 등에서 가져오는 것이 아니라 뒤에 명시된 문자열 값을 바로 redirection 하여 가져와 사용하게 된다.</p>
-      </li>
-      <li>따라서 해당 구문을 정리하면,<br />
-(1). line 변수 값을 문자열로 생성한다.<br />
-(2). (1) 번 값을 redirection 하여 가져오고,<br /> 
-(3). <code class="language-plaintext highlighter-rouge">\</code> 를 별도 처리하지 않고, <br />
-(4). 띄어쓰기(‘ ‘) 로 구분하여 생성된 배열 값을<br /> 
-(5). 배열 변수 <code class="language-plaintext highlighter-rouge">ADDR</code> 의 값으로 생성한다.</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">for i in "${ADDR[@]}"; do ... done</code>
-    <ul>
-      <li>반복문 <code class="language-plaintext highlighter-rouge">for</code> 는 배열 변수 ADDR 의 원소를 순회하면서 원소값 을 대입하여 <code class="language-plaintext highlighter-rouge">do ... done</code> 내 script 를 수행함.</li>
-      <li><code class="language-plaintext highlighter-rouge">ADDR[@]</code> 는 각 원소를 의미</li>
-      <li><code class="language-plaintext highlighter-rouge">""</code> 감싸 해당 원소값을 문자열로 변환, 혹시 문자열 내 다른 문자열을 포함한 경우 (ex. “값은 ${ADDR[@]}”) 다른 문자열과  배열 변수 값 부분을 명확히 구분하기 위해 <code class="language-plaintext highlighter-rouge">${}</code> 로 감싸줌.</li>
-    </ul>
-  </li>
-</ul>
-
-<p><br /></p>
-<ul>
-  <li>실행 결과</li>
-</ul>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@DESKTOP:~<span class="nv">$ </span>./example.sh
-1
-2
-3
-4
-5
-</code></pre></div></div>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="shell scirpt" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 01]]></summary></entry></feed>
+<p>각각의 사용법은 스크립트에서 변수의 값이나 명령어의 결과를 어떻게 처리할지에 따라 달라진다. 문자열 내에서 변수의 값을 그대로 사용하고 싶지 않거나, 특수 문자를 명령어의 일부로 해석되지 않게 하고 싶을 때 작은따옴표를 사용한다. 반면, 변수의 값을 확장하거나 명령어의 결과를 사용하고자 할 때는 큰따옴표를 사용한다.</p>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="bash" /><category term="shell scirpt" /><category term="quates" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 03]]></summary></entry></feed>

@@ -128,6 +128,8 @@
   "tag" : "device driver",
   "posts" : [
       
+      "./device_driver3.html",
+      
       "./device_driver2.html",
       
       "./device_driver1.html"
@@ -139,6 +141,8 @@
   {
   "tag" : "device node",
   "posts" : [
+      
+      "./device_driver3.html",
       
       "./device_driver2.html",
       
@@ -265,6 +269,16 @@
     
       
   {
+  "tag" : "ioctl",
+  "posts" : [
+      
+      "./device_driver3.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "kernel build",
   "posts" : [
       
@@ -297,6 +311,8 @@
   {
   "tag" : "linux",
   "posts" : [
+      
+      "./device_driver3.html",
       
       "./device_driver2.html",
       
