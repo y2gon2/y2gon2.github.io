@@ -128,6 +128,8 @@
   "tag" : "device driver",
   "posts" : [
       
+      "./udev1.html",
+      
       "./device_driver3.html",
       
       "./device_driver2.html",
@@ -311,6 +313,8 @@
   {
   "tag" : "linux",
   "posts" : [
+      
+      "./udev1.html",
       
       "./device_driver3.html",
       
@@ -621,6 +625,16 @@
   "posts" : [
       
       "./tail-recursion.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "udev",
+  "posts" : [
+      
+      "./udev1.html"
       
     ]
   } 
