@@ -35,7 +35,7 @@ author: Yong gon Yun
 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
 </details>
 
-개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) - Rootfs 빌드 강의 내용 (https://comento.kr/)
+개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/)
 
 ### 1. 관련 설정 추가 및 source code 생성
 
