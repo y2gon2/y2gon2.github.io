@@ -55,7 +55,7 @@ obj-$(CONFIG_DPLL)              += dpll/
 
 obj-$(CONFIG_S390)              += s390/
 # 추가 내용
-obj-y                           += comento/ 
+oeeebj-y                           += comento/ 
 ```
 
 1.2 drivers Kconfig 에도 추가될 디렉토리 Kconfig 항목 추가
