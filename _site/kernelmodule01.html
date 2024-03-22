@@ -22,7 +22,7 @@
   "headline": "Kernel Module 만들기",
   "abstract": "개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 10",
     "keywords": "linux, kernel module",
-    "wordcount": "771",
+    "wordcount": "766",
     "image": ["http://localhost:4000/assets/imgposts/general/post_general02.jpg"],
   "datePublished": "2024-02-28 10:32:20 +0900",
   "dateModified": "2024-02-28 10:32:20 +0900",
@@ -62,7 +62,7 @@
 <meta name="twitter:description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 10">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="771"/>
+<meta data-rh="true" name="twitter:data1" content="766"/>
 <meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general02.jpg">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
@@ -379,7 +379,7 @@
 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
 </details>
 
-<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) - Rootfs 빌드 강의 내용 (https://comento.kr/)</p>
+<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/)</p>
 
 <h3 id="1-관련-설정-추가-및-source-code-생성">1. 관련 설정 추가 및 source code 생성</h3>
 
@@ -397,7 +397,7 @@ user@DESKTOP:~/linux/drivers<span class="nv">$ </span>vim Makefile
 
 <span class="nv">obj-$(CONFIG_S390)</span>              <span class="o">+=</span> s390/
 <span class="c"># 추가 내용
-</span><span class="nv">obj-y</span>                           <span class="o">+=</span> comento/ 
+</span><span class="nv">oeeebj-y</span>                           <span class="o">+=</span> comento/ 
 </code></pre></div></div>
 
 <p>1.2 drivers Kconfig 에도 추가될 디렉토리 Kconfig 항목 추가</p>
@@ -659,9 +659,9 @@ Module                  Size  Used by
           
           
 
-          <a href="./udev1.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general06.jpg') center no-repeat; background-size: cover;">
+          <a href="./IPC04.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general10.jpg') center no-repeat; background-size: cover;">
             <div class="recent-item-title">
-              <span>udev 와 연동하기</span>
+              <span>IPC 실습 04 - Shared Memeory</span>
               
 
   <span class = "recent-item-meta">
@@ -673,7 +673,7 @@ Module                  Size  Used by
     
     <p class="page_meta-readtime">
       
-        7 minute read
+        5 minute read
       
     </p>
   
@@ -690,9 +690,9 @@ Module                  Size  Used by
           
           
 
-          <a href="./device_driver3.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general05.jpg') center no-repeat; background-size: cover;">
+          <a href="./IPC03.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general09.jpg') center no-repeat; background-size: cover;">
             <div class="recent-item-title">
-              <span>Device Driver 개발 3 (파일 특수 제어 (ioctl) 구현)</span>
+              <span>IPC 실습 03 - Unix socket</span>
               
 
   <span class = "recent-item-meta">
@@ -704,7 +704,7 @@ Module                  Size  Used by
     
     <p class="page_meta-readtime">
       
-        3 minute read
+        1 minute read
       
     </p>
   
@@ -721,9 +721,40 @@ Module                  Size  Used by
           
           
 
-          <a href="./device_driver2.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general04.jpg') center no-repeat; background-size: cover;">
+          <a href="./IPC02.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general08.jpg') center no-repeat; background-size: cover;">
             <div class="recent-item-title">
-              <span>Device Driver 개발 2 (파일 읽기/ 쓰기)</span>
+              <span>IPC 실습 02 - pipe</span>
+              
+
+  <span class = "recent-item-meta">
+  
+  
+  
+  
+    
+    
+    <p class="page_meta-readtime">
+      
+        2 minute read
+      
+    </p>
+  
+  
+  </span>
+
+            </div>
+          </a>
+        </div>
+      
+    
+      
+        <div class="recent-item">
+          
+          
+
+          <a href="./IPC01.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general07.jpg') center no-repeat; background-size: cover;">
+            <div class="recent-item-title">
+              <span>IPC 실습 01 - fork / execve</span>
               
 
   <span class = "recent-item-meta">
@@ -736,37 +767,6 @@ Module                  Size  Used by
     <p class="page_meta-readtime">
       
         4 minute read
-      
-    </p>
-  
-  
-  </span>
-
-            </div>
-          </a>
-        </div>
-      
-    
-      
-        <div class="recent-item">
-          
-          
-
-          <a href="./device_driver1.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general03.jpg') center no-repeat; background-size: cover;">
-            <div class="recent-item-title">
-              <span>Device Driver 개발 1</span>
-              
-
-  <span class = "recent-item-meta">
-  
-  
-  
-  
-    
-    
-    <p class="page_meta-readtime">
-      
-        6 minute read
       
     </p>
   

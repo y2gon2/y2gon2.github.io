@@ -7,9 +7,9 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Lazy Collection 과 Stream library - Gon's Tech Jurnal</title>
-	<link rel="canonical" href="http://localhost:4000/lazy-collection.html">
-	<meta name="description" content="Lazy Collection 과 Stream library">
+	<title>IPC 실습 02 - pipe - Gon's Tech Jurnal</title>
+	<link rel="canonical" href="http://localhost:4000/IPC02.html">
+	<meta name="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 16">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 <script type="application/ld+json">
@@ -19,13 +19,13 @@
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "http://localhost:4000"},
-  "headline": "Lazy Collection 과 Stream library",
-  "abstract": "Lazy Collection 과 Stream library",
-    "keywords": "elixir, lazy collection, elixir stream",
-    "wordcount": "492",
-    "image": ["http://localhost:4000/assets/imgposts/general/post_general11.jpg"],
-  "datePublished": "2024-01-07 10:32:20 +0900",
-  "dateModified": "2024-01-07 10:32:20 +0900",
+  "headline": "IPC 실습 02 - pipe",
+  "abstract": "개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 16",
+    "keywords": "linux, IPC, inter-process communication, pipe",
+    "wordcount": "545",
+    "image": ["http://localhost:4000/assets/imgposts/general/post_general08.jpg"],
+  "datePublished": "2024-03-19 10:32:20 +0900",
+  "dateModified": "2024-03-19 10:32:20 +0900",
   "author": {
     "@type": "Person",
     "name": "Yong gon Yun"},
@@ -40,30 +40,30 @@
 }
 </script>
 <!-- Open Graph data -->
-<meta property="og:url" content="http://localhost:4000/lazy-collection.html"/>
+<meta property="og:url" content="http://localhost:4000/IPC02.html"/>
 <meta property="og:type" content="article"/>
-<meta property="og:title" content="Lazy Collection 과 Stream library"/>
-<meta property="og:description" content="Lazy Collection 과 Stream library"/>
-<meta property="og:image" content="http://localhost:4000/assets/imgposts/general/post_general11.jpg"/>
-<meta property="og:image:alt" content="Lazy Collection 과 Stream library"/>
+<meta property="og:title" content="IPC 실습 02 - pipe"/>
+<meta property="og:description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 16"/>
+<meta property="og:image" content="http://localhost:4000/assets/imgposts/general/post_general08.jpg"/>
+<meta property="og:image:alt" content="IPC 실습 02 - pipe"/>
 <meta property="og:site_name" content="Gon's Tech Jurnal" />
-<meta property="article:published_time" content="2024-01-07 10:32:20 +0900" />
-<meta property="article:modified_time" content="2024-01-07 10:32:20 +0900" />
-<meta property="article:tag" content="elixir, lazy collection, elixir stream" />
+<meta property="article:published_time" content="2024-03-19 10:32:20 +0900" />
+<meta property="article:modified_time" content="2024-03-19 10:32:20 +0900" />
+<meta property="article:tag" content="linux, IPC, inter-process communication, pipe" />
 <meta property="fb:admins" content="ar.maybach" />
 <!-- Schema.org markup for Google -->
-<meta itemprop="name" content="Lazy Collection 과 Stream library">
-<meta itemprop="description" content="Lazy Collection 과 Stream library">
-<meta itemprop="image" content="http://localhost:4000/assets/imgposts/general/post_general11.jpg">
+<meta itemprop="name" content="IPC 실습 02 - pipe">
+<meta itemprop="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 16">
+<meta itemprop="image" content="http://localhost:4000/assets/imgposts/general/post_general08.jpg">
 <!-- Twitter Card data -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@N/A">
-<meta name="twitter:title" content="Lazy Collection 과 Stream library">
-<meta name="twitter:description" content="Lazy Collection 과 Stream library">
+<meta name="twitter:title" content="IPC 실습 02 - pipe">
+<meta name="twitter:description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 16">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="492"/>
-<meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general11.jpg">
+<meta data-rh="true" name="twitter:data1" content="545"/>
+<meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general08.jpg">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
 	<!-- iOS Safari -->
@@ -150,7 +150,7 @@
 
 <section class="hidden">
   <div class="post">
-      <a  class="post-list-title" href="./lazy-collection.html">Lazy Collection 과 Stream library</a>
+      <a  class="post-list-title" href="./IPC02.html">IPC 실습 02 - pipe</a>
       
 
   <span class = "post-card-meta">
@@ -162,7 +162,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2024-01-07T10:32:20+09:00">January 7, 2024</time>
+        <time datetime="2024-03-19T10:32:20+09:00">March 19, 2024</time>
       </span>
     
     
@@ -182,7 +182,7 @@
   </span>
 
         <div class="post-excerpt">
-            <h3>Lazy Collection</h3><p>Lazy Colleciton 은 Elixir와 같은 함수형 프로그래밍 언어에서 중요한 개념 중 하나로 데이터가 실제로 필요할 때까지 그 처리를 연기하는 방식으로 작동한다. 이 방식은 특히 대용량 데이터를 다룰 때 메모리 사용을 최소화하고 성능을 향상시킬 수 있다.</p><div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stream</span> <span class="o">=</span> <span class="no">Stream</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">10000</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">(</span><span class="nv">&amp;1</span> <span class="o">*</span> <span class="nv">&amp;1</span><span class="p">))</span></code></pre></div></div><p>이 코드는 1부터 10,000까지의 숫자 각각에 대해 제곱을 하는 스트림을 생성한다. 그러나 실제 제곱 연산은 스트림을 열거하는 시점, 예를 들어 Enum.to_list(stream)을 호출할 때까지 수행되지 않는다.</p><p><strong>특징</strong></p><ul><li>비동기 처리: lazy collection은 데이터의 전체 집합을 메모리에 한 번에 로드하지 않는다. 대신, 요소들은 필요할 때,...<a class="read-more" href="./lazy-collection.html"> read more</a>
+            <style> summary::-webkit-details-marker { display: none; } summary { list-style: none; }</style><details><summary></summary>에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지 에러방지</details><p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스...<a class="read-more" href="./IPC02.html"> read more</a>
         </div>
   </div>
 </section>
@@ -280,14 +280,14 @@
 </header> <!-- End Header -->
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Lazy Collection 과 Stream library">
-<meta itemprop="description" content="Lazy Collection 과 Stream library">
-<meta itemprop="datePublished" content="2024-01-07T10:32:20+09:00">
+    <meta itemprop="headline" content="IPC 실습 02 - pipe">
+<meta itemprop="description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 16">
+<meta itemprop="datePublished" content="2024-03-19T10:32:20+09:00">
 
     <div class="wrapper">
       <div class="page-content">
         <div class="header-page">
-          <h2 class="page-title">Lazy Collection 과 Stream library</h2>
+          <h2 class="page-title">IPC 실습 02 - pipe</h2>
           
 
   <span class = "post-page-meta">
@@ -299,7 +299,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2024-01-07T10:32:20+09:00">January 7, 2024</time>
+        <time datetime="2024-03-19T10:32:20+09:00">March 19, 2024</time>
       </span>
     
     
@@ -330,11 +330,13 @@
     
         <ul class="tags side">
             
-                <li><a href="./tag.html?tag=elixir" class="tag side">elixir</a></li>
+                <li><a href="./tag.html?tag=linux" class="tag side">linux</a></li>
             
-                <li><a href="./tag.html?tag=lazy+collection" class="tag side">lazy collection</a></li>
+                <li><a href="./tag.html?tag=IPC" class="tag side">IPC</a></li>
             
-                <li><a href="./tag.html?tag=elixir+stream" class="tag side">elixir stream</a></li>
+                <li><a href="./tag.html?tag=inter-process+communication" class="tag side">inter-process communication</a></li>
+            
+                <li><a href="./tag.html?tag=pipe" class="tag side">pipe</a></li>
             
     
         </ul>
@@ -343,11 +345,11 @@
     <div class="share-hover side">
         <span class="share-button side"><svg fill="currentColor" width="25" height="25" class="side"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>
         <div class="share-icons side" id="sidebar-icons">
-            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=Lazy Collection 과 Stream library&url=http://localhost:4000/lazy-collection.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/lazy-collection.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/lazy-collection.html&title=Lazy Collection 과 Stream library" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/lazy-collection.html&title=Lazy Collection 과 Stream library&summary=Lazy Collection 과 Stream library&source=http://localhost:4000/lazy-collection.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a class="email" href="mailto:?subject=Lazy Collection 과 Stream library&body=Lazy Collection 과 Stream library%0A%0ARead more here: http://localhost:4000/lazy-collection.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=IPC 실습 02 - pipe&url=http://localhost:4000/IPC02.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/IPC02.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/IPC02.html&title=IPC 실습 02 - pipe" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/IPC02.html&title=IPC 실습 02 - pipe&summary=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 16&source=http://localhost:4000/IPC02.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a class="email" href="mailto:?subject=IPC 실습 02 - pipe&body=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 16%0A%0ARead more here: http://localhost:4000/IPC02.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
             <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="side" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>
         </div>
     </div>
@@ -357,70 +359,201 @@
 
         
         
-<div class="center-container">
-  <div class="github-button">
-    <span class="button-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" role="img" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2.2467A10.00042,10.00042,0,0,0,8.83752,21.73419c.5.08752.6875-.21247.6875-.475,0-.23749-.01251-1.025-.01251-1.86249C7,19.85919,6.35,18.78423,6.15,18.22173A3.636,3.636,0,0,0,5.125,16.8092c-.35-.1875-.85-.65-.01251-.66248A2.00117,2.00117,0,0,1,6.65,17.17169a2.13742,2.13742,0,0,0,2.91248.825A2.10376,2.10376,0,0,1,10.2,16.65923c-2.225-.25-4.55-1.11254-4.55-4.9375a3.89187,3.89187,0,0,1,1.025-2.6875,3.59373,3.59373,0,0,1,.1-2.65s.83747-.26251,2.75,1.025a9.42747,9.42747,0,0,1,5,0c1.91248-1.3,2.75-1.025,2.75-1.025a3.59323,3.59323,0,0,1,.1,2.65,3.869,3.869,0,0,1,1.025,2.6875c0,3.83747-2.33752,4.6875-4.5625,4.9375a2.36814,2.36814,0,0,1,.675,1.85c0,1.33752-.01251,2.41248-.01251,2.75,0,.26251.1875.575.6875.475A10.0053,10.0053,0,0,0,12,2.2467Z"/></svg></span>
-    <a class="button-text" href="https://github.com/y2gon2/exercism/blob/main/document" target="_blank" aria-label="Open on GitHub">view on <b>GitHub</b></a>
-  </div>
-</div>
+        <style>
+    summary::-webkit-details-marker {
+        display: none;
+    }
+    summary {
+        list-style: none;
+    }
+</style>
 
-        <h3>Lazy Collection</h3>
-<p>Lazy Colleciton 은 Elixir와 같은 함수형 프로그래밍 언어에서 중요한 개념 중 하나로 데이터가 실제로 필요할 때까지 그 처리를 연기하는 방식으로 작동한다. 이 방식은 특히 대용량 데이터를 다룰 때 메모리 사용을 최소화하고 성능을 향상시킬 수 있다.</p>
+<details><summary></summary>
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+</details>
 
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stream</span> <span class="o">=</span> <span class="no">Stream</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">10000</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">(</span><span class="nv">&amp;1</span> <span class="o">*</span> <span class="nv">&amp;1</span><span class="p">))</span>
+<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/)</p>
+
+<h3 id="1-pipe-구현을-통한-부모-프로세서와-자식-프로세서-ipc">1. pipe 구현을 통한 부모 프로세서와 자식 프로세서 IPC</h3>
+
+<p>pipe 개념도</p>
+
+<center>
+  <img src="assets\img\posts\2024-03-19-IPC0201.png" width="500" />
+</center>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;sys/wait.h&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">pid_t</span> <span class="n">pid</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">pipe_from_parent_to_child</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">pipe_from_child_to_parent</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span>
+
+    <span class="n">pipe</span><span class="p">(</span><span class="n">pipe_from_parent_to_child</span><span class="p">);</span>
+    <span class="n">pipe</span><span class="p">(</span><span class="n">pipe_from_child_to_parent</span><span class="p">);</span>
+
+    <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 사용하지 않는 fd 는 닫아줌.</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">pipe_from_child_to_parent</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">pipe_from_parent_to_child</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+
+        <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">msg</span> <span class="o">=</span> <span class="s">"I'm child~!!"</span><span class="p">;</span>
+
+        <span class="n">printf</span><span class="p">(</span><span class="s">"[Child] send mes: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span>
+        <span class="n">write</span><span class="p">(</span><span class="n">pipe_from_child_to_parent</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">msg</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+        <span class="n">read</span><span class="p">(</span><span class="n">pipe_from_parent_to_child</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">buf</span><span class="p">,</span> <span class="mi">256</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"[Child] recv msg: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+
+        <span class="n">close</span><span class="p">(</span><span class="n">pipe_from_child_to_parent</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">pipe_from_parent_to_child</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// 사용하지 않는 fd 는 닫아줌.</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">pipe_from_child_to_parent</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">pipe_from_parent_to_child</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+
+        <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">msg</span> <span class="o">=</span> <span class="s">"I'm parent~!!"</span><span class="p">;</span>
+
+        <span class="n">printf</span><span class="p">(</span><span class="s">"[Parent] send mes: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span>
+        <span class="n">write</span><span class="p">(</span><span class="n">pipe_from_parent_to_child</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">msg</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+        <span class="n">read</span><span class="p">(</span><span class="n">pipe_from_child_to_parent</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">buf</span><span class="p">,</span> <span class="mi">256</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"[Parent] recv msg: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+
+        <span class="n">close</span><span class="p">(</span><span class="n">pipe_from_child_to_parent</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">pipe_from_parent_to_child</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
-<p>이 코드는 1부터 10,000까지의 숫자 각각에 대해 제곱을 하는 스트림을 생성한다. 그러나 실제 제곱 연산은 스트림을 열거하는 시점, 예를 들어 Enum.to_list(stream)을 호출할 때까지 수행되지 않는다.</p>
+<p>실행</p>
 
-<p><strong>특징</strong></p>
-<ul>
-<li>비동기 처리: lazy collection은 데이터의 전체 집합을 메모리에 한 번에 로드하지 않는다. 대신, 요소들은 필요할 때, 즉 실제로 열거(enumerate)하거나 접근할 때 처리된다.</li><br />
-<li>효율성: lazy collection은 메모리 사용을 최적화한다. 큰 데이터셋을 한 번에 처리하는 대신, 작은 조각으로 나누어 필요한 부분만 처리한다. 이는 특히 파일 읽기, 외부 API 호출, 대규모 계산과 같은 상황에서 유용하다.</li><br />
-<li>Function Chaining: lazy collection은 여러 함수를 연결(chaining)하여 복잡한 데이터 처리 파이프라인을 구축할 수 있다. 각 함수는 이전 함수의 출력을 입력으로 받아 처리한다.(아래 보충 설명 참조)</li><br />
-<li>Stream Module: Elixir에서 lazy collection을 구현하는 데 사용되는 주요 모듈은 Stream이다. Stream 모듈은 다양한 지연 처리 함수를 제공한다. 예를 들어, <code>Stream.map/2</code>은 컬렉션의 각 요소에 주어진 함수를 적용하지만, 실제 계산은 스트림을 열거할 때까지 연기된다.</li>
-</ul>
-
-<h3>즉시 연산 vs 지연 연산</h3>
-<p>아래 두 예제의 경우, 반환값은 동일하지만, 아래와 같이 다른 기능적 특징을 가진다.</p>
-
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">Stream</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">10000</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">(</span><span class="nv">&amp;1</span> <span class="o">*</span> <span class="nv">&amp;1</span><span class="p">))</span>
-</code></pre></div></div>
-<ul>
-<li>지연 연산: Stream.map은 연산을 즉시 수행하지 않고, 각 요소에 대한 연산을 정의하는 스트림을 반환한다. 이 스트림은 실제로 열거되기 전까지는 어떤 연산도 수행하지 않는다.</li><br />
-<li>메모리 효율성: 큰 데이터셋을 처리할 때 Stream.map은 모든 요소를 한 번에 메모리에 로드하지 않는다. 대신, 스트림을 열거할 때 각 요소를 개별적으로 처리한다. 이는 대규모 데이터셋을 다룰 때 메모리 사용을 최소화한다.</li><br />
-<li>적용 예: 위 code 에서 <code>Enum.to_list(stream)</code> 또는 다른 Enum 함수를 사용하여 스트림을 열거할 때까지 실제 연산이 연기된다.</li>
-</ul>
-
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">Enum</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">10000</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">(</span><span class="nv">&amp;1</span> <span class="o">*</span> <span class="nv">&amp;1</span><span class="p">))</span>
-</code></pre></div></div>
-<ul>
-<li>즉시 연산: Enum.map은 함수가 호출되는 즉시 모든 요소에 대해 연산을 수행한다. 연산 결과는 즉시 계산되고 반환된다.</li><br />
-<li>메모리 사용: 이 방식은 연산을 수행한 전체 결과를 메모리에 저장한다. 큰 데이터셋을 처리할 경우, 이는 상당한 양의 메모리를 사용할 수 있다.</li><br />
-<li>적용 예: 연산 결과가 즉시 필요하고 데이터셋이 메모리에 들어갈 수 있을 정도로 작을 때 유용.</li>
-</ul>
-
-<center>*****</center>
-<h3>Function Chaining 상태에서의 Lazy Collection</h3>
-<p>앞에서 관련 장점을 설명했으나, 다양한 함수를 연속적으로 사용하는 function chaining 에서 항상 해당 장점이 발휘되는 것은 아니다.</p>
-<p>예를 들면,</p>
-
-<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">1</span><span class="o">..</span><span class="mi">10000</span>
-<span class="o">|&gt;</span> <span class="no">Enum</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="nv">&amp;1</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
-<span class="o">|&gt;</span> <span class="no">Stream</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="nv">&amp;1</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">))</span>
-<span class="o">|&gt;</span> <span class="no">Enum</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span> vim pipe.c
+user@DESKTOP:~<span class="nv">$ </span> gcc <span class="nt">-o</span> pipe pipe.c
+user@DESKTOP:~<span class="nv">$ </span> ./pipe
+<span class="o">[</span>Parent] send mes: I<span class="s1">'m parent~!!
+[Child] send mes: I'</span>m child~!!
+<span class="o">[</span>Child] recv msg: I<span class="s1">'m parent~!!
+[Parent] recv msg: I'</span>m child~!!
 </code></pre></div></div>
 
-<p>의 처리 과정을 보면,</p>
+<h3 id="2-파이프-명령어-구현">2. 파이프 명령어 구현</h3>
 
-<ol>
-<li>chaining 과정에서 Stream 모듈의 함수 뒤에 Enum 모듈의 함수가 오면, 스트림에 대한 모든 연산이 Enum 함수 호출 시점에 즉시 수행된다. 이는 Enum 함수가 실제 데이터를 필요로 하기 때문이다.</li><br />
-<li>반대로, Enum 함수 다음에 Stream 함수가 오면, Enum 함수는 즉시 실행되고, 그 결과는 Stream 함수에 의해 다시 지연 처리된다.</li><br />
-<li>이 경우, Enum.map은 즉시 모든 요소에 대해 연산을 수행한다. 이어서 <code>Stream.filter</code>는 지연 처리 스트림을 생성하지만, 최종적으로 <code>Enum.to_list</code>에 의해 이 스트림이 즉시 열거되어 모든 데이터 처리가 완료된다.</li>
-</ol>
+<p>리눅스에서 사요하는 파이프 기호 <code class="language-plaintext highlighter-rouge">|</code> 도 동일한 pipe IPC 를 사용한 기능이다. 따라서, 예를 들면 <code class="language-plaintext highlighter-rouge">cat /etc/passwd | wc -l</code> 을 pipe IPC 를 사용하여 프로그램으로 구현해볼 수 있다.</p>
 
-<p>결론적으로, 예제에서 <code>Stream.filter(&amp;(&amp;1 &lt; 100))</code>는 결국 체인의 마지막에 있는 <code>Enum.to_list()</code> 함수 때문에 즉시 연산 처리된다.</p>
-<p>chaining된 함수들 중 하나라도 즉시 연산을 수행하는 Enum 모듈의 함수를 포함하고 있고, 이것이 체인의 마지막에 위치한다면, 체인의 모든 연산은 결국 즉시 수행된다. 이는 Enum 모듈의 함수가 실제 데이터를 필요로 하기 때문에, 지연된 연산들도 강제로 실행되어 결과를 산출한다.</p>
-<center>*****</center>
+<center>
+  <img src="assets\img\posts\2024-03-19-IPC0202.png" width="600" />
+</center>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;sys/wait.h&gt;</span><span class="cp">
+</span>
+<span class="cm">/* cat /etc/passwd | wc -l */</span>
+
+<span class="k">extern</span> <span class="kt">char</span><span class="o">**</span> <span class="n">environ</span><span class="p">;</span>
+
+<span class="kt">char</span><span class="o">*</span> <span class="k">const</span> <span class="n">front_argv</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"/bin/cat"</span><span class="p">,</span>
+    <span class="s">"/etc/passwd"</span><span class="p">,</span>
+    <span class="nb">NULL</span>
+<span class="p">};</span>
+
+<span class="kt">char</span><span class="o">*</span> <span class="k">const</span> <span class="n">back_argv</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"/bin/wc"</span><span class="p">,</span>
+    <span class="s">"-l"</span><span class="p">,</span>
+    <span class="nb">NULL</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">pid_t</span> <span class="n">pid</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">pipefd</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+    <span class="n">pipe</span><span class="p">(</span><span class="n">pipefd</span><span class="p">);</span>
+
+    <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="c1">// 읽기 fd 사용 X</span>
+        <span class="n">dup2</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">STDOUT_FILENO</span><span class="p">);</span> <span class="c1">// 쓰기 fd 를 표준출력 -&gt; 모든 표준출력은 쓰기 fd 로 전송됨</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>  <span class="c1">// 표준 출력 복제 후 닫음.</span>
+        <span class="n">execve</span><span class="p">(</span><span class="n">front_argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">front_argv</span><span class="p">,</span> <span class="n">environ</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="c1">// 읽기 fd 사용 X</span>
+        <span class="n">dup2</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">STDIN_FILENO</span><span class="p">);</span> <span class="c1">// 일기 fd 를 표준출력 -&gt; 읽기 fd 에서 읽ㅇ느 값을 표준입력으로 사용</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="c1">// 표준 입력 복제 후 닫음.</span>
+        <span class="n">execve</span><span class="p">(</span><span class="n">back_argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">back_argv</span><span class="p">,</span> <span class="n">environ</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">wait</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span> 
+
+    <span class="c1">// 부모프로세스에서의 fd 는 별개로 닫아야 함.</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="c1">// 읽기 fd 가 닫히면 2번째 프로세스의 표준 입력도</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="c1">// 닫히면서 2번째 프로세스도 종료됨.</span>
+
+    <span class="n">wait</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>결과 확인</p>
+
+<p>아래와 같이 해당 파일을 실행한 결과와  <code class="language-plaintext highlighter-rouge">cat /etc/passwd | wc -l</code> 의 실행 결과가 동일함을 확인할 수 있다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>gcc <span class="nt">-o</span> pipe2 pipe2.c
+user@DESKTOP:~<span class="nv">$ </span>./pipe2
+27
+user@DESKTOP:~<span class="nv">$ </span><span class="nb">cat</span> /etc/passwd | <span class="nb">wc</span> <span class="nt">-l</span>
+27
+</code></pre></div></div>
+
+<h3 id="3-네임드-파이프">3. 네임드 파이프</h3>
+
+<p>부모 자식간이 아닌 프로세스간 FIFO 파일의 경로를 알 수 있다면 통신이 가능하며, 이는 <code class="language-plaintext highlighter-rouge">mkfifo(fifo_file, mode)</code> 를 사용하여 수행 가능하다.</p>
+
+<p>따라서, 앞에서 구현한 <code class="language-plaintext highlighter-rouge">cat /etc/passwd | wc -l</code> 를 독립적으로 수행하는 두개의 프로세스를 구현하고 이를 연결하여 사용가능하다. 해당 사항을 shell script 로 구현하면</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="nb">mkfifo</span> <span class="nt">-m</span> 0600 fifo
+<span class="nb">wc</span> <span class="nt">-l</span> &lt; fifo &amp;
+<span class="nb">cat</span> /etc/passwd <span class="o">&gt;</span> fifo
+<span class="nb">rm </span>fifo
+</code></pre></div></div>
+
+<p>실행결과</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span><span class="nb">chmod</span> +x pipe3.sh
+user@DESKTOP:~<span class="nv">$ </span>./pipe3.sh
+27
+user@DESKTOP:~<span class="nv">$ </span><span class="nb">cat</span> /etc/passwd | <span class="nb">wc</span> <span class="nt">-l</span>
+27
+</code></pre></div></div>
+
 
         <aside class="sidebar inline" id="post-end">
     
@@ -431,11 +564,13 @@
     
         <ul class="tags inline">
             
-                <li><a href="./tag.html?tag=elixir" class="tag inline">elixir</a></li>
+                <li><a href="./tag.html?tag=linux" class="tag inline">linux</a></li>
             
-                <li><a href="./tag.html?tag=lazy+collection" class="tag inline">lazy collection</a></li>
+                <li><a href="./tag.html?tag=IPC" class="tag inline">IPC</a></li>
             
-                <li><a href="./tag.html?tag=elixir+stream" class="tag inline">elixir stream</a></li>
+                <li><a href="./tag.html?tag=inter-process+communication" class="tag inline">inter-process communication</a></li>
+            
+                <li><a href="./tag.html?tag=pipe" class="tag inline">pipe</a></li>
             
     
         </ul>
@@ -444,11 +579,11 @@
     <div class="share-hover inline">
         <span class="share-button inline"><svg fill="currentColor" width="25" height="25" class="inline"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>
         <div class="share-icons inline" id="post-end-icons">
-            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=Lazy Collection 과 Stream library&url=http://localhost:4000/lazy-collection.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/lazy-collection.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/lazy-collection.html&title=Lazy Collection 과 Stream library" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/lazy-collection.html&title=Lazy Collection 과 Stream library&summary=Lazy Collection 과 Stream library&source=http://localhost:4000/lazy-collection.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a class="email" href="mailto:?subject=Lazy Collection 과 Stream library&body=Lazy Collection 과 Stream library%0A%0ARead more here: http://localhost:4000/lazy-collection.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            <!-- <a class="twitter" href="https://twitter.com/intent/tweet?text=IPC 실습 02 - pipe&url=http://localhost:4000/IPC02.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/IPC02.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/IPC02.html&title=IPC 실습 02 - pipe" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a> -->
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/IPC02.html&title=IPC 실습 02 - pipe&summary=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 16&source=http://localhost:4000/IPC02.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a class="email" href="mailto:?subject=IPC 실습 02 - pipe&body=개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 16%0A%0ARead more here: http://localhost:4000/IPC02.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
             <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="inline" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>
         </div>
     </div>
@@ -845,14 +980,14 @@
     }
 
     function copyToClipboard() {
-      navigator.clipboard.writeText('http://localhost:4000/lazy-collection.html').then(function() {
+      navigator.clipboard.writeText('http://localhost:4000/IPC02.html').then(function() {
       alerts = document.getElementsByClassName('alert')
       for (i=0; i < alerts.length; i++){
         alerts[i].innerHTML='\u00ABlink copied\u00BB';
         setTimeout((function(i){ return function(){alerts[i].innerHTML='';}})(i), 1600 );
       };
       }, function() {
-        prompt("Unable to copy, please use this link:", "http://localhost:4000/lazy-collection.html");
+        prompt("Unable to copy, please use this link:", "http://localhost:4000/IPC02.html");
       });
     }
 

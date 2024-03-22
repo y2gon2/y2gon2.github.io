@@ -3,6 +3,22 @@
 [   
       
   {
+  "tag" : "IPC",
+  "posts" : [
+      
+      "./IPC04.html",
+      
+      "./IPC03.html",
+      
+      "./IPC02.html",
+      
+      "./IPC01.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "app.html.heex",
   "posts" : [
       
@@ -199,6 +215,26 @@
     
       
   {
+  "tag" : "execve",
+  "posts" : [
+      
+      "./IPC01.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "fork",
+  "posts" : [
+      
+      "./IPC01.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "gdb-multiarch",
   "posts" : [
       
@@ -271,6 +307,22 @@
     
       
   {
+  "tag" : "inter-process communication",
+  "posts" : [
+      
+      "./IPC04.html",
+      
+      "./IPC03.html",
+      
+      "./IPC02.html",
+      
+      "./IPC01.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "ioctl",
   "posts" : [
       
@@ -313,6 +365,14 @@
   {
   "tag" : "linux",
   "posts" : [
+      
+      "./IPC04.html",
+      
+      "./IPC03.html",
+      
+      "./IPC02.html",
+      
+      "./IPC01.html",
       
       "./udev1.html",
       
@@ -479,6 +539,16 @@
     
       
   {
+  "tag" : "pipe",
+  "posts" : [
+      
+      "./IPC02.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "polymorphism",
   "posts" : [
       
@@ -533,6 +603,16 @@
   "posts" : [
       
       "./users-column-add.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "shared memory",
+  "posts" : [
+      
+      "./IPC04.html"
       
     ]
   } ,
@@ -635,6 +715,16 @@
   "posts" : [
       
       "./udev1.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "unix socket",
+  "posts" : [
+      
+      "./IPC03.html"
       
     ]
   } 
