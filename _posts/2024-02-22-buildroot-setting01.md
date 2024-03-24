@@ -10,7 +10,7 @@ tags: [linux, buildroot, kernel build]
 author: Yong gon Yun
 ---
 
-개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/)
+아래 내용은 개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/) 강의 내용 중 일부에 해당함.
 
 
 ### 1. buildroot  다운로드 및 설치
