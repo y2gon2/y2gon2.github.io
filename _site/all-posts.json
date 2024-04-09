@@ -1,6 +1,12 @@
 {
   "posts" : [
     
+    "./tensorflow_gpu_setting.html",
+    
+    "./service-daemon.html",
+    
+    "./IPC05.html",
+    
     "./IPC04.html",
     
     "./IPC03.html",

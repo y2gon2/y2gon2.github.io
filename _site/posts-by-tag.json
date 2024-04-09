@@ -6,6 +6,10 @@
   "tag" : "IPC",
   "posts" : [
       
+      "./service-daemon.html",
+      
+      "./IPC05.html",
+      
       "./IPC04.html",
       
       "./IPC03.html",
@@ -121,10 +125,40 @@
     
       
   {
+  "tag" : "cuda",
+  "posts" : [
+      
+      "./tensorflow_gpu_setting.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "cudnn",
+  "posts" : [
+      
+      "./tensorflow_gpu_setting.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "custom javascript",
   "posts" : [
       
       "./custom-js-phoenix.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "daemon",
+  "posts" : [
+      
+      "./service-daemon.html"
       
     ]
   } ,
@@ -310,6 +344,8 @@
   "tag" : "inter-process communication",
   "posts" : [
       
+      "./IPC05.html",
+      
       "./IPC04.html",
       
       "./IPC03.html",
@@ -365,6 +401,10 @@
   {
   "tag" : "linux",
   "posts" : [
+      
+      "./service-daemon.html",
+      
+      "./IPC05.html",
       
       "./IPC04.html",
       
@@ -609,10 +649,32 @@
     
       
   {
+  "tag" : "semaphore",
+  "posts" : [
+      
+      "./IPC05.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "shared memory",
   "posts" : [
       
+      "./IPC05.html",
+      
       "./IPC04.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "shared systemd",
+  "posts" : [
+      
+      "./service-daemon.html"
       
     ]
   } ,
@@ -639,6 +701,16 @@
   "posts" : [
       
       "./phoenix-slot.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "socket",
+  "posts" : [
+      
+      "./service-daemon.html"
       
     ]
   } ,
@@ -705,6 +777,16 @@
   "posts" : [
       
       "./tail-recursion.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "tensorflow",
+  "posts" : [
+      
+      "./tensorflow_gpu_setting.html"
       
     ]
   } ,

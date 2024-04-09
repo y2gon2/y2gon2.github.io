@@ -22,7 +22,7 @@
   "headline": "Buildroot 설치 및 Kernel build",
   "abstract": "개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 06",
     "keywords": "linux, buildroot, kernel build",
-    "wordcount": "901",
+    "wordcount": "908",
     "image": ["http://localhost:4000/assets/imgposts/general/post_general24.jpg"],
   "datePublished": "2024-02-22 10:32:20 +0900",
   "dateModified": "2024-02-22 10:32:20 +0900",
@@ -62,7 +62,7 @@
 <meta name="twitter:description" content="개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 06">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="901"/>
+<meta data-rh="true" name="twitter:data1" content="908"/>
 <meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general24.jpg">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
@@ -182,7 +182,7 @@
   </span>
 
         <div class="post-excerpt">
-            <p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/)</p><h3 id="1-buildroot--다운로드-및-설치">1. buildroot 다운로드 및 설치</h3><h3 id="11-buildroot--다운로드">1.1 buildroot 다운로드</h3><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span>git clone git://git.buildroot.net/buildroot</code></pre></div></div><h4 id="12-qemu-설정">1.2 qemu 설정</h4><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span> <span class="nb">sudo </span>apt-get <span class="nb">install </span>libncurses-dev <span class="c"># 필수 라이브러리 설치</span>root@:~<span class="nv">$ </span><span class="nb">cd </span>buildrootroot@:~/buildroot<span class="nv">$ </span><span class="nb">ls </span>configs <span class="c"># config 종류 확인</span>root@:~/buildroot<span class="nv">$ </span>make qemu_aarch64_virt_defconfigroot@:~/buildroot<span class="nv">$ </span>make menuconfig</code></pre></div></div><center><img src="assets\img\posts\2024-02-22-buildroot-setting01.png" width="600" /></center><p>다음과 같이 설정을 진행</p><ul> <li>system configuration -&gt; init system -&gt; systemd 선택</li> <li>kernel -&gt; linux kernel 해제</li> <li>target packages -&gt; text editors -&gt; vim -&gt; target packages -&gt; libaries -&gt; Crypto -&gt; openssl support...<a class="read-more" href="./buildroot-setting01.html"> read more</a>
+            <p>아래 내용은 개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/) 강의 내용 중 일부에 해당함.</p><h3 id="1-buildroot--다운로드-및-설치">1. buildroot 다운로드 및 설치</h3><h3 id="11-buildroot--다운로드">1.1 buildroot 다운로드</h3><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span>git clone git://git.buildroot.net/buildroot</code></pre></div></div><h4 id="12-qemu-설정">1.2 qemu 설정</h4><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@:~<span class="nv">$ </span> <span class="nb">sudo </span>apt-get <span class="nb">install </span>libncurses-dev <span class="c"># 필수 라이브러리 설치</span>root@:~<span class="nv">$ </span><span class="nb">cd </span>buildrootroot@:~/buildroot<span class="nv">$ </span><span class="nb">ls </span>configs <span class="c"># config 종류 확인</span>root@:~/buildroot<span class="nv">$ </span>make qemu_aarch64_virt_defconfigroot@:~/buildroot<span class="nv">$ </span>make menuconfig</code></pre></div></div><center><img src="assets\img\posts\2024-02-22-buildroot-setting01.png" width="600" /></center><p>다음과 같이 설정을 진행</p><ul> <li>system configuration -&gt; init system -&gt; systemd 선택</li> <li>kernel -&gt; linux kernel 해제</li> <li>target packages -&gt; text editors -&gt; vim -&gt; target packages...<a class="read-more" href="./buildroot-setting01.html"> read more</a>
         </div>
   </div>
 </section>
@@ -357,7 +357,7 @@
 
         
         
-        <p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/)</p>
+        <p>아래 내용은 개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/) 강의 내용 중 일부에 해당함.</p>
 
 <h3 id="1-buildroot--다운로드-및-설치">1. buildroot  다운로드 및 설치</h3>
 
@@ -646,6 +646,99 @@ root@:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 <span c
           
           
 
+          <a href="./tensorflow_gpu_setting.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general13.jpg') center no-repeat; background-size: cover;">
+            <div class="recent-item-title">
+              <span>(Windows) CUDA 사용 tensorflow 작업 환경 설정</span>
+              
+
+  <span class = "recent-item-meta">
+  
+  
+  
+  
+    
+    
+    <p class="page_meta-readtime">
+      
+        3 minute read
+      
+    </p>
+  
+  
+  </span>
+
+            </div>
+          </a>
+        </div>
+      
+    
+      
+        <div class="recent-item">
+          
+          
+
+          <a href="./service-daemon.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general12.jpg') center no-repeat; background-size: cover;">
+            <div class="recent-item-title">
+              <span>IPC 실습 05 - Named Semaphore</span>
+              
+
+  <span class = "recent-item-meta">
+  
+  
+  
+  
+    
+    
+    <p class="page_meta-readtime">
+      
+        3 minute read
+      
+    </p>
+  
+  
+  </span>
+
+            </div>
+          </a>
+        </div>
+      
+    
+      
+        <div class="recent-item">
+          
+          
+
+          <a href="./IPC05.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general11.jpg') center no-repeat; background-size: cover;">
+            <div class="recent-item-title">
+              <span>IPC 실습 05 - Named Semaphore</span>
+              
+
+  <span class = "recent-item-meta">
+  
+  
+  
+  
+    
+    
+    <p class="page_meta-readtime">
+      
+        4 minute read
+      
+    </p>
+  
+  
+  </span>
+
+            </div>
+          </a>
+        </div>
+      
+    
+      
+        <div class="recent-item">
+          
+          
+
           <a href="./IPC04.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general10.jpg') center no-repeat; background-size: cover;">
             <div class="recent-item-title">
               <span>IPC 실습 04 - Shared Memeory</span>
@@ -661,99 +754,6 @@ root@:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 <span c
     <p class="page_meta-readtime">
       
         5 minute read
-      
-    </p>
-  
-  
-  </span>
-
-            </div>
-          </a>
-        </div>
-      
-    
-      
-        <div class="recent-item">
-          
-          
-
-          <a href="./IPC03.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general09.jpg') center no-repeat; background-size: cover;">
-            <div class="recent-item-title">
-              <span>IPC 실습 03 - Unix socket</span>
-              
-
-  <span class = "recent-item-meta">
-  
-  
-  
-  
-    
-    
-    <p class="page_meta-readtime">
-      
-        1 minute read
-      
-    </p>
-  
-  
-  </span>
-
-            </div>
-          </a>
-        </div>
-      
-    
-      
-        <div class="recent-item">
-          
-          
-
-          <a href="./IPC02.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general08.jpg') center no-repeat; background-size: cover;">
-            <div class="recent-item-title">
-              <span>IPC 실습 02 - pipe</span>
-              
-
-  <span class = "recent-item-meta">
-  
-  
-  
-  
-    
-    
-    <p class="page_meta-readtime">
-      
-        2 minute read
-      
-    </p>
-  
-  
-  </span>
-
-            </div>
-          </a>
-        </div>
-      
-    
-      
-        <div class="recent-item">
-          
-          
-
-          <a href="./IPC01.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general07.jpg') center no-repeat; background-size: cover;">
-            <div class="recent-item-title">
-              <span>IPC 실습 01 - fork / execve</span>
-              
-
-  <span class = "recent-item-meta">
-  
-  
-  
-  
-    
-    
-    <p class="page_meta-readtime">
-      
-        4 minute read
       
     </p>
   

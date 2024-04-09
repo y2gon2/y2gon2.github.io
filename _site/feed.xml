@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-03-22T11:48:55+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">IPC 실습 04 - Shared Memeory</title><link href="http://localhost:4000/IPC04.html" rel="alternate" type="text/html" title="IPC 실습 04 - Shared Memeory" /><published>2024-03-22T10:32:20+09:00</published><updated>2024-03-22T10:32:20+09:00</updated><id>http://localhost:4000/IPC04</id><content type="html" xml:base="http://localhost:4000/IPC04.html"><![CDATA[<style>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-04-09T14:15:01+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">(Windows) CUDA 사용 tensorflow 작업 환경 설정</title><link href="http://localhost:4000/tensorflow_gpu_setting.html" rel="alternate" type="text/html" title="(Windows) CUDA 사용 tensorflow 작업 환경 설정" /><published>2024-04-08T09:32:20+09:00</published><updated>2024-04-08T09:32:20+09:00</updated><id>http://localhost:4000/tensorflow_gpu_setting</id><content type="html" xml:base="http://localhost:4000/tensorflow_gpu_setting.html"><![CDATA[<style>
     summary::-webkit-details-marker {
         display: none;
     }
@@ -22,9 +22,521 @@
 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
 </details>
 
-<h3 id="1-공유메모리-란">1. 공유메모리 란?</h3>
+<p>tensflow 기반 딥러닝 학습을 하는데 cpu 기반 작업이 너무 느려서 GPU 를 사용하고자 하였으나 최신 자료는 없는것 같아 이를 다시 정리해 보았다. 다만 윈도우 환경에서 지원되는 CUDA toolkit 버젼은 그리 변화가 있지는 않았다.</p>
 
-<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/)</p>
+<ul>
+  <li>사용환경</li>
+  <li>OS: Windows 10  64bits</li>
+  <li>GPU : RTX 3070</li>
+  <li>GPU driver : Nvidia Graphic Driver 537.13</li>
+  <li>CUDA Toolkit : 11.2</li>
+  <li>Visual Studio : 2019</li>
+  <li>cudnn : 8.2.1 (for cuda toolkit 11.x)</li>
+  <li>python : 3.10</li>
+  <li>Anacoda 가상환경 - jupyter notebook</li>
+  <li>tensorflow-gpy : 2.10</li>
+</ul>
+
+<p>2024년 4월 기준, 아래 페이지에서 다음과 같이 윈도우 환경에서 Nvidia GPU 사용 환경 조건을 확인 할 수 있다. 
+<a href="https://www.tensorflow.org/install/source_windows?hl=en">링크 : Tensorflow Build from source on Windows </a></p>
+
+<center><img src="assets\img\posts\2024-04-08-tensorflow_gpu_setting.png" width="600" /></center>
+<p><br /></p>
+
+<h4 id="1nvidia-graphic-driver-설치-확인-및-전체-환경-설정-조건-확인">1.Nvidia Graphic Driver 설치 확인 및 전체 환경 설정 조건 확인</h4>
+
+<p>아래와 같이 우선 cmd 에서  ‘nvidia-smi’명령어를 실행하여 그래픽 드라이버라 정상적으로 설치되었는지 확인하며, 이 때 ‘CUDA Version’ 을 확인한다.</p>
+
+<center><img src="assets\img\posts\2024-04-08-tensorflow_gpu_settingnvidiasmi.png" width="600" /></center>
+
+<p>만약 본인 GPU CUDA 버전과 Tensorflow 가이드에 명시된 버젼이 맞다면 해당 버젼에 맞게 모든 설정을 조정하면 된다. 그러나 내 경우와 같이 아직 해당 버젼이 지원하지 않는 경우, 낮춰 모든 설정을 적용해야 한다. 내 경우는 CUDA 11.2 로 적용하였다.</p>
+
+<h4 id="2-cuda-tookit--cudnn-설치">2. CUDA Tookit &amp; cuDNN 설치</h4>
+
+<p>아래 링크에서  CUDA Tookit 을 받아 설치한다. 
+<a href="https://developer.nvidia.com/cuda-11.2.0-download-archive">CUDA Tookit 11.2 Downlaods</a></p>
+
+<p>상위 버전의 경우, 필요한 경우 함께  visual studio 를 설치지만, 해당 버젼은 별도로 설치 해주어야 한다. 해당 버전에 맞는 visual studio 는 2019 로 아래 링크에서 다운로드 받아 추가 설치해야 한다. 
+<a href="https://visualstudio.microsoft.com/ko/vs/older-downloads/">Visual Studio 2019 Download</a></p>
+
+<p>그리고 아래 링크에서 본인에게 맞는 버전의 cuDNN 을 다운 받는다. 
+<a href="https://developer.nvidia.com/rdp/cudnn-archive">cuDNN download</a></p>
+
+<p>내 경우, 아래 버젼으로 받아 설치하였다.</p>
+
+<center><img src="assets\img\posts\2024-04-08-tensorflow_gpu_setting_cudnn.png" width="600" /></center>
+
+<p>해당 파일을 받아 압축을 풀고 내부 파일들을 모두 복사하여, CUDA Toolkit 이 설치된 폴더 ( C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.2)에 붙여 넣는다.</p>
+
+<h4 id="3-환경변수-설정">3. 환경변수 설정</h4>
+
+<p>앞에서 설치한 CUDA Toolkit 이 정상적으로 설치되었는지 확인과 함께 환경 변수 경로를 추가 해준다.
+작업표시줄 검색창에서 “환경 변수” 를 검색하여 시스템 환경 변수 편집을 찾아 들어간다. 환경변수 버튼을 눌러서 들어가면 아래와 같이 창이 나오는데 여기에서 시스템 변수로 ‘CUDA_PATH’ 와 ‘CUDA_PATH_해당버전’ 이 포함되어 있어야 한다.</p>
+
+<center><img src="assets\img\posts\2024-04-08-tensorflow_gpu_setting_env1.png" width="400" /></center>
+
+<p>(다음 작업은 필요한지 잘 모르겠다.)
+추가로 사용자 변수 - Path 에 아래와 같이 CUDA Toolkit  설치 경로에 bin, include, lib 폴더 경로를 추가한다.</p>
+
+<center><img src="assets\img\posts\2024-04-08-tensorflow_gpu_setting_env2.png" width="500" /></center>
+
+<h4 id="4-아나콘다-내-가상환경-설정-및-tensorflow-gpu-설치">4. 아나콘다 내 가상환경 설정 및 tensorflow-gpu 설치</h4>
+
+<p>아나콘다를 최신 버전으로 설치하고, Anaconda Prompt 를 실행한다. 
+여기서 가상환경을 추가할 때 phython 버젼을 앞에서 확인한 tensorflow-gpu 지원 버전을 설치한다. 내 경우는 3.10 으로 설치하여 진행하였다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda create <span class="nt">-n</span> <span class="o">[</span>가상환경 이름] <span class="nv">python</span><span class="o">=</span>3.10
+</code></pre></div></div>
+
+<p>이후 해당 가상환경을 활성화 한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda activate <span class="o">[</span>가상환경이름]
+</code></pre></div></div>
+
+<p>그리고 tensorflow-gpu 를 홈페이지에서 확인한 버전으로 설치해 준다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>tensorflow-gpu<span class="o">==</span>2.10
+</code></pre></div></div>
+
+<p>기타 필요한 라이브러리들을 설치하고, jupyter notebook 을 실행하기 위한 notebook 을 설치하고 jupyter notebook 을 실행한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>notebook
+...
+jupyter notebook
+</code></pre></div></div>
+
+<h4 id="5-jupyter-에서-tensorflow-gpu-정상-작동-확인">5. jupyter 에서 tensorflow-gpu 정상 작동 확인</h4>
+
+<p>jupyter 커널에서 새 notebook 을 실행하여 아래 code 를 입력하여 gpu 가 정상적으로 연결되었는지를 확인한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from tensorflow.python.client import device_lib
+print<span class="o">(</span>device_lib.list_local_devices<span class="o">())</span>
+</code></pre></div></div>
+
+<p>코드를 실행하면 아래와 같이 출력되는데, 만약 GPU 연결이 되지 않았다면, CPU 정보만 출력되고, GPU 관련 정보는 출력되지 않는다.</p>
+
+<center><img src="assets\img\posts\2024-04-08-tensorflow_gpu_setting_ju.png" width="600" /></center>
+
+<p>만약 여기에서 CPU 만 잡힌 상태라면, 앞의 과정에서 무언가 잘못되었다는 의미이므로 다시 작업해야 한다. (개인적으로도 해당 설치까지 여러번 반복하였으며, 타 블로그 글에도 수차례 실패했다는 글이 많다.)</p>
+
+<p>최종적으로 성공했다면, 이제 GPU 실행 환경으로 설정하고 사용하면 된다. 우측 상단에 ‘Python 3(ipkernel)’ 로 되어 있다면 클릭해서 본인이 생성한 가상환겅 (ex. b2404) 로 선택하여 사용하면 된다.</p>
+
+<center><img src="assets\img\posts\2024-04-08-tensorflow_gpu_setting_ju1.png" width="600" /></center>]]></content><author><name>Yong gon Yun</name></author><category term="cuda" /><category term="cudnn" /><category term="tensorflow" /><summary type="html"><![CDATA[(Windows 10) CUDA 사용 tensorflow 작업 환경 설정]]></summary></entry><entry><title type="html">IPC 실습 05 - Named Semaphore</title><link href="http://localhost:4000/service-daemon.html" rel="alternate" type="text/html" title="IPC 실습 05 - Named Semaphore" /><published>2024-03-24T10:32:20+09:00</published><updated>2024-03-24T10:32:20+09:00</updated><id>http://localhost:4000/service-daemon</id><content type="html" xml:base="http://localhost:4000/service-daemon.html"><![CDATA[<style>
+    summary::-webkit-details-marker {
+        display: none;
+    }
+    summary {
+        list-style: none;
+    }
+</style>
+
+<details><summary></summary>
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+</details>
+
+<p>아래 내용은 개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/) 강의 내용 중 일부에 해당함.</p>
+
+<h3 id="1-systemd-란">1. Systemd 란?</h3>
+
+<p>커널이 가장 처음 띄우는 init 프로세스 (PID : 1)</p>
+<ul>
+  <li>
+    <p>시스템을 초기화 하여 여려가지 서비스 데몬들을 띄우고 관리함. 예를 들어, 디바이스 노드를 자동을 생성하는 udev 데몬도 systemd 서비스로 구동됨.</p>
+  </li>
+  <li>
+    <p>journalctl 을 사용하여 각 데몬의 로그도 저장 관리함.</p>
+  </li>
+  <li>
+    <p>각 서비스 간의 의존성을 자동으로 관리</p>
+  </li>
+</ul>
+
+<h4 id="기본-systemd-서비스-관리-명령어">기본 Systemd 서비스 관리 명령어</h4>
+
+<ul>
+  <li>systemctl status <서비스 이름=""> : 해당 서비스의 상태 조회</서비스></li>
+  <li>systemclt enable/disable <서비스 이름=""> : 해당 서비스 활성화/비활성화</서비스></li>
+  <li>systemclt start/stop <서비스 이름=""> : 해당 서비스 시작/종료</서비스></li>
+  <li>
+    <p>systemclt daemon-reload : 어떤 서비스를 수정하거나 추가했을 때 해당 명령를 통해 변경사항을 적용해줘양 함.</p>
+  </li>
+  <li>systemctl list-unit : 모든 서비스 목록 출력</li>
+  <li>systemctl list-sockets : 서비스가 사요아는 소켓의 목록을 출력</li>
+  <li>
+    <p>systemctl list-dependencies : 서비스를 tree 구조로 의존성을 표시하여 출력</p>
+  </li>
+  <li>journalctl -fn : 모든 systemd 서비스 데몬들의 로그 출력</li>
+  <li>journalctl -fn -u <서비스이름>.service : 모든 systemd 서비스 데몬들의 로그 출력</서비스이름></li>
+</ul>
+
+<h3 id="2-daemon-이란">2. Daemon 이란?</h3>
+
+<p>여러 요청에 따라서 서비스를 제공하기 위해 백그라운드로 길게 떠 있는 프로세스</p>
+
+<p>사용자가 직접 제어하지 않으며 init 시스템 등이 데몬을 관리하게 됨.</p>
+<ul>
+  <li>부모의 PID 는 1 (systemd) 이며 세션 및 그룩 아이디는 본인 자신이어야 함 - daemonize 과정 필요
+    <ul>
+      <li>init 프로세스에 입양시킨다고 표현되기도</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="daemonnochdir-noclose">daemon(nochdir, noclose)</h4>
+
+<p>데몬 프로세스를 생성 함수.</p>
+
+<ul>
+  <li>
+    <p>nochdir   : 0 이면, daemon 함수는 루트 디렉토리(/)로 현재 작업 디렉토리를 변경, 1 이면 현재 디렉토리를 변경하지 않고 진행. 일반적으로 0 의 설정값을 가지며 그 이유는 데몬 프로세스가 파일 시스템을 마운트 해제하는데 방해가 되지 않도록 하기 위함이다.</p>
+  </li>
+  <li>
+    <p>noclose   : 0이면, daemon 함수는 표준 입력(stdin), 표준 출력(stdout), 그리고 표준 에러(stderr)를 /dev/null로 리다이렉트. 만약 1이라면, 이러한 파일 디스크립터들을 리다이렉트하지 않음. 일반적으로 1의 값으로 설정되며 그 이유는 데몬 프로세스가 터미널과의 연결을 끊고, 백그라운드에서 조용히 실행되게 하고자함이다.</p>
+  </li>
+</ul>
+
+<h4 id="데몬-생성-과정">데몬 생성 과정</h4>
+
+<ol>
+  <li>
+    <p>프로세스 분기: 부모 프로세스를 종료하고 자식 프로세스를 백그라운드에서 실행하여 세션 리더가 되게 한다.</p>
+  </li>
+  <li>
+    <p>세션 생성: 새로운 세션을 생성하여 프로세스 그룹 리더가 된다.</p>
+  </li>
+  <li>
+    <p>작업 디렉토리 변경: 파일 시스템의 마운트 해제를 방지하기 위해 작업 디렉토리를 루트(/)로 변경(nochdir 0  인 경우).</p>
+  </li>
+  <li>
+    <p>파일 모드 마스크 초기화: 새로 생성되는 파일과 디렉토리의 권한을 제어.</p>
+  </li>
+  <li>
+    <p>표준 입출력 리다이렉트: 데몬 프로세스가 터미널과의 입출력 연결을 끊음(noclose 1 인 경우).</p>
+  </li>
+</ol>
+
+<h3 id="3-서비스-데몬-개발">3. 서비스 데몬 개발</h3>
+
+<p>구현하고자 하는 서비스 데몬은  systemd socket 활셩화하는 것이다.</p>
+
+<p>구현 동작</p>
+
+<ol>
+  <li>systemd 소켓을 열고 listen 상태로 둠.</li>
+  <li>소켓에 접속 요청이 들어오면, systemd 는 서비스 데몬을 실행</li>
+  <li>서비스 데몬은 실행되었을 때, accept 부터 처리하게 됨.</li>
+  <li>서비스 데몬이 더이상 처리할 것이 없으면 종료함.</li>
+  <li>요청이 들어올 때마다 2~4번 작업을 반복함.</li>
+</ol>
+
+<p>구현 서비스 데몬 관련 내용 (이해가 안감…;;)</p>
+<ul>
+  <li>소켓으로의 접속이 없을 경우는 서비스 데몬을 열지 않아 메모리 절약 가능</li>
+  <li>Accept = yse 까지 사용하면 accpet 도 systemd 가 해주나 성능상 이유로 추천되지는 않음.</li>
+</ul>
+
+<h3 id="4-코드-작성">4. 코드 작성</h3>
+
+<p>1.1. 루트 파일 시스템의 /usr/lib/systemd/system 밑에 <서비스>.socket 파일 생성</서비스></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Unit]
+<span class="nv">Description</span><span class="o">=</span>socket <span class="k">for </span>Comento Example
+service
+
+<span class="o">[</span>Socket]
+<span class="nv">ListenStream</span><span class="o">=</span>/run/comento.sock
+
+<span class="o">[</span>Install]
+<span class="nv">WantedBy</span><span class="o">=</span>sockets.target
+</code></pre></div></div>
+
+<p>1.2. systemctl enable <서비스>.socket : 해당 소켓 켜기</서비스></p>
+<ul>
+  <li>소켓을 켜게 되면 ls -l /run/comento.sock 파일 생성</li>
+</ul>
+
+<p>2.1 루트파일 시스템의 /usr/lib/systemd/system 밑에 <서비스>.service 파일 생성</서비스></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Unit]
+<span class="nv">Description</span><span class="o">=</span>Comento Example service
+
+<span class="o">[</span>Service]
+<span class="nv">Type</span><span class="o">=</span>forking
+<span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/comento-daemon
+<span class="nv">StandardOutput</span><span class="o">=</span>journal
+<span class="nv">Restart</span><span class="o">=</span>on-failure
+<span class="nv">StartLimitIntervalSec</span><span class="o">=</span>1s
+<span class="nv">StartLimitBurst</span><span class="o">=</span>32
+
+<span class="o">[</span>Install]
+<span class="nv">WantedBy</span><span class="o">=</span>basic.target
+</code></pre></div></div>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="IPC" /><category term="daemon" /><category term="shared systemd" /><category term="socket" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 20]]></summary></entry><entry><title type="html">IPC 실습 05 - Named Semaphore</title><link href="http://localhost:4000/IPC05.html" rel="alternate" type="text/html" title="IPC 실습 05 - Named Semaphore" /><published>2024-03-22T14:32:20+09:00</published><updated>2024-03-22T14:32:20+09:00</updated><id>http://localhost:4000/IPC05</id><content type="html" xml:base="http://localhost:4000/IPC05.html"><![CDATA[<style>
+    summary::-webkit-details-marker {
+        display: none;
+    }
+    summary {
+        list-style: none;
+    }
+</style>
+
+<details><summary></summary>
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+</details>
+
+<p>아래 내용은 개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/) 강의 내용 중 일부에 해당함.</p>
+
+<h3 id="1-semaphore">1. Semaphore</h3>
+
+<p>동시에 자원에 접근할 수 있는 스레드의 수를 제한하는 메커니즘. 일종의 카운터로, 특정 자원을 접근하려는 스레드의 수를 제어한다. 세마포어는 주로 두 가지 유형으로 나뉜다:</p>
+
+<ul>
+  <li>
+    <p>이진 세마포어(Binary Semaphore): 값이 0 또는 1만 될 수 있으며, 이는 뮤텍스와 유사한 방식, 자원에 대한 독점적 접근을 제어하는데 사용됨.</p>
+  </li>
+  <li>
+    <p>카운팅 세마포어(Counting Semaphore): 값이 정해진 범위 내에서 증가하거나 감소할 수 있으며, 동시에 여러 스레드가 자원에 접근할 수 있게 함.</p>
+  </li>
+</ul>
+
+<p>(카운팅) 세마포어의 동작 과정</p>
+
+<ol>
+  <li>
+    <p>읽기 작업 시작: 스레드가 읽기 작업을 시작하기 전, 쓰기 세마포어의 상태를 확인하여 쓰기 작업이 진행 중이지 않은지 확인한다. 그 후 읽기 세마포어의 카운트를 증가시켜 읽기 작업을 수행 중인 스레드의 수를 저장.</p>
+  </li>
+  <li>
+    <p>읽기 작업 종료: 스레드가 읽기 작업을 마치면, 읽기 세마포어의 카운트를 감소시켜 읽기 작업을 수행 중인 스레드의 수를 감소시킨다.</p>
+  </li>
+  <li>
+    <p>쓰기 작업 시작: 스레드가 쓰기 작업을 시작하기 전, 먼저 읽기 작업이 진행 중인지 확인하기 위해 읽기 세마포어의 카운트가 0이 될 때까지 기다린다. 이는 모든 읽기 작업이 완료됨을 의미합니다. 그 다음, 쓰기 세마포어를 잠금 상태로 전환하여 쓰기 작업을 시작한다.</p>
+  </li>
+  <li>
+    <p>쓰기 작업 종료: 쓰기 작업을 마친 후, 쓰기 세마포어를 해제하여 다른 스레드가 읽기 또는 쓰기 작업을 시작할 수 있도록 한다.</p>
+  </li>
+</ol>
+
+<p>위와 같은 방법을 통해 데이터를 쓰기 작업과 읽기 작업의 충돌을 예방할 수 있다. 다만 데이터의 일관성 (data consistency) 의 경우, 위와 같은 기본적인 세마포어로는 보장될 수 없다.</p>
+
+<p>예를 들어 기존 데이터가 0 일때, 하나의 스레드에서  해당 값을 읽어서 +1 을 하고 나서 쓰고, 그 결과 (1)을 다른 스레드가 읽어서 -1 하여 0최종 0의 결과 값을 의도 했을 때, 단순히 읽는 과정이 마무리되었을 때 쓰기를 하는 형태로 구현한다면, 위의 과정에서 최종 결과가 0 일 수도 있고 1 이거나 -1 일 수도 있는 불확정한 상황이 발생할 수 있다.</p>
+
+<p>이런 과정은 해당 작업 전체 (읽기-연산-쓰기) 과정에 lock 을 사용하여, 모든 작업이 작업의 절차가 분리되지 않고 하나의 덩어리르 처리되는 원자성이 보장되도록 처리하거나 하는 등의 방식을 사용하여 처리하여야 일관성을 유지할 수 있다.</p>
+
+<h3 id="2-주요-함수">2. 주요 함수</h3>
+
+<h4 id="sem_t-sem_openconst-char-name-int-oflag-mode_t-mode-unsigned-int-value">sem_t *sem_open(const char *name, int oflag, mode_t mode, unsigned int value);</h4>
+
+<p>POSIX 세마포어를 생성하거나 열기 위한 함수</p>
+
+<ul>
+  <li>name  : 세마포어의 이름</li>
+  <li>oflag : O_CREAT (세마포어가 존재하지 않을 경우 생성), O_EXCL (함께 O_CREAT와 사용되며, 세마포어가 이미 존재할 경우 실패), 등</li>
+  <li>mode  : 세마포어에 대한 접근 권한을 설정 (e.g. 0600)</li>
+  <li>valeu : 세마포어의 초기값. 이 값은 세마포어가 생성될 때만 의미가 있으며, 세마포어가 동시에 허용할 수 있는 최대 리소스 접근 수를 나타낸다. 예를 들어, 1로 설정할 경우, 해당 세마포어는 뮤텍스(mutex)와 유사하게 동작한다.</li>
+</ul>
+
+<h4 id="int-sem_waitsem_t-sem">int sem_wait(sem_t *sem);</h4>
+
+<p>세마포어의 제어권 획득</p>
+
+<ul>
+  <li>sem   : 작업할 세마포어 객체에 대한 포인터</li>
+</ul>
+
+<h4 id="int-sem_postsem_t-sem">int sem_post(sem_t *sem);</h4>
+
+<p>세마포어의 제어권 내려 놓음</p>
+
+<ul>
+  <li>sem   : 작업할 세마포어 객체에 대한 포인터</li>
+</ul>
+
+<h3 id="3-code">3. code</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;sys/mman.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;sys/stat.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;sys/wait.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;semaphore.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#define SEM_NAME "comento"
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">ptr</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">sem_init</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> 
+    <span class="n">sem_t</span> <span class="o">*</span><span class="n">sem</span><span class="p">;</span>
+    <span class="n">pid_t</span> <span class="n">pid</span><span class="p">;</span>
+
+    <span class="c1">// 동시 접근 가능 스레드 : 2 </span>
+    <span class="c1">// -&gt; 두 스레드가 동시에 제어권을 가지므로써 데이터 일관성을 유지할 수 없는 상태로 만듬.</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">argc</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">"-no-sem"</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">sem_init</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">sem_unlink</span><span class="p">(</span><span class="n">SEM_NAME</span><span class="p">);</span> <span class="c1">// Remove semaphore if exists</span>
+    <span class="n">sem</span> <span class="o">=</span> <span class="n">sem_open</span><span class="p">(</span><span class="n">SEM_NAME</span><span class="p">,</span> <span class="n">O_CREAT</span> <span class="o">|</span> <span class="n">O_EXCL</span><span class="p">,</span> <span class="mo">0600</span><span class="p">,</span> <span class="n">sem_init</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">sem</span> <span class="o">==</span> <span class="n">SEM_FAILED</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"Failed to create semaphore</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Mapping an anonymous share memory</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+    <span class="c1">// 익명의 공유 메모리 </span>
+    <span class="c1">// 프로그램 내에서 바로 해당 메모리 포인터를 받아 부모-자식 간 사용할 것이므로 이름 없이 사용 가능</span>
+    <span class="n">ptr</span> <span class="o">=</span> <span class="n">mmap</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">ptr</span><span class="p">),</span> <span class="n">PROT_READ</span> <span class="o">|</span> <span class="n">PROT_WRITE</span><span class="p">,</span> <span class="n">MAP_SHARED</span> <span class="o">|</span> <span class="n">MAP_ANONYMOUS</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
+
+    <span class="c1">// 자식 프로세스는 1씩 10000 번 더하기 수행</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">sem_wait</span><span class="p">(</span><span class="n">sem</span><span class="p">);</span>
+            <span class="p">(</span><span class="o">*</span><span class="n">ptr</span><span class="p">)</span><span class="o">++</span><span class="p">;</span> 
+            <span class="c1">// 해당 더하기 작업은 실제 기계어 수준에서는</span>
+            <span class="c1">// load *ptr, reg</span>
+            <span class="c1">// inc reg, 1</span>
+            <span class="c1">// store reg, *ptr</span>
+            <span class="c1">// 이렇게 세번의 명령어 수행으로 이루어진다.</span>
+
+            <span class="n">sem_post</span><span class="p">(</span><span class="n">sem</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">1000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"[Child] %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span> 
+    <span class="c1">// 부모 프로세스는 1씩 10000 번 빼기 수행</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">sem_wait</span><span class="p">(</span><span class="n">sem</span><span class="p">);</span>
+            
+            <span class="p">(</span><span class="o">*</span><span class="n">ptr</span><span class="p">)</span><span class="o">--</span><span class="p">;</span> <span class="c1">// </span>
+            <span class="c1">// 해당 빼기 작업은 실제 기계어 수준에서는</span>
+            <span class="c1">// load *ptr, reg </span>
+            <span class="c1">// dec reg, 1</span>
+            <span class="c1">//store reg, *ptr</span>
+            <span class="c1">// 이렇게 세번의 명령어 수행으로 이루어진다. </span>
+
+            <span class="n">sem_post</span><span class="p">(</span><span class="n">sem</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">1000</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"[Parent] %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        
+        <span class="n">wait</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Final value: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="4-실행">4. 실행</h3>
+
+<p>위 코드 파일을 컴파일하고, 동시 접근 스레드를 1개만 허용하여 실행하면 그 최종 결과 값은 항상 0이 나오게 된다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span> gcc <span class="nt">-o</span> sema sema.c
+user@DESKTOP:~<span class="nv">$ </span> ./sema
+Mapping an anonymous share memory
+<span class="o">[</span>Parent] <span class="nt">-1</span>
+<span class="o">[</span>Parent] <span class="nt">-1001</span>
+<span class="o">[</span>Parent] <span class="nt">-2001</span>
+<span class="o">[</span>Parent] <span class="nt">-3000</span>
+<span class="o">[</span>Child] <span class="nt">-2652</span>
+<span class="o">[</span>Parent] <span class="nt">-3039</span>
+<span class="o">[</span>Child] <span class="nt">-3000</span>
+<span class="o">[</span>Parent] <span class="nt">-3175</span>
+<span class="o">[</span>Child] <span class="nt">-3000</span>
+<span class="o">[</span>Parent] <span class="nt">-3119</span>
+<span class="o">[</span>Child] <span class="nt">-3000</span>
+<span class="o">[</span>Parent] <span class="nt">-3287</span>
+<span class="o">[</span>Child] <span class="nt">-3000</span>
+<span class="o">[</span>Parent] <span class="nt">-3250</span>
+<span class="o">[</span>Child] <span class="nt">-3000</span>
+<span class="o">[</span>Parent] <span class="nt">-3060</span>
+<span class="o">[</span>Child] <span class="nt">-3000</span>
+<span class="o">[</span>Child] <span class="nt">-2999</span>
+<span class="o">[</span>Child] <span class="nt">-1999</span>
+<span class="o">[</span>Child] <span class="nt">-999</span>
+Final value: 0
+</code></pre></div></div>
+
+<p>그러나 ‘-no-sem’ 옵션을 써서 부모 자식 스레드 동시 접근이 가능하도록 설정하면, 그 최종 결과는 0일 수도 있고, 아래와 같이 0 이 아닌 다른 값이 나올 수 도 있게 된다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>./sema <span class="nt">-no-sem</span>
+Mapping an anonymous share memory
+<span class="o">[</span>Parent] <span class="nt">-1</span>
+<span class="o">[</span>Parent] <span class="nt">-992</span>
+<span class="o">[</span>Child] <span class="nt">-177</span>
+<span class="o">[</span>Parent] <span class="nt">-1005</span>
+<span class="o">[</span>Child] <span class="nt">-999</span>
+<span class="o">[</span>Child] <span class="nt">-626</span>
+<span class="o">[</span>Parent] <span class="nt">-1001</span>
+<span class="o">[</span>Parent] <span class="nt">-1006</span>
+<span class="o">[</span>Child] <span class="nt">-1001</span>
+<span class="o">[</span>Parent] <span class="nt">-1086</span>
+<span class="o">[</span>Child] <span class="nt">-1007</span>
+<span class="o">[</span>Parent] <span class="nt">-1034</span>
+<span class="o">[</span>Child] <span class="nt">-1010</span>
+<span class="o">[</span>Parent] <span class="nt">-1041</span>
+<span class="o">[</span>Child] <span class="nt">-1021</span>
+<span class="o">[</span>Parent] <span class="nt">-1078</span>
+<span class="o">[</span>Child] <span class="nt">-1014</span>
+<span class="o">[</span>Parent] <span class="nt">-1097</span>
+<span class="o">[</span>Child] <span class="nt">-1013</span>
+<span class="o">[</span>Child] <span class="nt">-1006</span>
+Final value: <span class="nt">-7</span>
+</code></pre></div></div>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="IPC" /><category term="inter-process communication" /><category term="shared memory" /><category term="semaphore" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 19]]></summary></entry><entry><title type="html">IPC 실습 04 - Shared Memeory</title><link href="http://localhost:4000/IPC04.html" rel="alternate" type="text/html" title="IPC 실습 04 - Shared Memeory" /><published>2024-03-22T10:32:20+09:00</published><updated>2024-03-22T10:32:20+09:00</updated><id>http://localhost:4000/IPC04</id><content type="html" xml:base="http://localhost:4000/IPC04.html"><![CDATA[<style>
+    summary::-webkit-details-marker {
+        display: none;
+    }
+    summary {
+        list-style: none;
+    }
+</style>
+
+<details><summary></summary>
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+</details>
+
+<p>아래 내용은 개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/) 강의 내용 중 일부에 해당함.</p>
+
+<h3 id="1-공유메모리-란">1. 공유메모리 란?</h3>
 
 <p>데이터 공유를 목적으로 물리적인 메모리의 동일한 영영을 각 프로세스가 매핑</p>
 <ul>
@@ -253,7 +765,7 @@ drwxr-xr-x 16 root root 3.5K Mar 22 11:27 ..
 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
 </details>
 
-<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/)</p>
+<p>아래 내용은 개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/) 강의 내용 중 일부에 해당함.</p>
 
 <h3 id="1-unix-socket">1. Unix Socket</h3>
 
@@ -411,7 +923,7 @@ drwxr-xr-x 16 root root 3.5K Mar 22 11:27 ..
 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
 </details>
 
-<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/)</p>
+<p>아래 내용은 개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/) 강의 내용 중 일부에 해당함.</p>
 
 <h3 id="1-pipe-구현을-통한-부모-프로세서와-자식-프로세서-ipc">1. pipe 구현을 통한 부모 프로세서와 자식 프로세서 IPC</h3>
 
@@ -604,7 +1116,7 @@ user@DESKTOP:~<span class="nv">$ </span><span class="nb">cat</span> /etc/passwd 
 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
 </details>
 
-<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/)</p>
+<p>아래 내용은 개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/) 강의 내용 중 일부에 해당함.</p>
 
 <h3 id="fork-를-사용한-자식-프로세스-생성-및-종료">fork 를 사용한 자식 프로세스 생성 및 종료</h3>
 
@@ -748,7 +1260,7 @@ Process list <span class="o">&gt;</span>
   <li>filename : 현재 프로세스에서 실행 시킬 파일</li>
   <li>argv : 실행 프로그램에 전달할 인자 배열. 배열 첫번째는 일반적으로 실행파일의 이름, 중간 인자들은 해당 프로그램 실행시 설정 옵션, 파라미터 들, 마지막은 NULL 로 종료를 의미한다.</li>
   <li>env(환경변수) : 실행 프로그램에게 전달되는 환경 변수 배열이며, 각 환경 변수는 “KEY=value” 형태의 문자열이며, 마지막 값은 NULL 이어야 한다. 다만, 환경변수는 프로세스가 실행될 때, 자체적으로 설정되며, 해당 변수를 <code class="language-plaintext highlighter-rouge">extern char **environ;</code> 선언으로 포인터로 지정해서 사용하게 된다.</li>
-</ul>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="IPC" /><category term="inter-process communication" /><category term="fork" /><category term="execve" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 15]]></summary></entry><entry><title type="html">Device Driver 개발 3 (파일 특수 제어 (ioctl) 구현)</title><link href="http://localhost:4000/device_driver3.html" rel="alternate" type="text/html" title="Device Driver 개발 3 (파일 특수 제어 (ioctl) 구현)" /><published>2024-03-02T10:32:20+09:00</published><updated>2024-03-02T10:32:20+09:00</updated><id>http://localhost:4000/device_driver3</id><content type="html" xml:base="http://localhost:4000/device_driver3.html"><![CDATA[<style>
+</ul>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="IPC" /><category term="inter-process communication" /><category term="fork" /><category term="execve" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 15]]></summary></entry><entry><title type="html">udev 와 연동하기</title><link href="http://localhost:4000/udev1.html" rel="alternate" type="text/html" title="udev 와 연동하기" /><published>2024-03-02T10:32:20+09:00</published><updated>2024-03-02T10:32:20+09:00</updated><id>http://localhost:4000/udev1</id><content type="html" xml:base="http://localhost:4000/udev1.html"><![CDATA[<style>
     summary::-webkit-details-marker {
         display: none;
     }
@@ -772,204 +1284,7 @@ Process list <span class="o">&gt;</span>
 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
 </details>
 
-<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/)</p>
-
-<h3 id="1-파일-특수-제어-ioctl-이란">1. 파일 특수 제어 (ioctl) 이란?</h3>
-
-<p>ioctl은 리눅스에서 주로 사용되는 시스템 콜 중 하나로, “Input/Output Control”의 약자이다. 단순 읽기/쓰기 외 디바이스 드라이버에 특정 명령을 전달하거나, 드라이버의 상태를 변경하거나, 내부 데이터를 얻기 위해 사용된다. 일반적인 파일 입출력 시스템 콜과는 달리, ioctl을 통해 디바이스 특화 명령을 수행할 수 있기 때문에, 다양한 종류의 하드웨어 디바이스와 상호작용하는 데 매우 유용하다.</p>
-
-<p>unlocked_ioctl 함수 포인터 프로토타입 : <br />
-<strong>long (*unlocked_ioctl)(struct file *file, unsigned int cmd, unsigned long arg);</strong></p>
-
-<ul>
-  <li>
-    <p>struct file *file : <br />
-현재 열린 파일(디바이스)을 나타내는 file 구조체에 대한 포인터. 이 구조체는 파일에 대한 중요한 정보를 담고 있으며, ioctl 호출 시 해당 디바이스 파일에 대한 참조를 제공.</p>
-  </li>
-  <li>
-    <p>unsigned int cmd : <br />
-디바이스 드라이버에 전달된 명령. user space에서 ioctl 함수를 호출할 때 지정한 명령 코드가 이 인자로 전달된다. 드라이버는 이 코드를 사용하여 어떤 작업을 수행할지 결정한다. 명령 코드는 보통 드라이버의 헤더 파일에 상수로 정의되어 있다.</p>
-
-    <p>cmd 의 경우 일반적을 _IOR과 _IOW 매크로를 사용해서 정의 한다.</p>
-
-    <ul>
-      <li>_IO(type, nr): arg 없이 단순한 명령 매크로. type은 (디바이스 고유의) 명령 유형, nr 은 명령의 고유 번호를 의미</li>
-      <li>_IOW(type, nr, size): arg 를 사용해서 user space 에 size 만큼의 데이터를 kernel 에 넘김.</li>
-      <li>_IOR(type, nr, size): arg 를 사용해서 kernel 내에서 읽고, 해당 data 를 size 크기 만큼 가져옴.</li>
-    </ul>
-
-    <p>이를 사용하여 파일 읽기/쓰기와는 다른 디바이스의 상태, 구성, 또는 내부 정보 등을 읽거나 수정할 수 있다.</p>
-  </li>
-  <li>
-    <p>unsigned long arg : <br />
-명령에 대한 추가 데이터를 포함할 수 있는 사용자 공간의 포인터 또는 값. 명령의 성격에 따라 이 값은 주소 값일 수도 있고, 직접적인 데이터 값일 수도 있다. 드라이버는 이 값을 통해 필요한 추가 정보를 얻거나 사용자 공간으로 데이터를 전달할 수 있다.</p>
-  </li>
-</ul>
-
-<p>unlocked_ioctl 함수는 성공 시 0 또는 양의 정수를, 실패 시 음의 에러 코드를 반환한다. 이 반환 값은 시스템 콜을 호출한 사용자 공간 프로세스에게 전달된다.</p>
-
-<p>(unlocked_ioctl 대신 ioctl 함수 포인터를 사용하는 이유 중 하나는, unlocked_ioctl이 빅 커널 락(BKL, Big Kernel Lock)을 사용하지 않기 때문이다. 이는 더 나은 성능과 동시성을 제공하며, 현대의 멀티코어 시스템에서 중요한 특징이다. 따라서, 새로운 드라이버를 작성할 때는 unlocked_ioctl을 사용하는 것이 권장된다.)</p>
-
-<h3 id="2-파일-특수-제어-ioctl-구현">2. 파일 특수 제어 (ioctl) 구현</h3>
-
-<p>기존의 main.c 파일에 ioctl 관련 구현 내용을 추가해 준다. 해당 코드는 buffer 내용을 지우는 (clear) 하는 작업을 정의하였다.</p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define COMENTO_MAGIC 'c'  // type ( ioctl 명령을 유일하게 식별하기 위한 문자)
-#define COMENTO_IOCTL_CLEAR _IO(COMENTO_MAGIC, 0) // nr: 0 함수 내부 switch 문의 구분 번호
-</span>
-<span class="k">static</span> <span class="kt">long</span> <span class="nf">comento_device_ioctl</span><span class="p">(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">fp</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">cmd</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">switch</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">case</span> <span class="n">COMENTO_IOCTL_CLEAR</span><span class="p">:</span>
-            <span class="n">memset</span><span class="p">(</span><span class="n">comento_device_buf</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">COMENTO_BUF_SIZE</span><span class="p">);</span>
-            <span class="k">break</span><span class="p">;</span>
-        <span class="nl">default:</span>
-            <span class="n">printk</span><span class="p">(</span><span class="n">KERN_DEBUG</span> <span class="s">"%s failed - %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">__func__</span><span class="p">,</span> <span class="n">cmd</span><span class="p">);</span>
-            <span class="k">return</span> <span class="o">-</span><span class="n">EINVAL</span><span class="p">;</span> <span class="c1">// 정의되지 않은 값이 입력된 경우, "Invalid Argument" 오류 반환</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="c1">//...</span>
-<span class="k">static</span> <span class="k">struct</span> <span class="n">file_operations</span> <span class="n">comento_device_fops</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-
-    <span class="p">.</span><span class="n">unlocked_ioctl</span> <span class="o">=</span> <span class="n">comento_device_ioctl</span><span class="p">,</span>
-<span class="p">};</span>
-</code></pre></div></div>
-
-<p>한편, <a href="https://y2gon2.github.io/device_driver2.html">이전 post - 파일 읽기/ 쓰기</a> 에서는 파일 읽기/쓰기 기능만 사용되므로, 기존의 읽기/쓰기 함수를 사용하여 구현하였다. 그러나 ioctl 은 사용자 정의 명령을 통해 특정 디바이스 드라이버와 상호작용해야 하므로, 이를 별도로 구현해 주어야 한다. 이와 관련하여 해당 내용은 다음과 같다.</p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;sys/ioctl.h&gt;</span><span class="cp">
-#include</span> <span class="cpf">&lt;linux/limits.h&gt;</span><span class="cp">
-#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
-#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
-#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
-</span>
-<span class="cp">#define COMENTO_DEVICE_NAME "comento" // 디바이스 파일명 
-#define COMENTO_MAGIC 'c'
-</span>
-<span class="c1">// 디바이스에 대한 ioctl 명령을 정의, _IO 매크로를 사용하여 COMENTO_IOCTL_CLEAR 명령을 생성</span>
-<span class="c1">// 해당 정의는 앞에 커널 모듈의 소스코드에서 정의한 것과 일치해야 한다.</span>
-<span class="cp">#define COMENTO_IOCTL_CLEAR _IO(COMENTO_MAGIC, 0) 
-</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
-    <span class="c1">// open 함수를 사용하여 /dev/comento-device 디바이스 파일을 읽기/쓰기 모드(O_RDWR)로 염</span>
-    <span class="c1">// 파일 디스크립터는 fd 변수에 저장</span>
-    <span class="c1">// 파일 열기에 실패한 경우, 오류 메시지를 출력하고 프로그램을 종료</span>
-    <span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">"/dev/"</span> <span class="n">COMENTO_DEVICE_NAME</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">);</span> 
-    <span class="k">if</span><span class="p">(</span><span class="n">fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">"Failed to open device</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="c1">// ioctl(fd, COMENTO_DEVICE_IOCTL_CLEAR, 0) 해당 호출을 통해 </span>
-    <span class="c1">// 시스템 콜을 통해 커널 공간으로 전달되고, 커널은 등록된 디바이스 드라이버의 ioctl 처리 함수 </span>
-    <span class="c1">// 'comento_device_ioctl' - case COMENTO_DEVICE_IOCTL_CLEAR 이 실행되게 된다. </span>
-    <span class="c1">// 파일 디스크립터는 fd 변수에 저장되며, 파일 열기에 실패한 경우, </span>
-    <span class="c1">// 오류 메시지를 출력하고 프로그램을 종료합니다.</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">ioctl</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">COMENTO_IOCTL_CLEAR</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">"Failed to do ioctl command</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h3 id="3-구현-작업">3. 구현 작업</h3>
-
-<p>main.c 을 열어 위 소스 코드 추가</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ </span>vim drivers/comento/main.c
-</code></pre></div></div>
-
-<p>소스 코드 빌드</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 <span class="nv">CROSS_COMPILE</span><span class="o">=</span>/home/gon/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- make
-  CALL    scripts/checksyscalls.sh
-  CC <span class="o">[</span>M]  drivers/comento/main.o
-  LD <span class="o">[</span>M]  drivers/comento/comento.o
-  MODPOST Module.symvers
-  LD <span class="o">[</span>M]  drivers/comento/comento.ko
-</code></pre></div></div>
-
-<p>빌드된 커널 모듈을 이미지내 삽입</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">sudo </span>mount <span class="nt">-o</span> loop ../buildroot/output/images/rootfs.ext4 /mnt
-user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">sudo cp </span>drivers/comento/comento.ko /mnt/usr/lib/modules/.
-</code></pre></div></div>
-
-<p>사용자 프로그램 생성 (위 작성 코드 내용 사용)</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">cd</span> ..
-user@DESKTOP:~<span class="nv">$ </span>vim ioctl.c
-</code></pre></div></div>
-
-<p>toolchain 을 사용하여 사용자 프로그램 빌드</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-gcc <span class="nt">-o</span> ioctl ioctl.c
-</code></pre></div></div>
-
-<p>사용자 프로그램 이미지 내 추가</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span><span class="nb">sudo cp </span>ioctl /mnt/usr/bin
-user@DESKTOP:~<span class="nv">$ </span><span class="nb">sync
-</span>user@DESKTOP:~<span class="nv">$ </span><span class="nb">sudo </span>umount /mnt
-</code></pre></div></div>
-
-<p>QEMU 실행</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>qemu-system-aarch64 <span class="nt">-kernel</span> linux/arch/arm64/boot/Image <span class="nt">-drive</span> <span class="nv">format</span><span class="o">=</span>raw,file<span class="o">=</span>buildroot/output/images/rootfs.ext4,if<span class="o">=</span>virtio <span class="nt">-append</span> <span class="s2">"root=/dev/vda console=ttyAMA0 nokaslr"</span> <span class="nt">-nographic</span> <span class="nt">-M</span> virt <span class="nt">-cpu</span> cortex-a72 <span class="nt">-m</span> 2G <span class="nt">-smp</span> 2
-</code></pre></div></div>
-
-<h3 id="4-ioclt-사용">4. ioclt 사용</h3>
-
-<p>모듈 삽입 및 드라이버 노드 파일 생성</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># insmod /usr/lib/modules/comento.ko
-# cd /dev/
-# mkmod /dev/comento c 177 34
-# ls -lah comento
-crw-r--r--    1 root     root      177,  34 Mar  2 07:12 comento
-</code></pre></div></div>
-
-<p>node file buffer 문자열 넣기 및 확인</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># echo "hello~~!!" &gt; /dev/comento
-# cat /dev/comento
-hello~~!!
-</code></pre></div></div>
-
-<p>사용자 프로그램(ioctl) 을 실행하여 buffer 초기화 (clear) 실행</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ioctl
-# cat /dev/comento
-(출력 내용 없음)
-</code></pre></div></div>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="device driver" /><category term="device node" /><category term="ioctl" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 13]]></summary></entry><entry><title type="html">udev 와 연동하기</title><link href="http://localhost:4000/udev1.html" rel="alternate" type="text/html" title="udev 와 연동하기" /><published>2024-03-02T10:32:20+09:00</published><updated>2024-03-02T10:32:20+09:00</updated><id>http://localhost:4000/udev1</id><content type="html" xml:base="http://localhost:4000/udev1.html"><![CDATA[<style>
-    summary::-webkit-details-marker {
-        display: none;
-    }
-    summary {
-        list-style: none;
-    }
-</style>
-
-<details><summary></summary>
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-</details>
-
-<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/)</p>
+<p>아래 내용은 개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/) 강의 내용 중 일부에 해당함.</p>
 
 <h3 id="1-udev-란">1. udev 란?</h3>
 
@@ -1267,7 +1582,7 @@ crw-------    1 root     root      248,  17 Mar  3 08:48 /dev/comento17
   <li>
     <p>드라이버 생성 (/dev/): /dev/ 디렉토리에 디바이스 파일이 생성됨. 이 과정은 udev에 의해 자동으로 처리되며, /dev/ 내의 디바이스 파일은 사용자 공간에서 해당 디바이스에 접근하기 위한 인터페이스를 제공. udev 규칙에 따라 디바이스 파일의 이름, 권한 등이 설정.</p>
   </li>
-</ol>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="device driver" /><category term="udev" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 14]]></summary></entry><entry><title type="html">Device Driver 개발 2 (파일 읽기/ 쓰기)</title><link href="http://localhost:4000/device_driver2.html" rel="alternate" type="text/html" title="Device Driver 개발 2 (파일 읽기/ 쓰기)" /><published>2024-03-01T10:32:20+09:00</published><updated>2024-03-01T10:32:20+09:00</updated><id>http://localhost:4000/device_driver2</id><content type="html" xml:base="http://localhost:4000/device_driver2.html"><![CDATA[<style>
+</ol>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="device driver" /><category term="udev" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 14]]></summary></entry><entry><title type="html">Device Driver 개발 3 (파일 특수 제어 (ioctl) 구현)</title><link href="http://localhost:4000/device_driver3.html" rel="alternate" type="text/html" title="Device Driver 개발 3 (파일 특수 제어 (ioctl) 구현)" /><published>2024-03-02T10:32:20+09:00</published><updated>2024-03-02T10:32:20+09:00</updated><id>http://localhost:4000/device_driver3</id><content type="html" xml:base="http://localhost:4000/device_driver3.html"><![CDATA[<style>
     summary::-webkit-details-marker {
         display: none;
     }
@@ -1291,7 +1606,204 @@ crw-------    1 root     root      248,  17 Mar  3 08:48 /dev/comento17
 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
 </details>
 
-<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/)</p>
+<p>아래 내용은 개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/) 강의 내용 중 일부에 해당함.</p>
+
+<h3 id="1-파일-특수-제어-ioctl-이란">1. 파일 특수 제어 (ioctl) 이란?</h3>
+
+<p>ioctl은 리눅스에서 주로 사용되는 시스템 콜 중 하나로, “Input/Output Control”의 약자이다. 단순 읽기/쓰기 외 디바이스 드라이버에 특정 명령을 전달하거나, 드라이버의 상태를 변경하거나, 내부 데이터를 얻기 위해 사용된다. 일반적인 파일 입출력 시스템 콜과는 달리, ioctl을 통해 디바이스 특화 명령을 수행할 수 있기 때문에, 다양한 종류의 하드웨어 디바이스와 상호작용하는 데 매우 유용하다.</p>
+
+<p>unlocked_ioctl 함수 포인터 프로토타입 : <br />
+<strong>long (*unlocked_ioctl)(struct file *file, unsigned int cmd, unsigned long arg);</strong></p>
+
+<ul>
+  <li>
+    <p>struct file *file : <br />
+현재 열린 파일(디바이스)을 나타내는 file 구조체에 대한 포인터. 이 구조체는 파일에 대한 중요한 정보를 담고 있으며, ioctl 호출 시 해당 디바이스 파일에 대한 참조를 제공.</p>
+  </li>
+  <li>
+    <p>unsigned int cmd : <br />
+디바이스 드라이버에 전달된 명령. user space에서 ioctl 함수를 호출할 때 지정한 명령 코드가 이 인자로 전달된다. 드라이버는 이 코드를 사용하여 어떤 작업을 수행할지 결정한다. 명령 코드는 보통 드라이버의 헤더 파일에 상수로 정의되어 있다.</p>
+
+    <p>cmd 의 경우 일반적을 _IOR과 _IOW 매크로를 사용해서 정의 한다.</p>
+
+    <ul>
+      <li>_IO(type, nr): arg 없이 단순한 명령 매크로. type은 (디바이스 고유의) 명령 유형, nr 은 명령의 고유 번호를 의미</li>
+      <li>_IOW(type, nr, size): arg 를 사용해서 user space 에 size 만큼의 데이터를 kernel 에 넘김.</li>
+      <li>_IOR(type, nr, size): arg 를 사용해서 kernel 내에서 읽고, 해당 data 를 size 크기 만큼 가져옴.</li>
+    </ul>
+
+    <p>이를 사용하여 파일 읽기/쓰기와는 다른 디바이스의 상태, 구성, 또는 내부 정보 등을 읽거나 수정할 수 있다.</p>
+  </li>
+  <li>
+    <p>unsigned long arg : <br />
+명령에 대한 추가 데이터를 포함할 수 있는 사용자 공간의 포인터 또는 값. 명령의 성격에 따라 이 값은 주소 값일 수도 있고, 직접적인 데이터 값일 수도 있다. 드라이버는 이 값을 통해 필요한 추가 정보를 얻거나 사용자 공간으로 데이터를 전달할 수 있다.</p>
+  </li>
+</ul>
+
+<p>unlocked_ioctl 함수는 성공 시 0 또는 양의 정수를, 실패 시 음의 에러 코드를 반환한다. 이 반환 값은 시스템 콜을 호출한 사용자 공간 프로세스에게 전달된다.</p>
+
+<p>(unlocked_ioctl 대신 ioctl 함수 포인터를 사용하는 이유 중 하나는, unlocked_ioctl이 빅 커널 락(BKL, Big Kernel Lock)을 사용하지 않기 때문이다. 이는 더 나은 성능과 동시성을 제공하며, 현대의 멀티코어 시스템에서 중요한 특징이다. 따라서, 새로운 드라이버를 작성할 때는 unlocked_ioctl을 사용하는 것이 권장된다.)</p>
+
+<h3 id="2-파일-특수-제어-ioctl-구현">2. 파일 특수 제어 (ioctl) 구현</h3>
+
+<p>기존의 main.c 파일에 ioctl 관련 구현 내용을 추가해 준다. 해당 코드는 buffer 내용을 지우는 (clear) 하는 작업을 정의하였다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define COMENTO_MAGIC 'c'  // type ( ioctl 명령을 유일하게 식별하기 위한 문자)
+#define COMENTO_IOCTL_CLEAR _IO(COMENTO_MAGIC, 0) // nr: 0 함수 내부 switch 문의 구분 번호
+</span>
+<span class="k">static</span> <span class="kt">long</span> <span class="nf">comento_device_ioctl</span><span class="p">(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">fp</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">cmd</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">switch</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="n">COMENTO_IOCTL_CLEAR</span><span class="p">:</span>
+            <span class="n">memset</span><span class="p">(</span><span class="n">comento_device_buf</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">COMENTO_BUF_SIZE</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="nl">default:</span>
+            <span class="n">printk</span><span class="p">(</span><span class="n">KERN_DEBUG</span> <span class="s">"%s failed - %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">__func__</span><span class="p">,</span> <span class="n">cmd</span><span class="p">);</span>
+            <span class="k">return</span> <span class="o">-</span><span class="n">EINVAL</span><span class="p">;</span> <span class="c1">// 정의되지 않은 값이 입력된 경우, "Invalid Argument" 오류 반환</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//...</span>
+<span class="k">static</span> <span class="k">struct</span> <span class="n">file_operations</span> <span class="n">comento_device_fops</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="p">.</span><span class="n">unlocked_ioctl</span> <span class="o">=</span> <span class="n">comento_device_ioctl</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>한편, <a href="https://y2gon2.github.io/device_driver2.html">이전 post - 파일 읽기/ 쓰기</a> 에서는 파일 읽기/쓰기 기능만 사용되므로, 기존의 읽기/쓰기 함수를 사용하여 구현하였다. 그러나 ioctl 은 사용자 정의 명령을 통해 특정 디바이스 드라이버와 상호작용해야 하므로, 이를 별도로 구현해 주어야 한다. 이와 관련하여 해당 내용은 다음과 같다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;sys/ioctl.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;linux/limits.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#define COMENTO_DEVICE_NAME "comento" // 디바이스 파일명 
+#define COMENTO_MAGIC 'c'
+</span>
+<span class="c1">// 디바이스에 대한 ioctl 명령을 정의, _IO 매크로를 사용하여 COMENTO_IOCTL_CLEAR 명령을 생성</span>
+<span class="c1">// 해당 정의는 앞에 커널 모듈의 소스코드에서 정의한 것과 일치해야 한다.</span>
+<span class="cp">#define COMENTO_IOCTL_CLEAR _IO(COMENTO_MAGIC, 0) 
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="c1">// open 함수를 사용하여 /dev/comento-device 디바이스 파일을 읽기/쓰기 모드(O_RDWR)로 염</span>
+    <span class="c1">// 파일 디스크립터는 fd 변수에 저장</span>
+    <span class="c1">// 파일 열기에 실패한 경우, 오류 메시지를 출력하고 프로그램을 종료</span>
+    <span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">"/dev/"</span> <span class="n">COMENTO_DEVICE_NAME</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">);</span> 
+    <span class="k">if</span><span class="p">(</span><span class="n">fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Failed to open device</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ioctl(fd, COMENTO_DEVICE_IOCTL_CLEAR, 0) 해당 호출을 통해 </span>
+    <span class="c1">// 시스템 콜을 통해 커널 공간으로 전달되고, 커널은 등록된 디바이스 드라이버의 ioctl 처리 함수 </span>
+    <span class="c1">// 'comento_device_ioctl' - case COMENTO_DEVICE_IOCTL_CLEAR 이 실행되게 된다. </span>
+    <span class="c1">// 파일 디스크립터는 fd 변수에 저장되며, 파일 열기에 실패한 경우, </span>
+    <span class="c1">// 오류 메시지를 출력하고 프로그램을 종료합니다.</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">ioctl</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">COMENTO_IOCTL_CLEAR</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Failed to do ioctl command</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="3-구현-작업">3. 구현 작업</h3>
+
+<p>main.c 을 열어 위 소스 코드 추가</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ </span>vim drivers/comento/main.c
+</code></pre></div></div>
+
+<p>소스 코드 빌드</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 <span class="nv">CROSS_COMPILE</span><span class="o">=</span>/home/gon/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- make
+  CALL    scripts/checksyscalls.sh
+  CC <span class="o">[</span>M]  drivers/comento/main.o
+  LD <span class="o">[</span>M]  drivers/comento/comento.o
+  MODPOST Module.symvers
+  LD <span class="o">[</span>M]  drivers/comento/comento.ko
+</code></pre></div></div>
+
+<p>빌드된 커널 모듈을 이미지내 삽입</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">sudo </span>mount <span class="nt">-o</span> loop ../buildroot/output/images/rootfs.ext4 /mnt
+user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">sudo cp </span>drivers/comento/comento.ko /mnt/usr/lib/modules/.
+</code></pre></div></div>
+
+<p>사용자 프로그램 생성 (위 작성 코드 내용 사용)</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">cd</span> ..
+user@DESKTOP:~<span class="nv">$ </span>vim ioctl.c
+</code></pre></div></div>
+
+<p>toolchain 을 사용하여 사용자 프로그램 빌드</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-gcc <span class="nt">-o</span> ioctl ioctl.c
+</code></pre></div></div>
+
+<p>사용자 프로그램 이미지 내 추가</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span><span class="nb">sudo cp </span>ioctl /mnt/usr/bin
+user@DESKTOP:~<span class="nv">$ </span><span class="nb">sync
+</span>user@DESKTOP:~<span class="nv">$ </span><span class="nb">sudo </span>umount /mnt
+</code></pre></div></div>
+
+<p>QEMU 실행</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>qemu-system-aarch64 <span class="nt">-kernel</span> linux/arch/arm64/boot/Image <span class="nt">-drive</span> <span class="nv">format</span><span class="o">=</span>raw,file<span class="o">=</span>buildroot/output/images/rootfs.ext4,if<span class="o">=</span>virtio <span class="nt">-append</span> <span class="s2">"root=/dev/vda console=ttyAMA0 nokaslr"</span> <span class="nt">-nographic</span> <span class="nt">-M</span> virt <span class="nt">-cpu</span> cortex-a72 <span class="nt">-m</span> 2G <span class="nt">-smp</span> 2
+</code></pre></div></div>
+
+<h3 id="4-ioclt-사용">4. ioclt 사용</h3>
+
+<p>모듈 삽입 및 드라이버 노드 파일 생성</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># insmod /usr/lib/modules/comento.ko
+# cd /dev/
+# mkmod /dev/comento c 177 34
+# ls -lah comento
+crw-r--r--    1 root     root      177,  34 Mar  2 07:12 comento
+</code></pre></div></div>
+
+<p>node file buffer 문자열 넣기 및 확인</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># echo "hello~~!!" &gt; /dev/comento
+# cat /dev/comento
+hello~~!!
+</code></pre></div></div>
+
+<p>사용자 프로그램(ioctl) 을 실행하여 buffer 초기화 (clear) 실행</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ioctl
+# cat /dev/comento
+(출력 내용 없음)
+</code></pre></div></div>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="device driver" /><category term="device node" /><category term="ioctl" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 13]]></summary></entry><entry><title type="html">Device Driver 개발 2 (파일 읽기/ 쓰기)</title><link href="http://localhost:4000/device_driver2.html" rel="alternate" type="text/html" title="Device Driver 개발 2 (파일 읽기/ 쓰기)" /><published>2024-03-01T10:32:20+09:00</published><updated>2024-03-01T10:32:20+09:00</updated><id>http://localhost:4000/device_driver2</id><content type="html" xml:base="http://localhost:4000/device_driver2.html"><![CDATA[<style>
+    summary::-webkit-details-marker {
+        display: none;
+    }
+    summary {
+        list-style: none;
+    }
+</style>
+
+<details><summary></summary>
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+</details>
+
+<p>아래 내용은 개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/) 강의 내용 중 일부에 해당함.</p>
 
 <h3 id="1-파일-읽기-쓰기-구현">1. 파일 읽기/ 쓰기 구현</h3>
 
@@ -1508,702 +2020,4 @@ exit_group<span class="o">(</span>0<span class="o">)</span>                     
 <ul>
   <li>앞에서 구현한 파일 읽기와 동일한 callback 이 발생함을 확인할 수 있다. 
   파일 디스크립터 3 에 대해 값 “” 을 131072 buffer size 를 가지고 read 함수가 callback 된다.</li>
-</ul>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="device driver" /><category term="device node" /><category term="ssize_t()" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 12]]></summary></entry><entry><title type="html">Device Driver 개발 1</title><link href="http://localhost:4000/device_driver1.html" rel="alternate" type="text/html" title="Device Driver 개발 1" /><published>2024-02-29T10:32:20+09:00</published><updated>2024-02-29T10:32:20+09:00</updated><id>http://localhost:4000/device_driver1</id><content type="html" xml:base="http://localhost:4000/device_driver1.html"><![CDATA[<style>
-    summary::-webkit-details-marker {
-        display: none;
-    }
-    summary {
-        list-style: none;
-    }
-</style>
-
-<details><summary></summary>
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-</details>
-
-<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/)</p>
-
-<h3 id="1-디바이스-드라이버-종류">1. 디바이스 드라이버 종류</h3>
-
-<p>디바이스 드라이버는 플랫폼 별 (윈도우 드라이버, 리눅스 드라이버, 맥 OS 드라이버) 등 또는 OS 수준 별(커널 모드 드라이버, 사용자 모드 드라이버) 로 구분되기도 하며, 아래와 같이 하드웨어의 유형과 기능에 따라 장치별 드라이버로 구분되기도 한다.</p>
-
-<ol>
-  <li>
-    <p>블록 장치 드라이버<br />
-데이터를 블록이라는 고정된 크기의 단위로 저장하고 검색하는 저장 장치를 관리. 이러한 장치에는 하드 디스크 드라이브(HDD), 솔리드 스테이트 드라이브(SSD), USB 플래시 드라이브 등이 포함되며. 블록 장치 드라이버는 파일 시스템을 지원하여, 사용자와 시스템이 데이터를 효율적으로 저장하고 액세스할 수 있게 한다. (ex. 블록 장치 드라이버는 운영 체제가 디스크의 특정 블록을 읽거나 쓸 수 있도록 하며, 디스크 상의 데이터의 물리적 위치를 추상화.)</p>
-  </li>
-  <li>
-    <p>문자 장치 드라이버<br />
-데이터를 문자 단위로 처리하는 장치, 즉 한 번에 하나의 문자(또는 바이트)를 전송하는 장치를 관리한다. 이에는 키보드, 마우스, 시리얼 포트, 프린터 등이 포함된다. 문자 장치 드라이버는 사용자 입력을 처리하거나 문자 기반의 데이터를 장치로 전송하는 역할을 한다. (ex. 키보드 드라이버는 사용자가 누른 키의 신호를 받아 운영 체제가 이해할 수 있는 입력 데이터로 변환.)</p>
-  </li>
-  <li>
-    <p>네트워크 드라이버<br />
-네트워크 인터페이스 카드(NIC)나 기타 네트워킹 하드웨어 장치를 관리한다. 이 드라이버는 데이터 패킷을 네트워크를 통해 송수신하는 데 필요한 기능을 제공한다. 네트워크 드라이버는 네트워크 프로토콜(예: TCP/IP)과 상호 작용하여 데이터를 올바르게 포맷하고, 주소를 지정하며, 에러 검사를 수행한다. 네트워크 드라이버는 데이터의 안정적인 전송을 보장하기 위해 중요한 역할을 한다.</p>
-  </li>
-  <li>
-    <p>버스 디바이스 드라이버<br />
-컴퓨터 내의 다양한 하드웨어 장치를 연결하는 통신 경로인 버스를 관리한다. 대표적인 예로는 PCI(Peripheral Component Interconnect), USB(Universal Serial Bus), SATA(Serial ATA) 등이 있습니다. 버스 드라이버는 하드웨어 장치 간의 데이터 전송을 조정하고, 장치 간의 호환성을 보장한다. (ex. USB 버스 드라이버는 USB 장치가 컴퓨터에 연결될 때 필요한 전력 관리, 데이터 전송 속도 조정, 연결된 장치의 식별 및 구성을 담당.)</p>
-  </li>
-</ol>
-
-<h3 id="2-디바이스-노드">2. 디바이스 노드</h3>
-
-<p>디바이스 노드(Device Node)는 유닉스 및 유닉스 계열 운영 체제에서 하드웨어 장치를 파일 시스템 내의 파일로 표현하는 방법. 유닉스 계열 시스템은 ‘모든 것은 파일’이라는 철학을 따르는데, 이는 하드웨어 장치를 포함한 모든 자원을 파일처럼 취급한다는 의미이다. 디바이스 노드를 통해, 사용자와 응용 프로그램은 표준 파일 입출력(IO) 시스템 호출을 사용하여 하드웨어 장치와 통신할 수 있다.</p>
-
-<h4 id="디바이스-노드의-종류-타입">디바이스 노드의 종류 (타입)</h4>
-
-<ul>
-  <li>
-    <p>문자 디바이스(Character Device) : c <br /></p>
-  </li>
-  <li>
-    <p>블록 디바이스(Block Device) : b <br /></p>
-
-    <p>(네트워크 드라이버와 버스 디바이스 드라이버는 노출되지 않고 별도로 관리됨.)</p>
-  </li>
-</ul>
-
-<h4 id="디바이스-노드의-특징-및-사용-방법">디바이스 노드의 특징 및 사용 방법</h4>
-
-<ul>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">mknod &lt;파일이름&gt; &lt;타입&gt; &lt;주번호&gt; &lt;부번호&gt;</code> : 디바이스 노드 파일 생성</p>
-  </li>
-  <li>
-    <p>파일 시스템 내 위치 <br />
-디바이스 노드는 주로 /dev 디렉토리에 위치한다. 예를 들어, /dev/sda는 첫 번째 SATA 하드 드라이브를, /dev/tty는 현재 터미널을 나타낸다.</p>
-  </li>
-  <li>
-    <p>특수 파일 <br />
-디바이스 노드는 특수 파일로 분류된다. 일반 파일과 달리, 실제 데이터를 디스크에 저장하는 대신, 커널의 하드웨어 장치 드라이버와 통신하는 인터페이스 역할을 한다.</p>
-  </li>
-  <li>
-    <p>MAJOR/MINOR 번호 <br />
-각 디바이스 노드는 MAJOR 번호와 MINOR 번호를 가진다.</p>
-
-    <p>MAJOR 번호(0 ~ 511)는 장치 유형(예: 하드 디스크, 시리얼 포트)을 식별한다. 디바이스 드라이버마다 고유하며 커널이 자동으로 할당하기도 한다.</p>
-
-    <p>MINOR 번호(0 ~ 1048576)는 해당 유형 내의 개별 장치를 구분한다. 즉 디바이스마다 고유하며 디바이스 드라이버가 할당을 관리한다.</p>
-
-    <p>ex. USB 마우스를 여러개 꽂았을 경우 - 디바이스(minor 번호)는 여러개, 디바이스 드라이버(major 번호) 는 하나</p>
-  </li>
-  <li>
-    <p>사용자와 그룹 권한 <br />
-디바이스 노드는 파일과 마찬가지로 사용자와 그룹 권한을 가진다. 이를 통해 특정 사용자 또는 그룹만이 장치에 접근하거나 사용할 수 있는 권한을 제어할 수 있다.</p>
-  </li>
-</ul>
-
-<h3 id="3-문자-디바이스-드라이버-등록-실습">3. 문자 디바이스 드라이버 등록 실습</h3>
-
-<h4 id="31-문자-디바이스-드러이버-구현-시스템콜-파일-생성">3.1 문자 디바이스 드러이버 구현 시스템콜 파일 생성</h4>
-
-<p>(이전 post 에서 구현한 <code class="language-plaintext highlighter-rouge">linux/drivers/coment/main.c</code> 파일을 사용하여 진행)</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux/drivers/comento<span class="nv">$ </span>vim main.c
-</code></pre></div></div>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;linux/module.h&gt;</span><span class="cp">
-</span>
-<span class="c1">// (1)</span>
-<span class="k">static</span> <span class="kt">int</span> <span class="nf">comento_device_open</span><span class="p">(</span><span class="k">struct</span> <span class="n">inode</span> <span class="o">*</span><span class="n">inode</span><span class="p">,</span> <span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">file</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">minor</span> <span class="o">=</span> <span class="n">iminor</span><span class="p">(</span><span class="n">inode</span><span class="p">);</span>
-    <span class="n">printk</span><span class="p">(</span><span class="n">KERN_DEBUG</span> <span class="s">"%s - minor : %d/n"</span><span class="p">,</span> <span class="n">__func__</span><span class="p">,</span> <span class="n">minor</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span> 
-
-<span class="c1">// (2)</span>
-<span class="k">struct</span> <span class="n">file_operations</span> <span class="n">fops</span><span class="o">=</span> <span class="p">{</span>
-    <span class="p">.</span><span class="n">open</span> <span class="o">=</span> <span class="n">comento_device_open</span><span class="p">,</span>
-<span class="p">};</span>
-
-<span class="k">static</span> <span class="kt">int</span> <span class="n">__init</span> <span class="nf">comento_module_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> 
-<span class="p">{</span>
-    <span class="n">printk</span><span class="p">(</span><span class="n">KERN_DEBUG</span> <span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">__func__</span><span class="p">);</span>
-    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">register_chrdev</span><span class="p">(</span><span class="mi">177</span><span class="p">,</span> <span class="s">"comento"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">fops</span><span class="p">);</span> <span class="c1">// (3)</span>
-    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">static</span> <span class="kt">void</span> <span class="n">__exit</span> <span class="nf">comento_module_exit</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> 
-<span class="p">{</span>
-    <span class="n">unregister_chrdev</span><span class="p">(</span><span class="mi">177</span><span class="p">,</span> <span class="s">"comento"</span><span class="p">);</span>
-    <span class="n">printk</span><span class="p">(</span><span class="n">KERN_DEBUG</span> <span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">__func__</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="n">module_init</span><span class="p">(</span><span class="n">comento_module_init</span><span class="p">);</span>
-<span class="n">module_exit</span><span class="p">(</span><span class="n">comento_module_exit</span><span class="p">);</span>
-
-<span class="n">MODULE_AUTHOR</span><span class="p">(</span><span class="s">"Hello&lt;hello@comento.com&gt;"</span><span class="p">);</span>
-<span class="n">MODULE_DESCRIPTION</span><span class="p">(</span><span class="s">"Example module"</span><span class="p">);</span>
-<span class="n">MODULE_LICENSE</span><span class="p">(</span><span class="s">"GPL v2"</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>(1) static int comento_device_open(struct inode *inode, struct file *file) {} <br />
-리눅스 커널 내에서 디바이스 파일을 열려고 할 때 호출되는 함수. 이 함수는 file_operations 구조체 내에서 .open 포인터에 의해 참조되며, 사용자 공간에서 디바이스 파일(예: /dev/comento)에 대한 open 시스템 콜이 발생할 때 실행된다.
-해당 함수는 디바이스 파일이 열릴 때 필요한 초기화나 상태 확인 등의 작업을 수행하기 위애 정의 된다. <br />
-<code class="language-plaintext highlighter-rouge">struct file_operations</code> 의 주요 필드 callback 함수에 대한 정의를 살펴보면</p>
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">struct</span> <span class="n">file_operations</span> <span class="p">{</span>
-    <span class="k">struct</span> <span class="n">module</span> <span class="o">*</span><span class="n">owner</span><span class="p">;</span>
-    <span class="n">loff_t</span> <span class="p">(</span><span class="o">*</span><span class="n">llseek</span><span class="p">)</span> <span class="p">(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="p">,</span> <span class="n">loff_t</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
-    <span class="kt">ssize_t</span> <span class="p">(</span><span class="o">*</span><span class="n">read</span><span class="p">)</span> <span class="p">(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="p">,</span> <span class="kt">char</span> <span class="n">__user</span> <span class="o">*</span><span class="p">,</span> <span class="kt">size_t</span><span class="p">,</span> <span class="n">loff_t</span> <span class="o">*</span><span class="p">);</span>
-    <span class="kt">ssize_t</span> <span class="p">(</span><span class="o">*</span><span class="n">write</span><span class="p">)</span> <span class="p">(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">__user</span> <span class="o">*</span><span class="p">,</span> <span class="kt">size_t</span><span class="p">,</span> <span class="n">loff_t</span> <span class="o">*</span><span class="p">);</span>
-    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">open</span><span class="p">)</span> <span class="p">(</span><span class="k">struct</span> <span class="n">inode</span> <span class="o">*</span><span class="p">,</span> <span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="p">);</span>
-    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">release</span><span class="p">)</span> <span class="p">(</span><span class="k">struct</span> <span class="n">inode</span> <span class="o">*</span><span class="p">,</span> <span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="p">);</span>
-    <span class="c1">// 다른 필드들...</span>
-  <span class="p">};</span>
-</code></pre></div></div>
-<p>이와 같이 open 필드의 경우, inode 포인터와 file 포인터를 인자로 취하는 함수이여야 한다.</p>
-
-<ul>
-  <li>inode <br />
-inode는 유닉스 및 유닉스 계열 시스템에서 파일 시스템의 파일이나 디렉터리에 대한 메타데이터를 저장하는 데이터 구조 (구조체 타입) 각 파일이나 디렉터리는 고유한 inode를 가지며, 이 inode에는 파일의 소유자, 파일 모드(권한), 파일 크기, 파일이 저장된 디스크 상의 위치, 생성 및 수정 날짜 등의 정보가 포함된다. <br /> 
-디바이스 드라이버의 컨텍스트에서 inode 구조체는 디바이스 파일의 메타데이터에 접근하는 데 사용된다. 특히, 디바이스 파일을 나타내는 inode에서 Major 번호와 Minor 번호를 추출하여, 해당 디바이스 파일이 어떤 디바이스를 참조하는지 식별할 수 있다.<br /></li>
-</ul>
-
-<p>(2) file_operations <br />
-리눅스 커널 내에서 파일 작업을 위한 callback 함수를 정의하는데 사용되느 구조체. 커널 모듈이나 디바이스 드라이버가 파일 시스템의 파일이나 디바이스 파일에 대한 다양한 작업(예: 열기, 읽기, 쓰기 등)을 수행할 수 있도록 하는 인터페이스를 제공한다. 각 필드는 특정 파일 작업을 위한 함수 포인터를 가리키며, 해당 작업이 호출될 때 실행될 함수를 지정한다. <br /><br /></p>
-<ul>
-  <li>.open   : 파일이나 디바이스를 열 때 호출됨</li>
-  <li>.read   : 파일이나 디바이스에서 데이터를 읽을 때 호출됨</li>
-  <li>.write  : 파일이나 디바이스에 데이터를 쓸 때 호출됨</li>
-  <li>.release: 파일이나 디바이스가 닫힐 때 호출됨 (종종 close 작업으로 참조됨).</li>
-  <li>.llseek : 파일 내에서 읽기/쓰기 위치를 변경할 때 호출됨</li>
-  <li>.ioctl  : 장치에 특정 명령을 보낼 때 사용됨 (장치 제어).<br /><br /></li>
-</ul>
-
-<p>(3) register_chrdev(major, name, fops)  <br /> 
-새로운 문자 디바이스 드라이버 등록에 사용되는 API</p>
-<ul>
-  <li>major : 주번호로 사용할 번호를 지정, (0으로 지정시 커널이 자동 할당)</li>
-  <li>name : 디바이스의 이름</li>
-  <li>fops : 디바이스 드라이버가 구현할 file_operations</li>
-  <li>등록이 성공했다면 0 또는 할당받은 major 번호를 반환, 실패시 음수 반환</li>
-</ul>
-
-<p><br />
-이제 아래와 같이 수정한 소스 파일을 빌드하여 ko dynamic linker 파일 생성한다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 <span class="nv">CROSS_COMPILE</span><span class="o">=</span>/home/gon/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- make
-  CALL    scripts/checksyscalls.sh
-  CC <span class="o">[</span>M]  drivers/comento/main.o
-  LD <span class="o">[</span>M]  drivers/comento/comento.o
-  MODPOST Module.symvers
-  LD <span class="o">[</span>M]  drivers/comento/comento.ko
-</code></pre></div></div>
-
-<p>rootfs 에 마운트 해당 파일을 마우트 이미지에 삽입</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux/<span class="nv">$ </span><span class="nb">sudo </span>mount <span class="nt">-o</span> loop ../buildroot/output/images/rootfs.ext4 /mnt
-user@DESKTOP:~/linux/<span class="nv">$ </span><span class="nb">sudo cp </span>drivers/comento/comento.ko /mnt/usr/lib/modules/.
-user@DESKTOP:~/linux/<span class="nv">$ </span><span class="nb">sync
-</span>user@DESKTOP:~/linux/<span class="nv">$ </span><span class="nb">sudo </span>umount /mnt
-</code></pre></div></div>
-
-<p>QEMU 로 커널 실행</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux/<span class="nv">$ </span><span class="nb">cd</span> ..
-user@DESKTOP:~<span class="nv">$ </span>qemu-system-aarch64 <span class="nt">-kernel</span> linux/arch/arm64/boot/Image <span class="nt">-drive</span> <span class="nv">format</span><span class="o">=</span>raw,file<span class="o">=</span>buildroot/output/images/rootfs.ext4,if<span class="o">=</span>virtio <span class="nt">-append</span> <span class="s2">"root=/dev/vda console=ttyAMA0 nokaslr"</span> <span class="nt">-nographic</span> <span class="nt">-M</span> virt <span class="nt">-cpu</span> cortex-a72 <span class="nt">-m</span> 2G <span class="nt">-smp</span> 2
-</code></pre></div></div>
-
-<h4 id="32-디바이스-노드-만들기">3.2 디바이스 노드 만들기</h4>
-
-<p>mknod 명령어로 디바이스 노드를 생성한다. 순서대로 c (문자 디바이스), 177 (기존에 지정한 major 번호) 32 (임의의 minor 번호) 를 입력한다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># cd /dev/
-# mknod /dev/comento c 177 43
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># cat /dev/comento
-cat: can't open '/dev/comento': No such device or address
-</code></pre></div></div>
-
-<p>명령어 수행 결과를 확인했을 때, 아직 디바이스 드라이버가 로드되지 않아 찾지 못한다고 나온다. 따라서 아래와 같이 해당 디바이스 드라이버를 등록 시키고 다시 확인해보면,</p>
-
-<h4 id="33-모듈-로드">3.3 모듈 로드</h4>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># insmod /usr/lib/modules/comento.ko
-# cat /dev/comento
-cat: read error: Invalid argument
-</code></pre></div></div>
-
-<p>해당 결과와 같이, 드라이버 노드는 찾은 것 같다. 다만 read 대한 구현이 없기 때문에 해당 에러가 발생하였다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># dmesg
-...
-comento_module_init
-# ls -lah comento
-crw-r--r--    1 root     root      177,  43 Feb 29 07:20 comento
-</code></pre></div></div>
-
-<p>dmesg 로 init 되었음이 확인 되었으며, (그런데 <code class="language-plaintext highlighter-rouge">comento_device_open</code> 함수 실행 메세지는 안나왔네 ;;) ls 명령어를 통해 <code class="language-plaintext highlighter-rouge">comento</code> 파일이 생성 및 major, minor 번호가 정상적으로 부여되었음을 볼 수 있다.</p>
-
-<p>위 과정에서 모듈로드가 정상적으로 되어야 드라이버 노드가 정상적으로 작동함을 보여주기 위해  mknod 로 디바이스 노드를 생성한 이후 모듈을 로드 했지만, 논리적으로 절차를 생각하면, 우선 디바이스 노드의 binary 값을 매모리에 로드하는 것이 우선으로 시행되는 것이 맞다. 해당 insmod 명령어 수행시 어떤 작업이 수행되는지 정리하면 아래와 같다.</p>
-
-<ol>
-  <li>
-    <p>메모리 로드
-insmod 명령어는 디스크 상의 커널 모듈(.ko 파일)을 찾아 메모리로 로드. 이 파일에는 디바이스 드라이버의 실행 가능한 코드가 포함되어 있다.</p>
-  </li>
-  <li>
-    <p>초기화 및 등록
-드라이버 모듈이 메모리로 로드되면, 그 안에 정의된 초기화 함수가 실행된다. 이 초기화 과정에서 드라이버는 자신이 관리할 하드웨어 디바이스를 설정하고, 커널에 필요한 정보(예: 드라이버가 지원하는 연산, 메이저 번호 등)를 등록한다. 이로써 시스템은 해당 드라이버가 존재하고 사용 가능함을 알게 된다.</p>
-  </li>
-  <li>
-    <p>시스템과의 통합
-드라이버가 성공적으로 로드되고 초기화되면, 시스템의 다른 부분들은 해당 드라이버를 통해 연결된 하드웨어 디바이스와 통신할 수 있다. 예를 들어, 사용자 공간의 애플리케이션은 표준 파일 입출력 연산을 사용하여 디바이스 파일(/dev에 위치)을 통해 드라이버와 데이터를 주고받을 수 있다.</p>
-  </li>
-</ol>
-
-<p>이후 mknod 명령어 요청시 로드된 모듈을 가지고 어떤 작업들이 진행되는 정리하면 아래와 같다.</p>
-
-<ol>
-  <li>
-    <p>파일 유형 및 메이저/마이너 번호 지정
-사용자는 mknod 명령어를 실행할 때 파일의 경로, 유형(문자 디바이스 또는 블록 디바이스), 메이저 번호, 그리고 마이너 번호를 지정. 이 정보는 생성될 디바이스 파일의 특성을 결정한다.
-(예: mknod /dev/example c 240 0은 /dev 디렉토리에 example이라는 이름의 문자 디바이스 파일을 생성하며, 이 파일은 메이저 번호 240과 마이너 번호 0을 가진다.)</p>
-  </li>
-  <li>
-    <p>디바이스 파일 생성
-지정된 정보를 바탕으로 파일 시스템에 디바이스 파일을 생성. 이 파일은 실제 데이터를 저장하지 않고, 대신 특정 디바이스 드라이버와의 통신 경로 역할을 한다. 생성된 파일의 유형(문자 또는 블록), 메이저 번호, 마이너 번호는 커널이 디바이스 드라이버를 어떻게 찾아야 하는지를 결정하는 데 사용된다.</p>
-  </li>
-  <li>
-    <p>파일 시스템에 메타데이터 등록
-생성된 디바이스 파일에 대한 메타데이터가 파일 시스템에 등록. 이 메타데이터에는 파일의 유형, 권한, 소유자, 그룹, 메이저/마이너 번호 등이 포함될 수 있다. 이 정보는 파일 시스템을 통해 파일에 접근하려는 프로세스에 의해 참조된다.</p>
-  </li>
-  <li>
-    <p>시스템과의 통합
-디바이스 파일이 성공적으로 생성되면, 시스템의 다른 부분(예: 사용자 공간의 프로그램)은 이 파일을 통해 커널의 디바이스 드라이버와 통신할 수 있다. 파일에 대한 입출력 연산은 커널에 의해 해당 디바이스 드라이버의 적절한 함수로 라우팅된다.</p>
-  </li>
-</ol>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="device driver" /><category term="device node" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 11]]></summary></entry><entry><title type="html">Kernel Module 만들기</title><link href="http://localhost:4000/kernelmodule01.html" rel="alternate" type="text/html" title="Kernel Module 만들기" /><published>2024-02-28T10:32:20+09:00</published><updated>2024-02-28T10:32:20+09:00</updated><id>http://localhost:4000/kernelmodule01</id><content type="html" xml:base="http://localhost:4000/kernelmodule01.html"><![CDATA[<style>
-    summary::-webkit-details-marker {
-        display: none;
-    }
-    summary {
-        list-style: none;
-    }
-</style>
-
-<details><summary></summary>
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-</details>
-
-<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/)</p>
-
-<h3 id="1-관련-설정-추가-및-source-code-생성">1. 관련 설정 추가 및 source code 생성</h3>
-
-<p>1.1 드라이버 디렉토리 생성 및 Makefile 에 해당 디렉토리 추가</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span><span class="nb">cd </span>linux/drivers
-user@DESKTOP:~/linux/drivers<span class="nv">$ </span><span class="nb">mkdir </span>comento
-user@DESKTOP:~/linux/drivers<span class="nv">$ </span>vim Makefile
-</code></pre></div></div>
-
-<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">...</span>
-<span class="nv">obj-$(CONFIG_DRM_ACCEL)</span>         <span class="o">+=</span> accel/
-<span class="nv">obj-$(CONFIG_CDX_BUS)</span>           <span class="o">+=</span> cdx/
-<span class="nv">obj-$(CONFIG_DPLL)</span>              <span class="o">+=</span> dpll/
-
-<span class="nv">obj-$(CONFIG_S390)</span>              <span class="o">+=</span> s390/
-<span class="c"># 추가 내용
-</span><span class="nv">oeeebj-y</span>                           <span class="o">+=</span> comento/ 
-</code></pre></div></div>
-
-<p>1.2 drivers Kconfig 에도 추가될 디렉토리 Kconfig 항목 추가</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux/drivers<span class="nv">$ </span>vim Kconfig
-</code></pre></div></div>
-
-<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">...</span>
-<span class="err">source</span> <span class="s2">"drivers/cdx/Kconfig"</span>
-
-<span class="err">source</span> <span class="s2">"drivers/dpll/Kconfig"</span>
-
-<span class="err">source</span> <span class="s2">"drivers/comento/Kconfig"</span>  <span class="c"># 추가 내용
-</span>
-<span class="err">endmenu</span>
-</code></pre></div></div>
-
-<p>1.3 해당 디렉토리에 Kconfig 파일 추가</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux/drivers<span class="nv">$ </span><span class="nb">cd </span>comento
-user@DESKTOP:~/linux/drivers/comento<span class="nv">$ </span>vim Kconfig 
-</code></pre></div></div>
-
-<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">menu</span> <span class="s2">"Comento Example Driver"</span>
-
-<span class="err">config</span> <span class="err">COMENTO_EXAMPLE</span>
-    <span class="err">tristate</span> <span class="s2">"Comento Example Dirver Module"</span>
-    <span class="err">help</span>
-        <span class="err">This</span> <span class="err">is</span> <span class="err">an</span> <span class="err">example</span>
-
-<span class="err">endmenu</span>
-</code></pre></div></div>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">config COMENTO_EXAMPLE</code> : .config 파일에서는 CONFIG prefix 를 붙여 <code class="language-plaintext highlighter-rouge">CONFIG_COMENTO_EXAMPLE</code> 로 사용됨.</li>
-</ul>
-
-<p>1.4 해당 디렉토리 내 main.c 로 목적파일이 만들어 질 수 있도록 Makefile 추가</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux/drivers/comento<span class="nv">$ </span>vim Makefile
-</code></pre></div></div>
-
-<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">obj-$(CONFIG_COMENTO_EXAMPLE)</span> <span class="o">+=</span> comento.o
-<span class="nv">comento-objs</span> <span class="o">+=</span> main.o
-</code></pre></div></div>
-
-<p>1.5 linux kernel module 내용을 담은 소스 코드 <code class="language-plaintext highlighter-rouge">main.c</code> 작성</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux/drivers/comento<span class="nv">$ </span>vim main.c
-</code></pre></div></div>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span>  <span class="cpf">&lt;linux/module.h&gt;</span><span class="cp">
-</span>
-<span class="k">static</span> <span class="kt">int</span> <span class="n">__init</span> <span class="nf">comento_module_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">printk</span><span class="p">(</span><span class="n">KERN_DEBUG</span> <span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>  <span class="n">__func__</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">static</span> <span class="kt">void</span> <span class="n">__exit</span> <span class="nf">comento_module_exit</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">printk</span><span class="p">(</span><span class="n">KERN_DEBUG</span> <span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>  <span class="n">__func__</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="n">module_init</span><span class="p">(</span><span class="n">comento_module_init</span><span class="p">);</span>
-<span class="n">module_exit</span><span class="p">(</span><span class="n">comento_module_exit</span><span class="p">);</span>
-
-<span class="n">MODULE_AUTHOR</span><span class="p">(</span><span class="s">"Hello&lt;hello@comento.com&gt;"</span><span class="p">);</span>
-<span class="n">MODULE_DESCRIPTION</span><span class="p">(</span><span class="s">"Example module"</span><span class="p">);</span>
-<span class="n">MODULE_LICENSE</span><span class="p">(</span><span class="s">"GPL v2"</span><span class="p">);</span>
-</code></pre></div></div>
-<h4 id="모듈-초기화-및-종료-함수">모듈 초기화 및 종료 함수</h4>
-
-<ul>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">__init</code> 함수 (comento_module_init): 모듈이 커널에 로드될 때 자동으로 실행됨. <code class="language-plaintext highlighter-rouge">__init</code> 매크로는 이 함수가 초기화 코드에만 사용되며, 초기화 후에는 메모리에서 해제될 수 있음을 커널에 알린다. 이 예에서, printk 함수를 사용하여 커널 로그에 메시지 (<code class="language-plaintext highlighter-rouge">__func__</code> 매크로는 현재 함수 이름의 문자열을 반환) 를 출력한다. <code class="language-plaintext highlighter-rouge">__init</code> 은 init 관련 함수임을 표시한 attribute 이다.</p>
-  </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">__exit</code> 함수 (comento_module_exit): 모듈이 커널에서 제거될 때 실행됨. <code class="language-plaintext highlighter-rouge">__exit</code> 매크로는 이 함수가 종료 코드에만 사용되며, 모듈이 커널에 계속 로드되어 있는 경우 메모리를 절약하기 위해 해제될 수 있음을 나타낸다.</p>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">module_init</code> 매크로
-    <ul>
-      <li>목적: 커널 모듈이 시스템에 로드될 때 실행될 초기화 함수를 지정</li>
-      <li>동작: 지정된 초기화 함수는 모듈이 커널에 삽입될 때(insmod 명령어 사용 시) 자동으로 호출된다. 이 함수 내에서는 모듈이 제대로 작동하기 위해 필요한 리소스 할당, 상태 초기화, 디바이스 등록 등의 작업을 수행한다.</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">module_exit</code> 매크로
-    <ul>
-      <li>목적: 커널 모듈이 시스템에서 제거될 때 실행될 종료 함수를 지정</li>
-      <li>동작: 지정된 종료 함수는 모듈이 커널에서 제거될 때(rmmod 명령어 사용 시) 자동으로 호출된다. 이 함수 내에서는 모듈의 정상적인 종료를 위해 할당된 리소스의 해제, 등록된 디바이스의 등록 해제 등의 작업을 수행한다.</li>
-    </ul>
-  </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">MODULE_AUTHOR</code>: 모듈의 작성자.</p>
-  </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">MODULE_DESCRIPTION</code>: 모듈에 대한 간단한 설명.</p>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">MODULE_LICENSE</code>: 모듈의 라이선스 유형. “GPL v2”는, 모듈이 GNU General Public License 버전 2에 따라 배포됨을 나타낸다. 이는 모듈이 GPL 호환 코드와 함께 사용되어야 함을 의미한다.</li>
-</ul>
-
-<p>1.6 menuconfig 실행하여 항목 추가되었음을 확인하고 설정 반영</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux/drivers/comento<span class="nv">$ </span><span class="nb">cd</span> ..
-user@DESKTOP:~/linux/drivers<span class="nv">$ </span><span class="nb">cd</span> ..
-user@DESKTOP:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 make menuconfig
-</code></pre></div></div>
-<p>Device Driver 항목 맨 아래 다음과 같이 추가되었음을 확인할 수 있다.</p>
-
-<center><img src="assets\img\posts\2024-02-28-kernelmodule011.png" width="600" /></center>
-<p><br /></p>
-<center><img src="assets\img\posts\2024-02-28-kernelmodule012.png" width="600" /></center>
-
-<h3 id="2-kernel-build">2. kernel build</h3>
-
-<p>2.1  kernel build</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 <span class="nv">CROSS_COMPILE</span><span class="o">=</span>/home/gon/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- make 
-  CALL    scripts/checksyscalls.sh
-  CC <span class="o">[</span>M]  drivers/comento/main.o
-  LD <span class="o">[</span>M]  drivers/comento/comento.o
-  ...
-  CC <span class="o">[</span>M]  drivers/comento/comento.mod.o
-  LD <span class="o">[</span>M]  drivers/comento/comento.ko
-  ...
-</code></pre></div></div>
-
-<p>해당 kernel 을 build 하면 위와 같이 사용자가 작성한 <code class="language-plaintext highlighter-rouge">drivers/comento/main.o</code> 가 gcc 에 의해 빌드되고, 해당 linker script 가 <code class="language-plaintext highlighter-rouge">comento-objs += main.o</code> 에 명시된 대로 <code class="language-plaintext highlighter-rouge">main.o</code> 를 모아서 <code class="language-plaintext highlighter-rouge">obj-$(CONFIG_COMENTO_EXAMPLE) += comento.o</code> 대로 <code class="language-plaintext highlighter-rouge">drivers/comento/comento.o</code> 을 생성한다.</p>
-
-<p>그리고 <code class="language-plaintext highlighter-rouge">commento.o</code> 가 모듈관련 목적 파일 <code class="language-plaintext highlighter-rouge">drivers/comento/comento.mod.o</code> 과 함께 link 되서 linker 가 <code class="language-plaintext highlighter-rouge">drivers/comento/comento.ko</code> 를 만든다.</p>
-
-<h3 id="3-buildroot-이미지에-해당-ko-파일-추가-및-qemu-에서-모듈-로드가-정상적으로-되었는지-확인">3. buildroot 이미지에 해당 ko 파일 추가 및 QEMU 에서 모듈 로드가 정상적으로 되었는지 확인</h3>
-
-<p>3.1 buildroot 이미지에 해당 ko 파일 추가</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">sudo </span>mount <span class="nt">-o</span> loop ../buildroot/output/images/rootfs.ext4 /mnt
-user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">sudo mkdir</span> /mnt/usr/lib/modules
-user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">sudo cp </span>drivers/comento/comento.ko /mnt/usr/lib/modules
-user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">sync
-</span>user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">sudo </span>umount /mnt
-</code></pre></div></div>
-
-<p>3.2 QEMU 실행</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">cd</span> ..
-user@DESKTOP:~<span class="nv">$ </span>qemu-system-aarch64 <span class="nt">-kernel</span> linux/arch/arm64/boot/Image <span class="nt">-drive</span> <span class="nv">format</span><span class="o">=</span>raw,file<span class="o">=</span>buildroot/output/images/rootfs.ext4,if<span class="o">=</span>virtio <span class="nt">-append</span> <span class="s2">"root=/dev/vda console=ttyAMA0 nokaslr"</span> <span class="nt">-nographic</span> <span class="nt">-M</span> virt <span class="nt">-cpu</span> cortex-a72 <span class="nt">-m</span> 2G <span class="nt">-smp</span> 2
-</code></pre></div></div>
-
-<p>3.3 모듈 추가 확인</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ls /usr/lib/modules
-comento.ko
-</code></pre></div></div>
-
-<p>해당 커널에서 삽입한 경로에 보면 <code class="language-plaintext highlighter-rouge">comento.ko</code> 이 정상적으로 추가되어 있음을 볼 수 있다.</p>
-
-<h3 id="4-moudule-load--unload">4. moudule load / unload</h3>
-
-<p>4.1 load</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># insmod /usr/lib/moduels/comento.ko
-# dmesg -c
-comento_module_init
-</code></pre></div></div>
-<p>insmod 하여 모듈을 삽입하고 <code class="language-plaintext highlighter-rouge">dmesg</code> 를 하면, <code class="language-plaintext highlighter-rouge">main.c</code> 에 작성 했던 <code class="language-plaintext highlighter-rouge">comento_module_init()</code> 에서 작성한 대로 함수명 (<code class="language-plaintext highlighter-rouge">comento_module_init</code>) 을 출력하게 된다. 아래와 같이 <code class="language-plaintext highlighter-rouge">lsmod</code> 명령어로 현재 로드된 모듈들을 볼 수도 있다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># lsmod
-Module                  Size  Used by
-comento                12288  0
-</code></pre></div></div>
-
-<p>4.2 unload</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># rmmod comento.ko
-# dmesg -c
-comento_module_exit
-</code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">rmmod</code> 를 통해 지정된 모듈을 제거 한다. 제거하면서 “comento_module_exit” 메세지가 출력되었음을 볼 수 있다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># lsmod
-Module                  Size  Used by
-</code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">lsmod</code> 로 보면 이제 로드된 모듈이 없음을 확인할 수 있다.</p>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="kernel module" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 10]]></summary></entry><entry><title type="html">GDB 를 사용 기초 및 systemcall GDB 적용</title><link href="http://localhost:4000/gdp01.html" rel="alternate" type="text/html" title="GDB 를 사용 기초 및 systemcall GDB 적용" /><published>2024-02-25T10:32:20+09:00</published><updated>2024-02-25T10:32:20+09:00</updated><id>http://localhost:4000/gdp01</id><content type="html" xml:base="http://localhost:4000/gdp01.html"><![CDATA[<style>
-    summary::-webkit-details-marker {
-        display: none;
-    }
-    summary {
-        list-style: none;
-    }
-</style>
-
-<details><summary></summary>
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-</details>
-
-<p>개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/)</p>
-
-<h3 id="gdb-기초">GDB 기초</h3>
-
-<ol>
-  <li>GDB 사용을 위한 라이브러리 설치</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>gdb-multiarch
-</code></pre></div></div>
-
-<ol>
-  <li>GDB 로 관찰할 systemcall 작성</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>vi fact.c
-</code></pre></div></div>
-
-<ul>
-  <li>test 용 code</li>
-</ul>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
-</span>
-<span class="kt">int</span> <span class="nf">factorial</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">ret</span> <span class="o">*=</span> <span class="n">n</span><span class="p">;</span>
-        <span class="n">ret</span> <span class="o">*=</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">factorial</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"result: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<ol>
-  <li>gcc build</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>gcc <span class="nt">-g</span> fact.c <span class="nt">-o</span> fact 
-<span class="c"># -g : 컴파일된 실행 파일에 디버깅 정보를 포함</span>
-<span class="c"># GDB를 사용할 때 소스 코드의 라인 번호, 변수 이름 등의 상세한 정보에 접근 가능</span>
-</code></pre></div></div>
-
-<ol>
-  <li>GDB 실행</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>gdb-multiarch fact
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GNU gdb (Ubuntu 12.1-0ubuntu1~22.04) 12.1
-Copyright (C) 2022 Free Software Foundation, Inc.
-License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
-This is free software: you are free to change and redistribute it.
-There is NO WARRANTY, to the extent permitted by law.
-Type "show copying" and "show warranty" for details.
-This GDB was configured as "x86_64-linux-gnu".
-Type "show configuration" for configuration details.
-For bug reporting instructions, please see:
-&lt;https://www.gnu.org/software/gdb/bugs/&gt;.
-Find the GDB manual and other documentation resources online at:
-    &lt;http://www.gnu.org/software/gdb/documentation/&gt;.
-
-For help, type "help".
-Type "apropos word" to search for commands related to "word"...
-Reading symbols from fact...
-(gdb)
-</code></pre></div></div>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) start 10          # --- (1)
-Temporary breakpoint 1 at 0x11bd: file fact.c, line 14. # --- (2)
-Starting program: /home/gon/fact 10     
-[Thread debugging using libthread_db enabled]   --- (3)
-Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1". # --- (4)
-
-Temporary breakpoint 1, main (argc=2, argv=0x7fffffffe108) at fact.c:14
-14          int i = atoi(argv[1]);
-</code></pre></div></div>
-<p>(1) start 명령은 프로그램을 시작하고, 주어진 프로그램의 첫번째 인자(10)와 함께 메인 함수의 첫 번째 라인에서 일시적인 중단점을 설정.  이렇게 하면 프로그램이 실제로 실행되기 시작하며, 사용자가 프로그램의 초기 상태를 검사할 수 있게 된다.</p>
-
-<p>(2) 현재 중단점 code 상 line 의 위치와 메모리 주소. 즉 main 함수 내 첫번째 줄.</p>
-
-<p>(3) 멀티스레딩 프로그램을 디버깅하기 위해 libthread_db 라이브러리를 사용하고 있음을 표시</p>
-
-<p>(4) 호스트 시스템의 libthread_db 라이브러리를 사용하고 있음을 표시. 이 라이브러리는 스레드와 관련된 정보를 제공하여 디버거가 스레드를 효율적으로 관리할 수 있게 돕는다.</p>
-
-<h3 id="qeme-gdb-적용">QEME GDB 적용</h3>
-
-<ol>
-  <li>Debug mode 로 빌드되도록 Linux kernel 설정 변경</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span><span class="nb">cd </span>linux
-user@DESKTOP:~/linux<span class="nv">$ ARCH</span><span class="o">=</span>arm64 make menuconfig 
-</code></pre></div></div>
-
-<ul>
-  <li>kernel hacking -&gt;  Kernel debugging 선택</li>
-  <li>kernel hacking -&gt;  Compile-time checks and compiler options -&gt; Debug information (Disable debug information) -&gt;  Rely on the toolchain’s implicit default DWARF version 선택</li>
-</ul>
-
-<ol>
-  <li>re-build</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ </span> make <span class="nt">-j</span>&lt;cpu 수&gt;
-</code></pre></div></div>
-
-<ol>
-  <li>QEMU 실행</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~/linux<span class="nv">$ </span><span class="nb">cd</span> ..
-user@DESKTOP:~<span class="nv">$ </span>qemu-system-aarch64 <span class="nt">-kernel</span> linux/arch/arm64/boot/Image <span class="nt">-drive</span> <span class="nv">format</span><span class="o">=</span>raw,file<span class="o">=</span>buildroot/output/images/rootfs.ext4,if<span class="o">=</span>virtio <span class="nt">-append</span> <span class="s2">"root=/dev/vda console=ttyAMA0 nokaslr"</span> <span class="nt">-nographic</span> <span class="nt">-M</span> virt <span class="nt">-cpu</span> cortex-a72 <span class="nt">-m</span> 2G <span class="nt">-smp</span> 2 <span class="nt">-s</span> <span class="nt">-S</span>
-</code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">-s</code> : gdb 가 붙을 수 있도록 1234 포트를 열어둠
-<code class="language-plaintext highlighter-rouge">-S</code> : QEMU 가 시작하자마자 멈춰있는 상태로 만듬. (break-point 를 걸수 있는 시점을 마련하기 위함)</p>
-
-<p>(실행시 <code class="language-plaintext highlighter-rouge">-S</code> 옵션으로 인해 멈춰있게 됨. 그래서 다른 cli 상에서 <code class="language-plaintext highlighter-rouge">gdb-multiarch</code>를 사용하여 <code class="language-plaintext highlighter-rouge">linux/vmlinux</code> 경로에 위치한 리눅스 커널 이미지를 디버깅 모드로 염)</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>gdb-multiarch linux/vmlinux
-For <span class="nb">help</span>, <span class="nb">type</span> <span class="s2">"help"</span><span class="nb">.</span>
-Type <span class="s2">"apropos word"</span> to search <span class="k">for </span>commands related to <span class="s2">"word"</span>...
-Reading symbols from kernel/vmlinux...
-<span class="o">(</span>gdb<span class="o">)</span>
-</code></pre></div></div>
-
-<p>따라서 vmlinux 내 debugging 정보가 읽어지게 됨.</p>
-
-<ul>
-  <li>기존 buildroot 이미지에는 모든 정보가 담겨있는것이 아니라 kernel 을 실행할 수 있는 코드만 포함된 단순화된 파일이다. 따라서 해당 이미지 만으로 모든 디버깅 정보를 볼 수는 없는 환경이다. 그런데 <code class="language-plaintext highlighter-rouge">vmlinux</code> 파일의 경우, 커널의 디버깅 정보, 함수 및 변수 이름 정보, 코드 라인 정보 등이 모두 담긴 목적 파일이므로 <code class="language-plaintext highlighter-rouge">gdb-multiarch linux/vmlinux</code> 와 같이 해당 파일을 디버거 인자로 넘겨 주어야 한다.</li>
-</ul>
-
-<p>그리고 gdb prompt 창에 <code class="language-plaintext highlighter-rouge">target remote :1234</code> 를 입력하여 qemu 에서 열어둔 디버깅 포트 1234 에 접속한다. 연결된 이후, 원하는  break-point 를 걸 수 있다.  예를 들면,</p>
-
-<p><code class="language-plaintext highlighter-rouge">(gdb) break start_kernel</code> 로 입력하면 리눅스 커널에서 제일 먼저 실행되는 c 함수에 중단점을 생성하고,</p>
-
-<p><code class="language-plaintext highlighter-rouge">(gdb)__do_sys_&lt;시스템콜 함수 이름&gt;</code> 의 겅우 앞서 실습한 systemcall 을 디버깅 가능하다. 여기에서 <code class="language-plaintext highlighter-rouge">__do_sys_</code> 접두사는 SYSCALL_DEFINE 매크로가 자동 생성한 것이다.</p>
-
-<ol>
-  <li>QEMU 가 연 포트에 접근</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set </span>architecture aarch64
-<span class="o">(</span>gdb<span class="o">)</span> target remote :1234
-Remote debugging using :1234
-warning: Selected architecture i386:x86-64 is not compatible with reported target architecture aarch64
-warning: Architecture rejected target-supplied description
-0x0000000000000000 <span class="k">in </span>fixed_percpu_data <span class="o">()</span>  <span class="c"># bootloader 의 첫 시작 주소</span>
-</code></pre></div></div>
-
-<ol>
-  <li>break-point 걸기</li>
-</ol>
-
-<p><code class="language-plaintext highlighter-rouge">start_kernel</code> 이라는 가장 처음에 시작되는 함수에 break-point 걸기</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break </span>start_kernel
-Breakpoint 1 at 0xffffffff821889e0: file init/main.c, line 875.
-</code></pre></div></div>
-
-<p>우리가 추가한 systemcall 함수 break-point 걸기</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break </span>__do_sys_new_syscall
-Breakpoint 2 at 0xffffffff811391c9: file kernel/new_syscall.c, line 6.
-</code></pre></div></div>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="systemcall" /><category term="gdb-multiarch" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 09]]></summary></entry></feed>
+</ul>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="device driver" /><category term="device node" /><category term="ssize_t()" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 12]]></summary></entry></feed>
