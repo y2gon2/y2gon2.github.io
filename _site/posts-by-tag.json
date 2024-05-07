@@ -3,6 +3,36 @@
 [   
       
   {
+  "tag" : "DDPG",
+  "posts" : [
+      
+      "./DDPG1.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "DQN",
+  "posts" : [
+      
+      "./DDPG1.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "Deep Deterministic Policy Gradient",
+  "posts" : [
+      
+      "./DDPG1.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "IPC",
   "posts" : [
       
