@@ -1,6 +1,8 @@
 {
   "posts" : [
     
+    "./DQN_ml_agents.html",
+    
     "./tensorflow_gpu_setting.html",
     
     "./service-daemon.html",
