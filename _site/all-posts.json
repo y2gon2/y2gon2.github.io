@@ -1,6 +1,8 @@
 {
   "posts" : [
     
+    "./DDPG2_code.html",
+    
     "./DDPG1.html",
     
     "./DQN_ml_agents.html",
