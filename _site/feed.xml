@@ -1,4 +1,216 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-05-08T11:50:12+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">DDPG(Deep Deterministic Policy Gradient) 구현</title><link href="http://localhost:4000/DDPG2_code.html" rel="alternate" type="text/html" title="DDPG(Deep Deterministic Policy Gradient) 구현" /><published>2024-05-07T12:32:20+09:00</published><updated>2024-05-07T12:32:20+09:00</updated><id>http://localhost:4000/DDPG2_code</id><content type="html" xml:base="http://localhost:4000/DDPG2_code.html"><![CDATA[<style>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-05-13T13:42:43+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">PPO(Proximal Policy Optimization) 이론</title><link href="http://localhost:4000/PPO1.html" rel="alternate" type="text/html" title="PPO(Proximal Policy Optimization) 이론" /><published>2024-05-12T09:32:20+09:00</published><updated>2024-05-12T09:32:20+09:00</updated><id>http://localhost:4000/PPO1</id><content type="html" xml:base="http://localhost:4000/PPO1.html"><![CDATA[<style>
+    summary::-webkit-details-marker {
+        display: none;
+    }
+    summary {
+        list-style: none;
+    }
+</style>
+
+<details><summary></summary>
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+</details>
+
+<ul>
+  <li>해당 내용은 다음의 강의 및 책 내용을 개인적으로 재학습 하기 위해 작성됨. <br />
+<a href="https://www.inflearn.com/course/%EC%9C%A0%EB%8B%88%ED%8B%B0-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EC%9D%91%EC%9A%A9/dashboard">인프런 - 유니티 머신러닝 에이전트 완전정복 (응용편) </a><br />
+<a href="https://product.kyobobook.co.kr/detail/S000001952238">단단한 심층 강화 학습</a></li>
+</ul>
+
+<h3 id="1-ppo-의-개념-및-특징">1. PPO 의 개념 및 특징</h3>
+
+<p>PPO 의 주요 아이더는 단조 정책 향상 (monotonic policy imporvement) 를 보장함으로써 성능 붕괴를 피하게 해주는 대리 목적(surrogate objective) 을 도입하는 것.</p>
+
+<p>구조적 특징</p>
+
+<ul>
+  <li>정책 + 가치 기반 강화학습 알고리즘</li>
+  <li>확률적 경사 상승법 (Stochastic Gradient Ascent) 사용 -&gt; “Surrogate” 목적 함수 최대화</li>
+  <li>다수의 epoch 동안 미니 배치 업데이트 수행</li>
+  <li>On-policy RL 알고리즘</li>
+</ul>
+
+<p>기능적 특징</p>
+
+<ul>
+  <li>Trust Region Policy Optimization (TRPO) 의 장점 + TRPO 대비 비교적 단순한 구현, 다양한 환경에서의 평균적으로 좋은 성능, 더 낮은 샘플 복잡도의 장점을 지님.</li>
+</ul>
+
+<h3 id="2-ppo-알고리즘-배경">2. PPO 알고리즘 배경</h3>
+
+<h4 id="21-성능-붕괴">2.1 성능 붕괴</h4>
+
+<p>REIMFORCE 알고리즘과 같이, 정책 πθ 에 대한 최대 목적 max J(π<sub>θ</sub>) 찾기 위해 gradient 를 사용한다. 다시 말해서, 정책 경사 알고리즘을 사용하는 강화 학습의 경우, ∇<sub>θ</sub>J(θ) 를 이용하여 파라미터 θ 를 조정하는 방식으로 최적화 된다.</p>
+
+<p>그러나, 우리가 학습시키는 파라미터 θ 로 표현된 공간 (parameter space) ‘Θ’  과 실제로 수행하고자 하는 정책들 π 로 표현된 공간 (policy space) ‘Π’ 은 별개의 공간이다. 그리고 각각의 공간상의 값들이 어떤 연관 관계가 있는지 알 수 없다. 그 배치가 일정한지, 또는 서로 비례된 간격으로 배치되어 있는지 모른다. 이를 수식으로 표현하면 아래와 같다. 
+​<center><img src="assets\img\posts\2024-05-12-PPO1\1.png" width="400" /></center></p>
+
+<p>이 문제는 파라미미터 업데이트를 위한 이상적인 학습률 α 를 결정하기 어렵다는 점에서 문제가 될 수 있다. 파라미터 공간에 대응되는 정책 공간 Π 에 속하는 정책들 사이의 간격이 얼마인지를 사전에 알 수 없다.</p>
+
+<p>만약 α 가 너무 작으면,</p>
+
+<ul>
+  <li>훈련 횟수 증가에 따른 학습 시간 지연</li>
+  <li>지역 최대값 (local maxima) 빠져 전체 최대값을 찾지 못함 (성능 향상 중단)</li>
+</ul>
+
+<p>의 문제가 발생할 수 있고, α 가 너무 크면,</p>
+
+<ul>
+  <li>업데이트 간경이 너무 커서 좋은 정책을 건너뛰게 되는 성능 붕괴 발생</li>
+</ul>
+
+<p>이 나타날 수 있다.</p>
+
+<h4 id="22-상대적-정책-성능-식별자-relative-policy-preformance-identity">2.2 상대적 정책 성능 식별자 (relative policy preformance identity)</h4>
+
+<p>앞에서 언급된 문제를 해결하기 위해, 학습의 방향을 각각의 정책을 평가하는 것이 아닌 현재의 정책 새로운 정책이 얼마나 향상되었는가를 평가한다. 이를 아래와 같이 표기하며,  상대적 정책 성능 식별자 (relative policy performance identity) 라고 한다. (식 유도는 생략)
+​<center><img src="assets\img\posts\2024-05-12-PPO1\2.png" width="300" /></center></p>
+
+<p>π          : 기존정책 <br />
+ π’         : 다음정책<br />
+ A<sup>π</sup>(s , a)   : 이전 정책으로부터의 이득 A<sup>π</sup><sub>t</sub>=Q(s<sub>t</sub>,a<sub>t</sub>)−V(s<sub>t</sub>)<br /></p>
+
+<p>상대적 정책 성능 식별자  J(π’) – J(π) 는 정책 향상을 측정하는 지표 역할 을 하며, J(π’) 를 최대화 하는 것은, 곧 상대적 정책 성능 식별가 최대가 되게 하는 것이다. 
+ ​<center><img src="assets\img\posts\2024-05-12-PPO1\3.png" width="300" /></center></p>
+
+<p>목적함수를 이렇나 방식으로 구조화하는 것은  모든 정책 반복이 음이 아닌(단조로운) 향상, 즉  J(π’) – J(π)≥ 0 을 보장할 수 있어야 한다는 뜻이다. 최악의 경우에도 π’ = π 이기 때문에, 이렇게 할 수 있다면, 훈련 과정에서 성능 붕괴는 일어나지 않을 것이다.</p>
+
+<h4 id="23-대리-목적-surrogate-objective">2.3 대리 목적 (surrogate objective)</h4>
+
+<p>상대적 정책 성능 식별자  J(π’) – J(π) 에 대한 최대의 기대값을 찾을 수 있다면, 성능붕괴를 막을 수 있었다. 그러나 문제는 업데이트된 정책에 대한 목적값 J(π’) 을 현재 상태에서 알 수 없다. 이러한 역설을 해결하기 위해 상대적 정책 성능 식별자에 근사된 대리 목적(surrogate objective)  J<sub>π</sub><sup>CPI</sup>(π’) 을 구하는 함수 를 사용한다. (유도과정은 생략)
+  ​<center><img src="assets\img\posts\2024-05-12-PPO1\4.png" width="400" /></center></p>
+
+<ul>
+  <li>CPI 의미 : 보수적 정책 반복 (Conservative Policy Iteration)</li>
+</ul>
+
+<h4 id="24-probability-ratio--trpo">2.4 Probability ratio &amp; TRPO</h4>
+
+<p>surrogate objective 함수에서 ‘새로운 정책 / 기존 정책’ 을 probability ratio,
+  ​<center><img src="assets\img\posts\2024-05-12-PPO1\5.png" width="330" /></center></p>
+
+<p>라고 하며, TRPO (Trust Region Policy Optimization) 에서는 L<sup>CPI</sup> 을 최대화 하는 것을 목표로 한다. 
+  ​<center><img src="assets\img\posts\2024-05-12-PPO1\6.png" width="340" /></center></p>
+
+<p>그러나 probablity ratio 를 그대로 사용할 경우, 해당 값이 과도하게 큰 경우, 학습이 실패하거나 성능이 정하되는 문제가 발생한다. 이를 해결하기 위해 TRPO 의 경우, KL-Divergence 를 사용하여 penalty 를 주는 방식으로 문제를 해결하지만 이 방법은 이해가 어렵고 구현이 난해하다는 단점이 있다. PPO 의 경우 이 문제를  Clipping 기법을 사용하여, 비교적 간단하게 해결 하였다.</p>
+
+<h3 id="3-ppo-proximal-policy-optimization">3. PPO (Proximal Policy Optimization)</h3>
+
+<h4 id="31-clipped-surrogate-objective">3.1 Clipped Surrogate Objective</h4>
+
+<p>계산적으로 효율적인 Penalty 를 적용하고 과도한 Policy 업데이트를 방지 <br />
+​<img src="assets\img\posts\2024-05-12-PPO1\7.png" width="420" />
+​<center><img src="assets\img\posts\2024-05-12-PPO1\8.png" width="500" /></center></p>
+
+<p>A<sub>t</sub> &gt; 0 일때, <br /></p>
+<ol>
+  <li>r = 1 : 새 정책과 이전 정책이 같은 확률로 동일 행동을 선택. 이 경우 새 정책에서의 어드밴티지 A<sub>t</sub>의 기대값은 변하지 않음.</li>
+  <li>r &lt; 1 : 새 정책이 이전 정책보다 해당 행동을 선택할 확률이 낮아졌음을 의미. 즉, 새 정책이 이전 정책보다 더 적은 이득을 기대할 때 발생.</li>
+  <li>r &gt; 1 : 정책이 이전 정책보다 해당 행동을 선택할 확률이 높아졌음을 의미. 새 정책에서 더 많은 이득을 기대</li>
+  <li>Clipping 조건
+    <ul>
+      <li><strong>r &gt; 1 + ϵ</strong> :  r의 값이 너무 높게 나타나면 학습 과정에서 성능 붕괴가 발생할 위험이 있다. 예를 들어, 에이전트가 한 행동에 지나치게 의존하게 되면, 다른 잠재적으로 유리한 행동들을 탐색하지 못하고 환경에 대한 이해가 제한될 수 있다. <strong>클리핑은 L<sup>CLIP</sup> = (1 + ϵ) * A<sub>t</sub> 로 제한</strong>함으로써, 너무 큰 정책 변동을 방지하고 보다 안정적인 학습을 촉진.</li>
+      <li><strong>r &lt; 1 - ϵ</strong> : <strong>r<sub>t</sub>(θ)의 값을 1 - ϵ 으로 고정.</strong> 이렇게 하면, 에이전트가 불리한 행동을 취하는 것으로 평가되어 이전보다 훨씬 적게 선택될 경우, 이러한 선택의 영향을 완화하여 학습의 안정성을 높이는 것이다.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>A<sub>t</sub> &lt; 0 일때도 clipping 조건은 동일 하다.</p>
+
+<h4 id="32-generalized-advantage-estimate-gae">3.2 Generalized Advantage Estimate (GAE)</h4>
+<p>​<center><img src="assets\img\posts\2024-05-12-PPO1\8_1.png" width="650" /></center>
+  <a href="https://www.inflearn.com/course/%EC%9C%A0%EB%8B%88%ED%8B%B0-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EC%9D%91%EC%9A%A9/dashboard">이미지 출처</a></p>
+
+<h4 id="33-분산-강화-학습-distributed-rl">3.3 분산 강화 학습 (Distributed RL)</h4>
+
+<p>다수의 환경을 통해 얻은 데이터 사용
+  ​<center><img src="assets\img\posts\2024-05-12-PPO1\9.png" width="650" /></center>
+  <a href="https://www.inflearn.com/course/%EC%9C%A0%EB%8B%88%ED%8B%B0-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EC%9D%91%EC%9A%A9/dashboard">이미지 출처</a></p>
+
+<h4 id="34-network-architecture">3.4 Network Architecture</h4>
+
+<p>A2C 에서는 가치를 평가하는 critic network 와 행동을 결정하는 Actor network 가 각각 존재 하였으나, PPO 에서는 통합 네트워크로 운영됨.</p>
+
+<p>​<center><img src="assets\img\posts\2024-05-12-PPO1\10.png" width="650" /></center>
+  <a href="https://www.inflearn.com/course/%EC%9C%A0%EB%8B%88%ED%8B%B0-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EC%9D%91%EC%9A%A9/dashboard">이미지 출처</a></p>
+
+<p>네트워크 업데이트
+  ​<center><img src="assets\img\posts\2024-05-12-PPO1\11.png" width="650" /></center>
+  <a href="https://www.inflearn.com/course/%EC%9C%A0%EB%8B%88%ED%8B%B0-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EC%9D%91%EC%9A%A9/dashboard">이미지 출처</a></p>
+
+<ol>
+  <li>Actor Network Update
+    <ul>
+      <li>Surrogate Functon L<sub>t</sub><sup>CLIP</sup> 을 최대화 하도록 업데이트</li>
+      <li>Action Entropy S[π<sub>θ</sub>](s<sub>t</sub>) 행동 선택의 불확실성을 나타내는 척도. 최대화하여 탐색 가능성을 높임</li>
+    </ul>
+  </li>
+  <li>
+    <p>Critic Network Update
+L<sub>t</sub><sup>VF</sup> 는 예측 상태 가치 V<sub>θ</sub>(S<sub>t</sub>) 와 예측 상태  가치 V<sub>t</sub><sup>targ</sup> 의 차이 (오차)를 최소화 하도록 업데이트 (제곱의 의미 : 오차의 절대값을 고려 및 큰 오차에 대한 큰 패널티 부과)</p>
+  </li>
+  <li>Actor-Critic Network in PPO
+Actor 와 Critic Network 를 통합하여 구성. c<sub>1</sub> 은 가치 함수 오차의 영향 조절 계수. c<sub>2</sub> 는 탐색을 장려하는 정도를 조절하는 계수</li>
+</ol>
+
+<h4 id="35-ppo-알고리즘-의사-코드">3.5 PPO 알고리즘 의사 코드</h4>
+
+<p>​<center><img src="assets\img\posts\2024-05-12-PPO1\12.png" width="650" /></center>
+  <a href="https://www.inflearn.com/course/%EC%9C%A0%EB%8B%88%ED%8B%B0-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EC%9D%91%EC%9A%A9/dashboard">이미지 출처</a></p>
+
+<ol>
+  <li>분산학습을 통해 N 갯수의 actor 를</li>
+  <li>T timesteps 까지 실행하여</li>
+  <li>GAE 기법을 사용한 각 actor 의 T-step TD error A<sub>t</sub><sup>(T)</sup> 를 추정한다.</li>
+  <li>이렇게 모은 advantage set NT 에서 mini batch M 을 추출하여</li>
+  <li>(목표) 대리함수 L 에 대해 확률적 경사 상승 (gardient) 를 적용하여</li>
+  <li>파라미터 θ 를 업데이트</li>
+  <li>K epochs : 모든 데이터를 통해 mini batch 학습한 횟수</li>
+</ol>
+
+<h4 id="36-ppo-알고리즘-logic-process">3.6 PPO 알고리즘 logic process</h4>
+
+<p>PPO 알고리즘은 Actor-Critic 통합 network 를 통해 행동 결정 및 q 값 산출을 통한 업데이트를 진행된다.</p>
+
+<p>​<center><img src="assets\img\posts\2024-05-12-PPO1\13.png" width="650" /></center>
+  <a href="https://www.inflearn.com/course/%EC%9C%A0%EB%8B%88%ED%8B%B0-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EC%9D%91%EC%9A%A9/dashboard">이미지 출처</a></p>
+
+<ol>
+  <li>(I) T-steps 만큼 환경을 실행하여,</li>
+  <li>(I) Trajectory Memory 에 정보를 저장한다.</li>
+  <li>(L) 메모리에서  M (mini batch) 를 K (epochs) 만큼 추출</li>
+  <li>(L) Network 학습 정보를 통해,</li>
+  <li>(L) 현재 상태 가치와 타겟 상태 가치를 사용하여 Loss VF 값을 계산</li>
+  <li>(L) Action Entropy 계산</li>
+  <li>(L) probability ratio - r 과 GAE 로 계산된 advantage A<sub>t</sub> 를 clipping  하여 clipped objective L<sup>CLIP</sup>(θ)를 도출</li>
+  <li>(L) clipped objective + 상태 가치 loss + action entropy 를 통해 목적식을 산출</li>
+  <li>(L) stochastic gradient decent 를 적용하여 actor-critic 모델 업데이트</li>
+</ol>
+
+<h4 id="37-ppo-결과">3.7 PPO 결과</h4>
+
+<p>아래와 같이 타 알고리즘 대비 빠른 학습 결과를 얻을 수 있음을 확인
+  ​<center><img src="assets\img\posts\2024-05-12-PPO1\14.png" width="650" /></center>
+  <a href="https://www.inflearn.com/course/%EC%9C%A0%EB%8B%88%ED%8B%B0-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EC%9D%91%EC%9A%A9/dashboard">이미지 출처</a></p>
+
+<p>Atari 환경의 다양한 게임에서 A2C, ACER 와 성능비교</p>
+
+<p>해당 결과에서 모든 훈련 episode 평균 보상 값이  PPO 가 가장 높은 것을 확인. (빠르게 학습되므로)<br />
+다만, 학습 후반에 대한 보상 평균 점수는 ACER 가 더 높은 것으로 확인됨.
+  ​<center><img src="assets\img\posts\2024-05-12-PPO1\15.png" width="500" /></center>
+  <a href="https://www.inflearn.com/course/%EC%9C%A0%EB%8B%88%ED%8B%B0-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EC%9D%91%EC%9A%A9/dashboard">이미지 출처</a></p>]]></content><author><name>Yong gon Yun</name></author><category term="ppo" /><category term="proximal policy optimization" /><category term="surrogate object" /><category term="clipping" /><summary type="html"><![CDATA[PPO(Proximal Policy Optimization) 이론]]></summary></entry><entry><title type="html">DDPG(Deep Deterministic Policy Gradient) 구현</title><link href="http://localhost:4000/DDPG2_code.html" rel="alternate" type="text/html" title="DDPG(Deep Deterministic Policy Gradient) 구현" /><published>2024-05-07T12:32:20+09:00</published><updated>2024-05-07T12:32:20+09:00</updated><id>http://localhost:4000/DDPG2_code</id><content type="html" xml:base="http://localhost:4000/DDPG2_code.html"><![CDATA[<style>
     summary::-webkit-details-marker {
         display: none;
     }
@@ -2910,172 +3122,4 @@ user@DESKTOP:~<span class="nv">$ </span>./pipe3.sh
 27
 user@DESKTOP:~<span class="nv">$ </span><span class="nb">cat</span> /etc/passwd | <span class="nb">wc</span> <span class="nt">-l</span>
 27
-</code></pre></div></div>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="IPC" /><category term="inter-process communication" /><category term="pipe" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 16]]></summary></entry><entry><title type="html">IPC 실습 01 - fork / execve</title><link href="http://localhost:4000/IPC01.html" rel="alternate" type="text/html" title="IPC 실습 01 - fork / execve" /><published>2024-03-18T10:32:20+09:00</published><updated>2024-03-18T10:32:20+09:00</updated><id>http://localhost:4000/IPC01</id><content type="html" xml:base="http://localhost:4000/IPC01.html"><![CDATA[<style>
-    summary::-webkit-details-marker {
-        display: none;
-    }
-    summary {
-        list-style: none;
-    }
-</style>
-
-<details><summary></summary>
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-</details>
-
-<p>아래 내용은 개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/) 강의 내용 중 일부에 해당함.</p>
-
-<h3 id="fork-를-사용한-자식-프로세스-생성-및-종료">fork 를 사용한 자식 프로세스 생성 및 종료</h3>
-
-<p>아래와 같이 소스코드를 작성하여 자식 프로세스의 생애 주기 (생성 - 작업 - 좀비(작업완료) - 정리) 를 확인할 수 있는 코드를 작성한다.</p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
-#include</span> <span class="cpf">&lt;sys/wait.h&gt;</span><span class="cp">
-</span>
-<span class="k">extern</span> <span class="kt">char</span> <span class="o">**</span><span class="n">environ</span><span class="p">;</span> <span class="c1">// 환경변수를 나타내는 전역 변수</span>
-
-<span class="kt">char</span> <span class="n">ppid_str</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>
-<span class="kt">char</span><span class="o">*</span> <span class="k">const</span> <span class="n">ps_argv</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">"/bin/ps"</span><span class="p">,</span>
-    <span class="s">"-fx"</span><span class="p">,</span>
-    <span class="nb">NULL</span><span class="p">,</span>
-<span class="p">};</span>
-
-<span class="kt">int</span> <span class="nf">run_ps</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// 현재 작업 중인 시스템 프로세스 리스트를 확인하기 위한 자식 프로세스 생성 -- (b)</span>
-    <span class="kt">int</span> <span class="n">status</span><span class="p">;</span>
-    <span class="n">pid_t</span> <span class="n">pid</span><span class="p">;</span>
-
-    <span class="n">printf</span><span class="p">(</span><span class="s">"Process list &gt;</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-
-    <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">execve</span><span class="p">(</span><span class="n">ps_argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ps_argv</span><span class="p">,</span> <span class="n">environ</span><span class="p">);</span> <span class="c1">// execve 시스템 콜 실행 -- (c)</span>
-    <span class="p">}</span>
-
-    <span class="n">waitpid</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">status</span><span class="p">,</span> <span class="mi">0</span><span class="cm">/*no option*/</span><span class="p">);</span>  
-<span class="p">}</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// fork 프로세스 생애 주기를 보기 위해 순차적 작업 구현 -- (a)</span>
-    <span class="kt">int</span> <span class="n">status</span><span class="p">;</span>
-    <span class="n">pid_t</span> <span class="n">pid</span><span class="p">;</span>
-    <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// c. 생성된 자식 프로세스의 작업</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">"[Child] pid-%d ppid-%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">getpid</span><span class="p">(),</span> <span class="n">getppid</span><span class="p">());</span>
-        <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// 부모프로세스 </span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">"[Child] exit</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-        
-        <span class="k">return</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// c-1. 자식 프로세스 작업 종료</span>
-    <span class="p">}</span>
-    <span class="k">else</span> <span class="p">{</span> <span class="c1">// p. 부모 프로세스</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">"[Parent] pid-%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">getpid</span><span class="p">());</span>
-        <span class="n">run_ps</span><span class="p">();</span> <span class="c1">// p-1 작업 수행 </span>
-
-        <span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="c1">// 자식 프로세스 작업 완료 대기</span>
-        <span class="n">run_ps</span><span class="p">();</span> <span class="c1">// p-2 자식 프로세스 작업 완료 후 전체 시스템 프로세스 상태 확인</span>
-
-        <span class="n">waitpid</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">status</span><span class="p">,</span> <span class="mi">0</span><span class="cm">/*no option*/</span><span class="p">);</span> <span class="c1">// p-3 자식 프로세스 작업 완료 대기 및 좀비 프로세스 정리 후</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">"[Parent] child exit: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">WEXITSTATUS</span><span class="p">(</span><span class="n">status</span><span class="p">));</span> <span class="c1">// 자식 프로세스 종료 상태 확인</span>
-
-        <span class="n">run_ps</span><span class="p">();</span> <span class="c1">// p-4 (자식 프로세스를 완전히 제거한 이후) 프로세스 실행 상태 확인</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">"[Parent] exit</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-
-        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h4 id="a-fork-프로세스-생애-주기를-보기-위해-순차적-작업-구현">a. fork 프로세스 생애 주기를 보기 위해 순차적 작업 구현</h4>
-
-<p><code class="language-plaintext highlighter-rouge">pid = fork();</code> 를 수행하면 동일한 내용을 가진 부모 프로세스와 자식 프로세스가 생성된다. 다른 점은 해당 시스템콜 수행후 반환값 <code class="language-plaintext highlighter-rouge">pid</code> 는 자식프로세스는 0, 부모 프로세스는 자식 프로세스 PID 값을 가지게 된다.</p>
-
-<p>따라서 그다음 조건문에서 각각의 프로세스 작업이 달라지게 되며, 각각의 작업은 동시에 수행되므로, 작업의 우선 순위를 확정할 수 없다. 여기서는 그 작업을 시간 순서대로 실행시켜서 그 생애 주기를 정확하게 확인하기 위해 필요한 구간에 각 프로세스에 <code class="language-plaintext highlighter-rouge">sleep()</code> 조건을 주어서 구현하였다.</p>
-
-<p>그 작업 과정을 시간 순서대로 정리하면 아래와 같다.</p>
-
-<ul>
-  <li>부모/ 자식 프로세스 각각 pid 출력 (우선순위 없음)</li>
-  <li>부모 p-1 : 자식 프로세스가 아직 실행 중인 상태에서 시스템 프로세스 리스트를 출력하는 작업 수행</li>
-  <li>자식 c-1 : 자식 프로세스 내부 작업을 종료. 해당 프로세스는 반환 값(3) 을 가진 좀비 상태로 전환됨.</li>
-  <li>부모 p-2 : 시스템 프로세스 리스트를 출력하는 작업 수행. 여기서 아직 자식 프로세스가 좀비(z) 상태로 남아있음을 볼 수 있다.</li>
-  <li>부모 p-3 : 좀비 상태의 자식 프로세스를 정리하고, 자식 프로세스 반환값(3)을 확인.</li>
-  <li>부모 p-4 : 마지막으로  시스템 프로세스 리스트에서 자식 프로세스가 사라짐을 확인.</li>
-</ul>
-
-<p>위 내용을 실제로 실행하여 그 결과를 확인하면 아래와 같다</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>gcc <span class="nt">-o</span> fork fork.c
-user@DESKTOP:~<span class="nv">$ </span>./fork
-<span class="o">[</span>Parent] pid-7653
-Process list <span class="o">&gt;</span>
-<span class="o">[</span>Child] pid-7654 ppid-7653
-    PID TTY      STAT   TIME COMMAND
-    437 pts/1    S+     0:00 <span class="nt">-bash</span>
-    372 pts/0    Ss     0:00 <span class="nt">-bash</span>
-   7653 pts/0    S+     0:00  <span class="se">\_</span> ./fork
-   7654 pts/0    S+     0:00      <span class="se">\_</span> ./fork
-   7655 pts/0    R+     0:00      <span class="se">\_</span> /bin/ps <span class="nt">-fx</span>
-    431 ?        Ss     0:00 /lib/systemd/systemd <span class="nt">--user</span>
-    432 ?        S      0:00  <span class="se">\_</span> <span class="o">(</span>sd-pam<span class="o">)</span>
-<span class="o">[</span>Child] <span class="nb">exit
-</span>Process list <span class="o">&gt;</span>
-    PID TTY      STAT   TIME COMMAND
-    437 pts/1    S+     0:00 <span class="nt">-bash</span>
-    372 pts/0    Ss     0:00 <span class="nt">-bash</span>
-   7653 pts/0    S+     0:00  <span class="se">\_</span> ./fork
-   7654 pts/0    Z+     0:00      <span class="se">\_</span> <span class="o">[</span>fork] &lt;defunct&gt;
-   7664 pts/0    R+     0:00      <span class="se">\_</span> /bin/ps <span class="nt">-fx</span>
-    431 ?        Ss     0:00 /lib/systemd/systemd <span class="nt">--user</span>
-    432 ?        S      0:00  <span class="se">\_</span> <span class="o">(</span>sd-pam<span class="o">)</span>
-<span class="o">[</span>Parent] child <span class="nb">exit</span>: 3
-Process list <span class="o">&gt;</span>
-    PID TTY      STAT   TIME COMMAND
-    437 pts/1    S+     0:00 <span class="nt">-bash</span>
-    372 pts/0    Ss     0:00 <span class="nt">-bash</span>
-   7653 pts/0    S+     0:00  <span class="se">\_</span> ./fork
-   7665 pts/0    R+     0:00      <span class="se">\_</span> /bin/ps <span class="nt">-fx</span>
-    431 ?        Ss     0:00 /lib/systemd/systemd <span class="nt">--user</span>
-    432 ?        S      0:00  <span class="se">\_</span> <span class="o">(</span>sd-pam<span class="o">)</span>
-<span class="o">[</span>Parent] <span class="nb">exit</span>
-</code></pre></div></div>
-
-<p>해당 출력중 아래에 해당하는 항목을 보면, 자식 프로세스 작업을 완료한 이후</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   7654 pts/0    Z+     0:00      <span class="se">\_</span> <span class="o">[</span>fork] &lt;defunct&gt;
-</code></pre></div></div>
-
-<p>state  는 좀비(z) 이며 <defunct> 처리된 것을 볼 수 있다.</defunct></p>
-
-<h4 id="b-현재-작업-중인-시스템-프로세스-리스트를-확인하기-위한-자식-프로세스-생성">b. 현재 작업 중인 시스템 프로세스 리스트를 확인하기 위한 자식 프로세스 생성</h4>
-
-<p><code class="language-plaintext highlighter-rouge">run_ps()</code> 는 현재 실행 중인 시스템 프로세스 목록을 출력하기 위한 명령어 <code class="language-plaintext highlighter-rouge">ps</code> 을 해당 명령어 파일로 실행 시키는 함수 이다.</p>
-
-<p>해당 함수 내에서 실제로 ps 명령어를 실행하는 작업은 <code class="language-plaintext highlighter-rouge">fork</code> 하여 자식 프로세스가 작업하도록 구성되어 있으며, 해당 프로세스는 아래와 같이 출력됨을 확인 할 수 있다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    7655 pts/0    R+     0:00      <span class="se">\_</span> /bin/ps <span class="nt">-fx</span>
-</code></pre></div></div>
-
-<h4 id="c-execve-시스템-콜-실행">c. execve 시스템 콜 실행</h4>
-
-<p>` execve(ps_argv[0], ps_argv, environ)<code class="language-plaintext highlighter-rouge"> 시스템 콜이 자식 프로세스가 </code>ps` 명령어를 실행 시키는 부분이다.</p>
-
-<p>해당 함수의 매개 변수를 보면 다음가 같다.</p>
-
-<p>execve(filename, argv, env)</p>
-
-<ul>
-  <li>filename : 현재 프로세스에서 실행 시킬 파일</li>
-  <li>argv : 실행 프로그램에 전달할 인자 배열. 배열 첫번째는 일반적으로 실행파일의 이름, 중간 인자들은 해당 프로그램 실행시 설정 옵션, 파라미터 들, 마지막은 NULL 로 종료를 의미한다.</li>
-  <li>env(환경변수) : 실행 프로그램에게 전달되는 환경 변수 배열이며, 각 환경 변수는 “KEY=value” 형태의 문자열이며, 마지막 값은 NULL 이어야 한다. 다만, 환경변수는 프로세스가 실행될 때, 자체적으로 설정되며, 해당 변수를 <code class="language-plaintext highlighter-rouge">extern char **environ;</code> 선언으로 포인터로 지정해서 사용하게 된다.</li>
-</ul>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="IPC" /><category term="inter-process communication" /><category term="fork" /><category term="execve" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 15]]></summary></entry></feed>
+</code></pre></div></div>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="IPC" /><category term="inter-process communication" /><category term="pipe" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 16]]></summary></entry></feed>
