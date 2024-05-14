@@ -22,7 +22,7 @@
   "headline": "DDPG(Deep Deterministic Policy Gradient) 구현",
   "abstract": "DDPG(Deep Deterministic Policy Gradient) 구현",
     "keywords": "DDPG, Deep Deterministic Policy Gradient, DQN, pytorch",
-    "wordcount": "2678",
+    "wordcount": "2681",
     "image": ["http://localhost:4000/assets/imgposts/general/post_general16.jpg"],
   "datePublished": "2024-05-07 12:32:20 +0900",
   "dateModified": "2024-05-07 12:32:20 +0900",
@@ -62,7 +62,7 @@
 <meta name="twitter:description" content="DDPG(Deep Deterministic Policy Gradient) 구현">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="2678"/>
+<meta data-rh="true" name="twitter:data1" content="2681"/>
 <meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/general/post_general16.jpg">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
@@ -401,7 +401,7 @@
   <li>Main 함수</li>
 </ol>
 
-<p>해당 포스트에서는 코드의 알고리즘 진행 프로세스와 ML-agents 와 연동하여 어떻게 프로그램 로직이 연결되어 있는지 위주로 설명할 예정임. 해당 코드에서의 PyTroch , ML-agents 등 라이브러리 사용 및 환경 설정에 대한 설명은 이전 포스트 (Deep Q-Network + ML-agents 구현)[https://y2gon2.github.io/DQN_ml_agents.html]  와 유사함으로 해당 포스트를 참조.</p>
+<p>해당 포스트에서는 코드의 알고리즘 진행 프로세스와 ML-agents 와 연동하여 어떻게 프로그램 로직이 연결되어 있는지 위주로 설명할 예정임. 해당 코드에서의 PyTroch , ML-agents 등 라이브러리 사용 및 환경 설정에 대한 설명은 이전 포스트 <a href="https://y2gon2.github.io/DQN_ml_agents.html">Deep Q-Network + ML-agents 구현</a>  와 유사함으로 해당 포스트를 참조.</p>
 
 <h3 id="1-라이브러리--파라미터-설정">1. 라이브러리 &amp; 파라미터 설정</h3>
 
@@ -508,6 +508,9 @@
         <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">relu</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">torch</span><span class="p">.</span><span class="nf">tanh</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">mu</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="c1"># (1)
 </span></code></pre></div></div>
+
+<p>​<center><img src="assets\img\posts\2024-05-12-PPO1\8_1.png" width="650" /></center>
+  <a href="https://www.inflearn.com/course/%EC%9C%A0%EB%8B%88%ED%8B%B0-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EC%9D%91%EC%9A%A9/dashboard">이미지 출처</a></p>
 
 <p>(1) torch.tanh(self.mu(x))</p>
 
@@ -1138,6 +1141,37 @@ tanh 함수는 -1과 1 근처에서 포화(saturation)되는 성질을 가지고
           
           
 
+          <a href="./PPO2_code.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general18.jpg') center no-repeat; background-size: cover;">
+            <div class="recent-item-title">
+              <span>PPO(Proximal Policy Optimization) Code</span>
+              
+
+  <span class = "recent-item-meta">
+  
+  
+  
+  
+    
+    
+    <p class="page_meta-readtime">
+      
+        16 minute read
+      
+    </p>
+  
+  
+  </span>
+
+            </div>
+          </a>
+        </div>
+      
+    
+      
+        <div class="recent-item">
+          
+          
+
           <a href="./PPO1.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general17.jpg') center no-repeat; background-size: cover;">
             <div class="recent-item-title">
               <span>PPO(Proximal Policy Optimization) 이론</span>
@@ -1215,37 +1249,6 @@ tanh 함수는 -1과 1 근처에서 포화(saturation)되는 성질을 가지고
     <p class="page_meta-readtime">
       
         3 minute read
-      
-    </p>
-  
-  
-  </span>
-
-            </div>
-          </a>
-        </div>
-      
-    
-      
-        <div class="recent-item">
-          
-          
-
-          <a href="./DQN_ml_agents.html" class="recent-item-img" style="background: url('./assets/img/posts/general/post_general14.jpg') center no-repeat; background-size: cover;">
-            <div class="recent-item-title">
-              <span>Deep Q-Network + ML-agents 구현</span>
-              
-
-  <span class = "recent-item-meta">
-  
-  
-  
-  
-    
-    
-    <p class="page_meta-readtime">
-      
-        19 minute read
       
     </p>
   

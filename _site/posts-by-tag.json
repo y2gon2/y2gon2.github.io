@@ -154,6 +154,8 @@
   "tag" : "clipping",
   "posts" : [
       
+      "./PPO2_code.html",
+      
       "./PPO1.html"
       
     ]
@@ -670,6 +672,8 @@
   "tag" : "ppo",
   "posts" : [
       
+      "./PPO2_code.html",
+      
       "./PPO1.html"
       
     ]
@@ -689,6 +693,8 @@
   {
   "tag" : "proximal policy optimization",
   "posts" : [
+      
+      "./PPO2_code.html",
       
       "./PPO1.html"
       
@@ -853,6 +859,8 @@
   {
   "tag" : "surrogate object",
   "posts" : [
+      
+      "./PPO2_code.html",
       
       "./PPO1.html"
       

@@ -1,4 +1,741 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-05-13T13:42:43+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">PPO(Proximal Policy Optimization) 이론</title><link href="http://localhost:4000/PPO1.html" rel="alternate" type="text/html" title="PPO(Proximal Policy Optimization) 이론" /><published>2024-05-12T09:32:20+09:00</published><updated>2024-05-12T09:32:20+09:00</updated><id>http://localhost:4000/PPO1</id><content type="html" xml:base="http://localhost:4000/PPO1.html"><![CDATA[<style>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-05-14T19:55:26+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gon’s Tech Jurnal</title><subtitle>The Record of Backend Development</subtitle><author><name>Yong gon Yun</name></author><entry><title type="html">PPO(Proximal Policy Optimization) Code</title><link href="http://localhost:4000/PPO2_code.html" rel="alternate" type="text/html" title="PPO(Proximal Policy Optimization) Code" /><published>2024-05-14T09:32:20+09:00</published><updated>2024-05-14T09:32:20+09:00</updated><id>http://localhost:4000/PPO2_code</id><content type="html" xml:base="http://localhost:4000/PPO2_code.html"><![CDATA[<style>
+    summary::-webkit-details-marker {
+        display: none;
+    }
+    summary {
+        list-style: none;
+    }
+</style>
+
+<details><summary></summary>
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
+</details>
+
+<ul>
+  <li>해당 내용은 다음의 강의 및 책 내용을 개인적으로 재학습 하기 위해 작성됨. <br />
+<a href="https://www.inflearn.com/course/%EC%9C%A0%EB%8B%88%ED%8B%B0-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EC%9D%91%EC%9A%A9/dashboard">인프런 - 유니티 머신러닝 에이전트 완전정복 (응용편) </a><br /></li>
+</ul>
+
+<h3 id="1-라이브러리--파라미터-설정">1. 라이브러리 &amp; 파라미터 설정</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="n">platform</span>
+<span class="kn">import</span> <span class="n">torch</span>
+<span class="kn">import</span> <span class="n">troch.nn.functional</span> <span class="k">as</span> <span class="n">F</span>
+
+<span class="kn">from</span> <span class="n">torch.utils.tensorboard</span> <span class="kn">import</span> <span class="n">SummaryWriter</span>
+<span class="kn">from</span> <span class="n">mlagents_envs.environment</span> <span class="kn">import</span> <span class="n">UnityEnvironment</span><span class="p">,</span> <span class="n">ActionTuple</span>
+<span class="kn">from</span> <span class="n">mlagents_envs.side_channel.engine_configuration_channel</span> <span class="kn">import</span> <span class="n">EngineConfigurationChannel</span>
+<span class="kn">from</span> <span class="n">mlagents_envs.side_channel.environment_parameters_channel</span> <span class="kn">import</span> <span class="n">EnvironmentParametersChannel</span>
+
+<span class="n">state_size</span> <span class="o">=</span> <span class="mi">122</span> 
+<span class="c1"># ray 당 정보 수집: 40 rays * 감지된 물체의 (거리 + x축 속도 + z축 속도) = 120
+# agent 좌표 (x, z) = 2
+</span>
+<span class="n">action_size</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># 상, 하, 좌, 우, 정지
+</span>
+<span class="n">load_model</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">train_mode</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="n">discount_factor</span> <span class="o">=</span> <span class="mf">0.99</span>  <span class="c1"># 미래 보상의 감가율
+</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">3e-4</span>    <span class="c1"># 네트워크 학습률
+</span><span class="n">n_step</span> <span class="o">=</span> <span class="mi">128</span>            <span class="c1"># 모델 학습 주기
+</span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">128</span>        <span class="c1"># 한번 network 를 업데이트할 때 사용되는 데이터 수
+</span><span class="n">n_epoch</span> <span class="o">=</span> <span class="mi">3</span>             <span class="c1"># 한번 모델을 학습할 때 시행하는 epoch 수
+</span><span class="n">_lambda</span> <span class="o">=</span> <span class="mf">0.95</span>          <span class="c1"># GAE 기법에 사용할 설정값
+</span><span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.2</span>           <span class="c1"># clipped surrogate objective 에 사용할 설정 값
+</span>
+<span class="n">run_step</span> <span class="o">=</span> <span class="mi">200000</span> <span class="k">if</span> <span class="n">train_mode</span> <span class="k">else</span> <span class="mi">0</span> <span class="c1"># 학습모드에서 진행할 스텝 수 
+</span><span class="n">test_step</span> <span class="o">=</span> <span class="mi">1000003</span>     <span class="c1"># 평가모드에서 사용할 스텝수
+</span>
+<span class="n">print_interval</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">save_interval</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># Dodge  환경 설정 
+</span><span class="n">env_static_config</span> <span class="o">=</span> <span class="p">{</span><span class="sh">"</span><span class="s">ballSpeed</span><span class="sh">"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="sh">"</span><span class="s">ballRandom</span><span class="sh">"</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span> <span class="sh">"</span><span class="s">agentSpeed</span><span class="sh">"</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="c1"># 정적 리셋 파라미터들을 가진 변수 (환경 리셋시 항상 동일하게 사용되는 파라미트들)
+</span>
+<span class="n">env_dynamic_config</span> <span class="o">=</span> <span class="p">{</span><span class="sh">"</span><span class="s">boardRadius</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span><span class="sh">"</span><span class="s">min</span><span class="sh">"</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="sh">"</span><span class="s">max</span><span class="sh">"</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span> <span class="sh">"</span><span class="s">seed</span><span class="sh">"</span><span class="p">:</span><span class="mi">77</span><span class="p">},</span>
+                      <span class="sh">"</span><span class="s">ballNums</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span><span class="sh">"</span><span class="s">min</span><span class="sh">"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="sh">"</span><span class="s">max</span><span class="sh">"</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span> <span class="sh">"</span><span class="s">seed</span><span class="sh">"</span><span class="p">:</span><span class="mi">77</span><span class="p">}}</span>
+<span class="c1"># 동적 리셋 파라미터들을 가진 변수 (환경 리셋시 min ~ max 값 사이의 임의 값을 매번 다르게 생성)
+</span>
+<span class="c1"># 유니티 환경 경로
+</span><span class="n">game</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Dodge1</span><span class="sh">"</span>
+<span class="n">os_name</span> <span class="o">=</span> <span class="n">platform</span><span class="p">.</span><span class="nf">system</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">os_name</span> <span class="o">==</span> <span class="sh">'</span><span class="s">Windows</span><span class="sh">'</span><span class="p">:</span>
+    <span class="n">env_name</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">../envs/</span><span class="si">{</span><span class="n">game</span><span class="si">}</span><span class="s">_</span><span class="si">{</span><span class="n">os_name</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">game</span><span class="si">}</span><span class="sh">"</span>
+<span class="k">elif</span> <span class="n">os_name</span> <span class="o">==</span> <span class="sh">'</span><span class="s">Darwin</span><span class="sh">'</span><span class="p">:</span>
+    <span class="n">env_name</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">../envs/</span><span class="si">{</span><span class="n">game</span><span class="si">}</span><span class="s">_</span><span class="si">{</span><span class="n">os_name</span><span class="si">}</span><span class="sh">"</span>
+
+<span class="c1"># 모델 저장 및 불러오기 경로
+</span><span class="n">date_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">().</span><span class="nf">strftime</span><span class="p">(</span><span class="sh">"</span><span class="s">%Y%m%d%H%M%S</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">save_path</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">./saved_models/</span><span class="si">{</span><span class="n">game</span><span class="si">}</span><span class="s">/PPO/</span><span class="si">{</span><span class="n">date_time</span><span class="si">}</span><span class="sh">"</span> <span class="c1"># (./saved_models/환경이름/알고리즘 이름/스크립트 실행 시간)
+</span><span class="n">load_path</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">./saved_models/</span><span class="si">{</span><span class="n">game</span><span class="si">}</span><span class="s">/PPO/20240505123456</span><span class="sh">"</span>
+
+<span class="c1"># 연산 장치
+</span><span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">device</span><span class="p">(</span><span class="sh">"</span><span class="s">cuda</span><span class="sh">"</span> <span class="k">if</span> <span class="n">torch</span><span class="p">.</span><span class="n">cuda</span><span class="p">.</span><span class="nf">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="sh">"</span><span class="s">cpu</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="2-model-class">2. Model class</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ActorCritic</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">(</span><span class="n">ActorCritic</span><span class="p">,</span> <span class="n">self</span><span class="p">).</span><span class="nf">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">d1</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">state_size</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">d2</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">pi</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">action_size</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">v</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="nf">relu</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">d1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="nf">relu</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">d2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">F</span><span class="p">.</span><span class="nf">softmax</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">pi</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">),</span> <span class="n">self</span><span class="p">.</span><span class="nf">v</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Actor-Critic 통합 모델
+​<center><img src="assets\img\posts\2024-05-14-PPO2_code\1.png" width="480" /></center>
+  <a href="https://www.inflearn.com/course/%EC%9C%A0%EB%8B%88%ED%8B%B0-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EC%9D%91%EC%9A%A9/dashboard">이미지 출처</a></p>
+
+<h3 id="3-agent-class">3. Agent class</h3>
+
+<h4 id="31-ppoagent-class-와-초기화">3.1 PPOAgent class 와 초기화</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PPOAgent</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">network</span> <span class="o">=</span> <span class="nc">ActorCritic</span><span class="p">().</span><span class="nf">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">optim</span><span class="p">.</span><span class="nc">Adam</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">network</span><span class="p">.</span><span class="nf">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">memory</span> <span class="o">=</span> <span class="nf">list</span><span class="p">()</span> <span class="c1"># n_step 동안 진행한 여러 worker(학습 agent)들을 저장
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">writer</span> <span class="o">=</span> <span class="nc">SummaryWriter</span><span class="p">(</span><span class="n">save_path</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">load_model</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="c1"># 저장된 모델을 사용할 경우
+</span>            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">... Load Model from </span><span class="si">{</span><span class="n">load_path</span><span class="si">}</span><span class="s">/ckpt ...</span><span class="sh">"</span><span class="p">)</span>
+            <span class="n">checkpoint</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="n">load_path</span><span class="o">+</span><span class="sh">'</span><span class="s">/ckpt</span><span class="sh">'</span><span class="p">,</span> <span class="n">map_loaction</span><span class="o">=</span><span class="n">device</span><span class="p">)</span> <span class="c1"># cpu or gpu 메모링 모델 로드
+</span>            <span class="n">self</span><span class="p">.</span><span class="n">network</span><span class="p">.</span><span class="nf">laod_state_dict</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">[</span><span class="sh">"</span><span class="s">network</span><span class="sh">"</span><span class="p">])</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">optimizer</span><span class="p">.</span><span class="nf">load_state_dict</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">[</span><span class="sh">"</span><span class="s">optimizer</span><span class="sh">"</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h4 id="32-정책을-통해-행동-결정">3.2 정책을 통해 행동 결정</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">get_action</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="c1"># 네트워크 모드 설정 (ex. Dropout layer 존재 시 train mode 에서 활성화, test mode 에서 비활성화)
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">network</span><span class="p">.</span><span class="nf">train</span><span class="p">(</span><span class="n">training</span><span class="p">)</span>
+
+        <span class="c1"># 네트워크 연산에 따라 행동 결정
+</span>        <span class="n">pi</span><span class="p">,</span> <span class="n">_</span>  <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">network</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="nc">FloatTensor</span><span class="p">(</span><span class="n">state</span><span class="p">).</span><span class="nf">to</span><span class="p">(</span><span class="n">device</span><span class="p">))</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">multinomial</span><span class="p">(</span><span class="n">pi</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">1</span><span class="p">).</span><span class="nf">cpu</span><span class="p">().</span><span class="nf">numpy</span><span class="p">()</span>
+        <span class="c1"># torch.multinomial() : pi ( 1 * 5 텐서이며, 모든 요소의 합이 1인 확률 분보 값) 를 사용
+</span>        <span class="c1"># 해당 확률에 근거하여 하나의 index 를 선택
+</span>
+        <span class="k">return</span> <span class="n">action</span>
+</code></pre></div></div>
+
+<p>get_action 메서드를 사용하여 network 를 통해 action 을 선택하는 과정</p>
+
+<p>​<center><img src="assets\img\posts\2024-05-14-PPO2_code\2.png" width="480" /></center>
+  <a href="https://www.inflearn.com/course/%EC%9C%A0%EB%8B%88%ED%8B%B0-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EC%9D%91%EC%9A%A9/dashboard">이미지 출처</a></p>
+
+<h4 id="33-리플레이-메모리에-데이터-추가-상태-행동-보상-다음-상태-게임-종료-여부">3.3 리플레이 메모리에 데이터 추가 (상태, 행동, 보상, 다음 상태, 게임 종료 여부)</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">append_sample</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">aciton</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">next_state</span><span class="p">,</span> <span class="n">doen</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">memory</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">next_state</span><span class="p">,</span> <span class="n">done</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h4 id="34-학습-수행">3.4 학습 수행</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">train_model</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">network</span><span class="p">.</span><span class="nf">train</span><span class="p">()</span>
+
+        <span class="c1"># 롤아웃 데이터 추출 및 텐서 변환
+</span>        <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">stack</span><span class="p">([</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">memory</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">stack</span><span class="p">([</span><span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">memory</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">reward</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">stack</span><span class="p">([</span><span class="n">m</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">memory</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">next_state</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">stack</span><span class="p">([</span><span class="n">m</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">memory</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">done</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">stack</span><span class="p">([</span><span class="n">m</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">memory</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">memory</span><span class="p">.</span><span class="nf">clear</span><span class="p">()</span>
+
+        <span class="c1"># 실수형 텐서로 변환
+</span>        <span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">next_state</span><span class="p">,</span> <span class="n">done</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="p">.</span><span class="nc">FloatTensor</span><span class="p">(</span><span class="n">x</span><span class="p">).</span><span class="nf">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span>
+            <span class="p">[</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">next_state</span><span class="p">,</span> <span class="n">done</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="c1"># prob_old, adv, ret 계산
+</span>        <span class="c1"># pi_old    : state 에 대한 업데이트 전 network 의 pi  예측값
+</span>        <span class="c1"># value     : state 에 대한 업데이트 전 network 의 value 예측값
+</span>        <span class="c1"># prob_old  : pi_old 의 action index 에 대한 value (업데이트 전 action 의 확률값)
+</span>        <span class="c1"># adv       : 정책 신경망 업데이트에 사용할 어드벤티지 값
+</span>        <span class="c1"># ret       : 가치 신경망 업데이트에 사용할 티켓 값
+</span>        <span class="c1"># delta     : TD error (GAE 에서 1 ~ T step 까지 TD error 의 합은 Advantage (At) 임)
+</span>        <span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="nf">no_gard</span><span class="p">():</span>
+            <span class="n">pi_old</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">network</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>  <span class="c1"># (1)
+</span>            <span class="n">prob_old</span> <span class="o">=</span> <span class="n">pi_old</span><span class="p">.</span><span class="nf">gather</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">action</span><span class="p">.</span><span class="nf">long</span><span class="p">())</span> <span class="c1"># (2)
+</span>            <span class="c1"># gather(1, action) : 1 차원 (행) 의 상태를 유지하면서, 열의 값에서 action 에 해당하는 index 값을 추출 
+</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">next_value</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">network</span><span class="p">(</span><span class="n">next_state</span><span class="p">)</span> <span class="c1"># (3)
+</span>            <span class="n">delta</span> <span class="o">=</span> <span class="n">reward</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">done</span><span class="p">)</span> <span class="o">*</span> <span class="n">discount_factor</span> <span class="o">*</span> <span class="n">next_value</span> <span class="o">-</span> <span class="n">value</span> 
+            <span class="n">adv</span> <span class="o">=</span> <span class="n">delta</span><span class="p">.</span><span class="nf">clone</span><span class="p">()</span> <span class="c1"># (4)
+</span>
+            <span class="c1"># GAE 진행 전, adv 전처리 - (n_step * num_worker) 차원으로 변환.
+</span>            <span class="n">adv</span><span class="p">,</span> <span class="n">done</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span> <span class="c1"># (5)
+</span>                <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">.</span><span class="nf">view</span><span class="p">(</span><span class="n">n_step</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">).</span><span class="nf">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">).</span><span class="nf">contiguous</span><span class="p">(),</span>
+                <span class="p">[</span><span class="n">adv</span><span class="p">,</span> <span class="n">done</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="c1"># view(n_step, -1): 만약 n_step 이 32, adv 와 done 텐서 크기가 128 이였다면, 
+</span>            <span class="c1">#      adv, done 을 각각 4, 32 tensor 차원으로 변환 
+</span>            <span class="c1">#      즉, 메모리에서 추출한 data 를 num_worker * n_step 차원을 변환
+</span>            <span class="c1"># transpose(0, 1) : num_worker * n_step =&gt; n_step * num_worker 변환
+</span>            <span class="c1"># countiguous()   : view나 transpose 같은 연산 후에 텐서의 물리적인 메모리 배열이 실제 데이터 배열과 일치하지 않을 수 있음
+</span>            <span class="c1">#      contiguous()는 데이터를 메모리 상에서 연속적으로 재배치하여 텐서가 예상대로 작동하도록 함.
+</span>
+            <span class="c1"># GAE 연산 수행
+</span>            <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nf">reversed</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">n_step</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)):</span> <span class="c1"># (6)
+</span>                <span class="n">adv</span><span class="p">[:,</span> <span class="n">t</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">done</span><span class="p">[:,</span> <span class="n">t</span><span class="p">])</span> <span class="o">*</span> <span class="n">discount_factor</span> <span class="o">*</span> <span class="n">_lambda</span> <span class="o">*</span> <span class="n">adv</span><span class="p">[:,</span> <span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            
+            <span class="c1"># GAE 작업을 완료된 advantage 값들은 원래 차원으로 되돌리는 변환을 진행한다.
+</span>            <span class="n">adv</span> <span class="o">=</span> <span class="n">adv</span><span class="p">.</span><span class="nf">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">).</span><span class="nf">contiguous</span><span class="p">().</span><span class="nf">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># 현재 정책 조건에서의  advantage + 현재 상태 value 
+</span>            <span class="c1"># =&gt; 특정 행동 a 를 최했을 때의 전체적인 가치 Q(s, a) 추정치 로 사용
+</span>            <span class="n">ret</span> <span class="o">=</span> <span class="n">adv</span> <span class="o">+</span> <span class="n">value</span> <span class="c1"># (7)
+</span>
+        <span class="c1"># 학습 iteration 시작
+</span>        <span class="n">actor_losses</span><span class="p">,</span> <span class="n">critic_losses</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="n">idxs</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">reward</span><span class="p">))</span> <span class="c1"># 사용되는 전체 data 의 크기의 index
+</span>        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n_epoch</span><span class="p">):</span>
+            <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">shuffle</span><span class="p">(</span><span class="n">idxs</span><span class="p">)</span> <span class="c1"># idxs 간 순서를 통한 연관성을 배제시키기 위해
+</span>            <span class="k">for</span> <span class="n">offset</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">reward</span><span class="p">),</span> <span class="n">batch_size</span><span class="p">):</span>
+                <span class="n">idx</span> <span class="o">=</span> <span class="n">idxs</span><span class="p">[</span><span class="n">offset</span> <span class="p">:</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">batch_size</span><span class="p">]</span> <span class="c1"># batch 크기 만큼씩 slicing
+</span>
+                <span class="n">_state</span><span class="p">,</span> <span class="n">_action</span><span class="p">,</span> <span class="n">_ret</span><span class="p">,</span> <span class="n">_adv</span><span class="p">,</span> <span class="n">_prob_old</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span>
+                    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="p">[</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">ret</span><span class="p">,</span> <span class="n">adv</span><span class="p">,</span> <span class="n">prob_old</span><span class="p">]</span>
+                <span class="p">)</span> <span class="c1"># slicing 크기 만큼씩 추출
+</span>
+                <span class="n">pi</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">network</span><span class="p">(</span><span class="n">_state</span><span class="p">)</span> 
+                <span class="n">prob</span> <span class="o">=</span> <span class="n">pi</span><span class="p">.</span><span class="nf">gather</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">_action</span><span class="p">.</span><span class="nf">long</span><span class="p">())</span> <span class="c1"># 해당 action 의 정책 확률 추출
+</span>
+                <span class="c1"># 정책 신경망 손실함수 계산
+</span>                <span class="n">ratio</span> <span class="o">=</span> <span class="n">prob</span> <span class="o">/</span> <span class="p">(</span><span class="n">_prob_old</span> <span class="o">+</span> <span class="mf">1e-7</span><span class="p">)</span>   <span class="c1"># probability ratio
+</span>                <span class="n">surr1</span> <span class="o">=</span> <span class="n">ratio</span> <span class="o">*</span> <span class="n">_adv</span>                <span class="c1"># surrogate object
+</span>                <span class="n">surr2</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">clamp</span><span class="p">(</span><span class="n">ratio</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="o">-</span><span class="n">epsilon</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">1</span><span class="o">+</span><span class="n">epsilon</span><span class="p">)</span> <span class="o">*</span> <span class="n">_adv</span> <span class="c1"># clipped surrogate object
+</span>                <span class="n">actor_loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">torch</span><span class="p">.</span><span class="nf">min</span><span class="p">(</span><span class="n">surr1</span><span class="p">,</span> <span class="n">surr2</span><span class="p">).</span><span class="nf">mean</span><span class="p">()</span>
+
+                <span class="c1"># 가치신경망 손실 함수 계산
+</span>                <span class="n">critic_loss</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="nf">mse_loss</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">_ret</span><span class="p">).</span><span class="nf">mean</span><span class="p">()</span> <span class="c1"># ret - V(s) 의 제곱 평균
+</span>
+                <span class="n">total_loss</span> <span class="o">=</span> <span class="n">actor_loss</span> <span class="o">+</span> <span class="n">critic_loss</span> <span class="c1"># ??? action entropy 는???
+</span>
+                <span class="n">self</span><span class="p">.</span><span class="n">optimizer</span><span class="p">.</span><span class="nf">zero_grad</span><span class="p">()</span>
+                <span class="n">total_loss</span><span class="p">.</span><span class="nf">backward</span><span class="p">()</span>
+                <span class="n">self</span><span class="p">.</span><span class="n">optimizer</span><span class="p">.</span><span class="nf">step</span><span class="p">()</span>
+
+                <span class="n">actor_losses</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">actor_loss</span><span class="p">.</span><span class="nf">item</span><span class="p">())</span>
+                <span class="n">critic_losses</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">critic_loss</span><span class="p">.</span><span class="nf">item</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">actor_losses</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">critic_losses</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>​<center><img src="assets\img\posts\2024-05-14-PPO2_code\3.png" width="650" /></center>
+  <a href="https://www.inflearn.com/course/%EC%9C%A0%EB%8B%88%ED%8B%B0-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EC%9D%91%EC%9A%A9/dashboard">이미지 출처</a></p>
+
+<ol>
+  <li>
+    <p>pi_old, value = self.network(state)</p>
+
+    <p>update 되기 전 network 에 상태를 넣어 update 되기 전 정책과 value 구함.</p>
+  </li>
+  <li>
+    <p>prob_old = pi_old.gather(1, action.long())</p>
+
+    <p>pi_old tensor 에서 열(column) 이 action 인 곳의 값을 취함.</p>
+  </li>
+  <li>
+    <p>_, next_value = self.network(next_state)<br />
+delta = reward + (1 - done) * discount_factor * next_value - value</p>
+
+    <p>next_state 를 update 전 network 에 넣어 next_value 를 구하고, 이를 앞에서 계산된 요소들로 Temporal Difference Error 를 구한다.</p>
+  </li>
+  <li>
+    <p>adv = delta.clone()</p>
+
+    <p>TD error 복제 하여 advantage 로 사용</p>
+  </li>
+  <li>
+    <p>adv, done = map(lambda x: x.view(n_step, -1).transpose(0, 1).contiguous(), [adv, done])</p>
+
+    <p>GAE 진행 전, 학습 가능한 차원으로 adv를 전처리. (n_step * num_worker) 차원으로 변환.</p>
+  </li>
+  <li>
+    <p>for t in reversed(range(n_step - 1)):<br />
+adv[:, t] += (1 - done[:, t]) * discount_factor * _lambda * adv[:, t + 1]</p>
+
+    <p>GAE 연산 수행</p>
+  </li>
+  <li>
+    <p>ret = adv + value<br /></p>
+
+    <p>현재 정책 조건에서의  advantage + 현재 상태 value =&gt; 특정 행동 a 를 최했을 때의 전체적인 가치 Q(s, a) 추정치 로 사용</p>
+  </li>
+</ol>
+
+<h4 id="35-네트워크-모델-저장--학습기록">3.5 네트워크 모델 저장 &amp; 학습기록</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1"># 네트워크 모델 저장
+</span>    <span class="k">def</span> <span class="nf">save_model</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">... Save Model to </span><span class="si">{</span><span class="n">save_path</span><span class="si">}</span><span class="s">/ckpt ...</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">torch</span><span class="p">.</span><span class="nf">save</span><span class="p">({</span>
+            <span class="sh">"</span><span class="s">network</span><span class="sh">"</span> <span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">network</span><span class="p">.</span><span class="nf">state_dict</span><span class="p">(),</span>
+            <span class="sh">"</span><span class="s">optimizer</span><span class="sh">"</span> <span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">optimizer</span><span class="p">.</span><span class="nf">state_dict</span><span class="p">(),</span>
+        <span class="p">},</span> <span class="n">save_path</span><span class="o">+</span><span class="sh">'</span><span class="s">/ckpt</span><span class="sh">'</span><span class="p">)</span>
+
+    <span class="c1"># 학습기록
+</span>    <span class="k">def</span> <span class="nf">write_summary</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">actor_loss</span><span class="p">,</span> <span class="n">critic_loss</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">writer</span><span class="p">.</span><span class="nf">add_scalar</span><span class="p">(</span><span class="sh">"</span><span class="s">run/score</span><span class="sh">"</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">wirter</span><span class="p">.</span><span class="nf">add_scalar</span><span class="p">(</span><span class="sh">"</span><span class="s">model/actor_loss</span><span class="sh">"</span><span class="p">,</span> <span class="n">actor_loss</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">writer</span><span class="p">.</span><span class="nf">add_scalar</span><span class="p">(</span><span class="sh">"</span><span class="s">model/critic_loss</span><span class="sh">"</span><span class="p">,</span> <span class="n">critic_loss</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="4-main-함수">4. Main 함수</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
+    <span class="c1"># 유니티 환경 경로 설정(file name)
+</span>    <span class="n">engine_configuration_channel</span> <span class="o">=</span> <span class="nc">EngineConfigurationChannel</span><span class="p">()</span>
+    <span class="n">environment_parameters_channel</span> <span class="o">=</span> <span class="nc">EnvironmentParametersChannel</span><span class="p">()</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="nc">UnityEnvironment</span><span class="p">(</span>
+        <span class="n">file_name</span><span class="o">=</span><span class="n">env_name</span><span class="p">,</span>
+        <span class="n">side_channels</span><span class="o">=</span><span class="p">[</span><span class="n">engine_configuration_channel</span><span class="p">,</span> <span class="n">environment_parameters_channel</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">env</span><span class="p">.</span><span class="nf">reset</span><span class="p">()</span>
+
+    <span class="c1"># 유니티 behavior 설정
+</span>    <span class="n">behavior_name</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">env</span><span class="p">.</span><span class="n">behavior_specs</span><span class="p">.</span><span class="nf">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">spec</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="n">behavior_spec</span><span class="p">[</span><span class="n">behavior_name</span><span class="p">]</span> <span class="c1">#  behavior 의 spec (관찰, 행동) 정보 저장
+</span>    <span class="n">engine_configuration_channel</span><span class="p">.</span><span class="nf">set_configuration_parameters</span><span class="p">(</span><span class="n">time_scale</span><span class="o">=</span><span class="mf">12.0</span><span class="p">)</span>
+
+    <span class="c1"># 환경 정적 파라미터 값 설정
+</span>    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">env_static_config</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="n">environment_parameters_channel</span><span class="p">.</span><span class="nf">set_float_parameter</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    
+    <span class="c1"># 환경 동적 파라미터 분포 설정 (환경이 reset 될 때마다 설정된 범위 내에서 임의 값을 sampling 하여 사용)
+</span>    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">env_dynamic_config</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="n">environment_parameters_channel</span><span class="p">.</span><span class="nf">set_uniform_sampler_parameters</span><span class="p">(</span>
+            <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">[</span><span class="sh">"</span><span class="s">min</span><span class="sh">"</span><span class="p">],</span> <span class="n">value</span><span class="p">[</span><span class="sh">"</span><span class="s">max</span><span class="sh">"</span><span class="p">],</span> <span class="n">value</span><span class="p">[</span><span class="sh">"</span><span class="s">seed</span><span class="sh">"</span><span class="p">]</span>
+        <span class="p">)</span>
+    
+    <span class="c1"># decision step, termination step
+</span>    <span class="c1"># episode 진행 중 -&gt; dec
+</span>    <span class="c1"># episode 종료 : 종료 step -&gt; term / 다음 episode 의 첫 step -&gt; dec
+</span>    <span class="n">dec</span><span class="p">,</span> <span class="n">term</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="nf">get_steps</span><span class="p">(</span><span class="n">behavior_name</span><span class="p">)</span>
+    <span class="n">num_worker</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">dec</span><span class="p">)</span>
+
+    <span class="c1"># PPO 클랫 agent 정의
+</span>    <span class="n">agent</span> <span class="o">=</span> <span class="nc">PPOAgent</span><span class="p">()</span>
+    <span class="n">actor_losses</span><span class="p">,</span> <span class="n">critic_losses</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">episode</span><span class="p">,</span> <span class="n">score</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">run_step</span> <span class="o">+</span> <span class="n">test_step</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">step</span> <span class="o">==</span> <span class="n">run_step</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">train_mode</span><span class="p">:</span>
+                <span class="n">agent</span><span class="p">.</span><span class="nf">save_model</span><span class="p">()</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">TEST START</span><span class="sh">"</span><span class="p">)</span>
+            <span class="n">train_mode</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">engine_configuration_channel</span><span class="p">.</span><span class="nf">set_configuration_parameters</span><span class="p">(</span><span class="n">time_scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+        
+        <span class="n">state</span> <span class="o">=</span> <span class="n">dec</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># dec.obs : 지정한 behavior_name 가진 모든 agent 에 대한 모든 관측을 포함한 튜플
+</span>        <span class="c1"># 현재 관측 정보는 단 1개 종류이므로 obs[0] 값만 가져와서 state 정보로 넣어줌.
+</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">agent</span><span class="p">.</span><span class="nf">get_action</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">train_mode</span><span class="p">)</span>
+        
+        <span class="n">action_tuple</span> <span class="o">=</span> <span class="nc">ActionTuple</span><span class="p">()</span>
+        <span class="n">action_tuple</span><span class="p">.</span><span class="nf">add_discrete</span><span class="p">(</span><span class="n">action</span><span class="p">)</span> <span class="c1"># 이산적 action 할당
+</span>        <span class="n">env</span><span class="p">.</span><span class="nf">set_actions</span><span class="p">(</span><span class="n">behavior_name</span><span class="p">,</span> <span class="n">action_tuple</span><span class="p">)</span> <span class="c1"># unity 에 동작 정보 전달
+</span>        <span class="n">env</span><span class="p">.</span><span class="nf">step</span><span class="p">()</span> <span class="c1"># 동작 진행
+</span>
+        <span class="c1"># 환경으로부터 얻는 정보 (분산 학습을 위한 worker data 저장)
+</span>        <span class="n">dec</span><span class="p">,</span> <span class="n">term</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="nf">get_step</span><span class="p">(</span><span class="n">behavior_name</span><span class="p">)</span>
+        <span class="n">done</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_worker</span> <span class="c1"># 모든 worker 들 done 을 일괄적으로 초기화   
+</span>        <span class="n">next_state</span> <span class="o">=</span> <span class="n">dec</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>     <span class="c1"># 모든 worker 들의 관측 정보 반영
+</span>        <span class="n">reward</span> <span class="o">=</span> <span class="n">dec</span><span class="p">.</span><span class="n">reward</span>         <span class="c1"># 모든 worker 들의 보상 정보 반영
+</span>
+        <span class="c1"># 종료 worker 정보를 업데이트 
+</span>        <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">term</span><span class="p">.</span><span class="n">agent_id</span><span class="p">:</span> 
+            <span class="n">_id</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">term</span><span class="p">.</span><span class="n">agent_id</span><span class="p">).</span><span class="nf">index</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+            <span class="n">done</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">next_state</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">term</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">_id</span><span class="p">]</span>
+            <span class="n">reward</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">term</span><span class="p">.</span><span class="n">reward</span><span class="p">[</span><span class="n">_id</span><span class="p">]</span>
+        
+        <span class="n">score</span> <span class="o">+=</span> <span class="n">reward</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">train_mode</span><span class="p">:</span>
+            <span class="c1"># rollout memory 에 woker 들의 정보 저장
+</span>            <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">num_worker</span><span class="p">):</span>
+                <span class="n">agent</span><span class="p">.</span><span class="nf">append_sample</span><span class="p">(</span>
+                    <span class="n">state</span><span class="p">[</span><span class="nb">id</span><span class="p">],</span> 
+                    <span class="n">action</span><span class="p">[</span><span class="nb">id</span><span class="p">],</span> 
+                    <span class="p">[</span><span class="n">reward</span><span class="p">[</span><span class="nb">id</span><span class="p">]],</span> 
+                    <span class="n">next_state</span><span class="p">[</span><span class="nb">id</span><span class="p">],</span> 
+                    <span class="p">[</span><span class="n">done</span><span class="p">[</span><span class="nb">id</span><span class="p">]]</span>
+                <span class="p">)</span>
+            
+            <span class="c1"># n_step 마다 학습수행 모델 업데이트 및 loss 값 들을 리스트에 추가
+</span>            <span class="nf">if </span><span class="p">(</span><span class="n">step</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">n_step</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">actor_loss</span><span class="p">,</span> <span class="n">critic_loss</span> <span class="o">=</span> <span class="n">agent</span><span class="p">.</span><span class="nf">train_model</span><span class="p">()</span>
+                <span class="n">actor_losses</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">actor_loss</span><span class="p">)</span>
+                <span class="n">critic_losses</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">critic_loss</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">done</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">episode</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">scores</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="c1"># 게임 진행 상황 출력 및 텐서 보드에 보상과 손실 함수 값 기록
+</span>            <span class="k">if</span> <span class="n">episode</span> <span class="o">%</span> <span class="n">print_interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">mean_score</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+                <span class="n">mean_actor_loss</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">actor_losses</span><span class="p">)</span> <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">actor_losses</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+                <span class="n">mean_critic_loss</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">critic_losses</span><span class="p">)</span> <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">ciritc_losses</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+                <span class="n">agent</span><span class="p">.</span><span class="nf">write_summary</span><span class="p">(</span><span class="n">mean_score</span><span class="p">,</span> <span class="n">mean_actor_loss</span><span class="p">,</span> <span class="n">mean_critic_loss</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+                <span class="n">actor_losses</span><span class="p">,</span> <span class="n">critic_losses</span><span class="p">,</span> <span class="n">scores</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+
+                <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">episode</span><span class="si">}</span><span class="s"> Episode / Step: </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s"> / Score: </span><span class="si">{</span><span class="n">mean_score</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s"> /</span><span class="sh">"</span> <span class="o">+</span>\
+                      <span class="sa">f</span><span class="sh">"</span><span class="s">Actor loss: </span><span class="si">{</span><span class="n">mean_actor_loss</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s"> / Critic loss: </span><span class="si">{</span><span class="n">mean_critic_loss</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+                
+            <span class="c1"># 네트워크 모델 저장
+</span>            <span class="k">if</span> <span class="n">train_mode</span> <span class="ow">and</span> <span class="n">episode</span> <span class="o">%</span> <span class="n">save_interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">agent</span><span class="p">.</span><span class="nf">save_model</span><span class="p">()</span>
+
+    <span class="n">env</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="5-전체-코드">5. 전체 코드</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="n">platform</span>
+<span class="kn">import</span> <span class="n">torch</span>
+<span class="kn">import</span> <span class="n">troch.nn.functional</span> <span class="k">as</span> <span class="n">F</span>
+
+<span class="kn">from</span> <span class="n">torch.utils.tensorboard</span> <span class="kn">import</span> <span class="n">SummaryWriter</span>
+<span class="kn">from</span> <span class="n">mlagents_envs.environment</span> <span class="kn">import</span> <span class="n">UnityEnvironment</span><span class="p">,</span> <span class="n">ActionTuple</span>
+<span class="kn">from</span> <span class="n">mlagents_envs.side_channel.engine_configuration_channel</span> <span class="kn">import</span> <span class="n">EngineConfigurationChannel</span>
+<span class="kn">from</span> <span class="n">mlagents_envs.side_channel.environment_parameters_channel</span> <span class="kn">import</span> <span class="n">EnvironmentParametersChannel</span>
+
+<span class="n">state_size</span> <span class="o">=</span> <span class="mi">122</span> 
+<span class="c1"># ray 당 정보 수집: 40 rays * 감지된 물체의 (거리 + x축 속도 + z축 속도) = 120
+# agent 좌표 (x, z) = 2
+</span>
+<span class="n">action_size</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># 상, 하, 좌, 우, 정지
+</span>
+<span class="n">load_model</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">train_mode</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="n">discount_factor</span> <span class="o">=</span> <span class="mf">0.99</span>  <span class="c1"># 미래 보상의 감가율
+</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">3e-4</span>    <span class="c1"># 네트워크 학습률
+</span><span class="n">n_step</span> <span class="o">=</span> <span class="mi">128</span>            <span class="c1"># 모델 학습 주기
+</span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">128</span>        <span class="c1"># 한번 network 를 업데이트할 때 사용되는 데이터 수
+</span><span class="n">n_epoch</span> <span class="o">=</span> <span class="mi">3</span>             <span class="c1"># 한번 모델을 학습할 때 시행하는 epoch 수
+</span><span class="n">_lambda</span> <span class="o">=</span> <span class="mf">0.95</span>          <span class="c1"># GAE 기법에 사용할 설정값
+</span><span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.2</span>           <span class="c1"># clipped surrogate objective 에 사용할 설정 값
+</span>
+<span class="n">run_step</span> <span class="o">=</span> <span class="mi">200000</span> <span class="k">if</span> <span class="n">train_mode</span> <span class="k">else</span> <span class="mi">0</span> <span class="c1"># 학습모드에서 진행할 스텝 수 
+</span><span class="n">test_step</span> <span class="o">=</span> <span class="mi">1000003</span>     <span class="c1"># 평가모드에서 사용할 스텝수
+</span>
+<span class="n">print_interval</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">save_interval</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># Dodge  환경 설정 
+</span><span class="n">env_static_config</span> <span class="o">=</span> <span class="p">{</span><span class="sh">"</span><span class="s">ballSpeed</span><span class="sh">"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="sh">"</span><span class="s">ballRandom</span><span class="sh">"</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span> <span class="sh">"</span><span class="s">agentSpeed</span><span class="sh">"</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="c1"># 정적 리셋 파라미터들을 가진 변수 (환경 리셋시 항상 동일하게 사용되는 파라미트들)
+</span>
+<span class="n">env_dynamic_config</span> <span class="o">=</span> <span class="p">{</span><span class="sh">"</span><span class="s">boardRadius</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span><span class="sh">"</span><span class="s">min</span><span class="sh">"</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="sh">"</span><span class="s">max</span><span class="sh">"</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span> <span class="sh">"</span><span class="s">seed</span><span class="sh">"</span><span class="p">:</span><span class="mi">77</span><span class="p">},</span>
+                      <span class="sh">"</span><span class="s">ballNums</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span><span class="sh">"</span><span class="s">min</span><span class="sh">"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="sh">"</span><span class="s">max</span><span class="sh">"</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span> <span class="sh">"</span><span class="s">seed</span><span class="sh">"</span><span class="p">:</span><span class="mi">77</span><span class="p">}}</span>
+<span class="c1"># 동적 리셋 파라미터들을 가진 변수 (환경 리셋시 min ~ max 값 사이의 임의 값을 매번 다르게 생성)
+</span>
+<span class="c1"># 유니티 환경 경로
+</span><span class="n">game</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Dodge1</span><span class="sh">"</span>
+<span class="n">os_name</span> <span class="o">=</span> <span class="n">platform</span><span class="p">.</span><span class="nf">system</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">os_name</span> <span class="o">==</span> <span class="sh">'</span><span class="s">Windows</span><span class="sh">'</span><span class="p">:</span>
+    <span class="n">env_name</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">../envs/</span><span class="si">{</span><span class="n">game</span><span class="si">}</span><span class="s">_</span><span class="si">{</span><span class="n">os_name</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">game</span><span class="si">}</span><span class="sh">"</span>
+<span class="k">elif</span> <span class="n">os_name</span> <span class="o">==</span> <span class="sh">'</span><span class="s">Darwin</span><span class="sh">'</span><span class="p">:</span>
+    <span class="n">env_name</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">../envs/</span><span class="si">{</span><span class="n">game</span><span class="si">}</span><span class="s">_</span><span class="si">{</span><span class="n">os_name</span><span class="si">}</span><span class="sh">"</span>
+
+<span class="c1"># 모델 저장 및 불러오기 경로
+</span><span class="n">date_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">().</span><span class="nf">strftime</span><span class="p">(</span><span class="sh">"</span><span class="s">%Y%m%d%H%M%S</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">save_path</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">./saved_models/</span><span class="si">{</span><span class="n">game</span><span class="si">}</span><span class="s">/PPO/</span><span class="si">{</span><span class="n">date_time</span><span class="si">}</span><span class="sh">"</span> <span class="c1"># (./saved_models/환경이름/알고리즘 이름/스크립트 실행 시간)
+</span><span class="n">load_path</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">./saved_models/</span><span class="si">{</span><span class="n">game</span><span class="si">}</span><span class="s">/PPO/20240505123456</span><span class="sh">"</span>
+
+<span class="c1"># 연산 장치
+</span><span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">device</span><span class="p">(</span><span class="sh">"</span><span class="s">cuda</span><span class="sh">"</span> <span class="k">if</span> <span class="n">torch</span><span class="p">.</span><span class="n">cuda</span><span class="p">.</span><span class="nf">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="sh">"</span><span class="s">cpu</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># Actor-Critic class
+</span><span class="k">class</span> <span class="nc">ActorCritic</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">(</span><span class="n">ActorCritic</span><span class="p">,</span> <span class="n">self</span><span class="p">).</span><span class="nf">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">d1</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">state_size</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">d2</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">pi</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">action_size</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">v</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="nf">relu</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">d1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="nf">relu</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">d2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">F</span><span class="p">.</span><span class="nf">softmax</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">pi</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">),</span> <span class="n">self</span><span class="p">.</span><span class="nf">v</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># PPO Agent class
+</span><span class="k">class</span> <span class="nc">PPOAgent</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">network</span> <span class="o">=</span> <span class="nc">ActorCritic</span><span class="p">().</span><span class="nf">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">optim</span><span class="p">.</span><span class="nc">Adam</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">network</span><span class="p">.</span><span class="nf">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">memory</span> <span class="o">=</span> <span class="nf">list</span><span class="p">()</span> <span class="c1"># n_step 동안 진행한 여러 worker(학습 agent)들을 저장
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">writer</span> <span class="o">=</span> <span class="nc">SummaryWriter</span><span class="p">(</span><span class="n">save_path</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">load_model</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="c1"># 저장된 모델을 사용할 경우
+</span>            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">... Load Model from </span><span class="si">{</span><span class="n">load_path</span><span class="si">}</span><span class="s">/ckpt ...</span><span class="sh">"</span><span class="p">)</span>
+            <span class="n">checkpoint</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="n">load_path</span><span class="o">+</span><span class="sh">'</span><span class="s">/ckpt</span><span class="sh">'</span><span class="p">,</span> <span class="n">map_loaction</span><span class="o">=</span><span class="n">device</span><span class="p">)</span> <span class="c1"># cpu or gpu 메모링 모델 로드
+</span>            <span class="n">self</span><span class="p">.</span><span class="n">network</span><span class="p">.</span><span class="nf">laod_state_dict</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">[</span><span class="sh">"</span><span class="s">network</span><span class="sh">"</span><span class="p">])</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">optimizer</span><span class="p">.</span><span class="nf">load_state_dict</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">[</span><span class="sh">"</span><span class="s">optimizer</span><span class="sh">"</span><span class="p">])</span>
+
+    <span class="c1"># 정책을 통해 행동 결정
+</span>    <span class="k">def</span> <span class="nf">get_action</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="c1"># 네트워크 모드 설정 (ex. Dropout layer 존재 시 train mode 에서 활성화, test mode 에서 비활성화)
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">network</span><span class="p">.</span><span class="nf">train</span><span class="p">(</span><span class="n">training</span><span class="p">)</span>
+
+        <span class="c1"># 네트워크 연산에 따라 행동 결정
+</span>        <span class="n">pi</span><span class="p">,</span> <span class="n">_</span>  <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">network</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="nc">FloatTensor</span><span class="p">(</span><span class="n">state</span><span class="p">).</span><span class="nf">to</span><span class="p">(</span><span class="n">device</span><span class="p">))</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">multinomial</span><span class="p">(</span><span class="n">pi</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">1</span><span class="p">).</span><span class="nf">cpu</span><span class="p">().</span><span class="nf">numpy</span><span class="p">()</span>
+        <span class="c1"># torch.multinomial() : pi ( 1 * 5 텐서이며, 모든 요소의 합이 1인 확률 분보 값) 를 사용
+</span>        <span class="c1"># 해당 확률에 근거하여 하나의 index 를 선택
+</span>
+        <span class="k">return</span> <span class="n">action</span>
+    
+    <span class="c1"># 리플레이 메모리에 데이터 추가 (상태, 행동, 보상, 다음 상태, 게임 종료 여부)
+</span>    <span class="k">def</span> <span class="nf">append_sample</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">aciton</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">next_state</span><span class="p">,</span> <span class="n">doen</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">memory</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">next_state</span><span class="p">,</span> <span class="n">done</span><span class="p">))</span>
+
+    <span class="c1"># 학습 수행
+</span>    <span class="k">def</span> <span class="nf">train_model</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">network</span><span class="p">.</span><span class="nf">train</span><span class="p">()</span>
+
+        <span class="c1"># 롤아웃 데이터 추출 및 텐서 변환
+</span>        <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">stack</span><span class="p">([</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">memory</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">stack</span><span class="p">([</span><span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">memory</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">reward</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">stack</span><span class="p">([</span><span class="n">m</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">memory</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">next_state</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">stack</span><span class="p">([</span><span class="n">m</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">memory</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">done</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">stack</span><span class="p">([</span><span class="n">m</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">memory</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">memory</span><span class="p">.</span><span class="nf">clear</span><span class="p">()</span>
+
+        <span class="c1"># 실수형 텐서로 변환
+</span>        <span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">next_state</span><span class="p">,</span> <span class="n">done</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="p">.</span><span class="nc">FloatTensor</span><span class="p">(</span><span class="n">x</span><span class="p">).</span><span class="nf">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span>
+            <span class="p">[</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">next_state</span><span class="p">,</span> <span class="n">done</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="c1"># prob_old, adv, ret 계산
+</span>        <span class="c1"># pi_old    : state 에 대한 업데이트 전 network 의 pi  예측값
+</span>        <span class="c1"># value     : state 에 대한 업데이트 전 network 의 value 예측값
+</span>        <span class="c1"># prob_old  : pi_old 의 action index 에 대한 value (업데이트 전 action 의 확률값)
+</span>        <span class="c1"># adv       : 정책 신경망 업데이트에 사용할 어드벤티지 값
+</span>        <span class="c1"># ret       : 가치 신경망 업데이트에 사용할 티켓 값
+</span>        <span class="c1"># delta     : TD error (GAE 에서 1 ~ T step 까지 TD error 의 합은 Advantage (At) 임)
+</span>        <span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="nf">no_gard</span><span class="p">():</span>
+            <span class="n">pi_old</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">network</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>  <span class="c1"># (1)
+</span>            <span class="n">prob_old</span> <span class="o">=</span> <span class="n">pi_old</span><span class="p">.</span><span class="nf">gather</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">action</span><span class="p">.</span><span class="nf">long</span><span class="p">())</span> <span class="c1"># (2)
+</span>            <span class="c1"># gather(1, action) : 1 차원 (행) 의 상태를 유지하면서, 열의 값에서 action 에 해당하는 index 값을 추출 
+</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">next_value</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">network</span><span class="p">(</span><span class="n">next_state</span><span class="p">)</span> <span class="c1"># (3)
+</span>            <span class="n">delta</span> <span class="o">=</span> <span class="n">reward</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">done</span><span class="p">)</span> <span class="o">*</span> <span class="n">discount_factor</span> <span class="o">*</span> <span class="n">next_value</span> <span class="o">-</span> <span class="n">value</span> 
+            <span class="n">adv</span> <span class="o">=</span> <span class="n">delta</span><span class="p">.</span><span class="nf">clone</span><span class="p">()</span> <span class="c1"># (4)
+</span>
+            <span class="c1"># GAE 진행 전, adv 전처리 - (n_step * num_worker) 차원으로 변환.
+</span>            <span class="n">adv</span><span class="p">,</span> <span class="n">done</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span> <span class="c1"># (5)
+</span>                <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">.</span><span class="nf">view</span><span class="p">(</span><span class="n">n_step</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">).</span><span class="nf">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">).</span><span class="nf">contiguous</span><span class="p">(),</span>
+                <span class="p">[</span><span class="n">adv</span><span class="p">,</span> <span class="n">done</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="c1"># view(n_step, -1): 만약 n_step 이 32, adv 와 done 텐서 크기가 128 이였다면, 
+</span>            <span class="c1">#      adv, done 을 각각 4, 32 tensor 차원으로 변환 
+</span>            <span class="c1">#      즉, 메모리에서 추출한 data 를 num_worker * n_step 차원을 변환
+</span>            <span class="c1"># transpose(0, 1) : num_worker * n_step =&gt; n_step * num_worker 변환
+</span>            <span class="c1"># countiguous()   : view나 transpose 같은 연산 후에 텐서의 물리적인 메모리 배열이 실제 데이터 배열과 일치하지 않을 수 있음
+</span>            <span class="c1">#      contiguous()는 데이터를 메모리 상에서 연속적으로 재배치하여 텐서가 예상대로 작동하도록 함.
+</span>
+            <span class="c1"># GAE 연산 수행
+</span>            <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nf">reversed</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">n_step</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)):</span> <span class="c1"># (6)
+</span>                <span class="n">adv</span><span class="p">[:,</span> <span class="n">t</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">done</span><span class="p">[:,</span> <span class="n">t</span><span class="p">])</span> <span class="o">*</span> <span class="n">discount_factor</span> <span class="o">*</span> <span class="n">_lambda</span> <span class="o">*</span> <span class="n">adv</span><span class="p">[:,</span> <span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            
+            <span class="c1"># GAE 작업을 완료된 advantage 값들은 원래 차원으로 되돌리는 변환을 진행한다.
+</span>            <span class="n">adv</span> <span class="o">=</span> <span class="n">adv</span><span class="p">.</span><span class="nf">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">).</span><span class="nf">contiguous</span><span class="p">().</span><span class="nf">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># 현재 정책 조건에서의  advantage + 현재 상태 value 
+</span>            <span class="c1"># =&gt; 특정 행동 a 를 최했을 때의 전체적인 가치 Q(s, a) 추정치 로 사용
+</span>            <span class="n">ret</span> <span class="o">=</span> <span class="n">adv</span> <span class="o">+</span> <span class="n">value</span> <span class="c1"># (7)
+</span>
+        <span class="c1"># 학습 iteration 시작
+</span>        <span class="n">actor_losses</span><span class="p">,</span> <span class="n">critic_losses</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="n">idxs</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">reward</span><span class="p">))</span> <span class="c1"># 사용되는 전체 data 의 크기의 index
+</span>        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n_epoch</span><span class="p">):</span>
+            <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">shuffle</span><span class="p">(</span><span class="n">idxs</span><span class="p">)</span> <span class="c1"># idxs 간 순서를 통한 연관성을 배제시키기 위해
+</span>            <span class="k">for</span> <span class="n">offset</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">reward</span><span class="p">),</span> <span class="n">batch_size</span><span class="p">):</span>
+                <span class="n">idx</span> <span class="o">=</span> <span class="n">idxs</span><span class="p">[</span><span class="n">offset</span> <span class="p">:</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">batch_size</span><span class="p">]</span> <span class="c1"># batch 크기 만큼씩 slicing
+</span>
+                <span class="n">_state</span><span class="p">,</span> <span class="n">_action</span><span class="p">,</span> <span class="n">_ret</span><span class="p">,</span> <span class="n">_adv</span><span class="p">,</span> <span class="n">_prob_old</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span>
+                    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="p">[</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">ret</span><span class="p">,</span> <span class="n">adv</span><span class="p">,</span> <span class="n">prob_old</span><span class="p">]</span>
+                <span class="p">)</span> <span class="c1"># slicing 크기 만큼씩 추출
+</span>
+                <span class="n">pi</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">network</span><span class="p">(</span><span class="n">_state</span><span class="p">)</span> 
+                <span class="n">prob</span> <span class="o">=</span> <span class="n">pi</span><span class="p">.</span><span class="nf">gather</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">_action</span><span class="p">.</span><span class="nf">long</span><span class="p">())</span> <span class="c1"># 해당 action 의 정책 확률 추출
+</span>
+                <span class="c1"># 정책 신경망 손실함수 계산
+</span>                <span class="n">ratio</span> <span class="o">=</span> <span class="n">prob</span> <span class="o">/</span> <span class="p">(</span><span class="n">_prob_old</span> <span class="o">+</span> <span class="mf">1e-7</span><span class="p">)</span>   <span class="c1"># probability ratio
+</span>                <span class="n">surr1</span> <span class="o">=</span> <span class="n">ratio</span> <span class="o">*</span> <span class="n">_adv</span>                <span class="c1"># surrogate object
+</span>                <span class="n">surr2</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">clamp</span><span class="p">(</span><span class="n">ratio</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="o">-</span><span class="n">epsilon</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">1</span><span class="o">+</span><span class="n">epsilon</span><span class="p">)</span> <span class="o">*</span> <span class="n">_adv</span> <span class="c1"># clipped surrogate object
+</span>                <span class="n">actor_loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">torch</span><span class="p">.</span><span class="nf">min</span><span class="p">(</span><span class="n">surr1</span><span class="p">,</span> <span class="n">surr2</span><span class="p">).</span><span class="nf">mean</span><span class="p">()</span>
+
+                <span class="c1"># 가치신경망 손실 함수 계산
+</span>                <span class="n">critic_loss</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="nf">mse_loss</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">_ret</span><span class="p">).</span><span class="nf">mean</span><span class="p">()</span> <span class="c1"># ret - V(s) 의 제곱 평균
+</span>
+                <span class="n">total_loss</span> <span class="o">=</span> <span class="n">actor_loss</span> <span class="o">+</span> <span class="n">critic_loss</span> <span class="c1"># action entropy 반영되지 않음
+</span>
+                <span class="n">self</span><span class="p">.</span><span class="n">optimizer</span><span class="p">.</span><span class="nf">zero_grad</span><span class="p">()</span>
+                <span class="n">total_loss</span><span class="p">.</span><span class="nf">backward</span><span class="p">()</span>
+                <span class="n">self</span><span class="p">.</span><span class="n">optimizer</span><span class="p">.</span><span class="nf">step</span><span class="p">()</span>
+
+                <span class="n">actor_losses</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">actor_loss</span><span class="p">.</span><span class="nf">item</span><span class="p">())</span>
+                <span class="n">critic_losses</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">critic_loss</span><span class="p">.</span><span class="nf">item</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">actor_losses</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">critic_losses</span><span class="p">)</span>
+    
+    <span class="c1"># 네트워크 모델 저장
+</span>    <span class="k">def</span> <span class="nf">save_model</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">... Save Model to </span><span class="si">{</span><span class="n">save_path</span><span class="si">}</span><span class="s">/ckpt ...</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">torch</span><span class="p">.</span><span class="nf">save</span><span class="p">({</span>
+            <span class="sh">"</span><span class="s">network</span><span class="sh">"</span> <span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">network</span><span class="p">.</span><span class="nf">state_dict</span><span class="p">(),</span>
+            <span class="sh">"</span><span class="s">optimizer</span><span class="sh">"</span> <span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">optimizer</span><span class="p">.</span><span class="nf">state_dict</span><span class="p">(),</span>
+        <span class="p">},</span> <span class="n">save_path</span><span class="o">+</span><span class="sh">'</span><span class="s">/ckpt</span><span class="sh">'</span><span class="p">)</span>
+
+    <span class="c1"># 학습기록
+</span>    <span class="k">def</span> <span class="nf">write_summary</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">actor_loss</span><span class="p">,</span> <span class="n">critic_loss</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">writer</span><span class="p">.</span><span class="nf">add_scalar</span><span class="p">(</span><span class="sh">"</span><span class="s">run/score</span><span class="sh">"</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">wirter</span><span class="p">.</span><span class="nf">add_scalar</span><span class="p">(</span><span class="sh">"</span><span class="s">model/actor_loss</span><span class="sh">"</span><span class="p">,</span> <span class="n">actor_loss</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">writer</span><span class="p">.</span><span class="nf">add_scalar</span><span class="p">(</span><span class="sh">"</span><span class="s">model/critic_loss</span><span class="sh">"</span><span class="p">,</span> <span class="n">critic_loss</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+
+
+<span class="c1"># main
+</span><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
+    <span class="c1"># 유니티 환경 경로 설정(file name)
+</span>    <span class="n">engine_configuration_channel</span> <span class="o">=</span> <span class="nc">EngineConfigurationChannel</span><span class="p">()</span>
+    <span class="n">environment_parameters_channel</span> <span class="o">=</span> <span class="nc">EnvironmentParametersChannel</span><span class="p">()</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="nc">UnityEnvironment</span><span class="p">(</span>
+        <span class="n">file_name</span><span class="o">=</span><span class="n">env_name</span><span class="p">,</span>
+        <span class="n">side_channels</span><span class="o">=</span><span class="p">[</span><span class="n">engine_configuration_channel</span><span class="p">,</span> <span class="n">environment_parameters_channel</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">env</span><span class="p">.</span><span class="nf">reset</span><span class="p">()</span>
+
+    <span class="c1"># 유니티 behavior 설정
+</span>    <span class="n">behavior_name</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">env</span><span class="p">.</span><span class="n">behavior_specs</span><span class="p">.</span><span class="nf">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">spec</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="n">behavior_spec</span><span class="p">[</span><span class="n">behavior_name</span><span class="p">]</span> <span class="c1">#  behavior 의 spec (관찰, 행동) 정보 저장
+</span>    <span class="n">engine_configuration_channel</span><span class="p">.</span><span class="nf">set_configuration_parameters</span><span class="p">(</span><span class="n">time_scale</span><span class="o">=</span><span class="mf">12.0</span><span class="p">)</span>
+
+    <span class="c1"># 환경 정적 파라미터 값 설정
+</span>    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">env_static_config</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="n">environment_parameters_channel</span><span class="p">.</span><span class="nf">set_float_parameter</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    
+    <span class="c1"># 환경 동적 파라미터 분포 설정 (환경이 reset 될 때마다 설정된 범위 내에서 임의 값을 sampling 하여 사용)
+</span>    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">env_dynamic_config</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="n">environment_parameters_channel</span><span class="p">.</span><span class="nf">set_uniform_sampler_parameters</span><span class="p">(</span>
+            <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">[</span><span class="sh">"</span><span class="s">min</span><span class="sh">"</span><span class="p">],</span> <span class="n">value</span><span class="p">[</span><span class="sh">"</span><span class="s">max</span><span class="sh">"</span><span class="p">],</span> <span class="n">value</span><span class="p">[</span><span class="sh">"</span><span class="s">seed</span><span class="sh">"</span><span class="p">]</span>
+        <span class="p">)</span>
+    
+    <span class="c1"># decision step, termination step
+</span>    <span class="c1"># episode 진행 중 -&gt; dec
+</span>    <span class="c1"># episode 종료 : 종료 step -&gt; term / 다음 episode 의 첫 step -&gt; dec
+</span>    <span class="n">dec</span><span class="p">,</span> <span class="n">term</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="nf">get_steps</span><span class="p">(</span><span class="n">behavior_name</span><span class="p">)</span>
+    <span class="n">num_worker</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">dec</span><span class="p">)</span>
+
+    <span class="c1"># PPO 클랫 agent 정의
+</span>    <span class="n">agent</span> <span class="o">=</span> <span class="nc">PPOAgent</span><span class="p">()</span>
+    <span class="n">actor_losses</span><span class="p">,</span> <span class="n">critic_losses</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">episode</span><span class="p">,</span> <span class="n">score</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">run_step</span> <span class="o">+</span> <span class="n">test_step</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">step</span> <span class="o">==</span> <span class="n">run_step</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">train_mode</span><span class="p">:</span>
+                <span class="n">agent</span><span class="p">.</span><span class="nf">save_model</span><span class="p">()</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">TEST START</span><span class="sh">"</span><span class="p">)</span>
+            <span class="n">train_mode</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">engine_configuration_channel</span><span class="p">.</span><span class="nf">set_configuration_parameters</span><span class="p">(</span><span class="n">time_scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+        
+        <span class="n">state</span> <span class="o">=</span> <span class="n">dec</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># dec.obs : 지정한 behavior_name 가진 모든 agent 에 대한 모든 관측을 포함한 튜플
+</span>        <span class="c1"># 현재 관측 정보는 단 1개 종류이므로 obs[0] 값만 가져와서 state 정보로 넣어줌.
+</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">agent</span><span class="p">.</span><span class="nf">get_action</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">train_mode</span><span class="p">)</span>
+        
+        <span class="n">action_tuple</span> <span class="o">=</span> <span class="nc">ActionTuple</span><span class="p">()</span>
+        <span class="n">action_tuple</span><span class="p">.</span><span class="nf">add_discrete</span><span class="p">(</span><span class="n">action</span><span class="p">)</span> <span class="c1"># 이산적 action 할당
+</span>        <span class="n">env</span><span class="p">.</span><span class="nf">set_actions</span><span class="p">(</span><span class="n">behavior_name</span><span class="p">,</span> <span class="n">action_tuple</span><span class="p">)</span> <span class="c1"># unity 에 동작 정보 전달
+</span>        <span class="n">env</span><span class="p">.</span><span class="nf">step</span><span class="p">()</span> <span class="c1"># 동작 진행
+</span>
+        <span class="c1"># 환경으로부터 얻는 정보 (분산 학습을 위한 worker data 저장)
+</span>        <span class="n">dec</span><span class="p">,</span> <span class="n">term</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="nf">get_step</span><span class="p">(</span><span class="n">behavior_name</span><span class="p">)</span>
+        <span class="n">done</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_worker</span> <span class="c1"># 모든 worker 들 done 을 일괄적으로 초기화   
+</span>        <span class="n">next_state</span> <span class="o">=</span> <span class="n">dec</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>     <span class="c1"># 모든 worker 들의 관측 정보 반영
+</span>        <span class="n">reward</span> <span class="o">=</span> <span class="n">dec</span><span class="p">.</span><span class="n">reward</span>         <span class="c1"># 모든 worker 들의 보상 정보 반영
+</span>
+        <span class="c1"># 종료 worker 정보를 업데이트 
+</span>        <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">term</span><span class="p">.</span><span class="n">agent_id</span><span class="p">:</span> 
+            <span class="n">_id</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">term</span><span class="p">.</span><span class="n">agent_id</span><span class="p">).</span><span class="nf">index</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+            <span class="n">done</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">next_state</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">term</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">_id</span><span class="p">]</span>
+            <span class="n">reward</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">term</span><span class="p">.</span><span class="n">reward</span><span class="p">[</span><span class="n">_id</span><span class="p">]</span>
+        
+        <span class="n">score</span> <span class="o">+=</span> <span class="n">reward</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">train_mode</span><span class="p">:</span>
+            <span class="c1"># rollout memory 에 woker 들의 정보 저장
+</span>            <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">num_worker</span><span class="p">):</span>
+                <span class="n">agent</span><span class="p">.</span><span class="nf">append_sample</span><span class="p">(</span>
+                    <span class="n">state</span><span class="p">[</span><span class="nb">id</span><span class="p">],</span> 
+                    <span class="n">action</span><span class="p">[</span><span class="nb">id</span><span class="p">],</span> 
+                    <span class="p">[</span><span class="n">reward</span><span class="p">[</span><span class="nb">id</span><span class="p">]],</span> 
+                    <span class="n">next_state</span><span class="p">[</span><span class="nb">id</span><span class="p">],</span> 
+                    <span class="p">[</span><span class="n">done</span><span class="p">[</span><span class="nb">id</span><span class="p">]]</span>
+                <span class="p">)</span>
+            
+            <span class="c1"># n_step 마다 학습수행 모델 업데이트 및 loss 값 들을 리스트에 추가
+</span>            <span class="nf">if </span><span class="p">(</span><span class="n">step</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">n_step</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">actor_loss</span><span class="p">,</span> <span class="n">critic_loss</span> <span class="o">=</span> <span class="n">agent</span><span class="p">.</span><span class="nf">train_model</span><span class="p">()</span>
+                <span class="n">actor_losses</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">actor_loss</span><span class="p">)</span>
+                <span class="n">critic_losses</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">critic_loss</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">done</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">episode</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">scores</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="c1"># 게임 진행 상황 출력 및 텐서 보드에 보상과 손실 함수 값 기록
+</span>            <span class="k">if</span> <span class="n">episode</span> <span class="o">%</span> <span class="n">print_interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">mean_score</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+                <span class="n">mean_actor_loss</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">actor_losses</span><span class="p">)</span> <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">actor_losses</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+                <span class="n">mean_critic_loss</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">critic_losses</span><span class="p">)</span> <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">ciritc_losses</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+                <span class="n">agent</span><span class="p">.</span><span class="nf">write_summary</span><span class="p">(</span><span class="n">mean_score</span><span class="p">,</span> <span class="n">mean_actor_loss</span><span class="p">,</span> <span class="n">mean_critic_loss</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+                <span class="n">actor_losses</span><span class="p">,</span> <span class="n">critic_losses</span><span class="p">,</span> <span class="n">scores</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+
+                <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">episode</span><span class="si">}</span><span class="s"> Episode / Step: </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s"> / Score: </span><span class="si">{</span><span class="n">mean_score</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s"> /</span><span class="sh">"</span> <span class="o">+</span>\
+                      <span class="sa">f</span><span class="sh">"</span><span class="s">Actor loss: </span><span class="si">{</span><span class="n">mean_actor_loss</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s"> / Critic loss: </span><span class="si">{</span><span class="n">mean_critic_loss</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+                
+            <span class="c1"># 네트워크 모델 저장
+</span>            <span class="k">if</span> <span class="n">train_mode</span> <span class="ow">and</span> <span class="n">episode</span> <span class="o">%</span> <span class="n">save_interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">agent</span><span class="p">.</span><span class="nf">save_model</span><span class="p">()</span>
+
+    <span class="n">env</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+</code></pre></div></div>]]></content><author><name>Yong gon Yun</name></author><category term="ppo" /><category term="proximal policy optimization" /><category term="surrogate object" /><category term="clipping" /><summary type="html"><![CDATA[PPO(Proximal Policy Optimization) Code]]></summary></entry><entry><title type="html">PPO(Proximal Policy Optimization) 이론</title><link href="http://localhost:4000/PPO1.html" rel="alternate" type="text/html" title="PPO(Proximal Policy Optimization) 이론" /><published>2024-05-12T09:32:20+09:00</published><updated>2024-05-12T09:32:20+09:00</updated><id>http://localhost:4000/PPO1</id><content type="html" xml:base="http://localhost:4000/PPO1.html"><![CDATA[<style>
     summary::-webkit-details-marker {
         display: none;
     }
@@ -30,7 +767,7 @@
 
 <h3 id="1-ppo-의-개념-및-특징">1. PPO 의 개념 및 특징</h3>
 
-<p>PPO 의 주요 아이더는 단조 정책 향상 (monotonic policy imporvement) 를 보장함으로써 성능 붕괴를 피하게 해주는 대리 목적(surrogate objective) 을 도입하는 것.</p>
+<p>PPO 의 주요 아이디어는 단조 정책 향상 (monotonic policy imporvement) 를 보장함으로써 성능 붕괴를 피하게 해주는 대리 목적(surrogate objective) 을 도입하는 것.</p>
 
 <p>구조적 특징</p>
 
@@ -252,7 +989,7 @@ Actor 와 Critic Network 를 통합하여 구성. c<sub>1</sub> 은 가치 함�
   <li>Main 함수</li>
 </ol>
 
-<p>해당 포스트에서는 코드의 알고리즘 진행 프로세스와 ML-agents 와 연동하여 어떻게 프로그램 로직이 연결되어 있는지 위주로 설명할 예정임. 해당 코드에서의 PyTroch , ML-agents 등 라이브러리 사용 및 환경 설정에 대한 설명은 이전 포스트 (Deep Q-Network + ML-agents 구현)[https://y2gon2.github.io/DQN_ml_agents.html]  와 유사함으로 해당 포스트를 참조.</p>
+<p>해당 포스트에서는 코드의 알고리즘 진행 프로세스와 ML-agents 와 연동하여 어떻게 프로그램 로직이 연결되어 있는지 위주로 설명할 예정임. 해당 코드에서의 PyTroch , ML-agents 등 라이브러리 사용 및 환경 설정에 대한 설명은 이전 포스트 <a href="https://y2gon2.github.io/DQN_ml_agents.html">Deep Q-Network + ML-agents 구현</a>  와 유사함으로 해당 포스트를 참조.</p>
 
 <h3 id="1-라이브러리--파라미터-설정">1. 라이브러리 &amp; 파라미터 설정</h3>
 
@@ -359,6 +1096,9 @@ Actor 와 Critic Network 를 통합하여 구성. c<sub>1</sub> 은 가치 함�
         <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">relu</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">torch</span><span class="p">.</span><span class="nf">tanh</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">mu</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="c1"># (1)
 </span></code></pre></div></div>
+
+<p>​<center><img src="assets\img\posts\2024-05-12-PPO1\8_1.png" width="650" /></center>
+  <a href="https://www.inflearn.com/course/%EC%9C%A0%EB%8B%88%ED%8B%B0-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EC%9D%91%EC%9A%A9/dashboard">이미지 출처</a></p>
 
 <p>(1) torch.tanh(self.mu(x))</p>
 
@@ -2929,197 +3669,4 @@ drwxr-xr-x 16 root root 3.5K Mar 22 11:27 ..
 
     <span class="k">return</span> <span class="mi">3</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div></div>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="IPC" /><category term="inter-process communication" /><category term="unix socket" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 17]]></summary></entry><entry><title type="html">IPC 실습 02 - pipe</title><link href="http://localhost:4000/IPC02.html" rel="alternate" type="text/html" title="IPC 실습 02 - pipe" /><published>2024-03-19T10:32:20+09:00</published><updated>2024-03-19T10:32:20+09:00</updated><id>http://localhost:4000/IPC02</id><content type="html" xml:base="http://localhost:4000/IPC02.html"><![CDATA[<style>
-    summary::-webkit-details-marker {
-        display: none;
-    }
-    summary {
-        list-style: none;
-    }
-</style>
-
-<details><summary></summary>
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-에러방지  에러방지 에러방지  에러방지 에러방지  에러방지 에러방지  에러방지
-</details>
-
-<p>아래 내용은 개발자를 위한 시스템 반도체 SW개발 기초(디바이스 드라이버 개발) (https://comento.kr/) 강의 내용 중 일부에 해당함.</p>
-
-<h3 id="1-pipe-구현을-통한-부모-프로세서와-자식-프로세서-ipc">1. pipe 구현을 통한 부모 프로세서와 자식 프로세서 IPC</h3>
-
-<p>pipe 개념도</p>
-
-<center>
-  <img src="assets\img\posts\2024-03-19-IPC0201.png" width="500" />
-</center>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
-#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
-#include</span> <span class="cpf">&lt;sys/wait.h&gt;</span><span class="cp">
-</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">pid_t</span> <span class="n">pid</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">pipe_from_parent_to_child</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
-    <span class="kt">int</span> <span class="n">pipe_from_child_to_parent</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
-    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span>
-
-    <span class="n">pipe</span><span class="p">(</span><span class="n">pipe_from_parent_to_child</span><span class="p">);</span>
-    <span class="n">pipe</span><span class="p">(</span><span class="n">pipe_from_child_to_parent</span><span class="p">);</span>
-
-    <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// 사용하지 않는 fd 는 닫아줌.</span>
-        <span class="n">close</span><span class="p">(</span><span class="n">pipe_from_child_to_parent</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-        <span class="n">close</span><span class="p">(</span><span class="n">pipe_from_parent_to_child</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-
-        <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">msg</span> <span class="o">=</span> <span class="s">"I'm child~!!"</span><span class="p">;</span>
-
-        <span class="n">printf</span><span class="p">(</span><span class="s">"[Child] send mes: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span>
-        <span class="n">write</span><span class="p">(</span><span class="n">pipe_from_child_to_parent</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">msg</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
-        <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-
-        <span class="n">read</span><span class="p">(</span><span class="n">pipe_from_parent_to_child</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">buf</span><span class="p">,</span> <span class="mi">256</span><span class="p">);</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">"[Child] recv msg: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
-
-        <span class="n">close</span><span class="p">(</span><span class="n">pipe_from_child_to_parent</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-        <span class="n">close</span><span class="p">(</span><span class="n">pipe_from_parent_to_child</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-    <span class="p">}</span>
-    <span class="k">else</span> <span class="p">{</span>
-        <span class="c1">// 사용하지 않는 fd 는 닫아줌.</span>
-        <span class="n">close</span><span class="p">(</span><span class="n">pipe_from_child_to_parent</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-        <span class="n">close</span><span class="p">(</span><span class="n">pipe_from_parent_to_child</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-
-        <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">msg</span> <span class="o">=</span> <span class="s">"I'm parent~!!"</span><span class="p">;</span>
-
-        <span class="n">printf</span><span class="p">(</span><span class="s">"[Parent] send mes: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span>
-        <span class="n">write</span><span class="p">(</span><span class="n">pipe_from_parent_to_child</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">msg</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
-        <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-
-        <span class="n">read</span><span class="p">(</span><span class="n">pipe_from_child_to_parent</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">buf</span><span class="p">,</span> <span class="mi">256</span><span class="p">);</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">"[Parent] recv msg: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
-
-        <span class="n">close</span><span class="p">(</span><span class="n">pipe_from_child_to_parent</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-        <span class="n">close</span><span class="p">(</span><span class="n">pipe_from_parent_to_child</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-    <span class="p">}</span>
-    
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>실행</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span> vim pipe.c
-user@DESKTOP:~<span class="nv">$ </span> gcc <span class="nt">-o</span> pipe pipe.c
-user@DESKTOP:~<span class="nv">$ </span> ./pipe
-<span class="o">[</span>Parent] send mes: I<span class="s1">'m parent~!!
-[Child] send mes: I'</span>m child~!!
-<span class="o">[</span>Child] recv msg: I<span class="s1">'m parent~!!
-[Parent] recv msg: I'</span>m child~!!
-</code></pre></div></div>
-
-<h3 id="2-파이프-명령어-구현">2. 파이프 명령어 구현</h3>
-
-<p>리눅스에서 사요하는 파이프 기호 <code class="language-plaintext highlighter-rouge">|</code> 도 동일한 pipe IPC 를 사용한 기능이다. 따라서, 예를 들면 <code class="language-plaintext highlighter-rouge">cat /etc/passwd | wc -l</code> 을 pipe IPC 를 사용하여 프로그램으로 구현해볼 수 있다.</p>
-
-<center>
-  <img src="assets\img\posts\2024-03-19-IPC0202.png" width="600" />
-</center>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
-#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
-#include</span> <span class="cpf">&lt;sys/wait.h&gt;</span><span class="cp">
-</span>
-<span class="cm">/* cat /etc/passwd | wc -l */</span>
-
-<span class="k">extern</span> <span class="kt">char</span><span class="o">**</span> <span class="n">environ</span><span class="p">;</span>
-
-<span class="kt">char</span><span class="o">*</span> <span class="k">const</span> <span class="n">front_argv</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">"/bin/cat"</span><span class="p">,</span>
-    <span class="s">"/etc/passwd"</span><span class="p">,</span>
-    <span class="nb">NULL</span>
-<span class="p">};</span>
-
-<span class="kt">char</span><span class="o">*</span> <span class="k">const</span> <span class="n">back_argv</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">"/bin/wc"</span><span class="p">,</span>
-    <span class="s">"-l"</span><span class="p">,</span>
-    <span class="nb">NULL</span>
-<span class="p">};</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">pid_t</span> <span class="n">pid</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">pipefd</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
-
-    <span class="n">pipe</span><span class="p">(</span><span class="n">pipefd</span><span class="p">);</span>
-
-    <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">close</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="c1">// 읽기 fd 사용 X</span>
-        <span class="n">dup2</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">STDOUT_FILENO</span><span class="p">);</span> <span class="c1">// 쓰기 fd 를 표준출력 -&gt; 모든 표준출력은 쓰기 fd 로 전송됨</span>
-        <span class="n">close</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>  <span class="c1">// 표준 출력 복제 후 닫음.</span>
-        <span class="n">execve</span><span class="p">(</span><span class="n">front_argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">front_argv</span><span class="p">,</span> <span class="n">environ</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">close</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="c1">// 읽기 fd 사용 X</span>
-        <span class="n">dup2</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">STDIN_FILENO</span><span class="p">);</span> <span class="c1">// 일기 fd 를 표준출력 -&gt; 읽기 fd 에서 읽ㅇ느 값을 표준입력으로 사용</span>
-        <span class="n">close</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="c1">// 표준 입력 복제 후 닫음.</span>
-        <span class="n">execve</span><span class="p">(</span><span class="n">back_argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">back_argv</span><span class="p">,</span> <span class="n">environ</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="n">wait</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span> 
-
-    <span class="c1">// 부모프로세스에서의 fd 는 별개로 닫아야 함.</span>
-    <span class="n">close</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="c1">// 읽기 fd 가 닫히면 2번째 프로세스의 표준 입력도</span>
-    <span class="n">close</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="c1">// 닫히면서 2번째 프로세스도 종료됨.</span>
-
-    <span class="n">wait</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
-
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>결과 확인</p>
-
-<p>아래와 같이 해당 파일을 실행한 결과와  <code class="language-plaintext highlighter-rouge">cat /etc/passwd | wc -l</code> 의 실행 결과가 동일함을 확인할 수 있다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span>gcc <span class="nt">-o</span> pipe2 pipe2.c
-user@DESKTOP:~<span class="nv">$ </span>./pipe2
-27
-user@DESKTOP:~<span class="nv">$ </span><span class="nb">cat</span> /etc/passwd | <span class="nb">wc</span> <span class="nt">-l</span>
-27
-</code></pre></div></div>
-
-<h3 id="3-네임드-파이프">3. 네임드 파이프</h3>
-
-<p>부모 자식간이 아닌 프로세스간 FIFO 파일의 경로를 알 수 있다면 통신이 가능하며, 이는 <code class="language-plaintext highlighter-rouge">mkfifo(fifo_file, mode)</code> 를 사용하여 수행 가능하다.</p>
-
-<p>따라서, 앞에서 구현한 <code class="language-plaintext highlighter-rouge">cat /etc/passwd | wc -l</code> 를 독립적으로 수행하는 두개의 프로세스를 구현하고 이를 연결하여 사용가능하다. 해당 사항을 shell script 로 구현하면</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
-<span class="nb">mkfifo</span> <span class="nt">-m</span> 0600 fifo
-<span class="nb">wc</span> <span class="nt">-l</span> &lt; fifo &amp;
-<span class="nb">cat</span> /etc/passwd <span class="o">&gt;</span> fifo
-<span class="nb">rm </span>fifo
-</code></pre></div></div>
-
-<p>실행결과</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user@DESKTOP:~<span class="nv">$ </span><span class="nb">chmod</span> +x pipe3.sh
-user@DESKTOP:~<span class="nv">$ </span>./pipe3.sh
-27
-user@DESKTOP:~<span class="nv">$ </span><span class="nb">cat</span> /etc/passwd | <span class="nb">wc</span> <span class="nt">-l</span>
-27
-</code></pre></div></div>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="IPC" /><category term="inter-process communication" /><category term="pipe" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 16]]></summary></entry></feed>
+</code></pre></div></div>]]></content><author><name>Yong gon Yun</name></author><category term="linux" /><category term="IPC" /><category term="inter-process communication" /><category term="unix socket" /><summary type="html"><![CDATA[개발자를 위한 반도체 SW개발 기초 (디바이스 드라이버 개발) 관련 학습 17]]></summary></entry></feed>
