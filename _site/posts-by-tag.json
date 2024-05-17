@@ -83,6 +83,16 @@
     
       
   {
+  "tag" : "attention",
+  "posts" : [
+      
+      "./transformer.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "attribute",
   "posts" : [
       
@@ -225,6 +235,16 @@
     
       
   {
+  "tag" : "decoding",
+  "posts" : [
+      
+      "./transformer.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "device driver",
   "posts" : [
       
@@ -309,6 +329,16 @@
     
       
   {
+  "tag" : "embedding",
+  "posts" : [
+      
+      "./transformer.html"
+      
+    ]
+  } ,
+    
+      
+  {
   "tag" : "execve",
   "posts" : [
       
@@ -373,6 +403,16 @@
   "posts" : [
       
       "./impl_attribute.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "incoding",
+  "posts" : [
+      
+      "./transformer.html"
       
     ]
   } ,
@@ -905,6 +945,16 @@
   "posts" : [
       
       "./tensorflow_gpu_setting.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "transformer",
+  "posts" : [
+      
+      "./transformer.html"
       
     ]
   } ,

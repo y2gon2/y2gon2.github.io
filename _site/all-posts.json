@@ -1,6 +1,8 @@
 {
   "posts" : [
     
+    "./transformer.html",
+    
     "./PPO2_code.html",
     
     "./PPO1.html",
