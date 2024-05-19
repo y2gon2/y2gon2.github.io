@@ -86,6 +86,8 @@
   "tag" : "attention",
   "posts" : [
       
+      "./attentionPPO-code.html",
+      
       "./transformer.html"
       
     ]
@@ -331,6 +333,8 @@
   {
   "tag" : "embedding",
   "posts" : [
+      
+      "./attentionPPO-code.html",
       
       "./transformer.html"
       
@@ -604,6 +608,8 @@
   "tag" : "ml-agents",
   "posts" : [
       
+      "./attentionPPO-code.html",
+      
       "./DQN_ml_agents.html"
       
     ]
@@ -711,6 +717,8 @@
   {
   "tag" : "ppo",
   "posts" : [
+      
+      "./attentionPPO-code.html",
       
       "./PPO2_code.html",
       
@@ -953,6 +961,8 @@
   {
   "tag" : "transformer",
   "posts" : [
+      
+      "./attentionPPO-code.html",
       
       "./transformer.html"
       
